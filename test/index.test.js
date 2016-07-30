@@ -76,3 +76,88 @@ test('validate', (assert) => {
       assert.equal(err.message, 'Template format error: Unrecognized resource type: AWS::Not::aThing', 'invalid');
     });
 });
+
+test('merge', (assert) => {
+  var a = {
+    Metadata: { Instances: { Description: 'Information about the instances' } },
+    Parameters: { InstanceCount: { Type: 'Number' } },
+    Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' } } },
+    Conditions: { WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999) },
+    Resources: { Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } } },
+    Outputs: { Breakfast: { Condition: 'WouldYouLikeBaconWithThat', Value: cloudfriend.ref('Instance') } }
+  };
+
+  var b = {
+    Metadata: { Databases: { Description: 'Information about the databases' } },
+    Parameters: { DatabasePrefix: { Type: 'String' } },
+    Mappings: { Prefix: { eggs: { Name: 'bananas' } } },
+    Conditions: { TooMuch: cloudfriend.equals(cloudfriend.ref('DatabasePrefix'), 'bacon') },
+    Resources: { Database: { Type: 'AWS::DynamoDB::Table', Properties: { Name: cloudfriend.findInMap('Prefix', cloudfriend.ref('DatabasePrefix'), 'Name') } } },
+    Outputs: { GoSomewhereElse: { Condition: 'TooMuch', Value: cloudfriend.ref('Database') } }
+  };
+
+  var c = {
+    Parameters: { NoConsequence: { Type: 'String' } }
+  };
+
+  assert.deepEqual(cloudfriend.merge(a, b, c), {
+    AWSTemplateFormatVersion: '2010-09-09',
+    Metadata: {
+      Instances: { Description: 'Information about the instances' },
+      Databases: { Description: 'Information about the databases' }
+    },
+    Parameters: {
+      InstanceCount: { Type: 'Number' },
+      DatabasePrefix: { Type: 'String' },
+      NoConsequence: { Type: 'String' }
+    },
+    Mappings: {
+      Region: { 'us-east-1': { AMI: 'ami-123456' } },
+      Prefix: { eggs: { Name: 'bananas' } }
+    },
+    Conditions: {
+      WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999),
+      TooMuch: cloudfriend.equals(cloudfriend.ref('DatabasePrefix'), 'bacon')
+    },
+    Resources: {
+      Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } },
+      Database: { Type: 'AWS::DynamoDB::Table', Properties: { Name: cloudfriend.findInMap('Prefix', cloudfriend.ref('DatabasePrefix'), 'Name') } }
+    },
+    Outputs: {
+      Breakfast: { Condition: 'WouldYouLikeBaconWithThat', Value: cloudfriend.ref('Instance') },
+      GoSomewhereElse: { Condition: 'TooMuch', Value: cloudfriend.ref('Database') }
+    }
+  }, 'merge without overlap');
+
+  assert.throws(function() {
+    b = { Metadata: { Instances: { Description: 'Information about the instances' } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Metadata.Instances/, 'throws on .Metadata overlap');
+
+  assert.throws(function() {
+    b = { Parameters: { InstanceCount: { Type: 'Number' } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Parameters.InstanceCount/, 'throws on .Parameters overlap');
+
+  assert.throws(function() {
+    b = { Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' } } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Mappings.Region/, 'throws on .Mappings overlap');
+
+  assert.throws(function() {
+    b = { Conditions: { WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999) } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Conditions.WouldYouLikeBaconWithThat/, 'throws on .Conditions overlap');
+
+  assert.throws(function() {
+    b = { Resources: { Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Resources.Instance/, 'throws on .Resources overlap');
+
+  assert.throws(function() {
+    b = { Outputs: { Breakfast: { Condition: 'WouldYouLikeBaconWithThat', Value: cloudfriend.ref('Instance') } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Outputs.Breakfast/, 'throws on .Outputs overlap');
+
+  assert.end();
+});

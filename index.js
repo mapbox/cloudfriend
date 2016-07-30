@@ -3,6 +3,7 @@ var conditions = require('./lib/conditions');
 var pseudo = require('./lib/pseudo');
 var build = require('./lib/build');
 var validate = require('./lib/validate');
+var merge = require('./lib/merge');
 
 /**
  * The cloudfriend module
@@ -12,7 +13,8 @@ var validate = require('./lib/validate');
  */
 var cloudfriend = module.exports = {
   build: build,
-  validate: validate
+  validate: validate,
+  merge: merge
 };
 
 Object.keys(intrinsic).forEach(function(key) {
