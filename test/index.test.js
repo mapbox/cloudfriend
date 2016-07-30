@@ -30,7 +30,7 @@ test('conditions', (assert) => {
 });
 
 test('pseudo', (assert) => {
-  assert.deepEqual(cloudfriend.account, { Ref: 'AWS::AccountId' }, 'account');
+  assert.deepEqual(cloudfriend.accountId, { Ref: 'AWS::AccountId' }, 'account');
   assert.deepEqual(cloudfriend.notificationArns, { Ref: 'AWS::NotificationARNs' }, 'notificationArns');
   assert.deepEqual(cloudfriend.noValue, { Ref: 'AWS::NoValue' }, 'noValue');
   assert.deepEqual(cloudfriend.region, { Ref: 'AWS::Region' }, 'region');
