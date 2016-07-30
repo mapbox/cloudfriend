@@ -4,7 +4,7 @@ Helper functions for assembling CloudFormation templates in JavaScript
 
 ## Intrinsic functions, conditions, pseudo parameters
 
-method | CloudFormation
+CloudFriend | CloudFormation
 --- | ---
 base64(value) | [Fn::Base64](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-base64.html)
 findInMap(mapping, key, attr) | [Fn::FindInMap](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-findinmap.html)
