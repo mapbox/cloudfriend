@@ -7,12 +7,12 @@ var fixtures = path.resolve(__dirname, 'fixtures');
 
 test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.base64('secret'), { 'Fn::Base64': 'secret' }, 'base64');
-  assert.deepEqual(cloudfriend.lookup('mapping', 'key', 'value'), { 'Fn::FindInMap': ['mapping', 'key', 'value'] }, 'lookup');
-  assert.deepEqual(cloudfriend.attr('obj', 'key'), { 'Fn::GetAtt': ['obj', 'key'] }, 'attr');
-  assert.deepEqual(cloudfriend.azs(), { 'Fn::GetAZs': '' }, 'azs (no value specified)');
-  assert.deepEqual(cloudfriend.azs('us-east-1'), { 'Fn::GetAZs': 'us-east-1' }, 'azs (value specified)');
+  assert.deepEqual(cloudfriend.findInMap('mapping', 'key', 'value'), { 'Fn::FindInMap': ['mapping', 'key', 'value'] }, 'lookup');
+  assert.deepEqual(cloudfriend.getAtt('obj', 'key'), { 'Fn::GetAtt': ['obj', 'key'] }, 'attr');
+  assert.deepEqual(cloudfriend.getAzs(), { 'Fn::GetAZs': '' }, 'azs (no value specified)');
+  assert.deepEqual(cloudfriend.getAzs('us-east-1'), { 'Fn::GetAZs': 'us-east-1' }, 'azs (value specified)');
   assert.deepEqual(cloudfriend.join(['abra', 'cadabra']), { 'Fn::Join': ['', ['abra', 'cadabra']] }, 'join (no delimeter specified)');
-  assert.deepEqual(cloudfriend.join(['abra', 'cadabra'], '-'), { 'Fn::Join': ['-', ['abra', 'cadabra']] }, 'join (delimeter specified)');
+  assert.deepEqual(cloudfriend.join('-', ['abra', 'cadabra']), { 'Fn::Join': ['-', ['abra', 'cadabra']] }, 'join (delimeter specified)');
   assert.deepEqual(cloudfriend.select(1, ['abra', 'cadabra']), { 'Fn::Select': ['1', ['abra', 'cadabra']] }, '');
   assert.deepEqual(cloudfriend.ref('something'), { Ref: 'something' }, 'ref');
   assert.deepEqual(cloudfriend.userData(['#!/usr/bin/env bash', 'set -e']), { 'Fn::Base64': { 'Fn::Join': ['\n', ['#!/usr/bin/env bash', 'set -e']] } }, 'userData');
