@@ -31,6 +31,6 @@ module.exports = {
   },
   Outputs: {
     AccessKeyId: { Value: cloudfriend.ref('AccessKey') },
-    SecretAccessKey: { Value: cloudfriend.attr('AccessKey', 'SecretAccessKey') }
+    SecretAccessKey: { Value: cloudfriend.getAtt('AccessKey', 'SecretAccessKey') }
   }
 };
