@@ -21,11 +21,11 @@ test('intrinsic functions', (assert) => {
 
 test('conditions', (assert) => {
   assert.deepEqual(cloudfriend.and(['a', 'b']), { 'Fn::And': ['a', 'b'] }, 'and');
-  assert.deepEqual(cloudfriend.equal('a', 'b'), { 'Fn::Equals': ['a', 'b'] }, 'equal');
+  assert.deepEqual(cloudfriend.equals('a', 'b'), { 'Fn::Equals': ['a', 'b'] }, 'equal');
   assert.deepEqual(cloudfriend.if('condition', 'a', 'b'), { 'Fn::If': ['condition', 'a', 'b'] }, 'if');
   assert.deepEqual(cloudfriend.not('condition'), { 'Fn::Not': ['condition'] }, 'not');
   assert.deepEqual(cloudfriend.or(['a', 'b']), { 'Fn::Or': ['a', 'b'] }, 'or');
-  assert.deepEqual(cloudfriend.notEqual('a', 'b'), { 'Fn::Not': [{ 'Fn::Equals': ['a', 'b'] }] }, 'notEqual');
+  assert.deepEqual(cloudfriend.notEquals('a', 'b'), { 'Fn::Not': [{ 'Fn::Equals': ['a', 'b'] }] }, 'notEqual');
   assert.end();
 });
 
