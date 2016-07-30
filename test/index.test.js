@@ -30,12 +30,12 @@ test('conditions', (assert) => {
 });
 
 test('pseudo', (assert) => {
-  assert.deepEqual(cloudfriend.account(), { Ref: 'AWS::AccountId' }, 'account');
-  assert.deepEqual(cloudfriend.notificationArns(), { Ref: 'AWS::NotificationARNs' }, 'notificationArns');
-  assert.deepEqual(cloudfriend.noValue(), { Ref: 'AWS::NoValue' }, 'noValue');
-  assert.deepEqual(cloudfriend.region(), { Ref: 'AWS::Region' }, 'region');
-  assert.deepEqual(cloudfriend.stackId(), { Ref: 'AWS::StackId' }, 'stackId');
-  assert.deepEqual(cloudfriend.stack(), { Ref: 'AWS::StackName' }, 'stack');
+  assert.deepEqual(cloudfriend.account, { Ref: 'AWS::AccountId' }, 'account');
+  assert.deepEqual(cloudfriend.notificationArns, { Ref: 'AWS::NotificationARNs' }, 'notificationArns');
+  assert.deepEqual(cloudfriend.noValue, { Ref: 'AWS::NoValue' }, 'noValue');
+  assert.deepEqual(cloudfriend.region, { Ref: 'AWS::Region' }, 'region');
+  assert.deepEqual(cloudfriend.stackId, { Ref: 'AWS::StackId' }, 'stackId');
+  assert.deepEqual(cloudfriend.stackName, { Ref: 'AWS::StackName' }, 'stack');
   assert.end();
 });
 
