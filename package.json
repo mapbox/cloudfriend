@@ -1,0 +1,35 @@
+{
+  "name": "cloudfriend",
+  "version": "1.0.0",
+  "description": "Helper functions for assembling CloudFormation templates in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint index.js test lib",
+    "test": "tape test/*.test.js | tap-diff",
+    "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapbox/cloudfriend.git"
+  },
+  "keywords": [
+    "AWS",
+    "CloudFormation"
+  ],
+  "author": "Mapbox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapbox/cloudfriend/issues"
+  },
+  "homepage": "https://github.com/mapbox/cloudfriend#readme",
+  "devDependencies": {
+    "eslint": "^3.2.0",
+    "nyc": "^7.1.0",
+    "opener": "^1.4.1",
+    "tap-diff": "^0.1.1",
+    "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.4.11"
+  }
+}
