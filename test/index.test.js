@@ -132,32 +132,37 @@ test('merge', (assert) => {
   assert.throws(function() {
     b = { Metadata: { Instances: { Description: 'Information about the instances' } } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Metadata.Instances/, 'throws on .Metadata overlap');
+  }, /LogicalName used more than once: Instances/, 'throws on .Metadata overlap');
 
   assert.throws(function() {
     b = { Parameters: { InstanceCount: { Type: 'Number' } } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Parameters.InstanceCount/, 'throws on .Parameters overlap');
+  }, /LogicalName used more than once: InstanceCount/, 'throws on .Parameters overlap');
 
   assert.throws(function() {
     b = { Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' } } } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Mappings.Region/, 'throws on .Mappings overlap');
+  }, /LogicalName used more than once: Region/, 'throws on .Mappings overlap');
 
   assert.throws(function() {
     b = { Conditions: { WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999) } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Conditions.WouldYouLikeBaconWithThat/, 'throws on .Conditions overlap');
+  }, /LogicalName used more than once: WouldYouLikeBaconWithThat/, 'throws on .Conditions overlap');
 
   assert.throws(function() {
     b = { Resources: { Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } } } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Resources.Instance/, 'throws on .Resources overlap');
+  }, /LogicalName used more than once: Instance/, 'throws on .Resources overlap');
 
   assert.throws(function() {
     b = { Outputs: { Breakfast: { Condition: 'WouldYouLikeBaconWithThat', Value: cloudfriend.ref('Instance') } } };
     cloudfriend.merge(a, b);
-  }, /LogicalName used more than once: Outputs.Breakfast/, 'throws on .Outputs overlap');
+  }, /LogicalName used more than once: Breakfast/, 'throws on .Outputs overlap');
+
+  assert.throws(function() {
+    b = { Mappings: { Instance: { 'us-east-1': { AMI: 'ami-123456' } } } };
+    cloudfriend.merge(a, b);
+  }, /LogicalName used more than once: Instance/, 'throws on cross-property name overlap');
 
   assert.end();
 });
