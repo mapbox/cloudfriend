@@ -2,7 +2,7 @@ var test = require('tape');
 var cloudfriend = require('..');
 var path = require('path');
 
-var expectedTemplate = JSON.stringify(require('./fixtures/static.json'), null, 4);
+var expectedTemplate = require('./fixtures/static.json');
 var fixtures = path.resolve(__dirname, 'fixtures');
 
 test('intrinsic functions', (assert) => {
@@ -44,19 +44,19 @@ test('build', (assert) => {
 
   cloudfriend.build(path.join(fixtures, 'static.json'))
     .then(function(template) {
-      assert.equal(template, expectedTemplate, 'static.json');
+      assert.deepEqual(template, expectedTemplate, 'static.json');
       return cloudfriend.build(path.join(fixtures, 'static.js'));
     })
     .then(function(template) {
-      assert.equal(template, expectedTemplate, 'static.js');
+      assert.deepEqual(template, expectedTemplate, 'static.js');
       return cloudfriend.build(path.join(fixtures, 'sync.js'));
     })
     .then(function(template) {
-      assert.equal(template, expectedTemplate, 'sync.js');
+      assert.deepEqual(template, expectedTemplate, 'sync.js');
       return cloudfriend.build(path.join(fixtures, 'async.js'));
     })
     .then(function(template) {
-      assert.equal(template, expectedTemplate, 'async.js (success)');
+      assert.deepEqual(template, expectedTemplate, 'async.js (success)');
       return cloudfriend.build(path.join(fixtures, 'async-error.js'));
     })
     .catch(function(err) {

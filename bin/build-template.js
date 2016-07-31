@@ -7,5 +7,5 @@ var templatePath = process.argv[2];
 
 cloudfriend.build(templatePath)
   .then(function(template) {
-    console.log(template);
+    console.log(JSON.stringify(template, null, 4));
   });
