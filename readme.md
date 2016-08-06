@@ -36,3 +36,28 @@ method | description
 build(templatePath) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function
 validate(templatePath) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
 merge(template, template, ...) | Merges templates together. Throws errors if logical names are reused
+
+## CLI tools
+
+By installing cloudfriend globally, it can provide you with simple CLI tools for building and validating CloudFormation templates.
+
+```
+# either...
+$ git clone https://github.com/mapbox/cloudfriend && cd cloudfriend && npm link
+# ... or ...
+$ npm install -g cloudfriend
+```
+
+Then, to build a template:
+
+```
+# Prints the template as JSON to stdout
+$ build-template path/to/template.js
+```
+
+Or, to validate a template:
+
+```
+# Make sure that your shell is configured to make AWS requests
+$ validate-template path/to/template.js
+```

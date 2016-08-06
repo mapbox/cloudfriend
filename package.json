@@ -13,7 +13,8 @@
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json"
   },
   "bin": {
-    "build-template": "bin/build-template.js"
+    "build-template": "bin/build-template.js",
+    "validate-template": "bin/validate-template.js"
   },
   "repository": {
     "type": "git",
