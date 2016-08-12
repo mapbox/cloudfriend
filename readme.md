@@ -33,9 +33,9 @@ stackName | [AWS::StackName](http://docs.aws.amazon.com/AWSCloudFormation/latest
 
 method | description
 --- | ---
-build(templatePath) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function
+build(templatePath, opts) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.
 validate(templatePath) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
-merge(template, template, ...) | Merges templates together. Throws errors if logical names are reused
+merge(...template) | Merges templates together. Throws errors if logical names are reused
 
 ## CLI tools
 
