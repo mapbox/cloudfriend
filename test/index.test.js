@@ -40,7 +40,7 @@ test('pseudo', (assert) => {
 });
 
 test('build', (assert) => {
-  assert.plan(5);
+  assert.plan(8);
 
   cloudfriend.build(path.join(fixtures, 'static.json'))
     .then(function(template) {
@@ -57,10 +57,24 @@ test('build', (assert) => {
     })
     .then(function(template) {
       assert.deepEqual(template, expectedTemplate, 'async.js (success)');
-      return cloudfriend.build(path.join(fixtures, 'async-error.js'));
+      return cloudfriend.build(path.join(fixtures, 'async-error.js'))
+        .catch(function(err) {
+          assert.ok(err, 'async.js (error)');
+        });
     })
-    .catch(function(err) {
-      assert.ok(err, 'async.js (error)');
+    .then(function() {
+      return cloudfriend.build(path.join(fixtures, 'sync-args.js'), { some: 'options' });
+    })
+    .then(function(template) {
+      assert.deepEqual(template, { some: 'options', }, 'passes args (sync)');
+      return cloudfriend.build(path.join(fixtures, 'async-args.js'), { some: 'options' });
+    })
+    .then(function(template) {
+      assert.deepEqual(template, { some: 'options', }, 'passes args (async)');
+      return cloudfriend.build(path.join(fixtures, 'malformed.json'))
+        .catch(function(err) {
+          assert.ok(err, 'malformed JSON (error)');
+        });
     });
 });
 
