@@ -4,7 +4,9 @@
 
 Helper functions for assembling CloudFormation templates in JavaScript
 
-## Intrinsic functions, conditions, pseudo parameters
+## Intrinsic functions and conditions
+
+These are functions that you can use in place of various CloudFormation objects.
 
 CloudFriend | CloudFormation
 --- | ---
@@ -22,6 +24,13 @@ if(condition, ifTrue, ifFalse) | [Fn::If](http://docs.aws.amazon.com/AWSCloudFor
 not(condition) | [Fn::Not](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122042)
 or(conditions) | [Fn::Or](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122130)
 notEquals(a, b) | [Fn::Not](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122042) and [Fn::Equals](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e121788)
+
+## Pseudo parameters
+
+These are static properties of `cloudfriend` that you can use to reference various CloudFormation objects.
+
+CloudFriend | CloudFormation
+--- | ---
 accountId | [AWS::AccountId](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html)
 notificationArns | [AWS::NotificationARNs](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html)
 noValue | [AWS::NoValue](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html)
@@ -33,8 +42,8 @@ stackName | [AWS::StackName](http://docs.aws.amazon.com/AWSCloudFormation/latest
 
 method | description
 --- | ---
-build(templatePath, opts) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.
-validate(templatePath) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
+build(file, opts) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.
+validate(file) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
 merge(...template) | Merges templates together. Throws errors if logical names are reused
 
 ## CLI tools
