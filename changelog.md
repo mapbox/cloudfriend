@@ -1,3 +1,7 @@
+## v1.3.0
+
+- Adds support for Fn::Sub
+
 ## v1.2.0
 
 - Fixes `cloudfriend.build()` for JSON template files that do not use the `.json` extension.
