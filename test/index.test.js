@@ -16,6 +16,8 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.select(1, ['abra', 'cadabra']), { 'Fn::Select': ['1', ['abra', 'cadabra']] }, '');
   assert.deepEqual(cloudfriend.ref('something'), { Ref: 'something' }, 'ref');
   assert.deepEqual(cloudfriend.userData(['#!/usr/bin/env bash', 'set -e']), { 'Fn::Base64': { 'Fn::Join': ['\n', ['#!/usr/bin/env bash', 'set -e']] } }, 'userData');
+  assert.deepEqual(cloudfriend.sub('my ${thing}'), { 'Fn::Sub': 'my ${thing}' }, 'sub without variables');
+  assert.deepEqual(cloudfriend.sub('my ${thing}', { thing: 'stuff' }), { 'Fn::Sub': ['my ${thing}', { thing: 'stuff' }] }, 'sub with variables');
   assert.end();
 });
 
@@ -87,7 +89,7 @@ test('validate', (assert) => {
       return cloudfriend.validate(path.join(fixtures, 'invalid.json'));
     })
     .catch(function(err) {
-      assert.equal(err.message, 'Template format error: Unrecognized resource type: AWS::Not::aThing', 'invalid');
+      assert.ok(/Template format error: Unrecognized resource type/.test(err.message), 'invalid');
     });
 });
 
