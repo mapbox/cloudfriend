@@ -10,4 +10,5 @@ cloudfriend.validate(templatePath, 'us-east-1')
     console.log('✔ valid');
   }).catch(function(err) {
     console.log('✘ invalid: %s', err.message);
+    process.exit(1);
   });
