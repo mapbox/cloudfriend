@@ -1,3 +1,8 @@
+## v1.5.0
+
+- `.merge()` now allows name reuse across template properties, e.g. can have a Resource and an Output with the same name.
+- `.merge()` now allows name overlaps if the provided objects are identical.
+
 ## v1.4.0
 
 - `validate-template` now exits 1 if the template is invalid.
