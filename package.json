@@ -1,6 +1,6 @@
 {
   "name": "cloudfriend",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
