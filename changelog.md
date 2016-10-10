@@ -1,3 +1,7 @@
+## v1.6.0
+
+- Adds support of Fn::ImportValue
+
 ## v1.5.0
 
 - `.merge()` now allows name reuse across template properties, e.g. can have a Resource and an Output with the same name.
