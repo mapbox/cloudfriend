@@ -1,3 +1,7 @@
+## v1.4.0
+
+- `validate-template` now exits 1 if the template is invalid.
+
 ## v1.3.0
 
 - Adds support for Fn::Sub
