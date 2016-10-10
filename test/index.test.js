@@ -18,6 +18,8 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.userData(['#!/usr/bin/env bash', 'set -e']), { 'Fn::Base64': { 'Fn::Join': ['\n', ['#!/usr/bin/env bash', 'set -e']] } }, 'userData');
   assert.deepEqual(cloudfriend.sub('my ${thing}'), { 'Fn::Sub': 'my ${thing}' }, 'sub without variables');
   assert.deepEqual(cloudfriend.sub('my ${thing}', { thing: 'stuff' }), { 'Fn::Sub': ['my ${thing}', { thing: 'stuff' }] }, 'sub with variables');
+  assert.deepEqual(cloudfriend.importValue('id'), { 'Fn::ImportValue': 'id' }, 'import value with string');
+  assert.deepEqual(cloudfriend.importValue(cloudfriend.ref('Id')), { 'Fn::ImportValue': cloudfriend.ref('Id') }, 'import value with string');
   assert.end();
 });
 
