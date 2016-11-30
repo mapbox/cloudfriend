@@ -1,3 +1,7 @@
+## v1.7.0
+
+- Adds `cloudfriend.permissions`, which exports a CloudFormation template which creates an AWS user and access key with permission to run `cloudfriend.validate()`.
+
 ## v1.6.0
 
 - Adds support of Fn::ImportValue
