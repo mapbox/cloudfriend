@@ -56,7 +56,7 @@ By installing cloudfriend globally, it can provide you with simple CLI tools for
 # either...
 $ git clone https://github.com/mapbox/cloudfriend && cd cloudfriend && npm link
 # ... or ...
-$ npm install -g cloudfriend
+$ npm install -g @mapbox/cloudfriend
 ```
 
 Then, to build a template:
