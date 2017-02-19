@@ -1,0 +1,5321 @@
+[
+  {
+    "name": "AWS::ApiGateway::Account",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ID of the resource, such as",
+        "mysta-accou-01234b567890example",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::ApiKey",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the API key ID, such as",
+        "m2m1k7sybf",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Authorizer",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the authorizer's ID, such as",
+        "abcde1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::BasePathMapping",
+    "notFound": true
+  },
+  {
+    "name": "AWS::ApiGateway::ClientCertificate",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the client certificate name, such as",
+        "abc123",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Deployment",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the deployment ID, such as",
+        "123abc",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Method",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the method ID, such as",
+        "mysta-metho-01234b567890example",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Model",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the model name, such as",
+        "myModel",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Resource",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID, such as",
+        "abc123",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::RestApi",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the",
+        "RestApi",
+        "ID, such as",
+        "a1bcdef2gh",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type. This section lists the available attribute and a sample return value.",
+        "RootResourceId",
+        "The root resource ID for a",
+        "RestApi",
+        "resource, such as",
+        "a0bc123d4e",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::Stage",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the name of the stage, such as",
+        "MyTestStage",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApiGateway::UsagePlan",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the usage plan ID, such as",
+        "MyUsagePlan",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApplicationAutoScaling::ScalableTarget",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the AWS CloudFormation-generated ID of the resource,",
+        "        such as",
+        "service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH|ecs:service:DesiredCount|ecs",
+        ".",
+        "AWS CloudFormation uses the following format to generate the ID:",
+        "service/",
+        "resource_ID",
+        "|",
+        "scalable_dimension",
+        "|",
+        "service_namespace",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the Application Auto Scaling scaling policy Amazon Resource Name (ARN), such as",
+        "arn:aws:autoscaling:us-east-1:123456789012:scalingPolicy:12ab3c4d-56789-0ef1-2345-6ghi7jk8lm90:resource/ecs/service/ecsStack-MyECSCluster-AB12CDE3F4GH/ecsStack-MyECSService-AB12CDE3F4GH:policyName/MyStepPolicy",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::AutoScaling::AutoScalingGroup",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "In the following sample, the",
+        "Ref",
+        "function returns the name of the",
+        "MyASGroup",
+        "Auto Scaling group, such as",
+        "mystack-myasgroup-NT5EUXTNTXXD",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"MyASGroup\" }",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::AutoScaling::LaunchConfiguration",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "LaunchConfig",
+        "\" }",
+        ""
+      ],
+      [
+        "For the resource with the logical ID",
+        "LaunchConfig",
+        ",",
+        "Ref",
+        "will return the Auto Scaling launch configuration name, such as",
+        "mystack-mylaunchconfig-1DDYF1E3B3I",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::AutoScaling::LifecycleHook",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyLifeCycleHook",
+        "\" }",
+        ""
+      ],
+      [
+        "Ref",
+        "returns the lifecycle hook name, such as",
+        "mylifecyclehookname",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::AutoScaling::ScalingPolicy",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When you specify an",
+        "AWS::AutoScaling::ScalingPolicy",
+        "type as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the policy Amazon Resource Name (ARN), such as",
+        "arn:aws:autoscaling:us-east-1:123456789012:scalingPolicy:ab12c4d5-a1b2-a1b2-a1b2-ab12c4d56789:autoScalingGroupName/myStack-AutoScalingGroup-AB12C4D5E6:policyName/myStack-myScalingPolicy-AB12C4D5E6",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::AutoScaling::ScheduledAction",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyScheduledAction",
+        "\" }",
+        ""
+      ],
+      [
+        "For a scheduled Auto Scaling action with the logical ID",
+        "MyScheduledAction",
+        ",",
+        "Ref",
+        ""
+      ],
+      [
+        "mystack-myscheduledaction-NT5EUXTNTXXD",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CertificateManager::Certificate",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the certificate Amazon Resource Name (ARN), such as",
+        "arn:aws:acm:us-east-1:123456789012:certificate/12ab3c4d-56789-0ef1-2345-3dab6fa3ee50",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudFormation::Authentication",
+    "notFound": true
+  },
+  {
+    "name": "AWS::CloudFormation::CustomResource",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "For a custom resource, return values are defined by the custom resource provider, and are retrieved by",
+        "         calling",
+        "Fn::GetAtt",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudFormation::Init",
+    "notFound": true
+  },
+  {
+    "name": "AWS::CloudFormation::Interface",
+    "notFound": true
+  },
+  {
+    "name": "AWS::CloudFormation::Stack",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "For AWS::CloudFormation::Stack,",
+        "Ref",
+        "returns the Stack ID. For",
+        "            example:",
+        "arn:aws:cloudformation:",
+        "us-east-1",
+        ":123456789012:stack/mystack-mynestedstack-sggfrhxhum7w/f449b250-b969-11e0-a185-5081d0136786",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Outputs.",
+        "NestedStackOutputName",
+        "Returns",
+        ": The output value from the specified nested",
+        "                     stack where",
+        "NestedStackOutputName",
+        "is the name of the",
+        "                     output value.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudFormation::WaitCondition",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Data",
+        "Returns",
+        ": A JSON object that contains the",
+        "UniqueId",
+        "and",
+        "Data",
+        "values from the wait condition signal(s) for the specified wait",
+        "                            condition. For more information about wait condition signals, see",
+        "Wait Condition Signal JSON",
+        "                    Format",
+        ".",
+        "Example return value for a wait condition with 2 signals:",
+        "{ \"Signal1\" : \"Step 1 complete.\" , \"Signal2\" : \"Step 2 complete.\" }",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudFormation::WaitConditionHandle",
+    "notFound": true
+  },
+  {
+    "name": "AWS::CloudFront::Distribution",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "Returns",
+        ": The CloudFront",
+        "            distribution ID. For example:",
+        "E27LVI50CSW06W",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "DomainName",
+        "Returns",
+        ": The domain name of the resource. For example:",
+        "d2fadu0nynjpfn.cloudfront.net",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudTrail::Trail",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CloudWatch::Alarm",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify an AWS::CloudWatch::Alarm type as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the value of the",
+        "AlarmName",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodeBuild::Project",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the name of the AWS CodeBuild project, such as",
+        "myProjectName",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "        This section lists the available attribute and a sample return value.",
+        "Arn",
+        "The ARN of the AWS CodeBuild project, such as",
+        "arn:aws:codebuild:us-west-2:123456789012:project/myProjectName",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodeCommit::Repository",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the repository ID, such as",
+        "12a345b6-bbb7-4bb6-90b0-8c9577a2d2b9",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The Amazon Resource Name (ARN) of the repository, such as",
+        "arn:aws:codecommit:us-east-1:123456789012:MyDemoRepo",
+        ".",
+        "CloneUrlHttp",
+        "The URL to use for cloning the repository over HTTPS, such as",
+        "https://codecommit.us-east-1.amazonaws.com/v1/repos/MyDemoRepo",
+        ".",
+        "CloneUrlSsh",
+        "The URL to use for cloning the repository over SSH, such as",
+        "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos//v1/repos/MyDemoRepo",
+        ".",
+        "Name",
+        "The name of the repository, such",
+        "MyDemoRepo",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodeDeploy::Application",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::CodeDeploy::Application",
+        "resource to",
+        "        the intrinsic",
+        "Ref",
+        "function, the function returns the application name,",
+        "        such as",
+        "myapplication-a123d0d1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodeDeploy::DeploymentConfig",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::CodeDeploy::DeploymentConfig",
+        "resource to the intrinsic",
+        "Ref",
+        "function, the function returns the",
+        "            deployment configuration name, such as",
+        "mydeploymentconfig-a123d0d1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodeDeploy::DeploymentGroup",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::CodeDeploy::DeploymentGroup",
+        "resource to the intrinsic",
+        "Ref",
+        "function, the function returns the",
+        "            deployment group name, such as",
+        "mydeploymentgroup-a123d0d1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodePipeline::CustomActionType",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::CodePipeline::CustomActionType",
+        "resource to the intrinsic",
+        "Ref",
+        "function, the function returns the",
+        "            custom action name, such as",
+        "custo-MyCus-A1BCDEFGHIJ2",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::CodePipeline::Pipeline",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::CodePipeline::Pipeline",
+        "resource to",
+        "        the intrinsic",
+        "Ref",
+        "function, the function returns the pipeline name,",
+        "        such as",
+        "mysta-MyPipeline-A1BCDEFGHIJ2",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Config::ConfigRule",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::Config::ConfigRule",
+        "resource to the",
+        "        intrinsic",
+        "Ref",
+        "function, the function returns the rule name, such as",
+        "mystack-MyConfigRule-12ABCFPXHV4OV",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The Amazon Resource Name (ARN) of the AWS Config rule, such as",
+        "arn:aws:config:us-east-1:123456789012:config-rule/config-rule-a1bzhi",
+        ".",
+        "ConfigRuleId",
+        "The ID of the AWS Config rule, such as",
+        "config-rule-a1bzhi",
+        ".",
+        "Compliance.Type",
+        "The compliance status of  an AWS Config rule, such as",
+        "COMPLIANT",
+        "or",
+        "NON_COMPLIANT",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Config::ConfigurationRecorder",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::Config::ConfigurationRecorder",
+        "resource to the intrinsic",
+        "Ref",
+        "function, the function returns the",
+        "        configuration recorder name, such as",
+        "default",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Config::DeliveryChannel",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::Config::DeliveryChannel",
+        "resource to",
+        "        the intrinsic",
+        "Ref",
+        "function, the function returns the delivery channel",
+        "        name, such as",
+        "default",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::DataPipeline::Pipeline",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "When you specify an",
+        "AWS::DataPipeline::Pipeline",
+        "resource as an argument to",
+        "        the",
+        "Ref",
+        "function, AWS CloudFormation returns the pipeline ID.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::DirectoryService::MicrosoftAD",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the ID of the",
+        "myDirectory",
+        "directory, such as",
+        "d-12345ab592",
+        ".",
+        "{ \"Ref\": \"myDirectory\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Alias",
+        "The alias for a directory. For example:",
+        "d-12373a053a",
+        "or",
+        "alias4-mydirectory-12345abcgmzsk",
+        "(if you have the",
+        "CreateAlias",
+        "property set to true).",
+        "DnsIpAddresses",
+        "The IP addresses of the DNS servers for the directory, such as",
+        "[",
+        "                        \"192.0.2.1\", \"192.0.2.2\" ]",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::DirectoryService::SimpleAD",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the ID of the",
+        "myDirectory",
+        "directory, such as",
+        "d-1a2b3c4d5e",
+        ".",
+        "{ \"Ref\": \"myDirectory\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Alias",
+        "The alias for a directory. For example:",
+        "d-12373a053a",
+        "or",
+        "alias4-mydirectory-12345abcgmzsk",
+        "(if you have the",
+        "CreateAlias",
+        "property set to true).",
+        "DnsIpAddresses",
+        "The IP addresses of the DNS servers for the directory, such as",
+        "[",
+        "                        \"172.31.3.154\", \"172.31.63.203\" ]",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::DynamoDB::Table",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "MyResource",
+        "\" }",
+        "For the resource with the logical ID",
+        "myDynamoDBTable",
+        ",",
+        "Ref",
+        "will return the DynamoDB table name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "StreamArn",
+        "The Amazon Resource Name (ARN) of the DynamoDB stream, such as",
+        "arn:aws:dynamodb:us-east-1:123456789012:table/testddbstack-myDynamoDBTable-012A1SL7SMP5Q/stream/2015-11-30T20:10:00.000",
+        ".",
+        "Note",
+        "You must specify the",
+        "StreamSpecification",
+        "property to use this",
+        "                attribute.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::CustomerGateway",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyResource",
+        "\" }",
+        ""
+      ],
+      [
+        "For the resource with the logical ID \"MyResource\",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::DHCPOptions",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::EIP",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify the logical ID of an AWS::EC2::EIP object as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the value of the instance's",
+        "PublicIp",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "AllocationId",
+        "The ID that AWS assigns to represent the allocation of the address for use",
+        "                     with Amazon VPC. This is returned only for VPC elastic IP addresses. Example",
+        "                     return value:",
+        "eipalloc-5723d13e",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::EIPAssociation",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::FlowLog",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the flow log ID, such as",
+        "fl-1a23b456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::Host",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the host ID, such as",
+        "h-0ab123c45d67ef89",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::Instance",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an AWS::EC2::Instance object to the intrinsic",
+        "Ref",
+        "function, the object's InstanceId is returned. For example:",
+        "i-636be302",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "AvailabilityZone",
+        "The Availability Zone where the specified instance is launched. For example:",
+        "us-east-1b",
+        ".",
+        "You can retrieve a list of all Availability Zones for a region by using the",
+        "Fn::GetAZs",
+        "intrinsic function.",
+        "PrivateDnsName",
+        "The private DNS name of the specified instance. For example:",
+        "ip-10-24-34-0.ec2.internal",
+        ".",
+        "PublicDnsName",
+        "The public DNS name of the specified instance. For example:",
+        "ec2-107-20-50-45.compute-1.amazonaws.com",
+        ".",
+        "PrivateIp",
+        "The private IP address of the specified instance. For example:",
+        "10.24.34.0",
+        ".",
+        "PublicIp",
+        "The public IP address of the specified instance. For example:",
+        "192.0.2.0",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::InternetGateway",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::NatGateway",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::EC2::NatGateway",
+        "resource to the",
+        "        intrinsic",
+        "Ref",
+        "function, the function returns the ID of the NAT gateway,",
+        "        such as",
+        "nat-0a12bc456789de0fg",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::NetworkAcl",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::NetworkAclEntry",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::NetworkInterface",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "PrimaryPrivateIpAddress",
+        "Returns the primary private IP address of the network interface. For",
+        "                     example,",
+        "10.0.0.192",
+        ".",
+        "SecondaryPrivateIpAddresses",
+        "Returns the secondary private IP addresses of the network interface. For",
+        "                     example,",
+        "[\"10.0.0.161\", \"10.0.0.162\", \"10.0.0.163\"]",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::NetworkInterfaceAttachment",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::PlacementGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::Route",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::RouteTable",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify an",
+        "AWS::EC2::RouteTable",
+        "type as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the route table ID, such as",
+        "rtb-12a34567",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::SecurityGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify an",
+        "AWS::EC2::SecurityGroup",
+        "type as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the security group name or the security",
+        "            group ID (for EC2-VPC security groups that are not in a default VPC).",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "GroupId",
+        "The group ID of the specified security group, such as",
+        "sg-94b3a1f6",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::SecurityGroupEgress",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::SecurityGroupIngress",
+    "notFound": true
+  },
+  {
+    "name": "AWS::EC2::SpotFleet",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::Subnet",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID, such as",
+        "subnet-e19f0178",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "AvailabilityZone",
+        "Returns the availability zone (for example,",
+        "\"",
+        "us-east-1a",
+        "\"",
+        ") of",
+        "                     this subnet.",
+        "Example:",
+        "{ \"Fn::GetAtt\" : [ \"mySubnet\", \"AvailabilityZone\" ] }",
+        "Ipv6CidrBlocks",
+        "A list of IPv6 CIDR blocks that are associated with the subnet, such as",
+        "[ 2001:db8:1234:1a00::/64 ]",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::SubnetCidrBlock",
+    "notFound": true
+  },
+  {
+    "name": "AWS::EC2::SubnetNetworkAclAssociation",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "AssociationId",
+        "Returns the value of this object's",
+        "SubnetId",
+        "property.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::SubnetRouteTableAssociation",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"MyRTA\" }",
+        ""
+      ],
+      [
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::Volume",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify an",
+        "AWS::EC2::Volume",
+        "type as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the volume's physical ID. For example:",
+        "vol-5cb85026",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VolumeAttachment",
+    "notFound": true
+  },
+  {
+    "name": "AWS::EC2::VPC",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID, such as",
+        "vpc-18ac277d",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "CidrBlock",
+        "The set of IP addresses for the VPC. For example,",
+        "10.0.0.0/16",
+        ".",
+        "DefaultNetworkAcl",
+        "The default network ACL ID that is associated with the VPC. For example,",
+        "acl-814dafe3",
+        ".",
+        "DefaultSecurityGroup",
+        "The default security group ID that is associated with the VPC. For example,",
+        "sg-b178e0d3",
+        ".",
+        "Ipv6CidrBlocks",
+        "A list of IPv6 CIDR blocks that are associated with the VPC, such as",
+        "[",
+        "                        2001:db8:1234:1a00::/56 ]",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPCCidrBlock",
+    "notFound": true
+  },
+  {
+    "name": "AWS::EC2::VPCDHCPOptionsAssociation",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPCEndpoint",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::EC2::VPCEndpoint",
+        "resource to the",
+        "            intrinsic",
+        "Ref",
+        "function, the function returns the endpoint ID, such",
+        "            as",
+        "vpce-a123d0d1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPCGatewayAttachment",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPCPeeringConnection",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPNConnection",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyVPNConnection",
+        "\" }",
+        ""
+      ],
+      [
+        "For the VPNConnection with the logical ID \"MyVPNConnection\",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPNConnectionRoute",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPNGateway",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyVPNGateway",
+        "\" }",
+        ""
+      ],
+      [
+        "For the VPN gateway with the logical ID \"MyVPNGateway\",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EC2::VPNGatewayRoutePropagation",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "myVPNGatewayRouteProp",
+        "\" }",
+        ""
+      ],
+      [
+        "For the VPN gateway with the logical ID",
+        "myVPNGatewayRouteProp",
+        ",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ECR::Repository",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource name, such as",
+        "test-repository",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ECS::Cluster",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the name of the",
+        "MyECSCluster",
+        "cluster, such as",
+        "MyStack-MyECSCluster-NT5EUXTNTXXD",
+        ".",
+        "{ \"Ref\": \"MyECSCluster\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ECS::Service",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ARN.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the ARN of the",
+        "MyECSService",
+        "service, such as",
+        "arn:aws:ecs:us-west-2:123456789012:service/sample-webapp",
+        ".",
+        "{ \"Ref\": \"MyECSService\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Name",
+        "The name of the Amazon ECS service, such as",
+        "sample-webapp",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ECS::TaskDefinition",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the Amazon Resource Name (ARN).",
+        "In the following sample, the",
+        "Ref",
+        "function returns the ARN of the",
+        "MyTaskDefinition",
+        "task, such as",
+        "arn:aws:ecs:us-west-2:123456789012:task/1abf0f6d-a411-4033-b8eb-a4eed3ad252a",
+        ".",
+        "{ \"Ref\": \"MyTaskDefinition\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EFS::FileSystem",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID, such as",
+        "fs-47a2c22e",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EFS::MountTarget",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource ID, such as",
+        "fsmt-55a4413c",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElastiCache::CacheCluster",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "ConfigurationEndpoint.Address",
+        "The DNS address of the configuration endpoint for the Memcached cache",
+        "                     cluster.",
+        "ConfigurationEndpoint.Port",
+        "The port number of the configuration endpoint for the Memcached cache",
+        "                     cluster.",
+        "RedisEndpoint.Address",
+        "The DNS address of the configuration endpoint for the Redis cache cluster.",
+        "RedisEndpoint.Port",
+        "The port number of the configuration endpoint for the Redis cache cluster.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElastiCache::ParameterGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElastiCache::ReplicationGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the name of the",
+        "myReplicationGroup",
+        "replication group, such as",
+        "abc12xmy3d1w3hv6",
+        ".",
+        "{ \"Ref\": \"myReplicationGroup\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "PrimaryEndPoint.Address",
+        "The DNS address of the primary read-write cache node.",
+        "PrimaryEndPoint.Port",
+        "The number of the port that the primary read-write cache engine is listening",
+        "                     on.",
+        "ReadEndPoint.Addresses",
+        "A string with a list of endpoints for the read-only replicas. The order of",
+        "                     the addresses map to the order of the ports from the",
+        "ReadEndPoint.Ports",
+        "attribute.",
+        "ReadEndPoint.Ports",
+        "A string with a list of ports for the read-only replicas. The order of the",
+        "                     ports map to the order of the addresses from the",
+        "ReadEndPoint.Addresses",
+        "attribute.",
+        "ReadEndPoint.Addresses.List",
+        "A list of endpoints for the read-only replicas. The order of the addresses",
+        "                     map to the order of the ports from the",
+        "ReadEndPoint.Ports.List",
+        "attribute.",
+        "ReadEndPoint.Ports.List",
+        "A list of ports for the read-only replicas. The order of the ports map to",
+        "                     the order of the addresses from the",
+        "ReadEndPoint.Addresses.List",
+        "attribute.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElastiCache::SecurityGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify the",
+        "AWS::ElastiCache::SecurityGroup",
+        "resource as an",
+        "            argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the",
+        "CacheSecurityGroupName",
+        "property of the cache security",
+        "            group.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElastiCache::SecurityGroupIngress",
+    "notFound": true
+  },
+  {
+    "name": "AWS::ElastiCache::SubnetGroup ",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticBeanstalk::Application",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticBeanstalk::ApplicationVersion",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticBeanstalk::ConfigurationTemplate",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticBeanstalk::Environment",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "EndpointURL",
+        "The URL to the load balancer for this environment.",
+        "Example:",
+        "awseb-myst-myen-132MQC4KRLAMD-1371280482.",
+        "us-east-1",
+        ".elb.amazonaws.com",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticLoadBalancing::LoadBalancer",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example,",
+        "mystack-myelb-1WQN7BJGDB5YQ",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "CanonicalHostedZoneName",
+        "The name of the Amazon Route 53 hosted zone that is associated with the load balancer.",
+        "Important",
+        "If you specify",
+        "internal",
+        "for the Elastic Load Balancing scheme, use",
+        "DNSName",
+        "instead. For an",
+        "internal",
+        "scheme, the",
+        "                           load balancer doesn't have a",
+        "CanonicalHostedZoneName",
+        "value.",
+        "Example:",
+        "mystack-myelb-15HMABG9ZCN57-1013119603.",
+        "us-east-1",
+        ".elb.amazonaws.com",
+        "CanonicalHostedZoneNameID",
+        "The ID of the Amazon Route 53 hosted zone name that is associated with the load balancer.",
+        "Example:",
+        "Z3DZXE0Q79N41H",
+        "DNSName",
+        "The DNS name for the load balancer.",
+        "Example:",
+        "mystack-myelb-15HMABG9ZCN57-1013119603.",
+        "us-east-1",
+        ".elb.amazonaws.com",
+        "SourceSecurityGroup.GroupName",
+        "The security group that you can use as part of your inbound rules for your load balancer's",
+        "                     back-end Amazon EC2 application instances.",
+        "Example:",
+        "amazon-elb",
+        "SourceSecurityGroup.OwnerAlias",
+        "The owner of the source security group.",
+        "Example:",
+        "amazon-elb-sg",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticLoadBalancingV2::Listener",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the listener's ARN, such as",
+        "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticLoadBalancingV2::ListenerRule",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the rule's ARN, such as",
+        "arn:aws:elasticloadbalancing:us-west-2:123456789012:listener-rule/app/my-load-balancer/50dc6c495c0c9188/f2f7dc8efc522ab2/9683b2d02a6cabee",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ARN of the load balancer, for",
+        "        example:",
+        "arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-internal-load-balancer/50dc6c495c0c9188",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for the following attributes.",
+        "DNSName",
+        "The DNS name for the Application load balancer, for example",
+        "my-load-balancer-424835706.us-west-2.elb.amazonaws.com",
+        ".",
+        "CanonicalHostedZoneID",
+        "The ID of the Amazon Route 53 hosted zone associated with the load balancer, for example",
+        "Z2P70J7EXAMPLE",
+        ".",
+        "LoadBalancerFullName",
+        "The full name of the Application load balancer, for example",
+        "app/my-load-balancer/50dc6c495c0c9188",
+        ".",
+        "LoadBalancerName",
+        "The name of the Application load balancer, for example",
+        "my-load-balancer",
+        ".",
+        "SecurityGroups",
+        "The IDs of the security groups for the Application load balancer, for example",
+        "sg-123456a",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the target group's Amazon Resource Name (ARN), such as",
+        "arn:aws:elasticloadbalancing:us-west-2:123456789012:targetgroup/my-targets/73e2d6bc24d8a067",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "LoadBalancerArns",
+        "A list of  Amazon Resource Names (ARNs) of the load balancers that route traffic",
+        "              to this target group, such as",
+        "[",
+        "                \"arn:aws:elasticloadbalancing:us-west-2:123456789012:loadbalancer/app/my-load-balancer/50dc6c495c0c9188\"",
+        "                ]",
+        ".",
+        "TargetGroupFullName",
+        "The full name of the target group, such as",
+        "targetgroup/my-target-group/cbf133c568e0d028",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Elasticsearch::Domain",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource name, such as",
+        "mystack-elasticsea-abc1d2efg3h4",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EMR::Cluster",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the cluster ID, such as",
+        "j-1ABCD123AB1A",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "MasterPublicDNS",
+        "The public DNS name of the master node (instance), such as",
+        "ec2-12-123-123-123.us-west-2.compute.amazonaws.com",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EMR::InstanceGroupConfig",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the instance group ID, such as",
+        "ig-ABC12DEF3456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::EMR::Step",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the step ID, such as",
+        "s-1A2BC3D4EFG56",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Events::Rule",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the event rule ID, such as",
+        "mystack-ScheduledRule-ABCDEFGHIJK",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The event rule Amazon Resource Name (ARN), such as",
+        "arn:aws:events:us-east-1:123456789012:rule/example",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::GameLift::Alias",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the alias ID, such as",
+        "myalias-a01234b56-7890-1de2-f345-g67h8i901j2k",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::GameLift::Build",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the build ID, such as",
+        "mybuild-a01234b56-7890-1de2-f345-g67h8i901j2k",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::GameLift::Fleet",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the fleet ID, such as",
+        "myfleet-a01234b56-7890-1de2-f345-g67h8i901j2k",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::AccessKey",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "Specifying this resource ID to the intrinsic",
+        "Ref",
+        "function will return the",
+        "AccessKeyId",
+        ". For example:",
+        "AKIAIOSFODNN7EXAMPLE",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "SecretAccessKey",
+        "Returns the secret access key for the specified",
+        "AWS::IAM::AccessKey",
+        "resource. For",
+        "                     example:",
+        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYzEXAMPLEKEY",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::Group",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "Specifying this resource ID to the intrinsic",
+        "Ref",
+        "function will",
+        "        return the",
+        "GroupName",
+        ". For example:",
+        "mystack-mygroup-1DZETITOWEKVO",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) for the",
+        "AWS::IAM::Group",
+        "resource. For",
+        "                     example:",
+        "arn:aws:iam::123456789012:group/mystack-mygroup-1DZETITOWEKVO",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::InstanceProfile",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "MyProfile",
+        "\" }",
+        "For the IAM::InstanceProfile with the logical ID \"MyProfile\",",
+        "Ref",
+        "will return the",
+        "         resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) for the instance profile. For example:",
+        "{\"Fn::GetAtt\" : [\"MyProfile\", \"Arn\"] }",
+        "This will return a value such as",
+        "“arn:aws:iam::1234567890:instance-profile/MyProfile-ASDNSDLKJ”",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::ManagedPolicy",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ARN.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the ARN of the",
+        "CreateTestDBPolicy",
+        "managed policy, such as",
+        "arn:aws:iam::123456789012:policy/teststack-CreateTestDBPolicy-16M23YE3CS700",
+        ".",
+        "{ \"Ref\": \"CreateTestDBPolicy\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::Policy",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::Role",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "RootRole",
+        "\" }",
+        "For the IAM::Role with the logical ID \"RootRole\",",
+        "Ref",
+        "will return the resource",
+        "            name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) for the instance profile. For example:",
+        "{\"Fn::GetAtt\" : [\"MyRole\", \"Arn\"] }",
+        "This will return a value such as",
+        "“arn:aws:iam::1234567890:role/MyRole-AJJHDSKSDF”",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::User",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "Specifying this resource ID to the intrinsic Ref function will return the",
+        "UserName",
+        ". For example:",
+        "mystack-myuser-1CCXAFG2H2U4D",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) for the specified AWS::IAM::User resource. For example:",
+        "arn:aws:iam::123456789012:user/mystack-myuser-1CCXAFG2H2U4D",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IAM::UserToGroupAddition",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyUserToGroupAddition",
+        "\" }",
+        ""
+      ],
+      [
+        "For the",
+        "AWS::IAM::UserToGroupAddition",
+        "with the logical ID \"MyUserToGroupAddition\",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IoT::Certificate",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the certificate ID. For",
+        "            example:",
+        "{ \"Ref\": \"",
+        "MyCertificate",
+        "\" }",
+        "A",
+        "            value similar to the following is",
+        "            returned:",
+        "a1234567b89c012d3e4fg567hij8k9l01mno1p23q45678901rs234567890t1u2",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) for the instance profile. For",
+        "                     example:",
+        "{ \"Fn::GetAtt\": [\"",
+        "MyCertificate",
+        "\", \"Arn\"] }",
+        "A value similar to the following is",
+        "                     returned:",
+        "arn:aws:iot:ap-southeast-2:123456789012:cert/a1234567b89c012d3e4fg567hij8k9l01mno1p23q45678901rs234567890t1u2",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IoT::Policy",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the policy name. For example:",
+        "{ \"Ref\": \"",
+        "MyPolicy",
+        "\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IoT::PolicyPrincipalAttachment",
+    "notFound": true
+  },
+  {
+    "name": "AWS::IoT::Thing",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the thing name. For example:",
+        "{ \"Ref\": \"",
+        "MyThing",
+        "\" }",
+        "For a stack named",
+        "MyStack",
+        ", a value similar to the following is",
+        "            returned:",
+        "MyStack-MyThing-AB1CDEFGHIJK",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::IoT::ThingPrincipalAttachment",
+    "notFound": true
+  },
+  {
+    "name": "AWS::IoT::TopicRule",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the topic rule name. For example:",
+        "{ \"Ref\": \"",
+        "MyTopicRule",
+        "\" }",
+        "For a stack named",
+        "My-Stack",
+        "(the",
+        "–",
+        "character is",
+        "            omitted), a value similar to the following is",
+        "            returned:",
+        "MyStackMyTopicRule12ABC3D456EFG",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Kinesis::Stream",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you specify an AWS::Kinesis::Stream resource as an argument to the",
+        "Ref",
+        "function, AWS CloudFormation returns the stream name (physical ID).",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::KinesisFirehose::DeliveryStream",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the delivery stream name, such as",
+        "mystack-deliverystream-1ABCD2EF3GHIJ",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::KMS::Alias",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the alias name, such as",
+        "alias/myKeyAlias",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::KMS::Key",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function, it returns the key ID, such as",
+        "123ab456-a4c2-44cb-95fd-b781f32fbb37",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The ARN of the AWS KMS key, such as",
+        "arn:aws:kms:us-west-2:123456789012:key/12a34567-8c90-1defg-af84-0bf06c1747f3",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Lambda::EventSourceMapping",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Lambda::Alias",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ARN of the Lambda alias.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Lambda::Function",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "In the following sample, the",
+        "Ref",
+        "function returns the name of the",
+        "AMILookUp",
+        "function, such as",
+        "MyStack-AMILookUp-NT5EUXTNTXXD",
+        ".",
+        "{ \"Ref\": \"AMILookUp\" }",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The ARN of the Lambda function, such as",
+        "arn:aws:lambda:us-west-2:123456789012:MyStack-AMILookUp-NT5EUXTNTXXD",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Lambda::Permission",
+    "notFound": true
+  },
+  {
+    "name": "AWS::Lambda::Version",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the ARN of the Lambda version, such as",
+        "arn:aws:lambda:us-west-2:123456789012:function:helloworld:1",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of the specified resource type.",
+        "Version",
+        "The published version of a Lambda version, such as",
+        "1",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Logs::Destination",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource name, such as",
+        "TestDestination",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Logs::LogGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "The Amazon resource name (ARN) of the CloudWatch Logs log group, such as",
+        "arn:aws:logs:us-east-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Logs::LogStream",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource name, such as",
+        "MyAppLogStream",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Logs::MetricFilter",
+    "notFound": true
+  },
+  {
+    "name": "AWS::Logs::SubscriptionFilter",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::App",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myApp",
+        "\" }",
+        "For the AWS OpsWorks stack",
+        "myApp",
+        ",",
+        "Ref",
+        "returns the ID of",
+        "            the AWS OpsWorks app.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::ElasticLoadBalancerAttachment",
+    "notFound": true
+  },
+  {
+    "name": "AWS::OpsWorks::Instance",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myInstance1",
+        "\" }",
+        "For the AWS OpsWorks instance",
+        "myInstance1",
+        ",",
+        "Ref",
+        "returns the",
+        "            AWS OpsWorks instance ID.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "PublicIp",
+        "The public IP address of the AWS OpsWorks instance, such as",
+        "192.0.2.0",
+        ".",
+        "Note",
+        "To use this attribute, the AWS OpsWorks instance must be in an AWS OpsWorks layer that",
+        "                     auto-assigns public IP addresses.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::Layer",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myLayer",
+        "\" }",
+        "For the AWS OpsWorks layer",
+        "myLayer",
+        ",",
+        "Ref",
+        "returns the AWS OpsWorks",
+        "            layer ID.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::Stack",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myStack",
+        "\" }",
+        "For the AWS OpsWorks stack",
+        "myStack",
+        ",",
+        "Ref",
+        "returns the AWS OpsWorks",
+        "            stack ID.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::UserProfile",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the IAM user ARN, such as",
+        "arn:aws:iam::123456789012:user/opsworksuser",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::OpsWorks::Volume",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the AWS OpsWorks volume ID, such as",
+        "1ab23cd4-92ff-4501-b37c-example",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBCluster",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Endpoint.Address",
+        "The connection endpoint for the DB cluster. For example:",
+        "mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.",
+        "us-east-1",
+        ".rds.amazonaws.com",
+        ".",
+        "Endpoint.Port",
+        "The number of the port on which the DB cluster accepts connections, such as",
+        "3306",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBClusterParameterGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name..",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBInstance",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the RDS DB instance's logical name to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "will return the",
+        "DBInstanceIdentifier",
+        ". For",
+        "            example:",
+        "mystack-mydb-ea5ugmfvuaxg",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Endpoint.Address",
+        "The connection endpoint for the database. For example:",
+        "mystack-mydb-1apw1j4phylrk.cg034hpkmmjt.",
+        "us-east-1",
+        ".rds.amazonaws.com",
+        ".",
+        "Endpoint.Port",
+        "The port number on which the database accepts connections. For example:",
+        "3306",
+        ".",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBParameterGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "MyDBParameterGroup",
+        "\" }",
+        "For the RDS::DBParameterGroup with the logical ID \"MyDBParameterGroup\",",
+        "Ref",
+        "will",
+        "            return the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBSecurityGroup",
+    "notFound": true
+  },
+  {
+    "name": "AWS::RDS::DBSecurityGroupIngress",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::DBSubnetGroup",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::RDS::DBSubnetGroup",
+        "resource to",
+        "            the intrinsic",
+        "Ref",
+        "function, the function returns the name of the DB",
+        "            subnet group, such as",
+        "mystack-mydbsubnetgroup-0a12bc456789de0fg",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::EventSubscription",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "myEventSubscription",
+        "\" }",
+        ""
+      ],
+      [
+        "For the resource with the logical ID",
+        "myEventSubscription",
+        ",",
+        "Ref",
+        "returns the Amazon RDS event subscription name, such as:",
+        "mystack-myEventSubscription-1DDYF1E3B3I",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::RDS::OptionGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myOptionGroup",
+        "\" }",
+        "For the",
+        "myOptionGroup",
+        "resource,",
+        "Ref",
+        "returns the",
+        "            name of the option group.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Redshift::Cluster",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myCluster",
+        "\" }",
+        "For the Amazon Redshift cluster",
+        "myCluster",
+        ",",
+        "Ref",
+        "returns the",
+        "            name of the cluster.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Redshift::ClusterParameterGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myClusterParameterGroup",
+        "\" }",
+        "For the Amazon Redshift cluster parameter group",
+        "myClusterParameterGroup",
+        ",",
+        "Ref",
+        "returns the name of the cluster parameter group.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Redshift::ClusterSecurityGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myClusterSecurityGroup",
+        "\" }",
+        "For the Amazon Redshift cluster security group",
+        "myClusterSecurityGroup",
+        ",",
+        "Ref",
+        "returns the name of the cluster security group.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Redshift::ClusterSecurityGroupIngress",
+    "notFound": true
+  },
+  {
+    "name": "AWS::Redshift::ClusterSubnetGroup",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name. For example:",
+        "{ \"Ref\": \"",
+        "myClusterSubnetGroup",
+        "\" }",
+        "For the Amazon Redshift cluster subnet group",
+        "myClusterSubnetGroup",
+        ",",
+        "Ref",
+        "returns the name of the cluster subnet group.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Route53::HealthCheck",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the health check ID, such as",
+        "e0a123b4-4dba-4650-935e-example",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Route53::HostedZone",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "myHostedZone",
+        "\" }",
+        ""
+      ],
+      [
+        "Ref",
+        "returns the hosted zone ID, such as",
+        "Z23ABC4XYZL05B",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Route53::RecordSet",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When you specify an",
+        "AWS::Route53::RecordSet",
+        "type as an argument to the",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::Route53::RecordSetGroup",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        ""
+      ],
+      [
+        "{ \"Ref\": \"",
+        "MyRecordSetGroup",
+        "\" }",
+        ""
+      ],
+      [
+        "For the resource with the logical ID \"MyRecordSetGroup\",",
+        "Ref",
+        ""
+      ],
+      [
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::S3::Bucket",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "Example: mystack-mybucket-kdwwxmddtr2g",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "DomainName",
+        "Returns the DNS name of the specified bucket.",
+        "Example: mystack-mybucket-kdwwxmddtr2g.s3.amazonaws.com",
+        "WebsiteURL",
+        "Amazon S3 website endpoint for the specified bucket.",
+        "Example: http://mystack-mybucket-kdwwxmddtr2g.s3-website-",
+        "us-east-1",
+        ".amazonaws.com/",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::S3::BucketPolicy",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SDB::Domain",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SNS::Subscription",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SNS::Topic",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "For the",
+        "AWS::SNS::Topic",
+        "resource, the",
+        "Ref",
+        "intrinsic",
+        "            function returns the topic ARN, for example:",
+        "arn:aws:sns:us-east-1:123456789012:mystack-mytopic-NZJ5JSMVGFIE",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "TopicName",
+        "Returns the name for an Amazon SNS topic.",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::SNS::TopicPolicy",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SQS::Queue",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "The",
+        "AWS::SQS::Queue",
+        "type returns the queue URL, for example:",
+        "https://sqs.",
+        "us-east-1",
+        ".amazonaws.com/123456789012/aa4-MyQueue-Z5NOSZO2PZE9",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Arn",
+        "Returns the Amazon Resource Name (ARN) of the queue. For example:",
+        "arn:aws:sqs:",
+        "us-east-1",
+        ":123456789012:mystack-myqueue-15PG5C2FC1CW8",
+        "QueueName",
+        "Returns the queue name. For example:",
+        "mystack-myqueue-1VF9BKQH5BJVI",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::SQS::QueuePolicy",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SSM::Association",
+    "notFound": true
+  },
+  {
+    "name": "AWS::SSM::Document",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When you pass the logical ID of an",
+        "AWS::SSM::Document",
+        "resource to the",
+        "        intrinsic",
+        "Ref",
+        "function, the function returns the SSM document name,",
+        "        such as",
+        "ssm-myinstanceconfig-ABCNPH3XCAO6",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::StepFunctions::Activity",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the ARN of the created activity. For",
+        "            example:",
+        "{ \"Ref\": \"",
+        "MyActivity",
+        "\" }",
+        "Returns",
+        "            a value similar to the",
+        "            following:",
+        "arn:aws:states:us-east-1:111122223333:activity:myActivity",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Name",
+        "Returns the name of the activity. For example:",
+        "{ \"Fn::GetAtt\": [\"",
+        "MyActivity",
+        "\", \"Name\"] }",
+        "Returns a value similar to the",
+        "                     following:",
+        "myActivity",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::StepFunctions::StateMachine",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When you provide the logical ID of this resource to the",
+        "Ref",
+        "intrinsic",
+        "            function,",
+        "Ref",
+        "returns the ARN of the created state machine. For",
+        "            example:",
+        "{ \"Ref\": \"",
+        "MyStateMachine",
+        "\" }",
+        "Returns",
+        "            a value similar to the",
+        "            following:",
+        "arn:aws:states:us-east-1:111122223333:stateMachine:MyStateMachine-ABCDEFGHIJ1K",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ],
+      [
+        "Fn::GetAtt",
+        "Fn::GetAtt",
+        "returns a value for a specified attribute of this type.",
+        "   The following are the available attributes and sample return values.",
+        "Name",
+        "Returns the name of the state machine. For example:",
+        "{ \"Fn::GetAtt\": [\"",
+        "MyStateMachine",
+        "\", \"Name\"] }",
+        "Returns a value similar to the",
+        "                     following:",
+        "MyStateMachine-ABCDEFGHIJ1K",
+        "For more information about using",
+        "Fn::GetAtt",
+        ", see",
+        "Fn::GetAtt",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::ByteMatchSet",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::IPSet",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::Rule",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::SizeConstraintSet",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::SqlInjectionMatchSet",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::WebACL",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource name, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WAF::XssMatchSet",
+    "texts": [
+      [
+        "Return Value",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic function,",
+        "Ref",
+        "returns the resource physical ID, such as",
+        "1234a1a-a1b1-12a1-abcd-a123b123456",
+        ".",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  },
+  {
+    "name": "AWS::WorkSpaces::Workspace",
+    "texts": [
+      [
+        "Return Values",
+        ""
+      ],
+      [
+        "Ref",
+        "When the logical ID of this resource is provided to the",
+        "Ref",
+        "intrinsic",
+        "   function,",
+        "Ref",
+        "returns the resource name.",
+        "For more information about using the",
+        "Ref",
+        "function, see",
+        "Ref",
+        ".",
+        ""
+      ]
+    ]
+  }
+]
