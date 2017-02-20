@@ -2,6 +2,7 @@
 
 const test = require('tape');
 const Dereferencer = require('../lib/dereferencer');
+const cf = require('..');
 
 test('[dereferencer] various AWS::SQS::Queue return values', (assert) => {
   const template = {
@@ -30,7 +31,7 @@ test('[dereferencer] various AWS::SQS::Queue return values', (assert) => {
     region: 'us-east-1',
   };
 
-  assert.deepEqual(new Dereferencer(template).deploy(deploy, {}), {
+  assert.deepEqual(cf.dereference(template, {}, deploy), {
     Resources: {
       Queue: {
         Type: 'AWS::SQS::Queue',
