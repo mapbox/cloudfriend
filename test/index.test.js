@@ -16,6 +16,7 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.select(1, ['abra', 'cadabra']), { 'Fn::Select': ['1', ['abra', 'cadabra']] }, '');
   assert.deepEqual(cloudfriend.ref('something'), { Ref: 'something' }, 'ref');
   assert.deepEqual(cloudfriend.split(',', 'a,b,c,d'), { 'Fn::Split': [',', 'a,b,c,d'] }, 'split');
+  assert.deepEqual(cloudfriend.split(',', cloudfriend.ref('Id')), { 'Fn::Split': [',', { Ref: 'Id' }] }, 'split');
   assert.deepEqual(cloudfriend.userData(['#!/usr/bin/env bash', 'set -e']), { 'Fn::Base64': { 'Fn::Join': ['\n', ['#!/usr/bin/env bash', 'set -e']] } }, 'userData');
   assert.deepEqual(cloudfriend.sub('my ${thing}'), { 'Fn::Sub': 'my ${thing}' }, 'sub without variables');
   assert.deepEqual(cloudfriend.sub('my ${thing}', { thing: 'stuff' }), { 'Fn::Sub': ['my ${thing}', { thing: 'stuff' }] }, 'sub with variables');
