@@ -1,3 +1,11 @@
+## v1.8.1
+
+- `.split()` now allows object arguments.
+
+## v1.8.0
+
+- `.split()` added for `Fn::Split` intrinsic function.
+
 ## v1.7.0
 
 - Adds `cloudfriend.permissions`, which exports a CloudFormation template which creates an AWS user and access key with permission to run `cloudfriend.validate()`.
