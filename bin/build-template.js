@@ -3,9 +3,9 @@
 'use strict';
 
 const cloudfriend = require('..');
-const templatePath = process.argv[2];
-
-cloudfriend.build(templatePath)
-  .then((template) => {
+const argv = require('minimist')(process.argv.slice(2));
+const templatePath = argv._[0];
+cloudfriend.build(templatePath, argv)
+  .then(function(template) {
     console.log(JSON.stringify(template, null, 4));
   });
