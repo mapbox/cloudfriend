@@ -1,3 +1,7 @@
+## v1.8.2
+
+- more permissive engines.node
+
 ## v1.8.1
 
 - `.split()` now allows object arguments.
