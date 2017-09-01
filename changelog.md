@@ -1,3 +1,8 @@
+## v1.9.0
+
+- Adds `AWS::Partition` and `AWS::DomainSuffix` pseudo-parameters
+- Adds `cloudfriend.arn()`, a shortcut for constructing ARNs
+
 ## v1.8.2
 
 - more permissive engines.node
