@@ -22,6 +22,8 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.sub('my ${thing}', { thing: 'stuff' }), { 'Fn::Sub': ['my ${thing}', { thing: 'stuff' }] }, 'sub with variables');
   assert.deepEqual(cloudfriend.importValue('id'), { 'Fn::ImportValue': 'id' }, 'import value with string');
   assert.deepEqual(cloudfriend.importValue(cloudfriend.ref('Id')), { 'Fn::ImportValue': cloudfriend.ref('Id') }, 'import value with string');
+  assert.deepEqual(cloudfriend.arn('s3', 'my-bucket/*'), { 'Fn::Sub': ['arn:${AWS::Partition}:${service}:::${suffix}', { service: 's3', suffix: 'my-bucket/*' }] }, 's3 arn');
+  assert.deepEqual(cloudfriend.arn('cloudformation', 'stack/my-stack/*'), { 'Fn::Sub': ['arn:${AWS::Partition}:${service}:${AWS::Region}:${AWS::AccountId}:${suffix}', { service: 'cloudformation', suffix: 'stack/my-stack/*' }] }, 'non-s3 arn');
   assert.end();
 });
 
@@ -42,6 +44,8 @@ test('pseudo', (assert) => {
   assert.deepEqual(cloudfriend.region, { Ref: 'AWS::Region' }, 'region');
   assert.deepEqual(cloudfriend.stackId, { Ref: 'AWS::StackId' }, 'stackId');
   assert.deepEqual(cloudfriend.stackName, { Ref: 'AWS::StackName' }, 'stack');
+  assert.deepEqual(cloudfriend.partition, { Ref: 'AWS::Partition' }, 'stack');
+  assert.deepEqual(cloudfriend.domainSuffix, { Ref: 'AWS::DomainSuffix' }, 'stack');
   assert.end();
 });
 
