@@ -49,7 +49,7 @@ domainSuffix | [AWS::DomainSuffix](https://docs.aws.amazon.com/AWSCloudFormation
 method | description
 --- | ---
 build(file, opts) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.
-validate(file) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
+validate(file|stdin) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
 merge(...template) | Merges templates together. Throws errors if logical names are reused
 
 ## CLI tools
@@ -75,4 +75,6 @@ Or, to validate a template:
 ```
 # Make sure that your shell is configured to make AWS requests
 $ validate-template path/to/template.js
+# or to build and validate all at once
+$ build-template path/to/template.js | validate-template
 ```
