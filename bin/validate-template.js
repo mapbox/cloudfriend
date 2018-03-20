@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 
 var cloudfriend = require('..');
-var templatePath = process.argv[2];
+var templatePath = process.argv[2] || '-'; // if no templatePath is given, try stdin
 
 cloudfriend.validate(templatePath, 'us-east-1')
   .then(function() {

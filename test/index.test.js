@@ -89,7 +89,7 @@ test('build', (assert) => {
 });
 
 test('validate', (assert) => {
-  assert.plan(2);
+  assert.plan(3);
 
   cloudfriend.validate(path.join(fixtures, 'static.json'))
     .then(function() {
@@ -98,6 +98,17 @@ test('validate', (assert) => {
     })
     .catch(function(err) {
       assert.ok(/Template format error: Unrecognized resource type/.test(err.message), 'invalid');
+    })
+    .then(function() {
+      process.stdin.isTTY = false;
+      var p = cloudfriend.validate('-');
+      var stdin = JSON.stringify(require('./fixtures/static.json'), null, 4);
+      process.stdin.push(stdin);
+      process.stdin.emit('end');
+      return p;
+    })
+    .then(function() {
+      assert.ok(true, 'valid');
     });
 });
 

@@ -37,6 +37,7 @@
     "tape": "^4.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.4.11"
+    "aws-sdk": "^2.4.11",
+    "get-stdin": "^6.0.0"
   }
 }
