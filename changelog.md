@@ -1,3 +1,7 @@
+## v1.9.1
+
+- Rename `AWS::DomainSuffix` to `AWS::URLSuffix`
+
 ## v1.9.0
 
 - Adds `AWS::Partition` and `AWS::DomainSuffix` pseudo-parameters
