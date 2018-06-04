@@ -45,7 +45,7 @@ test('pseudo', (assert) => {
   assert.deepEqual(cloudfriend.stackId, { Ref: 'AWS::StackId' }, 'stackId');
   assert.deepEqual(cloudfriend.stackName, { Ref: 'AWS::StackName' }, 'stack');
   assert.deepEqual(cloudfriend.partition, { Ref: 'AWS::Partition' }, 'stack');
-  assert.deepEqual(cloudfriend.domainSuffix, { Ref: 'AWS::DomainSuffix' }, 'stack');
+  assert.deepEqual(cloudfriend.urlSuffix, { Ref: 'AWS::URLSuffix' }, 'stack');
   assert.end();
 });
 
