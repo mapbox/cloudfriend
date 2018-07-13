@@ -76,3 +76,10 @@ Or, to validate a template:
 # Make sure that your shell is configured to make AWS requests
 $ validate-template path/to/template.js
 ```
+
+You may also specify a region for validation:
+
+```
+# Make sure that your shell is configured to make AWS requests
+$ validate-template path/to/template.js us-east-1
+```

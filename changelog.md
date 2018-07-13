@@ -1,3 +1,7 @@
+## v1.10
+
+- Allow specifiying region in `validate-template` command
+
 ## v1.9.1
 
 - Rename `AWS::DomainSuffix` to `AWS::URLSuffix`
