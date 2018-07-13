@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console */
+'use strict';
 
-var cloudfriend = require('..');
-var templatePath = process.argv[2];
+const cloudfriend = require('..');
+const templatePath = process.argv[2];
 
 cloudfriend.build(templatePath)
-  .then(function(template) {
+  .then((template) => {
     console.log(JSON.stringify(template, null, 4));
   });

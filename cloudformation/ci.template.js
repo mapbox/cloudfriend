@@ -1,3 +1,5 @@
-var cloudfriend = require('..');
+'use strict';
+
+const cloudfriend = require('..');
 
 module.exports = cloudfriend.permissions;

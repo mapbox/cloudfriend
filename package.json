@@ -4,7 +4,7 @@
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
-    "node": "^4.0.0||>=6.0.0"
+    "node": ">=8"
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation",
@@ -31,12 +31,17 @@
   },
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
+    "@mapbox/eslint-config-mapbox": "^1.2.1",
     "eslint": "^3.2.0",
+    "eslint-plugin-node": "^6.0.1",
     "nyc": "^7.1.0",
     "opener": "^1.4.1",
     "tape": "^4.6.0"
   },
   "dependencies": {
     "aws-sdk": "^2.4.11"
+  },
+  "eslintConfig": {
+    "extends": "@mapbox/eslint-config-mapbox"
   }
 }
