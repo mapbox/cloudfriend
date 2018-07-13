@@ -6,6 +6,7 @@ const pseudo = require('./lib/pseudo');
 const build = require('./lib/build');
 const validate = require('./lib/validate');
 const merge = require('./lib/merge');
+const shortcuts = require('./lib/shortcuts');
 
 /**
  * The cloudfriend module
@@ -14,9 +15,10 @@ const merge = require('./lib/merge');
  * var cloudfriend = require('cloudfriend');
  */
 const cloudfriend = module.exports = {
-  build: build,
-  validate: validate,
-  merge: merge
+  build,
+  validate,
+  merge,
+  shortcuts
 };
 
 Object.keys(intrinsic).forEach((key) => {
