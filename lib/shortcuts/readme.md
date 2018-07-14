@@ -16,6 +16,15 @@ To create a Lambda function that invokes on a regular schedule, a CloudFormation
 
 All told, this can amount to hundreds of lines of CloudFormation template JSON. If the developer needs to build several Lambda functions, most of that code will be repetitious. Each may have a different code location and handler function, perhaps differences in permissions, and aside from that be mostly identical.
 
+## Available shortcuts
+
+- [Lambda](#cloudfriendshortcutslambda)
+- [ScheduledLambda](#cloudfriendshortcutsscheduledlambda)
+- [StreamLambda](#cloudfriendshortcutsstreamlambda)
+- [QueueLambda](#cloudfriendshortcutsqueuelambda)
+- [ServiceRole](#cloudfriendshortcutsservicerole)
+- [Queue](#cloudfriendshortcutsqueue)
+
 ## Using shortcuts in a template
 
 Shortcuts are intended to be included in a template using cloudfriend's `.merge()` function. The developer should begin by constructing a template that defines parameters and other aspects of the stack. Then, instantiate shortcut objects in the same template script, and export the result of `.merge()`ing the template with the shortcut objects. The final template JSON can be created via cloudfriend's `.build()` function, or the script can be deployed directly using [cfn-config](https://github.com/mapbox/cfn-config).
@@ -83,15 +92,6 @@ module.exports = cf.merge(
   lambda
 );
 ```
-
-## Available shortcuts
-
-- [Lambda](#cloudfriendshortcutslambda)
-- [ScheduledLambda](#cloudfriendshortcutsscheduledlambda)
-- [StreamLambda](#cloudfriendshortcutsstreamlambda)
-- [QueueLambda](#cloudfriendshortcutsqueuelambda)
-- [ServiceRole](#cloudfriendshortcutsservicerole)
-- [Queue](#cloudfriendshortcutsqueue)
 
 ### cloudfriend.shortcuts.Lambda
 
