@@ -46,37 +46,7 @@ urlSuffix | [AWS::URLSuffix](https://docs.aws.amazon.com/AWSCloudFormation/lates
 
 ## Shortcuts
 
-Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. 
-
-As an example, here's how you would use the scheduled Lambda shortcut to build a template that includes a Lambda function that executes every hour. This shortcut produces CloudFormation resources for a LogGroup, Role, Lambda function, Scheduled CloudWatch event, and Lambda permission.
-
-```js
-const cf = require('@mapbox/cloudfriend');
-
-const myTemplate = { ... }; // define other aspects of your template
-
-const scheduledLambda = new cf.shortcuts.ScheduledLambda(
-    'ScheduledLambdaFunction', // [required] the lambda function's logical name within the final template
-    { S3Bucket: 'my-lambda-code-bucket', S3Key: 'path/to/the/code.zip' }, // [required] the `.Code` property for a Lambda function
-    'index.handler', // [required] the JS function for Lambda to execute
-    'rate(1 hour)', // [required] the schedule expression
-    { Timeout: 30, MemorySize: 256 }, // [optional] additional properties for the Lambda function
-    {
-        Statement: [
-            {
-                Effet: 'Allow',
-                Action: 's3:GetObject',
-                Resource: 'arn:aws:s3:::data-bucket/some/data/object.zip'
-            }
-        ]
-    } // [optional] select additional properties for other resources within the shortcut
-);
-
-module.exports = cf.merge(
-    myTemplate,
-    scheduledLambda
-); // this script outputs myTemplate with the scheduled function resources merged into it
-```
+Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. See [the shortcuts readme for more information](./shortcuts/readme.md).
 
 ## Other helpers
 
