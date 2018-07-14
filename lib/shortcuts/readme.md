@@ -91,6 +91,7 @@ module.exports = cf.merge(
 - [StreamLambda](#cloudfriendshortcutsstreamlambda)
 - [QueueLambda](#cloudfriendshortcutsqueuelambda)
 - [ServiceRole](#cloudfriendshortcutsservicerole)
+- [Queue](#cloudfriendshortcutsqueue)
 
 ### cloudfriend.shortcuts.Lambda
 
@@ -327,5 +328,60 @@ An object containing further resource options that do not impact the IAM role it
 Attribute | Description | Default Value
 --- | --- | ---
 **Condition** | A stack condition that determines whether or not the IAM role should be created | `undefined`
+
+---
+
+### cloudfriend.shortcuts.Queue
+
+An SQS Queue that can be fed messages through an SNS topic.
+
+#### Resources created
+
+Resource type | Description
+---  | ---
+`AWS::SQS::Queue` | the SQS queue
+`AWS::SNS::Topic` | an SNS topic that can feed messages to the SQS queue
+`AWS::SNS::QueuePolicy` | permissions that permit the SNS topic to feed the SQS queue
+`AWS::SQS::Queue` | a dead-letter queue for messages that fail to be processed
+
+#### Arguments
+
+```js
+new cloudfriend.shortcuts.Queue(LogicalName, VisibilityTimeout, maxReceiveCount, QueueProperties, AdditionalOptions)
+```
+
+#### Required arguments
+
+Argument | Description
+--- | ---
+**LogicalName** | The logical name of the SQS queue within the resulting CloudFormation template
+
+#### Optional arguments
+
+Argument | Description | Default Value
+--- | --- | ---
+**VisibilityTimeout** | The length of time (in seconds) during which a message will be unavailable after it is delivered from the queue | `300`
+**maxReceiveCount** | The number of times a message is delivered to the source queue before being moved to the dead-letter queue | `10`
+**QueueProperties** | Additional properties for the SQS queue | `{}`
+**AdditionalOptions** | Properties relating to other resources | `{}`
+
+#### QueueProperties
+
+An object defining optional SQS queue properties. See [the CloudFormation documentation for complete details](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html).
+
+Attribute | Default Value
+--- | ---
+**MessageRetentionPeriod** | `1209600`
+**QueueName** | `${stack name}-${logical name}`
+
+#### AdditionalOptions
+
+An object containing further resource options that do not impact the SQS queue itself.
+
+Attribute | Description | Default Value
+--- | --- | ---
+**Condition** | A stack condition that determines whether or not the IAM role should be created | `undefined`
+**TopicName** | The name of the SNS topic | `${stack name}-${logical name}`
+**DeadLetterVisibilityTimeout** | The visibility timeout for the dead-letter queue | `300`
 
 ---
