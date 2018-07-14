@@ -90,6 +90,7 @@ module.exports = cf.merge(
 - [ScheduledLambda](#cloudfriendshortcutsscheduledlambda)
 - [StreamLambda](#cloudfriendshortcutsstreamlambda)
 - [QueueLambda](#cloudfriendshortcutsqueuelambda)
+- [ServiceRole](#cloudfriendshortcutsservicerole)
 
 ### cloudfriend.shortcuts.Lambda
 
@@ -133,7 +134,7 @@ Attribute | Default Value
 **Timeout** | `300`
 **\*** | additional properties as defined by Cloudformation & Lambda
 
-#### AdditionalProperties
+#### AdditionalOptions
 
 An object containing further resource options that do not impact the Lambda function itself
 
@@ -143,7 +144,7 @@ Attribute | Description | Default Value
 **Statement** | IAM policy statements for the Lambda function's execution role | `[]`
 **ErrorAlarmProperties** | [Properties of a CloudWatch alarm](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html) which tracks Lambda function errors | `{}`
 
-#### AdditionalProperties.ErrorAlarmProperties
+#### AdditionalOptions.ErrorAlarmProperties
 
 An object to define properties of the function's error alarm
 
@@ -195,9 +196,9 @@ Argument | Description
 
 [Same as for the Lambda shortcut above](#lambdaproperties).
 
-#### AdditionalProperties
+#### AdditionalOptions
 
-[Same as for the Lambda shortcut above](#additionalproperties).
+[Same as for the Lambda shortcut above](#additionaloptions).
 
 ---
 
@@ -234,9 +235,9 @@ Argument | Description
 
 [Same as for the Lambda shortcut above](#lambdaproperties).
 
-#### AdditionalProperties
+#### AdditionalOptions
 
-[Same as for the Lambda shortcut above](#additionalproperties), plus the following additions:
+[Same as for the Lambda shortcut above](#additionaloptions), plus the following additions:
 
 Attribute | Description | Default Value
 --- | --- | ---
@@ -261,7 +262,7 @@ Resource type | Description
 #### Arguments
 
 ```js
-new cloudfriend.shortcuts.QueueLambda(LogicalName, Code, Handler, EventSourceArn, LambdaProperties, AdditionalOptions)
+new cloudfriend.shortcuts.QueueLambda(LogicalName, Code, Handler, EventSourceArn, ReservedConcurrencyExecutions, LambdaProperties, AdditionalOptions)
 ```
 
 #### Required arguments
@@ -272,6 +273,7 @@ Argument | Description
 **Code** | [The source code for the Lambda function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html)
 **Handler** | [The name of the function that Lambda calls to start running your code](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler)
 **EventSourceArn** | [The ARN of the source SQS queue](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn)
+**ReservedConcurrencyExecutions** | [The maximum number of concurrent Lambda function executions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions)
 
 #### Optional arguments
 
@@ -279,12 +281,51 @@ Argument | Description
 
 [Same as for the Lambda shortcut above](#lambdaproperties).
 
-#### AdditionalProperties
+#### AdditionalOptions
 
-[Same as for the Lambda shortcut above](#additionalproperties), plus the following additions:
+[Same as for the Lambda shortcut above](#additionaloptions), plus the following additions:
 
 Attribute | Description | Default Value
 --- | --- | ---
 **Enabled** | Indicates whether Lambda begins polling the SQS queue | `true`
+
+---
+
+### cloudfriend.shortcuts.ServiceRole
+
+An IAM role to be assumed by an AWS service.
+
+#### Resources created
+
+Resource type | Description
+---  | ---
+`AWS::IAM::Role` | the IAM role
+
+#### Arguments
+
+```js
+new cloudfriend.shortcuts.ServiceRole(LogicalName, Service, Statement, RoleProperties, AdditionalOptions)
+```
+
+#### Required arguments
+
+Argument | Description
+--- | ---
+**LogicalName** | The logical name of the IAM role within the resulting CloudFormation template
+**Service** | The name of the AWS service that can assume this role, e.g. `lambda` or `ecs-tasks`
+
+#### Optional arguments
+
+#### RoleProperties
+
+An object defining optional IAM role properties. See [the CloudFormation documentation for details](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html).
+
+#### AdditionalOptions
+
+An object containing further resource options that do not impact the IAM role itself.
+
+Attribute | Description | Default Value
+--- | --- | ---
+**Condition** | A stack condition that determines whether or not the IAM role should be created | `undefined`
 
 ---
