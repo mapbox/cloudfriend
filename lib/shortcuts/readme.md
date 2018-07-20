@@ -18,12 +18,14 @@ All told, this can amount to hundreds of lines of CloudFormation template JSON. 
 
 ## Available shortcuts
 
-- [Lambda](#cloudfriendshortcutslambda)
-- [ScheduledLambda](#cloudfriendshortcutsscheduledlambda)
-- [StreamLambda](#cloudfriendshortcutsstreamlambda)
-- [QueueLambda](#cloudfriendshortcutsqueuelambda)
-- [ServiceRole](#cloudfriendshortcutsservicerole)
-- [Queue](#cloudfriendshortcutsqueue)
+Links to documentation for each shortcut in [api.md](./api.md)
+
+- [Lambda](./api.md#lambda)
+- [ScheduledLambda](./api.md#scheduledlambda)
+- [StreamLambda](./api.md#streamlambda)
+- [QueueLambda](./api.md#queuelambda)
+- [ServiceRole](./api.md#servicerole)
+- [Queue](./api.md#queue)
 
 ## Using shortcuts in a template
 
@@ -35,7 +37,8 @@ As an example, this template will create a named S3 bucket, and a Lambda functio
 const cf = require('@mapbox/cloudfriend');
 
 const Parameters = {
-  BucketName: { Type: 'String' }
+  BucketName: { Type: 'String' },
+  AlarmEmail: { Type: 'String' }
 };
 
 const Resources = {
@@ -47,17 +50,14 @@ const Resources = {
   }
 };
 
-const lambdaCode = {
-  S3Bucket: 'my-lambda-code-bucket',
-  S3Key: 'key/for/my/lambda/code.zip'
-};
-
-const lambdaOptions = {
+const lambda = new cf.shortcuts.Lambda({
+  LogicalName: 'Reader', 
+  Code: {
+    S3Bucket: 'my-lambda-code-bucket',
+    S3Key: 'key/for/my/lambda/code.zip'
+  }, 
   Description: cf.sub('Reads data from s3://${Bucket}'),
-  MemorySize: 512
-};
-
-const additionalOptions = {
+  MemorySize: 512, 
   Statement: [
     {
       Effect: 'Allow',
@@ -70,16 +70,9 @@ const additionalOptions = {
         cf.sub('${Bucket.Arn}/*')
       ]
     }
-  ]
-};
-
-const lambda = new cf.shortcuts.Lambda(
-  'Reader', 
-  lambdaCode, 
-  'index.handler', 
-  lambdaOptions, 
-  additionalOptions
-);
+  ],
+  AlarmActions: [cf.ref('AlarmEmail')]
+});
 
 const Outputs = {
   ReaderFunctionArn: {
@@ -92,296 +85,3 @@ module.exports = cf.merge(
   lambda
 );
 ```
-
-### cloudfriend.shortcuts.Lambda
-
-A basic Lambda function with no defined trigger.
-
-#### Resources created
-
-Resource type | Description
----  | ---
-`AWS::Lambda::Function` | the Lambda function itself
-`AWS::Logs::LogGroup` | a 14-day retention period log group
-`AWS::IAM::Role` | the Lambda function's execution role
-`AWS::CloudWatch::Alarm` | an alarm that triggers on Lambda function errors
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.Lambda(LogicalName, Code, Handler, LambdaProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the Lambda function within the resulting CloudFormation template
-**Code** | [The source code for the Lambda function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html)
-**Handler** | [The name of the function that Lambda calls to start running your code](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler)
-
-#### Optional arguments
-
-#### LambdaProperties
-
-An object representing [additional Lambda function properties](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html)
-
-Attribute | Default Value
---- | ---
-**Description** | conveys the lambda function's logical name and cloudformation stack
-**FunctionName** | `${stack name}-${logical name}`
-**MemorySize** | `128`
-**Runtime** | `nodejs8.10`
-**Timeout** | `300`
-**\*** | additional properties as defined by Cloudformation & Lambda
-
-#### AdditionalOptions
-
-An object containing further resource options that do not impact the Lambda function itself
-
-Attribute | Description | Default Value
---- | --- | ---
-**Condition** | A stack condition that determines whether or not the Lambda function should be created | `undefined`
-**Statement** | IAM policy statements for the Lambda function's execution role | `[]`
-**ErrorAlarmProperties** | [Properties of a CloudWatch alarm](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html) which tracks Lambda function errors | `{}`
-
-#### AdditionalOptions.ErrorAlarmProperties
-
-An object to define properties of the function's error alarm
-
-Attribute | Default Value
---- | ---
-**AlarmName** | `${stack name}-${logical name}-Errors`
-**Description** | conveys the Lambda function's name and stack
-**AlarmActions** | `[]`
-**Period** | `60`
-**EvaluationPeriods** | `1`
-**Statistic** | `Sum`
-**Threshold** | `0`
-**ComparisonOperator** | `GreaterThanThreshold`
-**TreatMissingData** | `notBreaching`
-
----
-
-### cloudfriend.shortcuts.ScheduledLambda
-
-A Lambda function configured to execute on a regular schedule.
-
-#### Resources created
-
-[Same as for the Lambda shortcut above](#resources-created), plus the following additions:
-
-Resource type | Description
----  | ---
-`AWS::Events::Rule` | the scheduled rule for periodic invocation
-`AWS::Lambda::Permission` | allows the rule to invoke the Lambda function
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.ScheduledLambda(LogicalName, Code, Handler, ScheduleExpression, LambdaProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the Lambda function within the resulting CloudFormation template
-**Code** | [The source code for the Lambda function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html)
-**Handler** | [The name of the function that Lambda calls to start running your code](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler)
-**ScheduleExpression** | [The string defining the invocation schedule](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression)
-
-#### Optional arguments
-
-#### LambdaProperties
-
-[Same as for the Lambda shortcut above](#lambdaproperties).
-
-#### AdditionalOptions
-
-[Same as for the Lambda shortcut above](#additionaloptions).
-
----
-
-### cloudfriend.shortcuts.StreamLambda
-
-A Lambda function configured to execute in response to events in a stream, either Kinesis or DynamoDB.
-
-#### Resources created
-
-[Same as for the Lambda shortcut above](#resources-created), plus the following additions:
-
-Resource type | Description
----  | ---
-`AWS::Lambda::EventSourceMapping` | the connector between the source stream and the Lambda function
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.StreamLambda(LogicalName, Code, Handler, EventSourceArn, LambdaProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the Lambda function within the resulting CloudFormation template
-**Code** | [The source code for the Lambda function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html)
-**Handler** | [The name of the function that Lambda calls to start running your code](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler)
-**EventSourceArn** | [The ARN of the source stream](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn)
-
-#### Optional arguments
-
-#### LambdaProperties
-
-[Same as for the Lambda shortcut above](#lambdaproperties).
-
-#### AdditionalOptions
-
-[Same as for the Lambda shortcut above](#additionaloptions), plus the following additions:
-
-Attribute | Description | Default Value
---- | --- | ---
-**BatchSize** | The maximum number of stream events per function invocation | `1`
-**Enabled** | Indicates whether Lambda begins polling the stream | `true`
-**StartingPosition** | [The position in the stream where Lambda starts reading](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition) | `LATEST`
-
----
-
-### cloudfriend.shortcuts.QueueLambda
-
-A Lambda function configured to execute in response to messages in an SQS queue.
-
-#### Resources created
-
-[Same as for the Lambda shortcut above](#resources-created), plus the following additions:
-
-Resource type | Description
----  | ---
-`AWS::Lambda::EventSourceMapping` | the connector between the SQS queue and the Lambda function
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.QueueLambda(LogicalName, Code, Handler, EventSourceArn, ReservedConcurrencyExecutions, LambdaProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the Lambda function within the resulting CloudFormation template
-**Code** | [The source code for the Lambda function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html)
-**Handler** | [The name of the function that Lambda calls to start running your code](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler)
-**EventSourceArn** | [The ARN of the source SQS queue](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn)
-**ReservedConcurrencyExecutions** | [The maximum number of concurrent Lambda function executions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions)
-
-#### Optional arguments
-
-#### LambdaProperties
-
-[Same as for the Lambda shortcut above](#lambdaproperties).
-
-#### AdditionalOptions
-
-[Same as for the Lambda shortcut above](#additionaloptions), plus the following additions:
-
-Attribute | Description | Default Value
---- | --- | ---
-**Enabled** | Indicates whether Lambda begins polling the SQS queue | `true`
-
----
-
-### cloudfriend.shortcuts.ServiceRole
-
-An IAM role to be assumed by an AWS service.
-
-#### Resources created
-
-Resource type | Description
----  | ---
-`AWS::IAM::Role` | the IAM role
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.ServiceRole(LogicalName, Service, Statement, RoleProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the IAM role within the resulting CloudFormation template
-**Service** | The name of the AWS service that can assume this role, e.g. `lambda` or `ecs-tasks`
-
-#### Optional arguments
-
-#### RoleProperties
-
-An object defining optional IAM role properties. See [the CloudFormation documentation for details](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html).
-
-#### AdditionalOptions
-
-An object containing further resource options that do not impact the IAM role itself.
-
-Attribute | Description | Default Value
---- | --- | ---
-**Condition** | A stack condition that determines whether or not the IAM role should be created | `undefined`
-
----
-
-### cloudfriend.shortcuts.Queue
-
-An SQS Queue that can be fed messages through an SNS topic.
-
-#### Resources created
-
-Resource type | Description
----  | ---
-`AWS::SQS::Queue` | the SQS queue
-`AWS::SNS::Topic` | an SNS topic that can feed messages to the SQS queue
-`AWS::SNS::QueuePolicy` | permissions that permit the SNS topic to feed the SQS queue
-`AWS::SQS::Queue` | a dead-letter queue for messages that fail to be processed
-
-#### Arguments
-
-```js
-new cloudfriend.shortcuts.Queue(LogicalName, VisibilityTimeout, maxReceiveCount, QueueProperties, AdditionalOptions)
-```
-
-#### Required arguments
-
-Argument | Description
---- | ---
-**LogicalName** | The logical name of the SQS queue within the resulting CloudFormation template
-
-#### Optional arguments
-
-Argument | Description | Default Value
---- | --- | ---
-**VisibilityTimeout** | The length of time (in seconds) during which a message will be unavailable after it is delivered from the queue | `300`
-**maxReceiveCount** | The number of times a message is delivered to the source queue before being moved to the dead-letter queue | `10`
-**QueueProperties** | Additional properties for the SQS queue | `{}`
-**AdditionalOptions** | Properties relating to other resources | `{}`
-
-#### QueueProperties
-
-An object defining optional SQS queue properties. See [the CloudFormation documentation for complete details](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html).
-
-Attribute | Default Value
---- | ---
-**MessageRetentionPeriod** | `1209600`
-**QueueName** | `${stack name}-${logical name}`
-
-#### AdditionalOptions
-
-An object containing further resource options that do not impact the SQS queue itself.
-
-Attribute | Description | Default Value
---- | --- | ---
-**Condition** | A stack condition that determines whether or not the IAM role should be created | `undefined`
-**TopicName** | The name of the SNS topic | `${stack name}-${logical name}`
-**DeadLetterVisibilityTimeout** | The visibility timeout for the dead-letter queue | `300`
-
----

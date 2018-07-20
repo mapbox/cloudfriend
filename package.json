@@ -10,7 +10,8 @@
     "pretest": "eslint index.js test lib bin cloudformation",
     "test": "nyc tape test/*.test.js",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
-    "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json"
+    "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
+    "shortcuts-api-doc": "documentation build lib/shortcuts/index.js -f md -o lib/shortcuts/api.md"
   },
   "bin": {
     "build-template": "bin/build-template.js",
@@ -32,6 +33,7 @@
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
+    "documentation": "^8.0.2",
     "eslint": "^3.2.0",
     "eslint-plugin-node": "^6.0.1",
     "nyc": "^7.1.0",
