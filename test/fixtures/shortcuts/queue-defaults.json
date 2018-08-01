@@ -1,0 +1,100 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": {
+          "Fn::Sub": "${AWS::StackName}-MyQueue"
+        },
+        "RedrivePolicy": {
+          "maxReceiveCount": 10,
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "MyQueueDeadLetter",
+              "Arn"
+            ]
+          }
+        },
+        "VisibilityTimeout": 300
+      }
+    },
+    "MyQueueDeadLetter": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "VisibilityTimeout": 300,
+        "QueueName": {
+          "Fn::Sub": [
+            "${queue}-dead-letter",
+            {
+              "queue": {
+                "Fn::Sub": "${AWS::StackName}-MyQueue"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "MyQueueTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": {
+          "Fn::Sub": "${AWS::StackName}-MyQueue"
+        },
+        "Subscription": {
+          "Endpoint": {
+            "Fn::GetAtt": [
+              "MyQueue",
+              "Arn"
+            ]
+          },
+          "Protocol": "sqs"
+        }
+      }
+    },
+    "MyQueuePolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Properties": {
+        "Queues": [
+          {
+            "Ref": "MyQueue"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2008-10-17",
+          "Id": "MyQueue",
+          "Statement": [
+            {
+              "Sid": "MyQueue",
+              "Effect": "Allow",
+              "Action": "sqs:SendMessage",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyQueue",
+                  "Arn"
+                ]
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Ref": "MyQueueTopic"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

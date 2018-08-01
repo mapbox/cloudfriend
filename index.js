@@ -1,9 +1,12 @@
-var intrinsic = require('./lib/intrinsic');
-var conditions = require('./lib/conditions');
-var pseudo = require('./lib/pseudo');
-var build = require('./lib/build');
-var validate = require('./lib/validate');
-var merge = require('./lib/merge');
+'use strict';
+
+const intrinsic = require('./lib/intrinsic');
+const conditions = require('./lib/conditions');
+const pseudo = require('./lib/pseudo');
+const build = require('./lib/build');
+const validate = require('./lib/validate');
+const merge = require('./lib/merge');
+const shortcuts = require('./lib/shortcuts');
 
 /**
  * The cloudfriend module
@@ -11,21 +14,22 @@ var merge = require('./lib/merge');
  * @example
  * var cloudfriend = require('cloudfriend');
  */
-var cloudfriend = module.exports = {
-  build: build,
-  validate: validate,
-  merge: merge
+const cloudfriend = module.exports = {
+  build,
+  validate,
+  merge,
+  shortcuts
 };
 
-Object.keys(intrinsic).forEach(function(key) {
+Object.keys(intrinsic).forEach((key) => {
   cloudfriend[key] = intrinsic[key];
 });
 
-Object.keys(conditions).forEach(function(key) {
+Object.keys(conditions).forEach((key) => {
   cloudfriend[key] = conditions[key];
 });
 
-Object.keys(pseudo).forEach(function(key) {
+Object.keys(pseudo).forEach((key) => {
   cloudfriend[key] = pseudo[key];
 });
 

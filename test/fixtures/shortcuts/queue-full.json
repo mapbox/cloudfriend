@@ -1,0 +1,112 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "MyQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Condition": "Always",
+      "Properties": {
+        "ContentBasedDeduplication": true,
+        "DelaySeconds": 60,
+        "FifoQueue": true,
+        "KmsMasterKeyId": "alias/my-key",
+        "MaximumMessageSize": 1024,
+        "MessageRetentionPeriod": 60,
+        "QueueName": "my-queue",
+        "ReceiveMessageWaitTimeSeconds": 20,
+        "RedrivePolicy": {
+          "maxReceiveCount": 100,
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "MyQueueDeadLetter",
+              "Arn"
+            ]
+          }
+        },
+        "VisibilityTimeout": 60
+      }
+    },
+    "MyQueueDeadLetter": {
+      "Type": "AWS::SQS::Queue",
+      "Condition": "Always",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "VisibilityTimeout": 60,
+        "QueueName": {
+          "Fn::Sub": [
+            "${queue}-dead-letter",
+            {
+              "queue": "my-queue"
+            }
+          ]
+        }
+      }
+    },
+    "MyQueueTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Condition": "Always",
+      "Properties": {
+        "TopicName": "my-topic",
+        "DisplayName": "topic-display-name",
+        "Subscription": {
+          "Endpoint": {
+            "Fn::GetAtt": [
+              "MyQueue",
+              "Arn"
+            ]
+          },
+          "Protocol": "sqs"
+        }
+      }
+    },
+    "MyQueuePolicy": {
+      "Type": "AWS::SQS::QueuePolicy",
+      "Condition": "Always",
+      "Properties": {
+        "Queues": [
+          {
+            "Ref": "MyQueue"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2008-10-17",
+          "Id": "MyQueue",
+          "Statement": [
+            {
+              "Sid": "MyQueue",
+              "Effect": "Allow",
+              "Action": "sqs:SendMessage",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyQueue",
+                  "Arn"
+                ]
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Ref": "MyQueueTopic"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

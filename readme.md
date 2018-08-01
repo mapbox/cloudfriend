@@ -44,6 +44,10 @@ stackName | [AWS::StackName](http://docs.aws.amazon.com/AWSCloudFormation/latest
 partition | [AWS::Partition](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-partition)
 urlSuffix | [AWS::URLSuffix](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-urlsuffix)
 
+## Shortcuts
+
+Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. See [the shortcuts readme for more information](./shortcuts/readme.md).
+
 ## Other helpers
 
 method | description

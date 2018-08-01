@@ -4,13 +4,14 @@
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
-    "node": "^4.0.0||>=6.0.0"
+    "node": ">=8"
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation",
     "test": "nyc tape test/*.test.js",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
-    "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json"
+    "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
+    "shortcuts-api-doc": "documentation build lib/shortcuts/index.js -f md -o lib/shortcuts/api.md"
   },
   "bin": {
     "build-template": "bin/build-template.js",
@@ -31,12 +32,18 @@
   },
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
+    "@mapbox/eslint-config-mapbox": "^1.2.1",
+    "documentation": "^8.0.2",
     "eslint": "^3.2.0",
+    "eslint-plugin-node": "^6.0.1",
     "nyc": "^7.1.0",
     "opener": "^1.4.1",
     "tape": "^4.6.0"
   },
   "dependencies": {
     "aws-sdk": "^2.4.11"
+  },
+  "eslintConfig": {
+    "extends": "@mapbox/eslint-config-mapbox"
   }
 }

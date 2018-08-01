@@ -1,0 +1,155 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "MyLambdaLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Condition": "Always",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": "my-function"
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Condition": "Always",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyLambdaLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "s3:GetObject",
+                  "Resource": "arn:aws:s3:::fake/data"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "MyLambda": {
+      "Type": "AWS::Lambda::Function",
+      "Condition": "Always",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-code-bucket",
+          "S3Key": "path/to/code.zip"
+        },
+        "DeadLetterConfig": {
+          "TargetArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
+        },
+        "Description": "my description",
+        "Environment": {
+          "Variables": {
+            "A": "a"
+          }
+        },
+        "FunctionName": "my-function",
+        "Handler": "index.something",
+        "KmsKeyArn": "arn:aws:kms:us-east-1:123456789012:key/fake",
+        "MemorySize": 512,
+        "ReservedConcurrencyExecutions": 10,
+        "Role": {
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs6.10",
+        "Timeout": 30,
+        "TracingConfig": {
+          "Mode": "Active"
+        },
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            "sg-12345"
+          ],
+          "SubnetIds": [
+            "fake"
+          ]
+        },
+        "Tags": [
+          {
+            "Key": "a",
+            "Value": "b"
+          }
+        ]
+      }
+    },
+    "MyLambdaErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Condition": "Always",
+      "Properties": {
+        "AlarmName": "my-alarm",
+        "AlarmDescription": "some alarm",
+        "AlarmActions": [
+          "devnull@mapbox.com"
+        ],
+        "Period": 120,
+        "EvaluationPeriods": 2,
+        "Statistic": "Minimum",
+        "Threshold": 10,
+        "ComparisonOperator": "LessThanThreshold",
+        "TreatMissingData": "breaching",
+        "EvaluateLowSampleCountPercentile": "ignore",
+        "OKActions": [
+          "devnull@mapbox.com"
+        ],
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "MyLambda"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    }
+  },
+  "Outputs": {}
+}

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = () => {
   return {
     AWSTemplateFormatVersion: '2010-09-09',

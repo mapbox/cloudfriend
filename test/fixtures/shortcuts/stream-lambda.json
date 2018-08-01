@@ -1,0 +1,159 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyLambdaLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyLambdaLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:GetRecords",
+                    "dynamodb:GetShardIterator",
+                    "dynamodb:DescribeStream",
+                    "dynamodb:ListStreams",
+                    "kinesis:GetRecords",
+                    "kinesis:GetShardIterator",
+                    "kinesis:DescribeStream",
+                    "kinesis:ListStreams"
+                  ],
+                  "Resource": [
+                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+                    {
+                      "Fn::Sub": [
+                        "${arn}/*",
+                        {
+                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "MyLambda": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-code-bucket",
+          "S3Key": "path/to/code.zip"
+        },
+        "Description": {
+          "Fn::Sub": "MyLambda in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda"
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 300
+      }
+    },
+    "MyLambdaErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda-Errors"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "MyLambda"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    },
+    "MyLambdaEventSource": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "Properties": {
+        "BatchSize": 1,
+        "Enabled": true,
+        "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda"
+        },
+        "StartingPosition": "LATEST"
+      }
+    }
+  },
+  "Outputs": {}
+}
