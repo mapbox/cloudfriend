@@ -102,6 +102,7 @@ an Alarm on function errors, a CloudWatch Event Rule, and a Lambda permission.
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes:
     -   `options.ScheduleExpression` **[String][23]** See [AWS documentation][52]
+    -   `options.State` **[String][23]** See [AWS documentation][53] (optional, default `'ENABLED'`)
 
 ### Examples
 
@@ -135,7 +136,7 @@ mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes:
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][53]
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
     -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33]
 
 ### Examples
@@ -171,10 +172,10 @@ source mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes:
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][53]
-    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
-    -   `options.Enabled` **[Boolean][55]** See [AWS documentation][56] (optional, default `true`)
-    -   `options.StartingPosition` **[String][23]** See [AWS documentation][57] (optional, default `'LATEST'`)
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
+    -   `options.BatchSize` **[Number][31]** See [AWS documentation][55] (optional, default `1`)
+    -   `options.Enabled` **[Boolean][56]** See [AWS documentation][57] (optional, default `true`)
+    -   `options.StartingPosition` **[String][23]** See [AWS documentation][58] (optional, default `'LATEST'`)
 
 ### Examples
 
@@ -205,11 +206,11 @@ Create an IAM role that will be assumed by an AWS service, e.g. Lambda or ECS.
     -   `options.LogicalName` **[String][23]** the logical name of the IAM role
         within the CloudFormation template.
     -   `options.Statement` **[Array][35]&lt;[Object][22]>** an array of permissions statements
-        to be included in the [PolicyDocument][58]. (optional, default `[]`)
-    -   `options.ManagedPolicyArns` **[Array][35]&lt;[String][23]>** See [AWS documentation][59] (optional, default `undefined`)
-    -   `options.MaxSessionDuration` **[Number][31]** See [AWS documentation][60] (optional, default `undefined`)
-    -   `options.Path` **[String][23]** See [AWS documentation][61] (optional, default `undefined`)
-    -   `options.RoleName` **[String][23]** See [AWS documentation][62] (optional, default `undefined`)
+        to be included in the [PolicyDocument][59]. (optional, default `[]`)
+    -   `options.ManagedPolicyArns` **[Array][35]&lt;[String][23]>** See [AWS documentation][60] (optional, default `undefined`)
+    -   `options.MaxSessionDuration` **[Number][31]** See [AWS documentation][61] (optional, default `undefined`)
+    -   `options.Path` **[String][23]** See [AWS documentation][62] (optional, default `undefined`)
+    -   `options.RoleName` **[String][23]** See [AWS documentation][63] (optional, default `undefined`)
     -   `options.Condition` **[String][23]** if there is a Condition defined
         in the template that should control whether or not to create this IAM role,
         specify the name of the condition here. See [AWS documentation][40] (optional, default `undefined`)
@@ -252,23 +253,23 @@ to publish messages to the queue.
     -   `options.LogicalName` **[String][23]** the logical name of the SQS queue
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
-    -   `options.VisibilityTimeout` **[Number][31]** See [AWS documentation][63] (optional, default `300`)
-    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][64] (optional, default `300`)
-    -   `options.ContentBasedDeduplication` **[Boolean][55]** See [AWS documentation][65] (optional, default `undefined`)
-    -   `options.DelaySeconds` **[Number][31]** See [AWS documentation][66] (optional, default `undefined`)
-    -   `options.FifoQueue` **[Boolean][55]** See [AWS documentation][67] (optional, default `undefined`)
-    -   `options.KmsMasterKeyId` **[String][23]** See [AWS documentation][68] (optional, default `undefined`)
-    -   `options.KmsDataKeyReusePeriodSeconds` **[Number][31]** See [AWS documentation][69] (optional, default `undefined`)
-    -   `options.MaximumMessageSize` **[Number][31]** See [AWS documentation][70] (optional, default `undefined`)
-    -   `options.MessageRetentionPeriod` **[Number][31]** See [AWS documentation][71] (optional, default `1209600`)
-    -   `options.QueueName` **[String][23]** See [AWS documentation][72] (optional, default `'${stack name}-${logical name}'`)
-    -   `options.ReceiveMessageWaitTimeSeconds` **[Number][31]** See [AWS documentation][73] (optional, default `undefined`)
+    -   `options.VisibilityTimeout` **[Number][31]** See [AWS documentation][64] (optional, default `300`)
+    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `300`)
+    -   `options.ContentBasedDeduplication` **[Boolean][56]** See [AWS documentation][66] (optional, default `undefined`)
+    -   `options.DelaySeconds` **[Number][31]** See [AWS documentation][67] (optional, default `undefined`)
+    -   `options.FifoQueue` **[Boolean][56]** See [AWS documentation][68] (optional, default `undefined`)
+    -   `options.KmsMasterKeyId` **[String][23]** See [AWS documentation][69] (optional, default `undefined`)
+    -   `options.KmsDataKeyReusePeriodSeconds` **[Number][31]** See [AWS documentation][70] (optional, default `undefined`)
+    -   `options.MaximumMessageSize` **[Number][31]** See [AWS documentation][71] (optional, default `undefined`)
+    -   `options.MessageRetentionPeriod` **[Number][31]** See [AWS documentation][72] (optional, default `1209600`)
+    -   `options.QueueName` **[String][23]** See [AWS documentation][73] (optional, default `'${stack name}-${logical name}'`)
+    -   `options.ReceiveMessageWaitTimeSeconds` **[Number][31]** See [AWS documentation][74] (optional, default `undefined`)
     -   `options.Condition` **[String][23]** if there is a Condition defined
         in the template that should control whether or not to create this SQS queue,
         specify the name of the condition here. See [AWS documentation][40] (optional, default `undefined`)
-    -   `options.TopicName` **[String][23]** See [AWS documentation][74] (optional, default `'${stack name}-${logical name}'`)
-    -   `options.DisplayName` **[String][23]** See [AWS documentation][75] (optional, default `undefined`)
-    -   `options.DeadLetterVisibilityTimeout` **[Number][31]** [VisibilityTimeout][63] for the dead-letter queue (optional, default `300`)
+    -   `options.TopicName` **[String][23]** See [AWS documentation][75] (optional, default `'${stack name}-${logical name}'`)
+    -   `options.DisplayName` **[String][23]** See [AWS documentation][76] (optional, default `undefined`)
+    -   `options.DeadLetterVisibilityTimeout` **[Number][31]** [VisibilityTimeout][64] for the dead-letter queue (optional, default `300`)
 
 ### Properties
 
@@ -392,48 +393,50 @@ module.exports = cf.merge(myTemplate, queue);
 
 [52]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression
 
-[53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
+[53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
 
-[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
+[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
 
-[55]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
 
-[56]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled
+[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[57]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition
+[57]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled
 
-[58]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
+[58]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition
 
-[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-managepolicyarns
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
 
-[60]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-maxsessionduration
+[60]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-managepolicyarns
 
-[61]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path
+[61]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-maxsessionduration
 
-[62]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-rolename
+[62]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path
 
-[63]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visibilitytimeout
+[63]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-rolename
 
-[64]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues-redrivepolicy.html#aws-sqs-queue-redrivepolicy-maxcount
+[64]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visibilitytimeout
 
-[65]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-contentbaseddeduplication
+[65]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues-redrivepolicy.html#aws-sqs-queue-redrivepolicy-maxcount
 
-[66]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-delayseconds
+[66]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-contentbaseddeduplication
 
-[67]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-fifoqueue
+[67]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-delayseconds
 
-[68]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsmasterkeyid
+[68]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-fifoqueue
 
-[69]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsdatakeyreuseperiodseconds
+[69]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsmasterkeyid
 
-[70]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-maxmsgsize
+[70]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsdatakeyreuseperiodseconds
 
-[71]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-msgretentionperiod
+[71]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-maxmsgsize
 
-[72]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-name
+[72]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-msgretentionperiod
 
-[73]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-receivemsgwaittime
+[73]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-name
 
-[74]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-name
+[74]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-receivemsgwaittime
 
-[75]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-displayname
+[75]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-name
+
+[76]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-displayname
