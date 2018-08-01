@@ -1,4 +1,9 @@
-## v1.10
+## v2.0.0
+
+- Cloudfriend is no longer friends with node.js versions less than v8. Now is the right time to update your local runtime.
+- Adds `cf.shortcuts`, which are a set of classes that can be used to generate boilerplate CloudFormation template code for certain scenarios.
+
+## v1.10.0
 
 - Allow specifiying region in `validate-template` command
 
