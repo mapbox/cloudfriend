@@ -32,7 +32,7 @@ LogGroup, a Role, an Alarm on function errors, and the Lambda Function itself.
 ### Parameters
 
 -   `options` **[Object][22]** configuration options for the Lambda function, its
-    IAM role, and the error Alarm.
+    IAM role, and the error Alarm. (optional, default `{}`)
     -   `options.LogicalName` **[String][23]** the logical name of the Lambda function
         within the CloudFormation template. This is used to construct the logical
         names of the other resources, as well as the Lambda function's name.
@@ -100,7 +100,7 @@ an Alarm on function errors, a CloudWatch Event Rule, and a Lambda permission.
 
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
-    function][2] with the following additional attributes:
+    function][2] with the following additional attributes: (optional, default `{}`)
     -   `options.ScheduleExpression` **[String][23]** See [AWS documentation][52]
     -   `options.State` **[String][23]** See [AWS documentation][53] (optional, default `'ENABLED'`)
 
@@ -135,7 +135,7 @@ mapping.
 
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
-    function][2] with the following additional attributes:
+    function][2] with the following additional attributes: (optional, default `{}`)
     -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
     -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33]
 
@@ -171,7 +171,7 @@ source mapping.
 
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
-    function][2] with the following additional attributes:
+    function][2] with the following additional attributes: (optional, default `{}`)
     -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
     -   `options.BatchSize` **[Number][31]** See [AWS documentation][55] (optional, default `1`)
     -   `options.Enabled` **[Boolean][56]** See [AWS documentation][57] (optional, default `true`)
@@ -202,9 +202,10 @@ Create an IAM role that will be assumed by an AWS service, e.g. Lambda or ECS.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the IAM role.
+-   `options` **[Object][22]** configuration options for the IAM role. (optional, default `{}`)
     -   `options.LogicalName` **[String][23]** the logical name of the IAM role
         within the CloudFormation template.
+    -   `options.Service` **[String][23]** the name of the AWS service that will assume this role, e.g. `lambda`
     -   `options.Statement` **[Array][35]&lt;[Object][22]>** an array of permissions statements
         to be included in the [PolicyDocument][59]. (optional, default `[]`)
     -   `options.ManagedPolicyArns` **[Array][35]&lt;[String][23]>** See [AWS documentation][60] (optional, default `undefined`)
@@ -228,6 +229,7 @@ const myTemplate = { ... };
 
 const role = new cf.shortcuts.ServiceRole({
   LogicalName: 'MyRole',
+  Service: 'lambda',
   Statement: [
     {
       Effect: 'Allow',
@@ -249,7 +251,7 @@ to publish messages to the queue.
 ### Parameters
 
 -   `options` **[Object][22]** configuration options for the SQS queue and related
-    resources.
+    resources. (optional, default `{}`)
     -   `options.LogicalName` **[String][23]** the logical name of the SQS queue
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
