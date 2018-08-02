@@ -46,7 +46,7 @@ urlSuffix | [AWS::URLSuffix](https://docs.aws.amazon.com/AWSCloudFormation/lates
 
 ## Shortcuts
 
-Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. See [the shortcuts readme for more information](./shortcuts/readme.md).
+Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. See [the shortcuts readme for more information](./lib/shortcuts/readme.md).
 
 ## Other helpers
 
