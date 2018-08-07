@@ -44,7 +44,7 @@ LogGroup, a Role, an Alarm on function errors, and the Lambda Function itself.
     -   `options.Handler` **[String][23]** See [AWS documentation][29] (optional, default `'index.handler'`)
     -   `options.KmsKeyArn` **[String][23]** See [AWS documentation][30] (optional, default `undefined`)
     -   `options.MemorySize` **[Number][31]** See [AWS documentation][32] (optional, default `128`)
-    -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33] (optional, default `undefined`)
+    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33] (optional, default `undefined`)
     -   `options.Runtime` **[String][23]** See [AWS documentation][34] (optional, default `'nodejs8.10'`)
     -   `options.Tags` **[Array][35]&lt;[Object][22]>** See [AWS documentation][36] (optional, default `undefined`)
     -   `options.Timeout` **[Number][31]** See [AWS documentation][37] (optional, default `300`)
@@ -137,7 +137,7 @@ mapping.
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
     -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
-    -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33]
+    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33]
 
 ### Examples
 
@@ -153,7 +153,7 @@ const lambda = new cf.shortcuts.QueueLambda({
     S3Key: 'path/to/code.zip'
   },
   EventSourceArn: cf.getAtt('MyQueue', 'Arn'),
-  ReservedConcurrencyExecutions: 30
+  ReservedConcurrentExecutions: 30
 });
 
 module.exports = cf.merge(myTemplate, lambda);
@@ -256,7 +256,7 @@ to publish messages to the queue.
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
     -   `options.VisibilityTimeout` **[Number][31]** See [AWS documentation][64] (optional, default `300`)
-    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `300`)
+    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `10`)
     -   `options.ContentBasedDeduplication` **[Boolean][56]** See [AWS documentation][66] (optional, default `undefined`)
     -   `options.DelaySeconds` **[Number][31]** See [AWS documentation][67] (optional, default `undefined`)
     -   `options.FifoQueue` **[Boolean][56]** See [AWS documentation][68] (optional, default `undefined`)

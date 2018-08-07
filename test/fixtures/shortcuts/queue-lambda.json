@@ -91,7 +91,7 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "ReservedConcurrencyExecutions": 10,
+        "ReservedConcurrentExecutions": 10,
         "Role": {
           "Fn::GetAtt": [
             "MyLambdaRole",
