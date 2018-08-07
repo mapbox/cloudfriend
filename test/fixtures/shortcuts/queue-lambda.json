@@ -143,7 +143,7 @@
         "Enabled": true,
         "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
         "FunctionName": {
-          "Fn::Sub": "${AWS::StackName}-MyLambda"
+          "Ref": "MyLambda"
         }
       }
     }
