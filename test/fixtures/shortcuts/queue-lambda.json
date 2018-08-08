@@ -56,7 +56,8 @@
                   "Effect": "Allow",
                   "Action": [
                     "sqs:DeleteMessage",
-                    "sqs:ReceiveMessage"
+                    "sqs:ReceiveMessage",
+                    "sqs:GetQueueAttributes"
                   ],
                   "Resource": [
                     "arn:aws:sqs:us-east-1:123456789012:queue/fake",
