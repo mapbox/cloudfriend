@@ -142,6 +142,7 @@
       "Type": "AWS::Lambda::EventSourceMapping",
       "Properties": {
         "Enabled": true,
+        "BatchSize": 1,
         "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
         "FunctionName": {
           "Ref": "MyLambda"

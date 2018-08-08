@@ -136,7 +136,8 @@ mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
+    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
     -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33]
 
 ### Examples
@@ -172,8 +173,8 @@ source mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
-    -   `options.BatchSize` **[Number][31]** See [AWS documentation][55] (optional, default `1`)
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
+    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
     -   `options.Enabled` **[Boolean][56]** See [AWS documentation][57] (optional, default `true`)
     -   `options.StartingPosition` **[String][23]** See [AWS documentation][58] (optional, default `'LATEST'`)
 
@@ -397,9 +398,9 @@ module.exports = cf.merge(myTemplate, queue);
 
 [53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
 
-[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
+[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
 
-[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
+[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
 
 [56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
