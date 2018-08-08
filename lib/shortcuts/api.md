@@ -44,7 +44,7 @@ LogGroup, a Role, an Alarm on function errors, and the Lambda Function itself.
     -   `options.Handler` **[String][23]** See [AWS documentation][29] (optional, default `'index.handler'`)
     -   `options.KmsKeyArn` **[String][23]** See [AWS documentation][30] (optional, default `undefined`)
     -   `options.MemorySize` **[Number][31]** See [AWS documentation][32] (optional, default `128`)
-    -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33] (optional, default `undefined`)
+    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33] (optional, default `undefined`)
     -   `options.Runtime` **[String][23]** See [AWS documentation][34] (optional, default `'nodejs8.10'`)
     -   `options.Tags` **[Array][35]&lt;[Object][22]>** See [AWS documentation][36] (optional, default `undefined`)
     -   `options.Timeout` **[Number][31]** See [AWS documentation][37] (optional, default `300`)
@@ -136,8 +136,9 @@ mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
-    -   `options.ReservedConcurrencyExecutions` **[Number][31]** See [AWS documentation][33]
+    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
+    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33]
 
 ### Examples
 
@@ -153,7 +154,7 @@ const lambda = new cf.shortcuts.QueueLambda({
     S3Key: 'path/to/code.zip'
   },
   EventSourceArn: cf.getAtt('MyQueue', 'Arn'),
-  ReservedConcurrencyExecutions: 30
+  ReservedConcurrentExecutions: 30
 });
 
 module.exports = cf.merge(myTemplate, lambda);
@@ -172,8 +173,8 @@ source mapping.
 -   `options` **[Object][22]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][54]
-    -   `options.BatchSize` **[Number][31]** See [AWS documentation][55] (optional, default `1`)
+    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
+    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
     -   `options.Enabled` **[Boolean][56]** See [AWS documentation][57] (optional, default `true`)
     -   `options.StartingPosition` **[String][23]** See [AWS documentation][58] (optional, default `'LATEST'`)
 
@@ -256,7 +257,7 @@ to publish messages to the queue.
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
     -   `options.VisibilityTimeout` **[Number][31]** See [AWS documentation][64] (optional, default `300`)
-    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `300`)
+    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `10`)
     -   `options.ContentBasedDeduplication` **[Boolean][56]** See [AWS documentation][66] (optional, default `undefined`)
     -   `options.DelaySeconds` **[Number][31]** See [AWS documentation][67] (optional, default `undefined`)
     -   `options.FifoQueue` **[Boolean][56]** See [AWS documentation][68] (optional, default `undefined`)
@@ -397,9 +398,9 @@ module.exports = cf.merge(myTemplate, queue);
 
 [53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
 
-[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
+[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
 
-[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
+[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
 
 [56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 

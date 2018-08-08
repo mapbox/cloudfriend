@@ -56,7 +56,8 @@
                   "Effect": "Allow",
                   "Action": [
                     "sqs:DeleteMessage",
-                    "sqs:ReceiveMessage"
+                    "sqs:ReceiveMessage",
+                    "sqs:GetQueueAttributes"
                   ],
                   "Resource": [
                     "arn:aws:sqs:us-east-1:123456789012:queue/fake",
@@ -91,7 +92,7 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "ReservedConcurrencyExecutions": 10,
+        "ReservedConcurrentExecutions": 10,
         "Role": {
           "Fn::GetAtt": [
             "MyLambdaRole",
@@ -141,9 +142,10 @@
       "Type": "AWS::Lambda::EventSourceMapping",
       "Properties": {
         "Enabled": true,
+        "BatchSize": 1,
         "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
         "FunctionName": {
-          "Fn::Sub": "${AWS::StackName}-MyLambda"
+          "Ref": "MyLambda"
         }
       }
     }

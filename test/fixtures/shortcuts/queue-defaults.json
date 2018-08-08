@@ -47,15 +47,17 @@
         "TopicName": {
           "Fn::Sub": "${AWS::StackName}-MyQueue"
         },
-        "Subscription": {
-          "Endpoint": {
-            "Fn::GetAtt": [
-              "MyQueue",
-              "Arn"
-            ]
-          },
-          "Protocol": "sqs"
-        }
+        "Subscription": [
+          {
+            "Endpoint": {
+              "Fn::GetAtt": [
+                "MyQueue",
+                "Arn"
+              ]
+            },
+            "Protocol": "sqs"
+          }
+        ]
       }
     },
     "MyQueuePolicy": {

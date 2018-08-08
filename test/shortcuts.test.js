@@ -79,7 +79,7 @@ test('[shortcuts] lambda', (assert) => {
     Handler: 'index.something',
     KmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/fake',
     MemorySize: 512,
-    ReservedConcurrencyExecutions: 10,
+    ReservedConcurrentExecutions: 10,
     Runtime: 'nodejs6.10',
     Tags: [{ Key: 'a', Value: 'b' }],
     Timeout: 30,
@@ -140,7 +140,7 @@ test('[shortcuts] queue-lambda', (assert) => {
         S3Key: 'path/to/code.zip'
       }
     }),
-    /You must provide an EventSourceArn and ReservedConcurrencyExecutions/,
+    /You must provide an EventSourceArn and ReservedConcurrentExecutions/,
     'throws without queue-lambda required parameters'
   );
 
@@ -151,7 +151,7 @@ test('[shortcuts] queue-lambda', (assert) => {
       S3Key: 'path/to/code.zip'
     },
     EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
-    ReservedConcurrencyExecutions: 10
+    ReservedConcurrentExecutions: 10
   });
 
   const template = cf.merge(lambda);
