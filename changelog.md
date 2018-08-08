@@ -1,3 +1,7 @@
+## v2.0.1
+
+- various shortcut bugfixes. See https://github.com/mapbox/cloudfriend/pull/34
+
 ## v2.0.0
 
 - Cloudfriend is no longer friends with node.js versions less than v8. Now is the right time to update your local runtime.
