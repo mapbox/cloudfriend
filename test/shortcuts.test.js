@@ -316,7 +316,7 @@ test('[shortcuts] queue', (assert) => {
   assert.end();
 });
 
-test('[shortcuts] service-role', (assert) => {
+test('[shortcuts] service role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.ServiceRole(),
     /You must provide a LogicalName and Service/,
@@ -379,6 +379,75 @@ test('[shortcuts] service-role', (assert) => {
     noUndefined(template),
     fixtures.get('service-role-no-defaults'),
     'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+const normalizeDeployment = (template) => {
+  const str = JSON
+    .stringify(template)
+    .replace(/Deployment([0-9a-f]{8})/g, 'Deployment');
+  return JSON.parse(str);
+};
+
+test('[shortcuts] hookshot passthrough', (assert) => {
+  const to = new cf.shortcuts.Lambda({
+    LogicalName: 'Destination',
+    Code: {
+      ZipFile: 'module.exports.handler = (e, c, cb) => cb();'
+    }
+  });
+
+  let passthrough = new cf.shortcuts.Hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination'
+  });
+
+  let template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough')),
+    'expected resources generated with defaults'
+  );
+
+  passthrough = new cf.shortcuts.Hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    AlarmActions: ['devnull@mapbox.com']
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-alarms', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-alarms')),
+    'expected resources generated with alarm config'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] github passthrough', (assert) => {
+  const to = new cf.shortcuts.Lambda({
+    LogicalName: 'Destination',
+    Code: {
+      ZipFile: 'module.exports.handler = (e, c, cb) => cb();'
+    }
+  });
+
+  const github = new cf.shortcuts.Hookshot.Github({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination'
+  });
+
+  const template = cf.merge(github, to);
+  if (update) fixtures.update('hookshot-github', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-github')),
+    'expected resources generated with defaults'
   );
 
   assert.end();
