@@ -1,3 +1,7 @@
+## v2.0.2
+
+- fixes a bug in the lambda service principal definition in china regions
+
 ## v2.0.1
 
 - various shortcut bugfixes. See https://github.com/mapbox/cloudfriend/pull/34
