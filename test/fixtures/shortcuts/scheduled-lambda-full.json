@@ -30,9 +30,7 @@
               "Effect": "Allow",
               "Action": "sts:AssumeRole",
               "Principal": {
-                "Service": {
-                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
-                }
+                "Service": "lambda.amazonaws.com"
               }
             }
           ]
