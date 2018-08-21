@@ -12,6 +12,9 @@
     }
   },
   "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
     "MyLambdaLogs": {
       "Type": "AWS::Logs::LogGroup",
       "Condition": "Always",
@@ -71,6 +74,7 @@
     "MyLambda": {
       "Type": "AWS::Lambda::Function",
       "Condition": "Always",
+      "DependsOn": "AnotherThing",
       "Properties": {
         "Code": {
           "S3Bucket": "my-code-bucket",

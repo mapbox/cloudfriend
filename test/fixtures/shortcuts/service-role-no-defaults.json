@@ -12,9 +12,13 @@
     }
   },
   "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
     "MyRole": {
       "Type": "AWS::IAM::Role",
       "Condition": "Always",
+      "DependsOn": "AnotherThing",
       "Properties": {
         "ManagedPolicyArns": [
           "arn:aws:iam::123456789012:policy/fake"

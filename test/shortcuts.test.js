@@ -89,6 +89,7 @@ test('[shortcuts] lambda', (assert) => {
       SubnetIds: ['fake']
     },
     Condition: 'Always',
+    DependsOn: 'AnotherThing',
     Statement: [
       {
         Effect: 'Allow',
@@ -110,11 +111,11 @@ test('[shortcuts] lambda', (assert) => {
     OKActions: ['devnull@mapbox.com']
   });
 
-  template = cf.merge({
-    Conditions: {
-      Always: cf.equals('1', '1')
-    }
-  }, lambda);
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    lambda
+  );
   if (update) fixtures.update('lambda-full', template);
   assert.deepEqual(
     noUndefined(template),
@@ -294,6 +295,7 @@ test('[shortcuts] queue', (assert) => {
     QueueName: 'my-queue',
     ReceiveMessageWaitTimeSeconds: 20,
     Condition: 'Always',
+    DependsOn: 'AnotherThing',
     TopicName: 'my-topic',
     DisplayName: 'topic-display-name',
     DeadLetterVisibilityTimeout: 60
@@ -301,6 +303,7 @@ test('[shortcuts] queue', (assert) => {
 
   template = cf.merge(
     { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
     queue
   );
   if (update) fixtures.update('queue-full', template);
@@ -313,7 +316,7 @@ test('[shortcuts] queue', (assert) => {
   assert.end();
 });
 
-test('[shortcuts]', (assert) => {
+test('[shortcuts] service-role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.ServiceRole(),
     /You must provide a LogicalName and Service/,
@@ -362,11 +365,13 @@ test('[shortcuts]', (assert) => {
     MaxSessionDuration: 60,
     Path: '/fake',
     RoleName: 'my-role',
-    Condition: 'Always'
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
   });
 
   template = cf.merge(
     { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
     role
   );
   if (update) fixtures.update('service-role-no-defaults', template);

@@ -12,9 +12,13 @@
     }
   },
   "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
     "MyQueue": {
       "Type": "AWS::SQS::Queue",
       "Condition": "Always",
+      "DependsOn": "AnotherThing",
       "Properties": {
         "ContentBasedDeduplication": true,
         "DelaySeconds": 60,
