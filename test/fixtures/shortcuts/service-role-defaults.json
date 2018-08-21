@@ -20,15 +20,7 @@
               }
             }
           ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Statement": []
-            }
-          }
-        ]
+        }
       }
     }
   },
