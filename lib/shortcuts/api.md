@@ -23,6 +23,14 @@
     -   [Parameters][19]
     -   [Properties][20]
     -   [Examples][21]
+-   [hookshot.Passthrough][22]
+    -   [Parameters][23]
+    -   [Properties][24]
+    -   [Examples][25]
+-   [hookshot.Github][26]
+    -   [Parameters][27]
+    -   [Properties][28]
+    -   [Examples][29]
 
 ## Lambda
 
@@ -31,45 +39,45 @@ LogGroup, a Role, an Alarm on function errors, and the Lambda Function itself.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the Lambda function, its
+-   `options` **[Object][30]** configuration options for the Lambda function, its
     IAM role, and the error Alarm. (optional, default `{}`)
-    -   `options.LogicalName` **[String][23]** the logical name of the Lambda function
+    -   `options.LogicalName` **[String][31]** the logical name of the Lambda function
         within the CloudFormation template. This is used to construct the logical
         names of the other resources, as well as the Lambda function's name.
-    -   `options.Code` **[Object][22]** See [AWS documentation][24]
-    -   `options.DeadLetterConfig` **[Object][22]** See [AWS documentation][25] (optional, default `undefined`)
-    -   `options.Description` **[String][23]** See [AWS documentation][26] (optional, default `'${logical name} in the ${stack name} stack'`)
-    -   `options.Environment` **[Object][22]** See [AWS documentation][27] (optional, default `undefined`)
-    -   `options.FunctionName` **[String][23]** See [AWS documentation][28] (optional, default `'${stack name}-${logical name}'`)
-    -   `options.Handler` **[String][23]** See [AWS documentation][29] (optional, default `'index.handler'`)
-    -   `options.KmsKeyArn` **[String][23]** See [AWS documentation][30] (optional, default `undefined`)
-    -   `options.MemorySize` **[Number][31]** See [AWS documentation][32] (optional, default `128`)
-    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33] (optional, default `undefined`)
-    -   `options.Runtime` **[String][23]** See [AWS documentation][34] (optional, default `'nodejs8.10'`)
-    -   `options.Tags` **[Array][35]&lt;[Object][22]>** See [AWS documentation][36] (optional, default `undefined`)
-    -   `options.Timeout` **[Number][31]** See [AWS documentation][37] (optional, default `300`)
-    -   `options.TracingConfig` **[Object][22]** See [AWS documentation][38] (optional, default `undefined`)
-    -   `options.VpcConfig` **[Object][22]** See [AWS documentation][39] (optional, default `undefined`)
-    -   `options.Condition` **[String][23]** if there is a Condition defined in the template
+    -   `options.Code` **[Object][30]** See [AWS documentation][32]
+    -   `options.DeadLetterConfig` **[Object][30]** See [AWS documentation][33] (optional, default `undefined`)
+    -   `options.Description` **[String][31]** See [AWS documentation][34] (optional, default `'${logical name} in the ${stack name} stack'`)
+    -   `options.Environment` **[Object][30]** See [AWS documentation][35] (optional, default `undefined`)
+    -   `options.FunctionName` **[String][31]** See [AWS documentation][36] (optional, default `'${stack name}-${logical name}'`)
+    -   `options.Handler` **[String][31]** See [AWS documentation][37] (optional, default `'index.handler'`)
+    -   `options.KmsKeyArn` **[String][31]** See [AWS documentation][38] (optional, default `undefined`)
+    -   `options.MemorySize` **[Number][39]** See [AWS documentation][40] (optional, default `128`)
+    -   `options.ReservedConcurrentExecutions` **[Number][39]** See [AWS documentation][41] (optional, default `undefined`)
+    -   `options.Runtime` **[String][31]** See [AWS documentation][42] (optional, default `'nodejs8.10'`)
+    -   `options.Tags` **[Array][43]&lt;[Object][30]>** See [AWS documentation][44] (optional, default `undefined`)
+    -   `options.Timeout` **[Number][39]** See [AWS documentation][45] (optional, default `300`)
+    -   `options.TracingConfig` **[Object][30]** See [AWS documentation][46] (optional, default `undefined`)
+    -   `options.VpcConfig` **[Object][30]** See [AWS documentation][47] (optional, default `undefined`)
+    -   `options.Condition` **[String][31]** if there is a Condition defined in the template
         that should control whether or not to create this Lambda function, specify
-        the name of the condition here. See [AWS documentation][40] (optional, default `undefined`)
-    -   `options.Statement` **[Array][35]&lt;[Object][22]>** an array of policy statements
+        the name of the condition here. See [AWS documentation][48] (optional, default `undefined`)
+    -   `options.Statement` **[Array][43]&lt;[Object][30]>** an array of policy statements
         defining the permissions that your Lambda function needs in order to execute. (optional, default `[]`)
-    -   `options.AlarmName` **[String][23]** See [AWS documentation][41] (optional, default `'${stack name}-${logical name}-Errors'`)
-    -   `options.AlarmDescription` **[String][23]** See [AWS documentation][42] (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
-    -   `options.AlarmActions` **[Array][35]&lt;[String][23]>** See [AWS documentation][43] (optional, default `[]`)
-    -   `options.Period` **[Number][31]** See [AWS documentation][44] (optional, default `60`)
-    -   `options.EvaluationPeriods` **[Number][31]** See [AWS documentation][45] (optional, default `1`)
-    -   `options.Statistic` **[String][23]** See [AWS documentation][46] (optional, default `'Sum'`)
-    -   `options.Threshold` **[Number][31]** See [AWS documentation][47] (optional, default `0`)
-    -   `options.ComparisonOperator` **[String][23]** See [AWS documentation][48] (optional, default `'GreaterThanThreshold'`)
-    -   `options.TreatMissingData` **[String][23]** See [AWS documentation][49] (optional, default `'notBreaching'`)
-    -   `options.EvaluateLowSampleCountPercentile` **[String][23]** See [AWS documentation][50] (optional, default `undefined`)
-    -   `options.OKActions` **[Array][35]&lt;[String][23]>** See [AWS documentation][51] (optional, default `undefined`)
+    -   `options.AlarmName` **[String][31]** See [AWS documentation][49] (optional, default `'${stack name}-${logical name}-Errors'`)
+    -   `options.AlarmDescription` **[String][31]** See [AWS documentation][50] (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
+    -   `options.AlarmActions` **[Array][43]&lt;[String][31]>** See [AWS documentation][51] (optional, default `[]`)
+    -   `options.Period` **[Number][39]** See [AWS documentation][52] (optional, default `60`)
+    -   `options.EvaluationPeriods` **[Number][39]** See [AWS documentation][53] (optional, default `1`)
+    -   `options.Statistic` **[String][31]** See [AWS documentation][54] (optional, default `'Sum'`)
+    -   `options.Threshold` **[Number][39]** See [AWS documentation][55] (optional, default `0`)
+    -   `options.ComparisonOperator` **[String][31]** See [AWS documentation][56] (optional, default `'GreaterThanThreshold'`)
+    -   `options.TreatMissingData` **[String][31]** See [AWS documentation][57] (optional, default `'notBreaching'`)
+    -   `options.EvaluateLowSampleCountPercentile` **[String][31]** See [AWS documentation][58] (optional, default `undefined`)
+    -   `options.OKActions` **[Array][43]&lt;[String][31]>** See [AWS documentation][59] (optional, default `undefined`)
 
 ### Properties
 
--   `Resources` **[Object][22]** the CloudFormation resources created by this shortcut.
+-   `Resources` **[Object][30]** the CloudFormation resources created by this shortcut.
 
 ### Examples
 
@@ -98,11 +106,11 @@ an Alarm on function errors, a CloudWatch Event Rule, and a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the scheduled Lambda
+-   `options` **[Object][30]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.ScheduleExpression` **[String][23]** See [AWS documentation][52]
-    -   `options.State` **[String][23]** See [AWS documentation][53] (optional, default `'ENABLED'`)
+    -   `options.ScheduleExpression` **[String][31]** See [AWS documentation][60]
+    -   `options.State` **[String][31]** See [AWS documentation][61] (optional, default `'ENABLED'`)
 
 ### Examples
 
@@ -133,12 +141,12 @@ mapping.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the scheduled Lambda
+-   `options` **[Object][30]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
-    -   `options.ReservedConcurrentExecutions` **[Number][31]** See [AWS documentation][33]
+    -   `options.BatchSize` **[Number][39]** See [AWS documentation][62] (optional, default `1`)
+    -   `options.EventSourceArn` **[String][31]** See [AWS documentation][63]
+    -   `options.ReservedConcurrentExecutions` **[Number][39]** See [AWS documentation][41]
 
 ### Examples
 
@@ -170,13 +178,13 @@ source mapping.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the scheduled Lambda
+-   `options` **[Object][30]** configuration options for the scheduled Lambda
     function and related resources. Extends [the `options` for a vanilla Lambda
     function][2] with the following additional attributes: (optional, default `{}`)
-    -   `options.EventSourceArn` **[String][23]** See [AWS documentation][55]
-    -   `options.BatchSize` **[Number][31]** See [AWS documentation][54] (optional, default `1`)
-    -   `options.Enabled` **[Boolean][56]** See [AWS documentation][57] (optional, default `true`)
-    -   `options.StartingPosition` **[String][23]** See [AWS documentation][58] (optional, default `'LATEST'`)
+    -   `options.EventSourceArn` **[String][31]** See [AWS documentation][63]
+    -   `options.BatchSize` **[Number][39]** See [AWS documentation][62] (optional, default `1`)
+    -   `options.Enabled` **[Boolean][64]** See [AWS documentation][65] (optional, default `true`)
+    -   `options.StartingPosition` **[String][31]** See [AWS documentation][66] (optional, default `'LATEST'`)
 
 ### Examples
 
@@ -203,23 +211,23 @@ Create an IAM role that will be assumed by an AWS service, e.g. Lambda or ECS.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the IAM role. (optional, default `{}`)
-    -   `options.LogicalName` **[String][23]** the logical name of the IAM role
+-   `options` **[Object][30]** configuration options for the IAM role. (optional, default `{}`)
+    -   `options.LogicalName` **[String][31]** the logical name of the IAM role
         within the CloudFormation template.
-    -   `options.Service` **[String][23]** the name of the AWS service that will assume this role, e.g. `lambda`
-    -   `options.Statement` **[Array][35]&lt;[Object][22]>** an array of permissions statements
-        to be included in the [PolicyDocument][59]. (optional, default `[]`)
-    -   `options.ManagedPolicyArns` **[Array][35]&lt;[String][23]>** See [AWS documentation][60] (optional, default `undefined`)
-    -   `options.MaxSessionDuration` **[Number][31]** See [AWS documentation][61] (optional, default `undefined`)
-    -   `options.Path` **[String][23]** See [AWS documentation][62] (optional, default `undefined`)
-    -   `options.RoleName` **[String][23]** See [AWS documentation][63] (optional, default `undefined`)
-    -   `options.Condition` **[String][23]** if there is a Condition defined
+    -   `options.Service` **[String][31]** the name of the AWS service that will assume this role, e.g. `lambda`
+    -   `options.Statement` **[Array][43]&lt;[Object][30]>** an array of permissions statements
+        to be included in the [PolicyDocument][67]. (optional, default `[]`)
+    -   `options.ManagedPolicyArns` **[Array][43]&lt;[String][31]>** See [AWS documentation][68] (optional, default `undefined`)
+    -   `options.MaxSessionDuration` **[Number][39]** See [AWS documentation][69] (optional, default `undefined`)
+    -   `options.Path` **[String][31]** See [AWS documentation][70] (optional, default `undefined`)
+    -   `options.RoleName` **[String][31]** See [AWS documentation][71] (optional, default `undefined`)
+    -   `options.Condition` **[String][31]** if there is a Condition defined
         in the template that should control whether or not to create this IAM role,
-        specify the name of the condition here. See [AWS documentation][40] (optional, default `undefined`)
+        specify the name of the condition here. See [AWS documentation][48] (optional, default `undefined`)
 
 ### Properties
 
--   `Resources` **[Object][22]** the CloudFormation resources created by this shortcut.
+-   `Resources` **[Object][30]** the CloudFormation resources created by this shortcut.
 
 ### Examples
 
@@ -251,32 +259,32 @@ to publish messages to the queue.
 
 ### Parameters
 
--   `options` **[Object][22]** configuration options for the SQS queue and related
+-   `options` **[Object][30]** configuration options for the SQS queue and related
     resources. (optional, default `{}`)
-    -   `options.LogicalName` **[String][23]** the logical name of the SQS queue
+    -   `options.LogicalName` **[String][31]** the logical name of the SQS queue
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
-    -   `options.VisibilityTimeout` **[Number][31]** See [AWS documentation][64] (optional, default `300`)
-    -   `options.maxReceiveCount` **[Number][31]** See [AWS documentation][65] (optional, default `10`)
-    -   `options.ContentBasedDeduplication` **[Boolean][56]** See [AWS documentation][66] (optional, default `undefined`)
-    -   `options.DelaySeconds` **[Number][31]** See [AWS documentation][67] (optional, default `undefined`)
-    -   `options.FifoQueue` **[Boolean][56]** See [AWS documentation][68] (optional, default `undefined`)
-    -   `options.KmsMasterKeyId` **[String][23]** See [AWS documentation][69] (optional, default `undefined`)
-    -   `options.KmsDataKeyReusePeriodSeconds` **[Number][31]** See [AWS documentation][70] (optional, default `undefined`)
-    -   `options.MaximumMessageSize` **[Number][31]** See [AWS documentation][71] (optional, default `undefined`)
-    -   `options.MessageRetentionPeriod` **[Number][31]** See [AWS documentation][72] (optional, default `1209600`)
-    -   `options.QueueName` **[String][23]** See [AWS documentation][73] (optional, default `'${stack name}-${logical name}'`)
-    -   `options.ReceiveMessageWaitTimeSeconds` **[Number][31]** See [AWS documentation][74] (optional, default `undefined`)
-    -   `options.Condition` **[String][23]** if there is a Condition defined
+    -   `options.VisibilityTimeout` **[Number][39]** See [AWS documentation][72] (optional, default `300`)
+    -   `options.maxReceiveCount` **[Number][39]** See [AWS documentation][73] (optional, default `10`)
+    -   `options.ContentBasedDeduplication` **[Boolean][64]** See [AWS documentation][74] (optional, default `undefined`)
+    -   `options.DelaySeconds` **[Number][39]** See [AWS documentation][75] (optional, default `undefined`)
+    -   `options.FifoQueue` **[Boolean][64]** See [AWS documentation][76] (optional, default `undefined`)
+    -   `options.KmsMasterKeyId` **[String][31]** See [AWS documentation][77] (optional, default `undefined`)
+    -   `options.KmsDataKeyReusePeriodSeconds` **[Number][39]** See [AWS documentation][78] (optional, default `undefined`)
+    -   `options.MaximumMessageSize` **[Number][39]** See [AWS documentation][79] (optional, default `undefined`)
+    -   `options.MessageRetentionPeriod` **[Number][39]** See [AWS documentation][80] (optional, default `1209600`)
+    -   `options.QueueName` **[String][31]** See [AWS documentation][81] (optional, default `'${stack name}-${logical name}'`)
+    -   `options.ReceiveMessageWaitTimeSeconds` **[Number][39]** See [AWS documentation][82] (optional, default `undefined`)
+    -   `options.Condition` **[String][31]** if there is a Condition defined
         in the template that should control whether or not to create this SQS queue,
-        specify the name of the condition here. See [AWS documentation][40] (optional, default `undefined`)
-    -   `options.TopicName` **[String][23]** See [AWS documentation][75] (optional, default `'${stack name}-${logical name}'`)
-    -   `options.DisplayName` **[String][23]** See [AWS documentation][76] (optional, default `undefined`)
-    -   `options.DeadLetterVisibilityTimeout` **[Number][31]** [VisibilityTimeout][64] for the dead-letter queue (optional, default `300`)
+        specify the name of the condition here. See [AWS documentation][48] (optional, default `undefined`)
+    -   `options.TopicName` **[String][31]** See [AWS documentation][83] (optional, default `'${stack name}-${logical name}'`)
+    -   `options.DisplayName` **[String][31]** See [AWS documentation][84] (optional, default `undefined`)
+    -   `options.DeadLetterVisibilityTimeout` **[Number][39]** [VisibilityTimeout][72] for the dead-letter queue (optional, default `300`)
 
 ### Properties
 
--   `Resources` **[Object][22]** the CloudFormation resources created by this shortcut.
+-   `Resources` **[Object][30]** the CloudFormation resources created by this shortcut.
 
 ### Examples
 
@@ -290,6 +298,119 @@ const queue = new cf.shortcuts.Queue({
 });
 
 module.exports = cf.merge(myTemplate, queue);
+```
+
+## hookshot.Passthrough
+
+The hookshot.Passthrough class defines resources that set up a single API Gateway
+endpoint that responds to POST and OPTIONS requests. You are expected to
+provide a Lambda function that will receive the request, and return some
+response to the caller.
+
+Note that in this case, your Lambda function will receive every HTTP POST
+request that arrives at the API Gateway URL that hookshot helped you create.
+You are responsible for any authentication that should be performed against
+incoming requests.
+
+Your Lambda function will receive an event object which includes the request
+method, headers, and body, as well as other data specific to the API Gateway
+endpoint created by hookshot. See [AWS documentation here][85]
+for a full description of the incoming data.
+
+In order to work properly, **your lambda function must return a data object
+matching in a specific JSON format**. Again, see [AWS documentation for a full description][86].
+
+Your API Gateway endpoint will be set up to allow cross-origin resource
+sharing (CORS) required by requests from any web page. Preflight `OPTIONS`
+requests will receive a `200` response with CORS headers. And the response
+you return from your Lambda function will be modified to include CORS headers.
+
+### Parameters
+
+-   `Prefix` **[String][31]** this will be used to prefix the set of CloudFormation
+    resources created by this shortcut.
+-   `PassthroughTo` **[String][31]** the logical name of the Lambda function that you
+    have written which will receive a request and generate a response to provide
+    to the caller.
+
+### Properties
+
+-   `Resources` **[Object][30]** the CloudFormation resources created by this shortcut.
+-   `Outputs` **[Object][30]** the CloudFormation outputs created by this
+    shortcut. This includes the URL for the API Gateway endpoint, and a random
+    string that can be used as a shared secret if you so desire.
+
+### Examples
+
+```javascript
+const cf = require('@mapbox/cloudfriend');
+
+const myTemplate = {
+  ...
+  Resources: {
+    MyLambdaFunction: {
+      Type: 'AWS::Lambda::Function',
+      Properties: { ... }
+    }
+  }
+};
+
+const webhook = new cf.shortcuts.hookshot.Passthrough({
+  Prefix: 'Webhook',
+  PassthroughTo: 'MyLambdaFunction'
+});
+
+module.exports = cf.merge(myTemplate, lambda);
+```
+
+## hookshot.Github
+
+The hookshot.Github class defines resources that set up a single API Gateway
+endpoint that is designed responds to POST requests sent from Github in
+response to various Github events. The hookshot system will use a shared
+secret to validate that the incoming payload did in fact originate from Github,
+before sending the event payload to your Lambda function for further
+processing. Any requests that did not come from Github or were not properly
+signed using your secret key are rejected, and will never make it to your
+Lambda function.
+
+### Parameters
+
+-   `Prefix` **[String][31]** this will be used to prefix the set of CloudFormation
+    resources created by this shortcut.
+-   `PassthroughTo` **[String][31]** the logical name of the Lambda function that you
+    have written which will receive a request and generate a response to provide
+    to the caller.
+
+### Properties
+
+-   `Resources` **[Object][30]** the CloudFormation resources created by this shortcut.
+-   `Outputs` **[Object][30]** the CloudFormation outputs created by this
+    shortcut. This includes the URL for the API Gateway endpoint, and a secret
+    string. Use these two values to configure Github to send webhooks to your
+    API Gateway endpoint.
+
+### Examples
+
+```javascript
+const cf = require('@mapbox/cloudfriend');
+
+const myTemplate = {
+  ...
+  Resources: {
+    MyLambdaFunction: {
+      Type: 'AWS::Lambda::Function',
+      Properties: { ... }
+    }
+  }
+};
+
+const webhook = new cf.shortcuts.hookshot.Github({
+  Prefix: 'Webhook',
+  PassthroughTo: 'MyLambdaFunction'
+});
+
+module.exports = cf.merge(myTemplate, lambda);
 ```
 
 [1]: #lambda
@@ -334,112 +455,132 @@ module.exports = cf.merge(myTemplate, queue);
 
 [21]: #examples-5
 
-[22]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[22]: #hookshotpassthrough
 
-[23]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[23]: #parameters-6
 
-[24]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html
+[24]: #properties-3
 
-[25]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig
+[25]: #examples-6
 
-[26]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-description
+[26]: #hookshotgithub
 
-[27]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-environment
+[27]: #parameters-7
 
-[28]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-functionname
+[28]: #properties-4
 
-[29]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler
+[29]: #examples-7
 
-[30]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-kmskeyarn
+[30]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[31]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[31]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[32]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-memorysize
+[32]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html
 
-[33]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions
+[33]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig
 
-[34]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-runtime
+[34]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-description
 
-[35]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[35]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-environment
 
-[36]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-tags
+[36]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-functionname
 
-[37]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-timeout
+[37]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler
 
-[38]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-tracingconfig
+[38]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-kmskeyarn
 
-[39]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-vpcconfig
+[39]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[40]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/conditions-section-structure.html
+[40]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-memorysize
 
-[41]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmname
+[41]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-reservedconcurrentexecutions
 
-[42]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmdescription
+[42]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-runtime
 
-[43]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmactions
+[43]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[44]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-period
+[44]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-tags
 
-[45]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-evaluationperiods
+[45]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-timeout
 
-[46]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-statistic
+[46]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-tracingconfig
 
-[47]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-threshold
+[47]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-vpcconfig
 
-[48]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-comparisonoperator
+[48]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/conditions-section-structure.html
 
-[49]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-treatmissingdata
+[49]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmname
 
-[50]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-evaluatelowsamplecountpercentile
+[50]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmdescription
 
-[51]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-okactions
+[51]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-alarmactions
 
-[52]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression
+[52]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-period
 
-[53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
+[53]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-evaluationperiods
 
-[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
+[54]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-statistic
 
-[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
+[55]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-threshold
 
-[56]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[56]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-comparisonoperator
 
-[57]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled
+[57]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-treatmissingdata
 
-[58]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition
+[58]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-evaluatelowsamplecountpercentile
 
-[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-okactions
 
-[60]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-managepolicyarns
+[60]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression
 
-[61]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-maxsessionduration
+[61]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state
 
-[62]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path
+[62]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize
 
-[63]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-rolename
+[63]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn
 
-[64]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visibilitytimeout
+[64]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[65]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues-redrivepolicy.html#aws-sqs-queue-redrivepolicy-maxcount
+[65]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled
 
-[66]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-contentbaseddeduplication
+[66]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition
 
-[67]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-delayseconds
+[67]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-policy.html#cfn-iam-policies-policydocument
 
-[68]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-fifoqueue
+[68]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-managepolicyarns
 
-[69]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsmasterkeyid
+[69]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-maxsessionduration
 
-[70]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsdatakeyreuseperiodseconds
+[70]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-path
 
-[71]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-maxmsgsize
+[71]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html#cfn-iam-role-rolename
 
-[72]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-msgretentionperiod
+[72]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-visibilitytimeout
 
-[73]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-name
+[73]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues-redrivepolicy.html#aws-sqs-queue-redrivepolicy-maxcount
 
-[74]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-receivemsgwaittime
+[74]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-contentbaseddeduplication
 
-[75]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-name
+[75]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-delayseconds
 
-[76]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-displayname
+[76]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#cfn-sqs-queue-fifoqueue
+
+[77]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsmasterkeyid
+
+[78]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-kmsdatakeyreuseperiodseconds
+
+[79]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-maxmsgsize
+
+[80]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-msgretentionperiod
+
+[81]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-name
+
+[82]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-queues.html#aws-sqs-queue-receivemsgwaittime
+
+[83]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-name
+
+[84]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html#cfn-sns-topic-displayname
+
+[85]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+
+[86]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format
