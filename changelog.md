@@ -1,3 +1,9 @@
+## v2.1.0
+
+- adds new shortcuts: `hookshot.Passthrough` and `hookshot.Github`, for simple webhook-response systems
+- adds support for `DependsOn` properties to several shortcuts
+- fixes a bug in `shortcuts.ServiceRole` if no permissions statements are provided
+
 ## v2.0.2
 
 - fixes a bug in the lambda service principal definition in china regions
