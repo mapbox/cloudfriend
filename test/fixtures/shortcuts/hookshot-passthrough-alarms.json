@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment7d639a44"
+          "Ref": "PassDeployment4351c704"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -40,7 +40,7 @@
         ]
       }
     },
-    "PassDeployment7d639a44": {
+    "PassDeployment4351c704": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -145,9 +145,7 @@
               "Effect": "Allow",
               "Action": "sts:AssumeRole",
               "Principal": {
-                "Service": {
-                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
-                }
+                "Service": "lambda.amazonaws.com"
               }
             }
           ]
@@ -271,9 +269,7 @@
               "Effect": "Allow",
               "Action": "sts:AssumeRole",
               "Principal": {
-                "Service": {
-                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
-                }
+                "Service": "lambda.amazonaws.com"
               }
             }
           ]

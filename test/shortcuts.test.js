@@ -392,6 +392,12 @@ const normalizeDeployment = (template) => {
 };
 
 test('[shortcuts] hookshot passthrough', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.hookshot.Passthrough(),
+    /You must provide a Prefix, and PassthroughTo/,
+    'throws without required parameters'
+  );
+
   const to = new cf.shortcuts.Lambda({
     LogicalName: 'Destination',
     Code: {
@@ -399,7 +405,7 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     }
   });
 
-  let passthrough = new cf.shortcuts.Hookshot.Passthrough({
+  let passthrough = new cf.shortcuts.hookshot.Passthrough({
     Prefix: 'Pass',
     PassthroughTo: 'Destination'
   });
@@ -412,7 +418,7 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'expected resources generated with defaults'
   );
 
-  passthrough = new cf.shortcuts.Hookshot.Passthrough({
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
     Prefix: 'Pass',
     PassthroughTo: 'Destination',
     AlarmActions: ['devnull@mapbox.com']
@@ -429,7 +435,13 @@ test('[shortcuts] hookshot passthrough', (assert) => {
   assert.end();
 });
 
-test('[shortcuts] github passthrough', (assert) => {
+test('[shortcuts] hookshot github', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.hookshot.Github(),
+    /You must provide a Prefix, and PassthroughTo/,
+    'throws without required parameters'
+  );
+
   const to = new cf.shortcuts.Lambda({
     LogicalName: 'Destination',
     Code: {
@@ -437,7 +449,7 @@ test('[shortcuts] github passthrough', (assert) => {
     }
   });
 
-  const github = new cf.shortcuts.Hookshot.Github({
+  const github = new cf.shortcuts.hookshot.Github({
     Prefix: 'Pass',
     PassthroughTo: 'Destination'
   });
