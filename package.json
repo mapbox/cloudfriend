@@ -41,7 +41,8 @@
     "tape": "^4.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.4.11"
+    "aws-sdk": "^2.4.11",
+    "redent": "^2.0.0"
   },
   "eslintConfig": {
     "extends": "@mapbox/eslint-config-mapbox"
