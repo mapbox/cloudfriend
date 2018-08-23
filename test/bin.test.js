@@ -1,16 +1,19 @@
-var path = require('path');
-var exec = require('child_process').exec;
-var test = require('tape');
+'use strict';
 
-test('bin/build-template', function(t) {
-  var script = path.normalize(__dirname + '/../bin/build-template.js');
-  var template = path.normalize(__dirname + '/fixtures/sync-args.js');
-  t.test('outputs expected', function(q) {
-    exec([script, template, '--this', 'that'].join(' '), function(err, stdout, stderr) {
+const path = require('path');
+const exec = require('child_process').exec;
+const test = require('tape');
+
+test('bin/build-template', (t) => {
+  const script = path.normalize(__dirname + '/../bin/build-template.js');
+  const template = path.normalize(__dirname + '/fixtures/sync-args.js');
+  t.test('outputs expected', (q) => {
+    exec([script, template, '--this', 'that', '-r', 'cn-north-1'].join(' '), (err, stdout, stderr) => {
       q.error(err);
       q.error(stderr);
-      var result = JSON.parse(stdout);
+      const result = JSON.parse(stdout);
       q.equal('that', result.this);
+      q.equal('cn-north-1', result.region);
       q.end();
     });
   });
