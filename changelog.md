@@ -1,3 +1,7 @@
+## v2.2.0
+
+- Pass options through to command line tools #22
+
 ## v2.1.0
 
 - adds new shortcuts: `hookshot.Passthrough` and `hookshot.Github`, for simple webhook-response systems
