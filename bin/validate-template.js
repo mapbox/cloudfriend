@@ -3,8 +3,12 @@
 'use strict';
 
 const cloudfriend = require('..');
-const templatePath = process.argv[2];
-const region = process.argv[3] || 'us-east-1';
+const argv = require('minimist')(process.argv.slice(2), {
+  default: { region: 'us-east-1' },
+  alias: { r: 'region' }
+});
+const templatePath = argv._[0];
+const region = argv.region || 'us-east-1';
 
 cloudfriend.validate(templatePath, region)
   .then(() => {
