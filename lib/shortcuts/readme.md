@@ -26,6 +26,8 @@ Links to documentation for each shortcut in [api.md](./api.md)
 - [QueueLambda](./api.md#queuelambda)
 - [ServiceRole](./api.md#servicerole)
 - [Queue](./api.md#queue)
+- [hookshot.Passthrough](./api.md#hookshotpassthrough)
+- [hookshot.Github](./api.md#hookshotgithub)
 
 ## Using shortcuts in a template
 
