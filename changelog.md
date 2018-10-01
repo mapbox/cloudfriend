@@ -1,3 +1,7 @@
+## v2.3.0
+
+- Shortcut lambdas are run with runtime Node8.10 by default
+
 ## v2.2.0
 
 - Pass options through to command line tools #22
