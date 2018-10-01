@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment4351c704"
+          "Ref": "PassDeployment5a428b86"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -40,7 +40,7 @@
         ]
       }
     },
-    "PassDeployment4351c704": {
+    "PassDeployment5a428b86": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -203,7 +203,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs6.10",
+        "Runtime": "nodejs8.10",
         "Timeout": 30
       }
     },
@@ -313,7 +313,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs6.10",
+        "Runtime": "nodejs8.10",
         "Timeout": 300
       }
     },
