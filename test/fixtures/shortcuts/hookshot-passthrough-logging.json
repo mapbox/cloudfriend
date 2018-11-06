@@ -36,7 +36,7 @@
             "ResourcePath": "/*",
             "ThrottlingBurstLimit": 20,
             "ThrottlingRateLimit": 5,
-            "LoggingLevel": "OFF"
+            "LoggingLevel": "INFO"
           }
         ]
       }

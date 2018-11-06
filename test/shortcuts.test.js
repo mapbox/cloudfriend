@@ -398,6 +398,16 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'throws without required parameters'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.hookshot.Passthrough({
+      Prefix: 'Pass',
+      PassthroughTo: 'Destination',
+      LoggingLevel: 'HAM'
+    }),
+    /LoggingLevel must be one of OFF, INFO, or ERROR/,
+    'throws with invalid LoggingLevel'
+  );
+
   const to = new cf.shortcuts.Lambda({
     LogicalName: 'Destination',
     Code: {
@@ -430,6 +440,20 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-passthrough-alarms')),
     'expected resources generated with alarm config'
+  );
+
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    LoggingLevel: 'INFO'
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-logging', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-logging')),
+    'expected resources generated with configured LoggingLevel'
   );
 
   assert.end();
