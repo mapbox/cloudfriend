@@ -1,3 +1,7 @@
+## v2.4.0
+
+- Hookshot caller can now set execution LoggingLevel to INFO or ERROR
+
 ## v2.3.0
 
 - Shortcut lambdas are run with runtime Node8.10 by default
