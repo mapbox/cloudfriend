@@ -36,9 +36,9 @@
             "ResourcePath": "/*",
             "ThrottlingBurstLimit": 20,
             "ThrottlingRateLimit": 5,
-            "LoggingLevel": "INFO",
-            "DataTraceEnabled": false,
-            "MetricsEnabled": false
+            "LoggingLevel": "ERROR",
+            "DataTraceEnabled": true,
+            "MetricsEnabled": true
           }
         ]
       }

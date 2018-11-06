@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment4d92664b"
+          "Ref": "PassDeploymentc8119049"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -36,12 +36,14 @@
             "ResourcePath": "/*",
             "ThrottlingBurstLimit": 20,
             "ThrottlingRateLimit": 5,
-            "LoggingLevel": "OFF"
+            "LoggingLevel": "OFF",
+            "DataTraceEnabled": false,
+            "MetricsEnabled": false
           }
         ]
       }
     },
-    "PassDeployment4d92664b": {
+    "PassDeploymentc8119049": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
