@@ -456,6 +456,51 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'expected resources generated with configured LoggingLevel'
   );
 
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    DataTraceEnabled: true,
+    MetricsEnabled: true
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-enhanced-logging', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-enhanced-logging')),
+    'expected resources generated with detailed logging and metrics'
+  );
+
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    DataTraceEnabled: true,
+    MetricsEnabled: true,
+    LoggingLevel: 'INFO'
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-full-blown-logging', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-full-blown-logging')),
+    'LoggingLevel respected with detailed logging and metrics'
+  );
+
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    AccessLogFormat: '{ "requestId":"$context.requestId" }'
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-access-log-format', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-access-log-format')),
+    'expected resources generated with access logs'
+  );
+
   assert.end();
 });
 

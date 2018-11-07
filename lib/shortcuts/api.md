@@ -339,7 +339,14 @@ you return from your Lambda function will be modified to include CORS headers.
     have written which will receive a request and generate a response to provide
     to the caller.
 -   `LoggingLevel` **[String][31]** one of `OFF`, `INFO`, or `ERROR`. Logs are delivered
-    to a CloudWatch LogGroup named `API-Gateway-Execution-Logs_{rest-api-id}/hookshot`
+    to a CloudWatch LogGroup named `API-Gateway-Execution-Logs_{rest-api-id}/hookshot` (optional, default `'OFF'`)
+-   `DataTraceEnabled` **[Boolean][65]** set to `true` to enable full request/response
+    logging in the API's execution logs. (optional, default `false`)
+-   `MetricsEnabled` **[Boolean][65]** set to `true` to enable additional
+    execution metrics in CloudWatch. (optional, default `false`)
+-   `AccessLogFormat` **[String][31]?** A single line format of the access logs of
+    data, as specified by selected $context variables. The format must include at
+    least $context.requestId. [See AWS documentation for details][88].
 
 ### Properties
 
@@ -596,3 +603,5 @@ module.exports = cf.merge(myTemplate, lambda);
 [86]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
 
 [87]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format
+
+[88]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apigateway-stage-accesslogsetting.html#cfn-apigateway-stage-accesslogsetting-format

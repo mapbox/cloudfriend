@@ -37,8 +37,8 @@
             "ThrottlingBurstLimit": 20,
             "ThrottlingRateLimit": 5,
             "LoggingLevel": "INFO",
-            "DataTraceEnabled": false,
-            "MetricsEnabled": false
+            "DataTraceEnabled": true,
+            "MetricsEnabled": true
           }
         ]
       }
