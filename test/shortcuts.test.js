@@ -487,6 +487,20 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'LoggingLevel respected with detailed logging and metrics'
   );
 
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    AccessLogFormat: '{ "requestId":"$context.requestId" }'
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update) fixtures.update('hookshot-passthrough-access-log-format', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-access-log-format')),
+    'expected resources generated with access logs'
+  );
+
   assert.end();
 });
 

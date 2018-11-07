@@ -36,9 +36,18 @@
             "ResourcePath": "/*",
             "ThrottlingBurstLimit": 20,
             "ThrottlingRateLimit": 5,
-            "LoggingLevel": "INFO",
-            "DataTraceEnabled": true,
-            "MetricsEnabled": true
+            "LoggingLevel": "OFF",
+            "DataTraceEnabled": false,
+            "MetricsEnabled": false,
+            "AccessLogSetting": {
+              "DestinationArn": {
+                "Fn::GetAtt": [
+                  "PassAccessLogs",
+                  "Arn"
+                ]
+              },
+              "Format": "{ \"requestId\":\"$context.requestId\" }"
+            }
           }
         ]
       }
@@ -121,6 +130,15 @@
         "SourceArn": {
           "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PassApi}/*"
         }
+      }
+    },
+    "PassAccessLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "${AWS::StackName}-Pass-access-logs"
+        },
+        "RetentionInDays": 14
       }
     },
     "PassFunctionLogs": {
