@@ -214,7 +214,7 @@
       "Type": "AWS::CloudWatch::Alarm",
       "Properties": {
         "AlarmName": {
-          "Fn::Sub": "${AWS::StackName}-PassFunction-Errors"
+          "Fn::Sub": "${AWS::StackName}-PassFunction-Errors-${AWS::Region}"
         },
         "AlarmDescription": {
           "Fn::Sub": [
@@ -324,7 +324,7 @@
       "Type": "AWS::CloudWatch::Alarm",
       "Properties": {
         "AlarmName": {
-          "Fn::Sub": "${AWS::StackName}-Destination-Errors"
+          "Fn::Sub": "${AWS::StackName}-Destination-Errors-${AWS::Region}"
         },
         "AlarmDescription": {
           "Fn::Sub": [
