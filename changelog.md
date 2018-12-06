@@ -1,3 +1,7 @@
+# v2.6.0
+
+- Modifies CloudWatch alarm names to include the AWS region.
+
 ## v2.5.0
 
 - Hookshot caller can now enable metrics, detailed execution logging, and setup custom-formatted access logging
