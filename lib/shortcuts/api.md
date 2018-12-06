@@ -65,7 +65,7 @@ LogGroup, a Role, an Alarm on function errors, and the Lambda Function itself.
         to this Lambda function. See [AWS documentation][49] (optional, default `undefined`)
     -   `options.Statement` **[Array][43]&lt;[Object][30]>** an array of policy statements
         defining the permissions that your Lambda function needs in order to execute. (optional, default `[]`)
-    -   `options.AlarmName` **[String][31]** See [AWS documentation][50] (optional, default `'${stack name}-${logical name}-Errors'`)
+    -   `options.AlarmName` **[String][31]** See [AWS documentation][50] (optional, default `'${stack name}-${logical name}-Errors-${region}'`)
     -   `options.AlarmDescription` **[String][31]** See [AWS documentation][51] (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
     -   `options.AlarmActions` **[Array][43]&lt;[String][31]>** See [AWS documentation][52] (optional, default `[]`)
     -   `options.Period` **[Number][39]** See [AWS documentation][53] (optional, default `60`)

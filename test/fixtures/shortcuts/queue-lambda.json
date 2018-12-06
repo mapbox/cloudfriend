@@ -105,7 +105,7 @@
       "Type": "AWS::CloudWatch::Alarm",
       "Properties": {
         "AlarmName": {
-          "Fn::Sub": "${AWS::StackName}-MyLambda-Errors"
+          "Fn::Sub": "${AWS::StackName}-MyLambda-Errors-${AWS::Region}"
         },
         "AlarmDescription": {
           "Fn::Sub": [
