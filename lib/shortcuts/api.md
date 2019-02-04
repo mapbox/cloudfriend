@@ -375,7 +375,7 @@ const webhook = new cf.shortcuts.hookshot.Passthrough({
   PassthroughTo: 'MyLambdaFunction'
 });
 
-module.exports = cf.merge(myTemplate, lambda);
+module.exports = cf.merge(myTemplate, webhook);
 ```
 
 ## hookshot.Github
