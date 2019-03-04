@@ -7,7 +7,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "pretest": "eslint index.js test lib bin cloudformation",
+    "pretest": "tsc && eslint index.js test lib bin cloudformation",
+    "tsc": "tsc",
     "test": "nyc tape test/*.test.js",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
@@ -33,12 +34,14 @@
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
+    "@types/node": "^11.9.6",
     "documentation": "^8.0.2",
     "eslint": "^3.2.0",
     "eslint-plugin-node": "^6.0.1",
     "nyc": "^7.1.0",
     "opener": "^1.4.1",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "typescript": "^3.3.3333"
   },
   "dependencies": {
     "aws-sdk": "^2.4.11",

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "strict": true,
+  },
+  "include": ["lib/**/*.js"]
+}
