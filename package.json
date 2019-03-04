@@ -35,6 +35,7 @@
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
     "@types/node": "^11.9.6",
+    "@types/redent": "^2.0.0",
     "documentation": "^8.0.2",
     "eslint": "^3.2.0",
     "eslint-plugin-node": "^6.0.1",
