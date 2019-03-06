@@ -30,7 +30,7 @@ test('[shortcuts] fixture validation', async (assert) => {
 
 test('[shortcuts] lambda', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.Lambda(),
+    () => new cf.shortcuts.Lambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without required parameters'
   );
@@ -128,7 +128,7 @@ test('[shortcuts] lambda', (assert) => {
 
 test('[shortcuts] queue-lambda', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.QueueLambda(),
+    () => new cf.shortcuts.QueueLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -168,7 +168,7 @@ test('[shortcuts] queue-lambda', (assert) => {
 
 test('[shortcuts] scheduled-lambda', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.ScheduledLambda(),
+    () => new cf.shortcuts.ScheduledLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -225,7 +225,7 @@ test('[shortcuts] scheduled-lambda', (assert) => {
 
 test('[shortcuts] stream-lambda', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.StreamLambda(),
+    () => new cf.shortcuts.StreamLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
