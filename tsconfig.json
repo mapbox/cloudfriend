@@ -8,8 +8,8 @@
     "noEmit": true,
     "target": "es2016",
     "resolveJsonModule": true,
-    // "strict": true,
-    "strictNullChecks": true
+    "strict": true,
+    // "strictNullChecks": true
   },
   "exclude": ["test/"]
 }

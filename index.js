@@ -21,18 +21,14 @@ const cloudfriend = module.exports = {
   shortcuts
 };
 
-Object.keys(intrinsic).forEach((key) => {
-  cloudfriend[key] = intrinsic[key];
-});
+Object.assign(cloudfriend, intrinsic);
+Object.assign(cloudfriend, conditions);
+Object.assign(cloudfriend, pseudo);
 
-Object.keys(conditions).forEach((key) => {
-  cloudfriend[key] = conditions[key];
-});
 
-Object.keys(pseudo).forEach((key) => {
-  cloudfriend[key] = pseudo[key];
-});
-
+/**
+ * @type object
+ */
 cloudfriend.permissions = {
   AWSTemplateFormatVersion: '2010-09-09',
   Resources: {
@@ -58,12 +54,12 @@ cloudfriend.permissions = {
     AccessKey: {
       Type: 'AWS::IAM::AccessKey',
       Properties: {
-        UserName: cloudfriend.ref('User')
+        UserName: intrinsic.ref('User')
       }
     }
   },
   Outputs: {
-    AccessKeyId: { Value: cloudfriend.ref('AccessKey') },
-    SecretAccessKey: { Value: cloudfriend.getAtt('AccessKey', 'SecretAccessKey') }
+    AccessKeyId: { Value: intrinsic.ref('AccessKey') },
+    SecretAccessKey: { Value: intrinsic.getAtt('AccessKey', 'SecretAccessKey') }
   }
 };
