@@ -1,3 +1,3 @@
-import * as _ServiceRole from './service-role';
+import { ServiceRole } from './service-role';
 
-export { _ServiceRole as ServiceRole };
+export { ServiceRole };
