@@ -8,5 +8,6 @@
     "resolveJsonModule": true,
     // "strict": true,
     "strictNullChecks": true
-  }
+  },
+  "exclude": ["test/"]
 }
