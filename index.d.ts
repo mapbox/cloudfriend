@@ -1,6 +1,5 @@
+import * as _build from "./lib/build";
 
-
-declare module cloudfriend {
-  export function build(templatePath: string, templateOptions: object): object
+export namespace cloudfriend {
+  export { _build as build }
 }
-
