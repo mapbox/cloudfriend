@@ -264,7 +264,7 @@ test('[shortcuts] stream-lambda', (assert) => {
 
 test('[shortcuts] queue', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.Queue(),
+    () => new cf.shortcuts.Queue({}),
     /You must provide a LogicalName/,
     'throws without required parameters'
   );
@@ -318,7 +318,7 @@ test('[shortcuts] queue', (assert) => {
 
 test('[shortcuts] service role', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.ServiceRole(),
+    () => new cf.shortcuts.ServiceRole({}),
     /You must provide a LogicalName and Service/,
     'throws without required parameters'
   );
@@ -393,7 +393,7 @@ const normalizeDeployment = (template) => {
 
 test('[shortcuts] hookshot passthrough', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.hookshot.Passthrough(),
+    () => new cf.shortcuts.hookshot.Passthrough({}),
     /You must provide a Prefix, and PassthroughTo/,
     'throws without required parameters'
   );
@@ -506,7 +506,7 @@ test('[shortcuts] hookshot passthrough', (assert) => {
 
 test('[shortcuts] hookshot github', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.hookshot.Github(),
+    () => new cf.shortcuts.hookshot.Github({}),
     /You must provide a Prefix, and PassthroughTo/,
     'throws without required parameters'
   );
