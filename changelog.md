@@ -1,3 +1,7 @@
+# v2.7.0
+
+- Adds support for Layers to Lambda shortcuts
+
 # v2.6.0
 
 - Modifies CloudWatch alarm names to include the AWS region.
