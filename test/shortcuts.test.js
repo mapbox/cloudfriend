@@ -78,6 +78,7 @@ test('[shortcuts] lambda', (assert) => {
     FunctionName: 'my-function',
     Handler: 'index.something',
     KmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/fake',
+    Layers: ['arn:aws:fake:layer/abc'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
     Runtime: 'nodejs6.10',
