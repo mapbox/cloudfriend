@@ -1,5 +1,8 @@
 'use strict';
 
+// eslint-disable-next-line node/no-missing-require
+try { require('@mapbox/invisible-cloudfriend'); } catch (err) { true; }
+
 const intrinsic = require('./lib/intrinsic');
 const conditions = require('./lib/conditions');
 const pseudo = require('./lib/pseudo');
