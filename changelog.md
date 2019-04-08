@@ -1,3 +1,8 @@
+# v2.8.0
+
+- Allows Hookshot callers to bring their own webhook secret. This is used for 
+signature-verification in the `.Github()` case.
+
 # v2.7.0
 
 - Adds support for Layers to Lambda shortcuts
