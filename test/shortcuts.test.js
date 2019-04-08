@@ -15,7 +15,7 @@ test('[shortcuts] fixture validation', async (assert) => {
     .filter((filename) => path.extname(filename) === '.json')
     .map((filename) => {
       return cf.validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
-        .catch(() => assert.fail(`${filename} fixture fails validation`))
+        .catch((err) => assert.fail(`${filename} fixture fails validation: ${err.message}`))
         .then(() => assert.pass(`${filename} fixture passed validation`));
     });
 
@@ -519,17 +519,45 @@ test('[shortcuts] hookshot github', (assert) => {
     }
   });
 
-  const github = new cf.shortcuts.hookshot.Github({
+  let github = new cf.shortcuts.hookshot.Github({
     Prefix: 'Pass',
     PassthroughTo: 'Destination'
   });
 
-  const template = cf.merge(github, to);
+  let template = cf.merge(github, to);
   if (update) fixtures.update('hookshot-github', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-github')),
     'expected resources generated with defaults'
+  );
+
+  github = new cf.shortcuts.hookshot.Github({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    WebhookSecret: 'abc123'
+  });
+
+  template = cf.merge(github, to);
+  if (update) fixtures.update('hookshot-github-secret-string', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-github-secret-string')),
+    'expected resources generated when secret passed as string'
+  );
+
+  github = new cf.shortcuts.hookshot.Github({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    WebhookSecret: cf.ref('SomeParameter')
+  });
+  const Parameters = { SomeParameter: { Type: 'String' } };
+  template = cf.merge(github, to, { Parameters });
+  if (update) fixtures.update('hookshot-github-secret-ref', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-github-secret-ref')),
+    'expected resources generated when secret passed as ref'
   );
 
   assert.end();
