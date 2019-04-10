@@ -343,11 +343,37 @@ test('[shortcuts] service role', (assert) => {
   });
 
   template = cf.merge(role);
-  if (update) fixtures.update('service-role-suffix-replace', template);
+  if (update) fixtures.update('service-role-no-url-suffix', template);
   assert.deepEqual(
     noUndefined(template),
-    fixtures.get('service-role-suffix-replace'),
-    'expected resources generated, region-specific service suffix replaced'
+    fixtures.get('service-role-no-url-suffix'),
+    'expected resources generated, service for which AWS::URLSuffix is invalid'
+  );
+
+  role = new cf.shortcuts.ServiceRole({
+    LogicalName: 'MyRole',
+    Service: 'ec2'
+  });
+
+  template = cf.merge(role);
+  if (update) fixtures.update('service-role-url-suffix', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('service-role-url-suffix'),
+    'expected resources generated, service for which AWS::URLSuffix is invalid'
+  );
+
+  role = new cf.shortcuts.ServiceRole({
+    LogicalName: 'MyRole',
+    Service: 'ec2.amazonaws.com'
+  });
+
+  template = cf.merge(role);
+  if (update) fixtures.update('service-role-url-suffix-with-replacement', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('service-role-url-suffix-with-replacement'),
+    'expected resources generated, service for which AWS::URLSuffix is invalid specified with a suffix'
   );
 
   role = new cf.shortcuts.ServiceRole({
