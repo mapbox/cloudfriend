@@ -15,7 +15,7 @@
               "Action": "sts:AssumeRole",
               "Principal": {
                 "Service": {
-                  "Fn::Sub": "lambda.${AWS::URLSuffix}"
+                  "Fn::Sub": "lambda.amazonaws.com"
                 }
               }
             }
