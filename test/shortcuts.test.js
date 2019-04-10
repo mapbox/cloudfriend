@@ -562,3 +562,34 @@ test('[shortcuts] hookshot github', (assert) => {
 
   assert.end();
 });
+
+test('[shortcuts] hookshot load-balancer', (assert) => {
+  // assert.throws(
+  //   () => new cf.shortcuts.hookshot.LoadBalancer(),
+  //   /You must provide a Prefix, and PassthroughTo/,
+  //   'throws without required parameters'
+  // );
+
+  const to = new cf.shortcuts.Lambda({
+    LogicalName: 'Destination',
+    Code: {
+      ZipFile: 'module.exports.handler = (e, c, cb) => cb();'
+    }
+  });
+
+  const github = new cf.shortcuts.hookshot.LoadBalancer({
+    PassthroughTo: 'Destination',
+    SecurityGroups: ['sg-123'],
+    Subnets: ['subnet-123']
+  });
+
+  const template = cf.merge(github, to);
+  if (update) fixtures.update('hookshot-load-balancer', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-load-balancer')),
+    'expected resources generated with defaults'
+  );
+
+  assert.end();
+});

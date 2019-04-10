@@ -1,0 +1,491 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "HookshotLoadBalancer": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "IpAddressType": "ipv4",
+        "Name": {
+          "Fn::Sub": [
+            "${AWS::StackName}-${prefix}",
+            {
+              "prefix": "hookshot"
+            }
+          ]
+        },
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          "sg-123"
+        ],
+        "Subnets": [
+          "subnet-123"
+        ],
+        "Type": "application"
+      }
+    },
+    "HookshotTargetGroup": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroupCustomResource",
+            "Arn"
+          ]
+        },
+        "Name": {
+          "Fn::Sub": [
+            "${AWS::StackName}-${prefix}",
+            {
+              "prefix": "hookshot"
+            }
+          ]
+        },
+        "HealthCheckPath": "/status"
+      }
+    },
+    "HookshotInvocationPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "Destination",
+            "Arn"
+          ]
+        },
+        "Principal": "elasticloadbalancing.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroup",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "HookshotTargetGroupRegistration": {
+      "Type": "AWS::CloudFormation::CustomResource",
+      "DependsOn": "HookshotInvocationPermission",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroupRegistrationCustomResource",
+            "Arn"
+          ]
+        },
+        "TargetGroupArn": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroup",
+            "Arn"
+          ]
+        },
+        "LambdaFunctionArn": {
+          "Fn::GetAtt": [
+            "Destination",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "HookshotTargetGroupCustomResourceLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": [
+                  "${AWS::StackName}-${prefix}-target-group-custom-resource",
+                  {
+                    "prefix": "hookshot"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "HookshotTargetGroupCustomResourceRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "HookshotTargetGroupCustomResourceLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "elasticloadbalancing:CreateTargetGroup",
+                    "elasticloadbalancing:DeleteTargetGroup",
+                    "elasticloadbalancing:ModifyTargetGroup",
+                    "elasticloadbalancing:ModifyTargetGroupAttributes"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "HookshotTargetGroupCustomResource": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "module.exports.handler = function targetGroup(event,context){cov_1l8mhrhdzc.f[9]++;const response=(cov_1l8mhrhdzc.s[55]++,require('cfn-response'));const AWS=(cov_1l8mhrhdzc.s[56]++,require('aws-sdk'));const elb=(cov_1l8mhrhdzc.s[57]++,new AWS.ELBv2());cov_1l8mhrhdzc.s[58]++;const main=async()=>{cov_1l8mhrhdzc.f[10]++;const{RequestType,PhysicalResourceId,ResourceProperties}=(cov_1l8mhrhdzc.s[59]++,event);cov_1l8mhrhdzc.s[60]++;if(RequestType.toUpperCase()==='CREATE'){cov_1l8mhrhdzc.b[31][0]++;const{TargetGroups}=(cov_1l8mhrhdzc.s[61]++,await elb.createTargetGroup({Name:ResourceProperties.Name,HealthCheckIntervalSeconds:30,HealthCheckPath:ResourceProperties.HealthCheckPath,HealthCheckTimeoutSeconds:5,HealthyThresholdCount:3,UnhealthyThresholdCount:3,TargetType:'lambda'}).promise());const data=(cov_1l8mhrhdzc.s[62]++,{Arn:TargetGroups[0].TargetGroupArn});cov_1l8mhrhdzc.s[63]++;const cleanup=()=>{cov_1l8mhrhdzc.f[11]++;cov_1l8mhrhdzc.s[64]++;return elb.deleteTargetGroup({TargetGroupArn:data.Arn}).promise();};cov_1l8mhrhdzc.s[65]++;await elb.modifyTargetGroupAttributes({TargetGroupArn:data.Arn,Attributes:[{Key:'lambda.multi_value_headers.enabled',Value:'true'}]}).promise().catch(async err=>{cov_1l8mhrhdzc.f[12]++;cov_1l8mhrhdzc.s[66]++;await cleanup();cov_1l8mhrhdzc.s[67]++;throw err;});cov_1l8mhrhdzc.s[68]++;response.send(event,context,response.SUCCESS,data,data.Arn);}else{cov_1l8mhrhdzc.b[31][1]++;}cov_1l8mhrhdzc.s[69]++;if(RequestType.toUpperCase()==='UPDATE'){cov_1l8mhrhdzc.b[32][0]++;cov_1l8mhrhdzc.s[70]++;response.send(event,context,response.SUCCESS);}else{cov_1l8mhrhdzc.b[32][1]++;}cov_1l8mhrhdzc.s[71]++;if(RequestType.toUpperCase()==='DELETE'){cov_1l8mhrhdzc.b[33][0]++;cov_1l8mhrhdzc.s[72]++;if(PhysicalResourceId){cov_1l8mhrhdzc.b[34][0]++;cov_1l8mhrhdzc.s[73]++;await elb.deleteTargetGroup({TargetGroupArn:PhysicalResourceId}).promise();}else{cov_1l8mhrhdzc.b[34][1]++;}cov_1l8mhrhdzc.s[74]++;response.send(event,context,response.SUCCESS);}else{cov_1l8mhrhdzc.b[33][1]++;}};cov_1l8mhrhdzc.s[75]++;main().catch(err=>{cov_1l8mhrhdzc.f[13]++;cov_1l8mhrhdzc.s[76]++;console.log(err);cov_1l8mhrhdzc.s[77]++;response.send(event,context,response.FAILED);});};"
+        },
+        "Description": {
+          "Fn::Sub": "HookshotTargetGroupCustomResource in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": [
+            "${AWS::StackName}-${prefix}-target-group-custom-resource",
+            {
+              "prefix": "hookshot"
+            }
+          ]
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroupCustomResourceRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 300
+      }
+    },
+    "HookshotTargetGroupCustomResourceErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-HookshotTargetGroupCustomResource-Errors-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": [
+                  "${AWS::StackName}-${prefix}-target-group-custom-resource",
+                  {
+                    "prefix": "hookshot"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "HookshotTargetGroupCustomResource"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    },
+    "HookshotTargetGroupRegistrationCustomResourceLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": [
+                  "${AWS::StackName}-${prefix}-target-group-registration-custom-resource",
+                  {
+                    "prefix": "hookshot"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "HookshotTargetGroupRegistrationCustomResourceRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "HookshotTargetGroupRegistrationCustomResourceLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "elasticloadbalancing:RegisterTargets",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "HookshotTargetGroupRegistrationCustomResource": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "module.exports.handler = function targetGroupRegistration(event,context){cov_1l8mhrhdzc.f[14]++;const response=(cov_1l8mhrhdzc.s[78]++,require('cfn-response'));const AWS=(cov_1l8mhrhdzc.s[79]++,require('aws-sdk'));const elb=(cov_1l8mhrhdzc.s[80]++,new AWS.ELBv2());const{RequestType,ResourceProperties}=(cov_1l8mhrhdzc.s[81]++,event);cov_1l8mhrhdzc.s[82]++;const main=async()=>{cov_1l8mhrhdzc.f[15]++;cov_1l8mhrhdzc.s[83]++;if(RequestType.toUpperCase()==='CREATE'){cov_1l8mhrhdzc.b[35][0]++;cov_1l8mhrhdzc.s[84]++;await elb.registerTargets({TargetGroupArn:ResourceProperties.TargetGroupArn,Targets:[{Id:ResourceProperties.LambdaFunctionArn}]}).promise();cov_1l8mhrhdzc.s[85]++;response.send(event,context,response.SUCCESS);}else{cov_1l8mhrhdzc.b[35][1]++;}cov_1l8mhrhdzc.s[86]++;if(RequestType.toUpperCase()==='UPDATE'){cov_1l8mhrhdzc.b[36][0]++;cov_1l8mhrhdzc.s[87]++;response.send(event,context,response.SUCCESS);}else{cov_1l8mhrhdzc.b[36][1]++;}cov_1l8mhrhdzc.s[88]++;if(RequestType.toUpperCase()==='DELETE'){cov_1l8mhrhdzc.b[37][0]++;cov_1l8mhrhdzc.s[89]++;response.send(event,context,response.SUCCESS);}else{cov_1l8mhrhdzc.b[37][1]++;}};cov_1l8mhrhdzc.s[90]++;main().catch(err=>{cov_1l8mhrhdzc.f[16]++;cov_1l8mhrhdzc.s[91]++;console.log(err);cov_1l8mhrhdzc.s[92]++;response.send(event,context,response.FAILED);});};"
+        },
+        "Description": {
+          "Fn::Sub": "HookshotTargetGroupRegistrationCustomResource in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": [
+            "${AWS::StackName}-${prefix}-target-group-registration-custom-resource",
+            {
+              "prefix": "hookshot"
+            }
+          ]
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "HookshotTargetGroupRegistrationCustomResourceRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 300
+      }
+    },
+    "HookshotTargetGroupRegistrationCustomResourceErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-HookshotTargetGroupRegistrationCustomResource-Errors-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": [
+                  "${AWS::StackName}-${prefix}-target-group-registration-custom-resource",
+                  {
+                    "prefix": "hookshot"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "HookshotTargetGroupRegistrationCustomResource"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    },
+    "HookshotHttpListener": {
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+      "Properties": {
+        "DefaultActions": [
+          {
+            "TargetGroupArn": {
+              "Fn::GetAtt": [
+                "HookshotTargetGroup",
+                "Arn"
+              ]
+            },
+            "Type": "forward"
+          }
+        ],
+        "LoadBalancerArn": {
+          "Ref": "HookshotLoadBalancer"
+        },
+        "Port": 80,
+        "Protocol": "HTTP"
+      }
+    },
+    "DestinationLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-Destination"
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "DestinationRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "DestinationLogs",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Destination": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "ZipFile": "module.exports.handler = (e, c, cb) => cb();"
+        },
+        "Description": {
+          "Fn::Sub": "Destination in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-Destination"
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "DestinationRole",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 300
+      }
+    },
+    "DestinationErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-Destination-Errors-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-Destination"
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "Destination"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    }
+  },
+  "Outputs": {}
+}

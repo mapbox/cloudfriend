@@ -33,10 +33,11 @@
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
+    "cfn-response": "^1.0.1",
     "documentation": "^8.0.2",
     "eslint": "^3.2.0",
     "eslint-plugin-node": "^6.0.1",
-    "nyc": "^7.1.0",
+    "nyc": "^13.3.0",
     "opener": "^1.4.1",
     "tape": "^4.6.0"
   },
