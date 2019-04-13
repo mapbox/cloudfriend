@@ -1,3 +1,7 @@
+# v2.8.2
+
+- Adds `firehose` as another service which cannot use `AWS::URLSuffix`
+
 # v2.8.1
 
 - Implement a list of AWS service namespaces where use of `AWS::URLSuffix` results in an invalid service URL in China regions.
