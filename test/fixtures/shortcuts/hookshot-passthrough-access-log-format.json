@@ -5,26 +5,25 @@
   "Mappings": {},
   "Conditions": {},
   "Resources": {
-    "PassSecret": {
-      "Type": "AWS::ApiGateway::ApiKey",
-      "Properties": {
-        "Enabled": false
-      }
-    },
     "PassApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
         "Name": {
           "Fn::Sub": "${AWS::StackName}-webhook"
         },
-        "FailOnWarnings": true
+        "FailOnWarnings": true,
+        "EndpointConfiguration": {
+          "Types": [
+            "REGIONAL"
+          ]
+        }
       }
     },
     "PassStage": {
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment60b3cb7b"
+          "Ref": "PassDeployment28becc6f"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -52,7 +51,7 @@
         ]
       }
     },
-    "PassDeployment60b3cb7b": {
+    "PassDeployment28becc6f": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -130,6 +129,12 @@
         "SourceArn": {
           "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PassApi}/*"
         }
+      }
+    },
+    "PassSecret": {
+      "Type": "AWS::ApiGateway::ApiKey",
+      "Properties": {
+        "Enabled": false
       }
     },
     "PassAccessLogs": {
