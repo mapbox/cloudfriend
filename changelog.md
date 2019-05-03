@@ -1,3 +1,7 @@
+# v3.0.1
+
+- Dependency updates to avoid security vulnerabilities and make installable in node.js v12.
+
 # v3.0.0
 
 - Makes all hookshot API Gateway **regional** instead of **edge-optimized** endpoints.
