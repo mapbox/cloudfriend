@@ -1,3 +1,7 @@
+# v3.0.0
+
+- Makes all hookshot API Gateway **regional** instead of **edge-optimized** endpoints.
+
 # v2.8.2
 
 - Adds `firehose` as another service which cannot use `AWS::URLSuffix`
