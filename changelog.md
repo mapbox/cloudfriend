@@ -1,3 +1,7 @@
+## HEAD
+
+- Shortcut lambdas are run with runtime Node10.x by default
+
 # v3.0.1
 
 - Dependency updates to avoid security vulnerabilities and make installable in node.js v12.
@@ -16,7 +20,7 @@
 
 # v2.8.0
 
-- Allows Hookshot callers to bring their own webhook secret. This is used for 
+- Allows Hookshot callers to bring their own webhook secret. This is used for
 signature-verification in the `.Github()` case.
 
 # v2.7.0
