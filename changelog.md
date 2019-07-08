@@ -1,4 +1,4 @@
-## HEAD
+# v3.1.0
 
 - Shortcut lambdas are run with runtime Node10.x by default
 
