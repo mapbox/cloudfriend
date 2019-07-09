@@ -77,7 +77,7 @@
             "Arn"
           ]
         },
-        "Runtime": "node10.x",
+        "Runtime": "nodejs8.10",
         "Timeout": 300
       }
     },
