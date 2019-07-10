@@ -1,3 +1,7 @@
+# v 3.1.1
+
+- Revert shortcut Lambdas to `node8.10` runtime, as `ZipFile`-style function definitions are not yet supported for `node10.x` by Cloudformation.
+
 # v3.1.0
 
 - Shortcut lambdas are run with runtime Node10.x by default
