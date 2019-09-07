@@ -1,4 +1,8 @@
-# v 3.1.1
+# v3.2.0
+
+- Adds shortcuts for a generic IAM role and for a cross-account IAM role.
+
+# v3.1.1
 
 - Revert shortcut Lambdas to `node8.10` runtime, as `ZipFile`-style function definitions are not yet supported for `node10.x` by Cloudformation.
 
