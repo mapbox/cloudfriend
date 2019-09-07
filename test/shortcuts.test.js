@@ -317,6 +317,128 @@ test('[shortcuts] queue', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] role', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.Role(),
+    /You must provide a LogicalName and AssumeRolePrincipals/,
+    'throws without required parameters'
+  );
+
+  let role = new cf.shortcuts.Role({
+    LogicalName: 'MyRole',
+    AssumeRolePrincipals: [
+      { Service: 'ec2.amazonaws.com' }
+    ]
+  });
+
+  let template = cf.merge(role);
+  if (update) fixtures.update('role-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('role-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  role = new cf.shortcuts.Role({
+    LogicalName: 'MyRole',
+    AssumeRolePrincipals: [
+      { Service: 'ec2.amazonaws.com' }
+    ],
+    Statement: [
+      {
+        Effect: 'Allow',
+        Action: 's3:GetObject',
+        Resource: 'arn:aws:s3:::fake/data'
+      }
+    ],
+    ManagedPolicyArns: [
+      'arn:aws:iam::123456789012:policy/fake'
+    ],
+    MaxSessionDuration: 60,
+    Path: '/fake',
+    RoleName: 'my-role',
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    role
+  );
+  if (update) fixtures.update('role-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('role-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] cross-account role', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.CrossAccountRole(),
+    /You must provide a LogicalName and Accounts/,
+    'throws without required parameters'
+  );
+
+  let role = new cf.shortcuts.CrossAccountRole({
+    LogicalName: 'MyRole',
+    Accounts: [
+      '123456789012',
+      'arn:aws:iam::123456789012:root',
+      { 'Fn::Sub': 'arn:aws:iam::${AWS::AccountId}:root' }
+    ]
+  });
+
+  let template = cf.merge(role);
+  if (update) fixtures.update('cross-account-role-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('cross-account-role-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  role = new cf.shortcuts.CrossAccountRole({
+    LogicalName: 'MyRole',
+    Accounts: [
+      '123456789012',
+      'arn:aws:iam::123456789012:root',
+      { 'Fn::Sub': 'arn:aws:iam::${AWS::AccountId}:root' }
+    ],
+    Statement: [
+      {
+        Effect: 'Allow',
+        Action: 's3:GetObject',
+        Resource: 'arn:aws:s3:::fake/data'
+      }
+    ],
+    ManagedPolicyArns: [
+      'arn:aws:iam::123456789012:policy/fake'
+    ],
+    MaxSessionDuration: 60,
+    Path: '/fake',
+    RoleName: 'my-role',
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    role
+  );
+  if (update) fixtures.update('cross-account-role-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('cross-account-role-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
 test('[shortcuts] service role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.ServiceRole(),
