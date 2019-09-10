@@ -1,3 +1,7 @@
+# v3.3.0
+
+- Adds shortcut for an event-driven Lambda function.
+
 # v3.2.0
 
 - Adds shortcuts for a generic IAM role and for a cross-account IAM role.
