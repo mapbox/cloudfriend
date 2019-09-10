@@ -11,11 +11,15 @@ const update = !!process.env.UPDATE;
 const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 
 test('[shortcuts] fixture validation', async (assert) => {
-  const validations = fs.readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
+  const validations = fs
+    .readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
     .filter((filename) => path.extname(filename) === '.json')
     .map((filename) => {
-      return cf.validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
-        .catch((err) => assert.fail(`${filename} fixture fails validation: ${err.message}`))
+      return cf
+        .validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
+        .catch((err) =>
+          assert.fail(`${filename} fixture fails validation: ${err.message}`)
+        )
         .then(() => assert.pass(`${filename} fixture passed validation`));
     });
 
@@ -72,9 +76,11 @@ test('[shortcuts] lambda', (assert) => {
       S3Bucket: 'my-code-bucket',
       S3Key: 'path/to/code.zip'
     },
-    DeadLetterConfig: { TargetArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake' },
+    DeadLetterConfig: {
+      TargetArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
+    },
     Description: 'my description',
-    Environment:  { Variables: { A: 'a' } },
+    Environment: { Variables: { A: 'a' } },
     FunctionName: 'my-function',
     Handler: 'index.something',
     KmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/fake',
@@ -135,13 +141,14 @@ test('[shortcuts] queue-lambda', (assert) => {
   );
 
   assert.throws(
-    () => new cf.shortcuts.QueueLambda({
-      LogicalName: 'MyLambda',
-      Code: {
-        S3Bucket: 'my-code-bucket',
-        S3Key: 'path/to/code.zip'
-      }
-    }),
+    () =>
+      new cf.shortcuts.QueueLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
     /You must provide an EventSourceArn and ReservedConcurrentExecutions/,
     'throws without queue-lambda required parameters'
   );
@@ -175,13 +182,14 @@ test('[shortcuts] scheduled-lambda', (assert) => {
   );
 
   assert.throws(
-    () => new cf.shortcuts.ScheduledLambda({
-      LogicalName: 'MyLambda',
-      Code: {
-        S3Bucket: 'my-code-bucket',
-        S3Key: 'path/to/code.zip'
-      }
-    }),
+    () =>
+      new cf.shortcuts.ScheduledLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
     /You must provide a ScheduleExpression/,
     'throws without scheduled-lambda required parameters'
   );
@@ -224,6 +232,76 @@ test('[shortcuts] scheduled-lambda', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] event-lambda', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.EventLambda(),
+    /You must provide a LogicalName, and Code/,
+    'throws without basic lambda required parameters'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.EventLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
+    /You must provide an EventPattern/,
+    'throws without event-lambda required parameters'
+  );
+
+  let lambda = new cf.shortcuts.EventLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventPattern: {
+      source: ['aws.ec2'],
+      'detail-type': ['EC2 Instance State-change Notification'],
+      detail: {
+        state: ['running']
+      }
+    }
+  });
+
+  let template = cf.merge(lambda);
+  if (update) fixtures.update('event-lambda-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('event-lambda-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  lambda = new cf.shortcuts.EventLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventPattern: {
+      source: ['aws.ec2'],
+      'detail-type': ['EC2 Instance State-change Notification'],
+      detail: {
+        state: ['running']
+      }
+    },
+    State: 'DISABLED'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('event-lambda-full', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('event-lambda-full'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
 test('[shortcuts] stream-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.StreamLambda(),
@@ -232,13 +310,14 @@ test('[shortcuts] stream-lambda', (assert) => {
   );
 
   assert.throws(
-    () => new cf.shortcuts.StreamLambda({
-      LogicalName: 'MyLambda',
-      Code: {
-        S3Bucket: 'my-code-bucket',
-        S3Key: 'path/to/code.zip'
-      }
-    }),
+    () =>
+      new cf.shortcuts.StreamLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
     /You must provide an EventSourceArn/,
     'throws without stream-lambda required parameters'
   );
@@ -326,9 +405,7 @@ test('[shortcuts] role', (assert) => {
 
   let role = new cf.shortcuts.Role({
     LogicalName: 'MyRole',
-    AssumeRolePrincipals: [
-      { Service: 'ec2.amazonaws.com' }
-    ]
+    AssumeRolePrincipals: [{ Service: 'ec2.amazonaws.com' }]
   });
 
   let template = cf.merge(role);
@@ -341,9 +418,7 @@ test('[shortcuts] role', (assert) => {
 
   role = new cf.shortcuts.Role({
     LogicalName: 'MyRole',
-    AssumeRolePrincipals: [
-      { Service: 'ec2.amazonaws.com' }
-    ],
+    AssumeRolePrincipals: [{ Service: 'ec2.amazonaws.com' }],
     Statement: [
       {
         Effect: 'Allow',
@@ -351,9 +426,7 @@ test('[shortcuts] role', (assert) => {
         Resource: 'arn:aws:s3:::fake/data'
       }
     ],
-    ManagedPolicyArns: [
-      'arn:aws:iam::123456789012:policy/fake'
-    ],
+    ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
     MaxSessionDuration: 60,
     Path: '/fake',
     RoleName: 'my-role',
@@ -414,9 +487,7 @@ test('[shortcuts] cross-account role', (assert) => {
         Resource: 'arn:aws:s3:::fake/data'
       }
     ],
-    ManagedPolicyArns: [
-      'arn:aws:iam::123456789012:policy/fake'
-    ],
+    ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
     MaxSessionDuration: 60,
     Path: '/fake',
     RoleName: 'my-role',
@@ -491,7 +562,8 @@ test('[shortcuts] service role', (assert) => {
   });
 
   template = cf.merge(role);
-  if (update) fixtures.update('service-role-url-suffix-with-replacement', template);
+  if (update)
+    fixtures.update('service-role-url-suffix-with-replacement', template);
   assert.deepEqual(
     noUndefined(template),
     fixtures.get('service-role-url-suffix-with-replacement'),
@@ -508,9 +580,7 @@ test('[shortcuts] service role', (assert) => {
         Resource: 'arn:aws:s3:::fake/data'
       }
     ],
-    ManagedPolicyArns: [
-      'arn:aws:iam::123456789012:policy/fake'
-    ],
+    ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
     MaxSessionDuration: 60,
     Path: '/fake',
     RoleName: 'my-role',
@@ -534,9 +604,10 @@ test('[shortcuts] service role', (assert) => {
 });
 
 const normalizeDeployment = (template) => {
-  const str = JSON
-    .stringify(template)
-    .replace(/Deployment([0-9a-f]{8})/g, 'Deployment');
+  const str = JSON.stringify(template).replace(
+    /Deployment([0-9a-f]{8})/g,
+    'Deployment'
+  );
   return JSON.parse(str);
 };
 
@@ -548,11 +619,12 @@ test('[shortcuts] hookshot passthrough', (assert) => {
   );
 
   assert.throws(
-    () => new cf.shortcuts.hookshot.Passthrough({
-      Prefix: 'Pass',
-      PassthroughTo: 'Destination',
-      LoggingLevel: 'HAM'
-    }),
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'HAM'
+      }),
     /LoggingLevel must be one of OFF, INFO, or ERROR/,
     'throws with invalid LoggingLevel'
   );
@@ -613,7 +685,8 @@ test('[shortcuts] hookshot passthrough', (assert) => {
   });
 
   template = cf.merge(passthrough, to);
-  if (update) fixtures.update('hookshot-passthrough-enhanced-logging', template);
+  if (update)
+    fixtures.update('hookshot-passthrough-enhanced-logging', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-passthrough-enhanced-logging')),
@@ -629,10 +702,13 @@ test('[shortcuts] hookshot passthrough', (assert) => {
   });
 
   template = cf.merge(passthrough, to);
-  if (update) fixtures.update('hookshot-passthrough-full-blown-logging', template);
+  if (update)
+    fixtures.update('hookshot-passthrough-full-blown-logging', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
-    normalizeDeployment(fixtures.get('hookshot-passthrough-full-blown-logging')),
+    normalizeDeployment(
+      fixtures.get('hookshot-passthrough-full-blown-logging')
+    ),
     'LoggingLevel respected with detailed logging and metrics'
   );
 
@@ -643,7 +719,8 @@ test('[shortcuts] hookshot passthrough', (assert) => {
   });
 
   template = cf.merge(passthrough, to);
-  if (update) fixtures.update('hookshot-passthrough-access-log-format', template);
+  if (update)
+    fixtures.update('hookshot-passthrough-access-log-format', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-passthrough-access-log-format')),
