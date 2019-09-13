@@ -135,6 +135,7 @@
         ],
         "Period": 120,
         "EvaluationPeriods": 2,
+        "DatapointsToAlarm": 1,
         "Statistic": "Minimum",
         "Threshold": 10,
         "ComparisonOperator": "LessThanThreshold",
