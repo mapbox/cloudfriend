@@ -1,0 +1,193 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
+    "MyKinesisFirehose": {
+      "Type": "AWS::KinesisFirehose::DeliveryStream",
+      "Properties": {
+        "DeliveryStreamName": {
+          "Fn::Sub": "${AWS::StackName}-MyKinesisFirehose"
+        },
+        "DeliveryStreamType": "KinesisStreamAsSource",
+        "S3DestinationConfiguration": {
+          "BucketARN": {
+            "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
+          },
+          "Prefix": {
+            "Fn::Join": [
+              "",
+              [
+                "raw/",
+                "MyKinesisFirehose",
+                "/"
+              ]
+            ]
+          },
+          "BufferingHints": {
+            "IntervalInSeconds": 900,
+            "SizeInMBs": 128
+          },
+          "CloudWatchLoggingOptions": {
+            "Enabled": true,
+            "LogGroupName": {
+              "Ref": "MyKinesisFirehoseLogGroup"
+            },
+            "LogStreamName": "firehose"
+          },
+          "CompressionFormat": "GZIP",
+          "RoleARN": {
+            "Fn::GetAtt": [
+              "MyKinesisFirehoseRole",
+              "Arn"
+            ]
+          }
+        },
+        "KinesisStreamSourceConfiguration": {
+          "KinesisStreamARN": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream",
+          "RoleARN": {
+            "Fn::GetAtt": [
+              "MyKinesisFirehoseRole",
+              "Arn"
+            ]
+          }
+        }
+      }
+    },
+    "MyKinesisFirehoseLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/kinesisfirehose/${name}",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-KinesisFirehose"
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "MyKinesisFirehoseLogStream": {
+      "Type": "AWS::Logs::LogStream",
+      "Properties": {
+        "LogGroupName": {
+          "Ref": "MyKinesisFirehoseLogGroup"
+        },
+        "LogStreamName": "firehose"
+      }
+    },
+    "MyKinesisFirehoseRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "firehose.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Path": "/",
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:PutObject",
+                    "s3:GetObject"
+                  ],
+                  "Resource": {
+                    "Fn::Join": [
+                      "/",
+                      [
+                        {
+                          "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
+                        },
+                        {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "raw/",
+                              "MyKinesisFirehose",
+                              "/"
+                            ]
+                          ]
+                        },
+                        "*"
+                      ]
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:AbortMultipartUpload",
+                    "s3:GetBucketLocation",
+                    "s3:ListBucket",
+                    "s3:ListBucketMultipartUploads"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:*"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyKinesisFirehoseLogGroup",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "kinesis-stream",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "kinesis:DescribeStream",
+                    "kinesis:Get*"
+                  ],
+                  "Resource": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "Outputs": {}
+}
