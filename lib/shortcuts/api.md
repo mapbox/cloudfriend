@@ -474,6 +474,18 @@ sets up logging and creates a policy allowing records to be delivered to the del
     -   `options.KinesisStreamARN` **([String][49] \| [Object][48])** a string or ref identifying a source Kinesis Stream (optional, default `undefined`)
     -   `options.BufferingIntervalInSeconds` **[Number][59]** See [AWS documentation][109] (optional, default `900`)
     -   `options.BufferingSizeInMBs` **[Number][59]** See [AWS documentation][110] (optional, default `128`)
+    -   `options.AlarmName` **[String][49]** See [AWS documentation][69] (optional, default `'${stack name}-${logical name}-Freshness-${region}'`)
+    -   `options.AlarmDescription` **[String][49]** See [AWS documentation][70] (optional, default `'Freshness alarm for ${stack name}-${logical name} kinesis firehose in ${stack name} stack'`)
+    -   `options.AlarmActions` **[Array][57]&lt;[String][49]>** See [AWS documentation][71] (optional, default `[]`)
+    -   `options.Period` **[Number][59]** See [AWS documentation][72] (optional, default `60`)
+    -   `options.EvaluationPeriods` **[Number][59]** See [AWS documentation][73] (optional, default `1`)
+    -   `options.Statistic` **[String][49]** See [AWS documentation][74] (optional, default `'Maximum'`)
+    -   `options.Threshold` **[Number][59]** See [AWS documentation][75] (optional, default `(BufferingIntervalInSeconds*2)`)
+    -   `options.ComparisonOperator` **[String][49]** See [AWS documentation][76] (optional, default `'GreaterThanThreshold'`)
+    -   `options.TreatMissingData` **[String][49]** See [AWS documentation][77] (optional, default `'notBreaching'`)
+    -   `options.EvaluateLowSampleCountPercentile` **[String][49]** See [AWS documentation][78] (optional, default `undefined`)
+    -   `options.ExtendedStatistic` **[String][49]** See [AWS documentation][79]] (optional, default `undefined`)
+    -   `options.OKActions` **[Array][57]&lt;[String][49]>** See [AWS documentation][80] (optional, default `undefined`)
 
 ### Properties
 

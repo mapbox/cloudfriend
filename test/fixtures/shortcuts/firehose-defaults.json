@@ -160,6 +160,39 @@
           }
         ]
       }
+    },
+    "MyKinesisFirehoseErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-MyKinesisFirehose-Freshness-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Freshness alarm for ${AWS::StackName}-${name} kinesis firehose in ${AWS::StackName} stack",
+            {
+              "name": "MyKinesisFirehose"
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 1,
+        "Statistic": "Maximum",
+        "Threshold": 1800,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Firehose",
+        "Dimensions": [
+          {
+            "Name": "FirehoseName",
+            "Value": {
+              "Ref": "MyKinesisFirehose"
+            }
+          }
+        ],
+        "MetricName": "DeliveryToS3.DataFreshness"
+      }
     }
   },
   "Outputs": {}
