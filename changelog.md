@@ -1,3 +1,7 @@
+# v3.4.0
+
+- Adds requirement for lambda shortcut alarm evaluation windows to >= the lambda timeout
+
 # v3.3.0
 
 - Adds shortcut for an event-driven Lambda function.
