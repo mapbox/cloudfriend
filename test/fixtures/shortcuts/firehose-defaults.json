@@ -99,6 +99,25 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "logs:*"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyKinesisFirehoseLogGroup",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "s3-destination",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
                     "s3:PutObject",
                     "s3:GetObject"
                   ],
@@ -134,18 +153,6 @@
                   ],
                   "Resource": {
                     "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:*"
-                  ],
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyKinesisFirehoseLogGroup",
-                      "Arn"
-                    ]
                   }
                 }
               ]

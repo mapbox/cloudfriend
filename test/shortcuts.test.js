@@ -396,22 +396,22 @@ test('[shortcuts] queue', (assert) => {
   assert.end();
 });
 
-test('[shortcuts] kinesis firehose', (assert) => {
+test('[shortcuts] s3 kinesis firehose', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.KinesisFirehose(),
+    () => new cf.shortcuts.S3KinesisFirehose(),
     /You must provide a LogicalName/,
     'throws without required LogicalName parameter'
   );
 
   assert.throws(
-    () => new cf.shortcuts.KinesisFirehose({
+    () => new cf.shortcuts.S3KinesisFirehose({
       LogicalName: 'MyKinesisFirehose'
     }),
     /You must provide a DestinationBucket/,
     'throws without required DestinationBucket parameter'
   );
 
-  let firehose = new cf.shortcuts.KinesisFirehose({
+  let firehose = new cf.shortcuts.S3KinesisFirehose({
     LogicalName: 'MyKinesisFirehose',
     DestinationBucket: 'mah-bukkit'
   });
@@ -424,7 +424,7 @@ test('[shortcuts] kinesis firehose', (assert) => {
     'expected resources generated for full defaults'
   );
 
-  firehose = new cf.shortcuts.KinesisFirehose({
+  firehose = new cf.shortcuts.S3KinesisFirehose({
     LogicalName: 'MyKinesisFirehose',
     DestinationBucket: 'mah-bukkit',
     KinesisStreamARN: 'arn:aws:kinesis:us-east-1:111122223333:stream/my-stream'

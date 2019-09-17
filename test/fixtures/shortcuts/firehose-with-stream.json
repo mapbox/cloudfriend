@@ -22,6 +22,15 @@
           "Fn::Sub": "${AWS::StackName}-MyKinesisFirehose"
         },
         "DeliveryStreamType": "KinesisStreamAsSource",
+        "KinesisStreamSourceConfiguration": {
+          "KinesisStreamARN": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream",
+          "RoleARN": {
+            "Fn::GetAtt": [
+              "MyKinesisFirehoseRole",
+              "Arn"
+            ]
+          }
+        },
         "S3DestinationConfiguration": {
           "BucketARN": {
             "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
@@ -48,15 +57,6 @@
             "LogStreamName": "firehose"
           },
           "CompressionFormat": "GZIP",
-          "RoleARN": {
-            "Fn::GetAtt": [
-              "MyKinesisFirehoseRole",
-              "Arn"
-            ]
-          }
-        },
-        "KinesisStreamSourceConfiguration": {
-          "KinesisStreamARN": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream",
           "RoleARN": {
             "Fn::GetAtt": [
               "MyKinesisFirehoseRole",
@@ -118,6 +118,40 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "logs:*"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyKinesisFirehoseLogGroup",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "kinesis-stream",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "kinesis:DescribeStream",
+                    "kinesis:Get*"
+                  ],
+                  "Resource": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream"
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "s3-destination",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
                     "s3:PutObject",
                     "s3:GetObject"
                   ],
@@ -154,33 +188,6 @@
                   "Resource": {
                     "Fn::Sub": "arn:${AWS::Partition}:s3:::mah-bukkit"
                   }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "logs:*"
-                  ],
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyKinesisFirehoseLogGroup",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          },
-          {
-            "PolicyName": "kinesis-stream",
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "kinesis:DescribeStream",
-                    "kinesis:Get*"
-                  ],
-                  "Resource": "arn:aws:kinesis:us-east-1:111122223333:stream/my-stream"
                 }
               ]
             }
