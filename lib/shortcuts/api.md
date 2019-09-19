@@ -461,6 +461,10 @@ module.exports = cf.merge(myTemplate, queue);
 Creates a Kinesis Firehouse that can receive records by direct put or by consuming a Kinesis Stream
 and writes out to the specific S3 destination. Creates a Kinesis Firehouse delivery stream,
 sets up logging and creates a policy allowing records to be delivered to the delivery stream.
+Also creates a CloudWatch alarm on the `DeliveryToS3.DataFreshness` metric -- the age
+(from getting into Kinesis Data Firehose to now) of the oldest record in Kinesis Data Firehose.
+By default, if that metric exceed double the `BufferingIntervalInSeconds`, the
+alarm is triggered.
 
 ### Parameters
 
