@@ -6,7 +6,7 @@
     -   [Parameters][2]
     -   [Properties][3]
     -   [Examples][4]
--   [EventLambda][5]
+-   [ScheduledLambda][5]
     -   [Parameters][6]
     -   [Examples][7]
 -   [EventLambda][8]
@@ -119,7 +119,7 @@ const lambda = new cf.shortcuts.Lambda({
 module.exports = cf.merge(myTemplate, lambda);
 ```
 
-## EventLambda
+## ScheduledLambda
 
 **Extends Lambda**
 
@@ -672,13 +672,13 @@ module.exports = cf.merge(myTemplate, webhook);
 
 [4]: #examples
 
-[5]: #eventlambda
+[5]: #scheduledlambda
 
 [6]: #parameters-1
 
 [7]: #examples-1
 
-[8]: #eventlambda-1
+[8]: #eventlambda
 
 [9]: #parameters-2
 
