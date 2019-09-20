@@ -1,3 +1,7 @@
+# v3.5.0
+
+- Adds shortcut for Kinesis Firehouse (with S3 destination)
+
 # v3.4.0
 
 - Adds requirement for lambda shortcut alarm evaluation windows to >= the lambda timeout
