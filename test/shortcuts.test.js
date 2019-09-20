@@ -396,6 +396,55 @@ test('[shortcuts] queue', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] s3 kinesis firehose', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.S3KinesisFirehose(),
+    /You must provide a LogicalName/,
+    'throws without required LogicalName parameter'
+  );
+
+  assert.throws(
+    () => new cf.shortcuts.S3KinesisFirehose({
+      LogicalName: 'MyKinesisFirehose'
+    }),
+    /You must provide a DestinationBucket/,
+    'throws without required DestinationBucket parameter'
+  );
+
+  let firehose = new cf.shortcuts.S3KinesisFirehose({
+    LogicalName: 'MyKinesisFirehose',
+    DestinationBucket: 'mah-bukkit'
+  });
+
+  let template = cf.merge(firehose);
+  if (update) fixtures.update('firehose-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('firehose-defaults'),
+    'expected resources generated for full defaults'
+  );
+
+  firehose = new cf.shortcuts.S3KinesisFirehose({
+    LogicalName: 'MyKinesisFirehose',
+    DestinationBucket: 'mah-bukkit',
+    KinesisStreamARN: 'arn:aws:kinesis:us-east-1:111122223333:stream/my-stream'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    firehose
+  );
+  if (update) fixtures.update('firehose-with-stream', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('firehose-with-stream'),
+    'expected resources generated with stream'
+  );
+
+  assert.end();
+});
+
 test('[shortcuts] role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.Role(),
