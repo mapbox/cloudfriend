@@ -322,7 +322,7 @@ test('[shortcuts] stream-lambda', (assert) => {
     'throws without stream-lambda required parameters'
   );
 
-  const lambda = new cf.shortcuts.StreamLambda({
+  let lambda = new cf.shortcuts.StreamLambda({
     LogicalName: 'MyLambda',
     Code: {
       S3Bucket: 'my-code-bucket',
@@ -331,12 +331,33 @@ test('[shortcuts] stream-lambda', (assert) => {
     EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
   });
 
-  const template = cf.merge(lambda);
-  if (update) fixtures.update('stream-lambda', template);
+  let template = cf.merge(lambda);
+  if (update) fixtures.update('stream-lambda-defaults', template);
   assert.deepEqual(
     noUndefined(template),
-    fixtures.get('stream-lambda'),
-    'expected resources generated'
+    fixtures.get('stream-lambda-defaults'),
+    'expected resources generated via defaults'
+  );
+
+  lambda = new cf.shortcuts.StreamLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
+    BatchSize: 10000,
+    MaximumBatchingWindowInSeconds: 300,
+    Enabled: false,
+    StartingPosition: 'TRIM_HORIZON'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('stream-lambda-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('stream-lambda-no-defaults'),
+    'expected resources generated without defaults'
   );
 
   assert.end();
