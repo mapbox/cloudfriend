@@ -1,3 +1,7 @@
+# v3.6.0
+
+- Adds support for the `MaximumBatchingWindowInSeconds` property of an event source mapping within the `StreamLambda` shortcut
+
 # v3.5.0
 
 - Adds shortcut for Kinesis Firehouse (with S3 destination)
