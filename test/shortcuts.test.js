@@ -363,6 +363,64 @@ test('[shortcuts] stream-lambda', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] subscription-filter-lambda', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.SubscriptionFilterLambda(),
+    /You must provide a LogicalName, and Code/,
+    'throws without basic lambda required parameters'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.SubscriptionFilterLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
+    /You must provide an EventSourceArn/,
+    'throws without subscription-filter-lambda required parameters'
+  );
+
+  let lambda = new cf.shortcuts.SubscriptionFilterLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    LogGroupName: 'my-log-group'
+  });
+
+  let template = cf.merge(lambda);
+  if (update) fixtures.update('subscription-filter-lambda-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('subscription-filter-lambda-defaults'),
+    'expected resources generated via defaults'
+  );
+
+  lambda = new cf.shortcuts.SubscriptionFilterLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    FilterPattern: '{ $.errorCode = 400 }',
+    LogGroupName: 'my-log-group'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('subscription-filter-lambda-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('subscription-filter-lambda-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
 test('[shortcuts] queue', (assert) => {
   assert.throws(
     () => new cf.shortcuts.Queue(),
