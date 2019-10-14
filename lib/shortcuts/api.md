@@ -49,7 +49,7 @@
     -   [Parameters][45]
     -   [Properties][46]
     -   [Examples][47]
--   [SubscriptionFilterLambda][48]
+-   [LogSubscriptionLambda][48]
     -   [Parameters][49]
     -   [Examples][50]
 
@@ -668,11 +668,11 @@ const webhook = new cf.shortcuts.hookshot.Github({
 module.exports = cf.merge(myTemplate, webhook);
 ```
 
-## SubscriptionFilterLambda
+## LogSubscriptionLambda
 
 **Extends Lambda**
 
-A Lambda function that executes in response to a subscription filter.
+A Lambda function that executes in response to a log subscription filter.
 Includes a LogGroup, a Role, an Alarm on function errors, a CloudWatch Subscription Filter,
 and a Lambda permission.
 
@@ -691,7 +691,7 @@ const cf = require('@mapbox/cloudfriend');
 
 const myTemplate = { ... };
 
-const lambda = new cf.shortcuts.SubscriptionFilterLambda({
+const lambda = new cf.shortcuts.LogSubscriptionLambda({
   LogicalName: 'MyLambda',
   Code: {
     S3Bucket: 'my-code-bucket',
@@ -797,7 +797,7 @@ module.exports = cf.merge(myTemplate, lambda);
 
 [47]: #examples-11
 
-[48]: #subscriptionfilterlambda
+[48]: #logsubscriptionlambda
 
 [49]: #parameters-13
 

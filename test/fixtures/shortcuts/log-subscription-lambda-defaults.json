@@ -1,0 +1,46 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyLambdaSubscriptionFilter": {
+      "Type": "AWS::Logs::SubscriptionFilter",
+      "Properties": {
+        "DestinationArn": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "FilterPattern": "",
+        "LogGroupName": "my-log-group"
+      }
+    },
+    "MyLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "Principal": {
+          "Fn::Sub": "logs.${AWS::URLSuffix}"
+        },
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${Name}:*",
+            {
+              "Name": "my-log-group"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

@@ -363,16 +363,16 @@ test('[shortcuts] stream-lambda', (assert) => {
   assert.end();
 });
 
-test('[shortcuts] subscription-filter-lambda', (assert) => {
+test('[shortcuts] log-subscription-lambda', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.SubscriptionFilterLambda(),
+    () => new cf.shortcuts.LogSubscriptionLambda(),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
 
   assert.throws(
     () =>
-      new cf.shortcuts.SubscriptionFilterLambda({
+      new cf.shortcuts.LogSubscriptionLambda({
         LogicalName: 'MyLambda',
         Code: {
           S3Bucket: 'my-code-bucket',
@@ -380,10 +380,10 @@ test('[shortcuts] subscription-filter-lambda', (assert) => {
         }
       }),
     /You must provide a LogGroupName/,
-    'throws without subscription-filter-lambda required parameters'
+    'throws without log-subscription-lambda required parameters'
   );
 
-  let lambda = new cf.shortcuts.SubscriptionFilterLambda({
+  let lambda = new cf.shortcuts.LogSubscriptionLambda({
     LogicalName: 'MyLambda',
     Code: {
       S3Bucket: 'my-code-bucket',
@@ -393,14 +393,14 @@ test('[shortcuts] subscription-filter-lambda', (assert) => {
   });
 
   let template = cf.merge(lambda);
-  if (update) fixtures.update('subscription-filter-lambda-defaults', template);
+  if (update) fixtures.update('log-subscription-lambda-defaults', template);
   assert.deepEqual(
     noUndefined(template),
-    fixtures.get('subscription-filter-lambda-defaults'),
+    fixtures.get('log-subscription-lambda-defaults'),
     'expected resources generated via defaults'
   );
 
-  lambda = new cf.shortcuts.SubscriptionFilterLambda({
+  lambda = new cf.shortcuts.LogSubscriptionLambda({
     LogicalName: 'MyLambda',
     Code: {
       S3Bucket: 'my-code-bucket',
@@ -411,10 +411,10 @@ test('[shortcuts] subscription-filter-lambda', (assert) => {
   });
 
   template = cf.merge(lambda);
-  if (update) fixtures.update('subscription-filter-lambda-no-defaults', template);
+  if (update) fixtures.update('log-subscription-lambda-no-defaults', template);
   assert.deepEqual(
     noUndefined(template),
-    fixtures.get('subscription-filter-lambda-no-defaults'),
+    fixtures.get('log-subscription-lambda-no-defaults'),
     'expected resources generated without defaults'
   );
 
