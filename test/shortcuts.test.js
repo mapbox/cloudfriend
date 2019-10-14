@@ -379,7 +379,7 @@ test('[shortcuts] subscription-filter-lambda', (assert) => {
           S3Key: 'path/to/code.zip'
         }
       }),
-    /You must provide an EventSourceArn/,
+    /You must provide a LogGroupName/,
     'throws without subscription-filter-lambda required parameters'
   );
 
