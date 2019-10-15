@@ -1,3 +1,7 @@
+# v.3.7.0
+
+- Adds shortcut for log subscription lambda
+
 # v3.6.0
 
 - Adds support for the `MaximumBatchingWindowInSeconds` property of an event source mapping within the `StreamLambda` shortcut
