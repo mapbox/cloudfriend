@@ -472,6 +472,18 @@ test('[shortcuts] queue', (assert) => {
     'expected resources generated no defaults'
   );
 
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyQueue',
+    TopicArn: 'arn:aws:sns:us-east-1:111122223333:MyTopic'
+  });
+  template = cf.merge(queue);
+  if (update) fixtures.update('queue-external-topic', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('queue-external-topic'),
+    'expected resources generated for external topic'
+  );
+
   assert.end();
 });
 

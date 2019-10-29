@@ -46,18 +46,15 @@
       "Properties": {
         "TopicName": {
           "Fn::Sub": "${AWS::StackName}-MyQueue"
-        },
-        "Subscription": [
-          {
-            "Endpoint": {
-              "Fn::GetAtt": [
-                "MyQueue",
-                "Arn"
-              ]
-            },
-            "Protocol": "sqs"
-          }
-        ]
+        }
+      }
+    },
+    "MyQueueSubscription": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "Protocol": "sqs",
+        "TopicArn": { "Ref": "MyQueueTopic" },
+        "Endpoint": { "Fn::GetAtt": ["MyQueue", "Arn"]}
       }
     },
     "MyQueuePolicy": {
