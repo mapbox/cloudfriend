@@ -1,3 +1,7 @@
+# v3.8.0
+
+- Adds `ExistingTopicArn` option to queue shortcut
+
 # v.3.7.0
 
 - Adds shortcut for log subscription lambda
