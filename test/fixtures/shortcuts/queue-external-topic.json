@@ -3,33 +3,17 @@
   "Metadata": {},
   "Parameters": {},
   "Mappings": {},
-  "Conditions": {
-    "Always": {
-      "Fn::Equals": [
-        "1",
-        "1"
-      ]
-    }
-  },
+  "Conditions": {},
   "Resources": {
-    "AnotherThing": {
-      "Type": "AWS::SNS::Topic"
-    },
     "MyQueue": {
       "Type": "AWS::SQS::Queue",
-      "Condition": "Always",
-      "DependsOn": "AnotherThing",
       "Properties": {
-        "ContentBasedDeduplication": true,
-        "DelaySeconds": 60,
-        "FifoQueue": true,
-        "KmsMasterKeyId": "alias/my-key",
-        "MaximumMessageSize": 1024,
-        "MessageRetentionPeriod": 60,
-        "QueueName": "my-queue",
-        "ReceiveMessageWaitTimeSeconds": 20,
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": {
+          "Fn::Sub": "${AWS::StackName}-MyQueue"
+        },
         "RedrivePolicy": {
-          "maxReceiveCount": 100,
+          "maxReceiveCount": 10,
           "deadLetterTargetArn": {
             "Fn::GetAtt": [
               "MyQueueDeadLetter",
@@ -37,44 +21,36 @@
             ]
           }
         },
-        "VisibilityTimeout": 60
+        "VisibilityTimeout": 300
       }
     },
     "MyQueueDeadLetter": {
       "Type": "AWS::SQS::Queue",
-      "Condition": "Always",
       "Properties": {
         "MessageRetentionPeriod": 1209600,
-        "VisibilityTimeout": 60,
+        "VisibilityTimeout": 300,
         "QueueName": {
           "Fn::Sub": [
             "${queue}-dead-letter",
             {
-              "queue": "my-queue"
+              "queue": {
+                "Fn::Sub": "${AWS::StackName}-MyQueue"
+              }
             }
           ]
         }
-      }
-    },
-    "MyQueueTopic": {
-      "Type": "AWS::SNS::Topic",
-      "Condition": "Always",
-      "Properties": {
-        "TopicName": "my-topic",
-        "DisplayName": "topic-display-name"
       }
     },
     "MyQueueSubscription": {
       "Type": "AWS::SNS::Subscription",
       "Properties": {
         "Protocol": "sqs",
-        "ExistingTopicArn": { "Ref": "MyQueueTopic" },
+        "ExistingTopicArn": "arn:aws:sns:us-east-1:111122223333:MyTopic",
         "Endpoint": { "Fn::GetAtt": ["MyQueue", "Arn"]}
       }
     },
     "MyQueuePolicy": {
       "Type": "AWS::SQS::QueuePolicy",
-      "Condition": "Always",
       "Properties": {
         "Queues": [
           {
@@ -100,9 +76,7 @@
               },
               "Condition": {
                 "ArnEquals": {
-                  "aws:SourceArn": {
-                    "Ref": "MyQueueTopic"
-                  }
+                  "aws:SourceArn": "arn:aws:sns:us-east-1:111122223333:MyTopic"
                 }
               }
             }
