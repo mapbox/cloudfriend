@@ -412,7 +412,7 @@ module.exports = cf.merge(myTemplate, role);
 Creates an SQS queue that can be fed messages through an SNS topic. Creates
 an SQS queue and a dead-letter queue for it. Either creates a new SNS
 topic that can be used for sending messages into the queue, or subscribes the queue
-to an existing SNS topic provided with the `TopicArn` option.
+to an existing SNS topic provided with the `ExistingTopicArn` option.
 
 ### Parameters
 
@@ -437,7 +437,7 @@ to an existing SNS topic provided with the `TopicArn` option.
         specify the name of the condition here. See [AWS documentation][70] (optional, default `undefined`)
     -   `options.DependsOn` **[String][52]** Specify a stack resource dependency
         to this SQS queue. See [AWS documentation][71] (optional, default `undefined`)
-    -   `options.TopicArn` **[String][52]?** Specify an SNS topic ARN to subscribe the queue to.
+    -   `options.ExistingTopicArn` **[String][52]?** Specify an SNS topic ARN to subscribe the queue to.
         If this option is provided, TopicName is irrelevant because no new topic is created.
     -   `options.TopicName` **[String][52]** See [AWS documentation][111] (optional, default `'${stack name}-${logical name}'`)
     -   `options.DisplayName` **[String][52]** See [AWS documentation][112] (optional, default `undefined`)
