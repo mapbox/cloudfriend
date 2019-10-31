@@ -1,3 +1,7 @@
+# HEAD
+
+- Fix bug in queue shortcut
+
 # v3.8.0
 
 - Adds `ExistingTopicArn` option to queue shortcut
