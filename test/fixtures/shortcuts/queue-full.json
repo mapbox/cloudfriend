@@ -68,7 +68,7 @@
       "Type": "AWS::SNS::Subscription",
       "Properties": {
         "Protocol": "sqs",
-        "ExistingTopicArn": { "Ref": "MyQueueTopic" },
+        "TopicArn": { "Ref": "MyQueueTopic" },
         "Endpoint": { "Fn::GetAtt": ["MyQueue", "Arn"]}
       }
     },
