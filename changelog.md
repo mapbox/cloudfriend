@@ -1,4 +1,4 @@
-# HEAD
+# v3.8.1
 
 - Fix bug in queue shortcut
 
