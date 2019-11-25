@@ -100,11 +100,11 @@
         "AlarmActions": [],
         "Period": 60,
         "EvaluationPeriods": 5,
-        "DatapointsToAlarm": 1,
+        "DatapointsToAlarm": 3,
         "Statistic": "Sum",
         "Threshold": 0,
         "ComparisonOperator": "GreaterThanThreshold",
-        "TreatMissingData": "notBreaching",
+        "TreatMissingData": "missing",
         "Namespace": "AWS/Lambda",
         "Dimensions": [
           {
