@@ -145,19 +145,13 @@ const cf = require('@mapbox/cloudfriend');
 
 const myTemplate = { ... };
 
-const lambda = new cf.shortcuts.EventLambda({
+const lambda = new cf.shortcuts.ScheduledLambda({
   LogicalName: 'MyLambda',
   Code: {
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  EventPattern: {
-    "source": [ "aws.ec2" ],
-    "detail-type": [ "EC2 Instance State-change Notification" ],
-    "detail": {
-      "state": [ "running" ]
-    }
-  }
+  ScheduleExpression: 'cron(45 * * * *)',
 });
 
 module.exports = cf.merge(myTemplate, lambda);
