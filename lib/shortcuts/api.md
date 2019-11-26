@@ -151,7 +151,7 @@ const lambda = new cf.shortcuts.ScheduledLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  ScheduleExpression: 'cron(45 * * * *)',
+  ScheduleExpression: 'cron(45 * * * ? *)',
 });
 
 module.exports = cf.merge(myTemplate, lambda);
