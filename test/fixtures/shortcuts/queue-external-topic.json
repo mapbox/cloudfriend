@@ -46,7 +46,12 @@
       "Properties": {
         "Protocol": "sqs",
         "TopicArn": "arn:aws:sns:us-east-1:111122223333:MyTopic",
-        "Endpoint": { "Fn::GetAtt": ["MyQueue", "Arn"]}
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "MyQueue",
+            "Arn"
+          ]
+        }
       }
     },
     "MyQueuePolicy": {
