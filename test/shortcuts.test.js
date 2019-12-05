@@ -39,6 +39,19 @@ test('[shortcuts] lambda', (assert) => {
     'throws without required parameters'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.Lambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      Runtime: 'nodejs6.10'
+    }),
+    /Runtime nodejs6.10 is not one of the supported runtimes: nodejs10.x,nodejs12.x/,
+    'throws for unsupported runtime'
+  );
+
   let lambda = new cf.shortcuts.Lambda({
     LogicalName: 'MyLambda',
     Code: {
@@ -87,7 +100,7 @@ test('[shortcuts] lambda', (assert) => {
     Layers: ['arn:aws:fake:layer/abc'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
-    Runtime: 'nodejs6.10',
+    Runtime: 'nodejs10.x',
     Tags: [{ Key: 'a', Value: 'b' }],
     Timeout: 30,
     TracingConfig: { Mode: 'Active' },
