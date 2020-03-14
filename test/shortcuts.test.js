@@ -970,7 +970,7 @@ test('[shortcuts] glue json table', (assert) => {
   assert.end();
 });
 
-test.only('[shortcuts] glue orc table', (assert) => {
+test('[shortcuts] glue orc table', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GlueOrcTable(),
     /You must provide a Location/,
