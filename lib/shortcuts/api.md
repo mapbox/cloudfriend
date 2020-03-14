@@ -646,7 +646,7 @@ const myTemplate = { ... };
 
 const table = new cf.shortcuts.GlueTable({
   LogicalName: 'MyTable',
-  DatabaseName: 'my_database'
+  DatabaseName: 'my_database',
   Name: 'my_table',
   Columns: [
     { Name: 'column_name', Type: 'string', Comment: 'my_column description' }
