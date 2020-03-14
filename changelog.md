@@ -1,3 +1,7 @@
+# v4.1.1
+
+- Bugfixes for Glue shortcuts
+
 # v4.1.0
 
 - Add shortcuts for Glue resources
