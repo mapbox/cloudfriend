@@ -31,8 +31,10 @@
                 "view": {
                   "Fn::Base64": {
                     "Fn::Sub": [
-                      "{\"catalog\":\"awsdatacatalog\",\"schema\":\"my_database\",\"originalSql\":\"SELECT * FROM another.table\",\"columns\":[{\"name\":\"column\",\"type\":\"varchar\"}]}",
-                      {}
+                      "{\"catalog\":\"awsdatacatalog\",\"schema\":\"${DatabaseName}\",\"originalSql\":\"SELECT * FROM another.table\",\"columns\":[{\"name\":\"column\",\"type\":\"varchar\"}]}",
+                      {
+                        "DatabaseName": "my_database"
+                      }
                     ]
                   }
                 }
@@ -44,7 +46,7 @@
             "Location": "",
             "NumberOfBuckets": 0,
             "SerdeInfo": {},
-            "StoredAsSubdirectories": true
+            "StoredAsSubDirectories": false
           }
         }
       }

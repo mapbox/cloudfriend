@@ -23,7 +23,7 @@
             "Location": "",
             "NumberOfBuckets": 0,
             "SerdeInfo": {},
-            "StoredAsSubdirectories": true
+            "StoredAsSubDirectories": true
           }
         }
       }

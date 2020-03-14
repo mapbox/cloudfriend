@@ -31,7 +31,7 @@
                 "serialization.format": "1"
               }
             },
-            "StoredAsSubdirectories": true
+            "StoredAsSubDirectories": true
           }
         }
       }
