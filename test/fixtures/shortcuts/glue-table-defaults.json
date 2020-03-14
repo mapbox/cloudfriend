@@ -1,0 +1,33 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableInput": {
+          "Description": {
+            "Fn::Sub": "Created by the ${AWS::StackName} CloudFormation stack"
+          },
+          "Name": "my_table",
+          "PartitionKeys": [],
+          "StorageDescriptor": {
+            "Compressed": false,
+            "Location": "",
+            "NumberOfBuckets": 0,
+            "SerdeInfo": {},
+            "StoredAsSubdirectories": true
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

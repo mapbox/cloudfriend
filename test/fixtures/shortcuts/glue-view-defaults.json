@@ -1,0 +1,54 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyView": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableInput": {
+          "Description": {
+            "Fn::Sub": "Created by the ${AWS::StackName} CloudFormation stack"
+          },
+          "Name": "my_view",
+          "Parameters": {
+            "comment": "Presto View",
+            "presto_view": "true"
+          },
+          "PartitionKeys": [],
+          "TableType": "VIRTUAL_VIEW",
+          "ViewExpandedText": "/* Presto View */",
+          "ViewOriginalText": {
+            "Fn::Sub": [
+              "/* Presto View: ${view} */",
+              {
+                "view": {
+                  "Fn::Base64": {
+                    "Fn::Sub": [
+                      "{\"catalog\":\"awsdatacatalog\",\"schema\":\"my_database\",\"originalSql\":\"SELECT * FROM another.table\",\"columns\":[{\"name\":\"column\",\"type\":\"varchar\"}]}",
+                      {}
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "StorageDescriptor": {
+            "Compressed": false,
+            "Location": "",
+            "NumberOfBuckets": 0,
+            "SerdeInfo": {},
+            "StoredAsSubdirectories": true
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

@@ -1,0 +1,36 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
+    "MyDatabase": {
+      "Type": "AWS::Glue::Database",
+      "Condition": "Always",
+      "DependsOn": "AnotherThing",
+      "Properties": {
+        "CatalogId": "123456",
+        "DatabaseInput": {
+          "Name": "my_database",
+          "Description": "my_database description",
+          "LocationUri": "fakeuri",
+          "Parameters": {
+            "thing": "a"
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

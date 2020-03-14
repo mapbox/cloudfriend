@@ -1,0 +1,41 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableInput": {
+          "Description": {
+            "Fn::Sub": "Created by the ${AWS::StackName} CloudFormation stack"
+          },
+          "Name": "my_table",
+          "PartitionKeys": [],
+          "TableType": "EXTERNAL_TABLE",
+          "StorageDescriptor": {
+            "Compressed": false,
+            "InputFormat": "org.apache.hadoop.hive.ql.io.orc.OrcInputFormat",
+            "Location": "s3://fake/location",
+            "NumberOfBuckets": 0,
+            "OutputFormat": "org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat",
+            "SerdeInfo": {
+              "SerializationLibrary": "org.apache.hadoop.hive.ql.io.orc.OrcSerde",
+              "Parameters": {
+                "serialization.format": "1"
+              }
+            },
+            "StoredAsSubdirectories": true
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

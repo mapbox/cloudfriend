@@ -771,6 +771,359 @@ test('[shortcuts] service role', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] glue database', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueDatabase(),
+    /You must provide a LogicalName and Name/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueDatabase({
+    LogicalName: 'MyDatabase',
+    Name: 'my_database'
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-database-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-database-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueDatabase({
+    LogicalName: 'MyDatabase',
+    Name: 'my_database',
+    CatalogId: '123456',
+    Description: 'my_database description',
+    LocationUri: 'fakeuri',
+    Parameters: { thing: 'a' },
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-database-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-database-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] glue table', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueTable(),
+    /You must provide a LogicalName, Name, DatabaseName, and Columns/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ]
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-table-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-table-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    CatalogId: '1234',
+    Owner: 'Team',
+    Parameters: { table: 'params' },
+    Description: 'my_table description',
+    Retention: 12,
+    TableType: 'TABLE_TYPE',
+    ViewExpandedText: '/* Presto View */',
+    ViewOriginalText: '/* Presto View: abc123= */',
+    BucketColumns: ['column'],
+    Compressed: true,
+    InputFormat: 'fake.input.format',
+    Location: 's3://fake/location',
+    OutputFormat: 'fake.output.format',
+    StorageParameters: { storage: 'parameters' },
+    SerdeInfo: {
+      SerializationLibrary: 'fake.serde'
+    },
+    SkewedColumns: {
+      SkewedColumnNames: ['column'],
+      SkewedColumnValueLocationMap: { fake: 'map' },
+      SkewedColumnValues: ['value']
+    },
+    SortColumns: [
+      { Column: 'column', SortOrder: 0 }
+    ],
+    StoredAsSubdirectory: true,
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-table-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-table-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] glue json table', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueJsonTable(),
+    /You must provide a Location/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueJsonTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location'
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-json-table-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-json-table-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueJsonTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    CatalogId: '1234',
+    Owner: 'Team',
+    Parameters: { table: 'params' },
+    Description: 'my_table description',
+    Retention: 12,
+    TableType: 'TABLE_TYPE',
+    ViewExpandedText: '/* Presto View */',
+    ViewOriginalText: '/* Presto View: abc123= */',
+    BucketColumns: ['column'],
+    Compressed: true,
+    Location: 's3://fake/location',
+    InputFormat: 'fake.input.format',
+    OutputFormat: 'fake.output.format',
+    StorageParameters: { storage: 'parameters' },
+    SerdeInfo: {
+      SerializationLibrary: 'fake.serde'
+    },
+    SkewedColumns: {
+      SkewedColumnNames: ['column'],
+      SkewedColumnValueLocationMap: { fake: 'map' },
+      SkewedColumnValues: ['value']
+    },
+    SortColumns: [
+      { Column: 'column', SortOrder: 0 }
+    ],
+    StoredAsSubdirectory: true,
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-json-table-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-json-table-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test.only('[shortcuts] glue orc table', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueOrcTable(),
+    /You must provide a Location/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueOrcTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location'
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-orc-table-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-orc-table-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueOrcTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    CatalogId: '1234',
+    Owner: 'Team',
+    Parameters: { table: 'params' },
+    Description: 'my_table description',
+    Retention: 12,
+    TableType: 'TABLE_TYPE',
+    ViewExpandedText: '/* Presto View */',
+    ViewOriginalText: '/* Presto View: abc123= */',
+    BucketColumns: ['column'],
+    Compressed: true,
+    Location: 's3://fake/location',
+    InputFormat: 'fake.input.format',
+    OutputFormat: 'fake.output.format',
+    StorageParameters: { storage: 'parameters' },
+    SerdeInfo: {
+      SerializationLibrary: 'fake.serde'
+    },
+    SkewedColumns: {
+      SkewedColumnNames: ['column'],
+      SkewedColumnValueLocationMap: { fake: 'map' },
+      SkewedColumnValues: ['value']
+    },
+    SortColumns: [
+      { Column: 'column', SortOrder: 0 }
+    ],
+    StoredAsSubdirectory: true,
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-orc-table-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-orc-table-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] glue view', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueView(),
+    /You must provide a DatabaseName, Columns, and OriginalSql/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueView({
+    LogicalName: 'MyView',
+    DatabaseName: 'my_database',
+    Name: 'my_view',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    OriginalSql: 'SELECT * FROM another.table'
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-view-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-view-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueView({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_view',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    OriginalSql: 'SELECT * FROM another.table',
+    CatalogId: '1234',
+    Owner: 'Team',
+    Parameters: { table: 'params' },
+    Description: 'my_view description',
+    Retention: 12,
+    TableType: 'TABLE_TYPE',
+    BucketColumns: ['column'],
+    Compressed: true,
+    Location: 's3://fake/location',
+    InputFormat: 'fake.input.format',
+    OutputFormat: 'fake.output.format',
+    StorageParameters: { storage: 'parameters' },
+    SerdeInfo: {
+      SerializationLibrary: 'fake.serde'
+    },
+    SkewedColumns: {
+      SkewedColumnNames: ['column'],
+      SkewedColumnValueLocationMap: { fake: 'map' },
+      SkewedColumnValues: ['value']
+    },
+    SortColumns: [
+      { Column: 'column', SortOrder: 0 }
+    ],
+    StoredAsSubdirectory: true,
+    SqlVariables: { env: { Ref: 'AWS::StackName' } },
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-view-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-view-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
 const normalizeDeployment = (template) => {
   const str = JSON.stringify(template).replace(
     /Deployment([0-9a-f]{8})/g,

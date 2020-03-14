@@ -1,0 +1,65 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Condition": "Always",
+      "DependsOn": "AnotherThing",
+      "Properties": {
+        "CatalogId": "1234",
+        "DatabaseName": "my_database",
+        "TableInput": {
+          "Description": "my_table description",
+          "Name": "my_table",
+          "Owner": "Team",
+          "Parameters": {
+            "table": "params"
+          },
+          "PartitionKeys": [],
+          "Retention": 12,
+          "TableType": "TABLE_TYPE",
+          "ViewExpandedText": "/* Presto View */",
+          "ViewOriginalText": "/* Presto View: abc123= */",
+          "StorageDescriptor": {
+            "BucketColumns": [
+              "column"
+            ],
+            "Compressed": true,
+            "InputFormat": "fake.input.format",
+            "Location": "s3://fake/location",
+            "NumberOfBuckets": 0,
+            "OutputFormat": "fake.output.format",
+            "Parameters": {
+              "storage": "parameters"
+            },
+            "SerdeInfo": {
+              "SerializationLibrary": "fake.serde"
+            },
+            "SortColumns": [
+              {
+                "Column": "column",
+                "SortOrder": 0
+              }
+            ],
+            "StoredAsSubdirectories": true
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}
