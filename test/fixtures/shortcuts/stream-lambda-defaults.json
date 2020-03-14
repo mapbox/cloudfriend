@@ -53,9 +53,14 @@
                 {
                   "Effect": "Allow",
                   "Action": [
-                    "sqs:DeleteMessage",
-                    "sqs:ReceiveMessage",
-                    "sqs:GetQueueAttributes"
+                    "dynamodb:GetRecords",
+                    "dynamodb:GetShardIterator",
+                    "dynamodb:DescribeStream",
+                    "dynamodb:ListStreams",
+                    "kinesis:GetRecords",
+                    "kinesis:GetShardIterator",
+                    "kinesis:DescribeStream",
+                    "kinesis:ListStreams"
                   ],
                   "Resource": [
                     "arn:aws:sqs:us-east-1:123456789012:queue/fake",
@@ -90,7 +95,6 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "ReservedConcurrentExecutions": 10,
         "Role": {
           "Fn::GetAtt": [
             "MyLambdaRole",
@@ -140,12 +144,13 @@
     "MyLambdaEventSource": {
       "Type": "AWS::Lambda::EventSourceMapping",
       "Properties": {
-        "Enabled": true,
         "BatchSize": 1,
+        "Enabled": true,
         "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
         "FunctionName": {
           "Ref": "MyLambda"
-        }
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

@@ -39,6 +39,19 @@ test('[shortcuts] lambda', (assert) => {
     'throws without required parameters'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.Lambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      Runtime: 'nodejs6.10'
+    }),
+    /Runtime nodejs6.10 is not one of the supported runtimes: nodejs10.x,nodejs12.x/,
+    'throws for unsupported runtime'
+  );
+
   let lambda = new cf.shortcuts.Lambda({
     LogicalName: 'MyLambda',
     Code: {
@@ -87,7 +100,7 @@ test('[shortcuts] lambda', (assert) => {
     Layers: ['arn:aws:fake:layer/abc'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
-    Runtime: 'nodejs6.10',
+    Runtime: 'nodejs12.x',
     Tags: [{ Key: 'a', Value: 'b' }],
     Timeout: 30,
     TracingConfig: { Mode: 'Active' },
@@ -322,7 +335,7 @@ test('[shortcuts] stream-lambda', (assert) => {
     'throws without stream-lambda required parameters'
   );
 
-  const lambda = new cf.shortcuts.StreamLambda({
+  let lambda = new cf.shortcuts.StreamLambda({
     LogicalName: 'MyLambda',
     Code: {
       S3Bucket: 'my-code-bucket',
@@ -331,12 +344,91 @@ test('[shortcuts] stream-lambda', (assert) => {
     EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
   });
 
-  const template = cf.merge(lambda);
-  if (update) fixtures.update('stream-lambda', template);
+  let template = cf.merge(lambda);
+  if (update) fixtures.update('stream-lambda-defaults', template);
   assert.deepEqual(
     noUndefined(template),
-    fixtures.get('stream-lambda'),
-    'expected resources generated'
+    fixtures.get('stream-lambda-defaults'),
+    'expected resources generated via defaults'
+  );
+
+  lambda = new cf.shortcuts.StreamLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
+    BatchSize: 10000,
+    MaximumBatchingWindowInSeconds: 300,
+    Enabled: false,
+    StartingPosition: 'TRIM_HORIZON'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('stream-lambda-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('stream-lambda-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
+test('[shortcuts] log-subscription-lambda', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.LogSubscriptionLambda(),
+    /You must provide a LogicalName, and Code/,
+    'throws without basic lambda required parameters'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.LogSubscriptionLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        }
+      }),
+    /You must provide a LogGroupName/,
+    'throws without log-subscription-lambda required parameters'
+  );
+
+  let lambda = new cf.shortcuts.LogSubscriptionLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    LogGroupName: 'my-log-group'
+  });
+
+  let template = cf.merge(lambda);
+  if (update) fixtures.update('log-subscription-lambda-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('log-subscription-lambda-defaults'),
+    'expected resources generated via defaults'
+  );
+
+  lambda = new cf.shortcuts.LogSubscriptionLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    FilterPattern: '{ $.errorCode = 400 }',
+    LogGroupName: 'my-log-group'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('log-subscription-lambda-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('log-subscription-lambda-no-defaults'),
+    'expected resources generated without defaults'
   );
 
   assert.end();
@@ -391,6 +483,33 @@ test('[shortcuts] queue', (assert) => {
     noUndefined(template),
     fixtures.get('queue-full'),
     'expected resources generated no defaults'
+  );
+
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyQueue',
+    ExistingTopicArn: 'arn:aws:sns:us-east-1:111122223333:MyTopic'
+  });
+  template = cf.merge(queue);
+  if (update) fixtures.update('queue-external-topic', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('queue-external-topic'),
+    'expected resources generated for external topic'
+  );
+
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyQueue',
+    ExistingTopicArn: { Ref: 'TopicForOtherThing' }
+  });
+  template = cf.merge(
+    { Resources: { TopicForOtherThing: { Type: 'AWS::SNS::Topic' } } },
+    queue
+  );
+  if (update) fixtures.update('queue-external-topic-ref', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('queue-external-topic-ref'),
+    'expected resources generated for external topic identified by ref'
   );
 
   assert.end();

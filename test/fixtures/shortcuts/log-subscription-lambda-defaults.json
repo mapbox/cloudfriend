@@ -49,30 +49,6 @@
                       "Arn"
                     ]
                   }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "dynamodb:GetRecords",
-                    "dynamodb:GetShardIterator",
-                    "dynamodb:DescribeStream",
-                    "dynamodb:ListStreams",
-                    "kinesis:GetRecords",
-                    "kinesis:GetShardIterator",
-                    "kinesis:DescribeStream",
-                    "kinesis:ListStreams"
-                  ],
-                  "Resource": [
-                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
-                    {
-                      "Fn::Sub": [
-                        "${arn}/*",
-                        {
-                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
-                        }
-                      ]
-                    }
-                  ]
                 }
               ]
             }
@@ -101,7 +77,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs8.10",
+        "Runtime": "nodejs10.x",
         "Timeout": 300
       }
     },
@@ -141,16 +117,40 @@
         "MetricName": "Errors"
       }
     },
-    "MyLambdaEventSource": {
-      "Type": "AWS::Lambda::EventSourceMapping",
+    "MyLambdaSubscriptionFilter": {
+      "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "BatchSize": 1,
-        "Enabled": true,
-        "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
-        "FunctionName": {
-          "Ref": "MyLambda"
+        "DestinationArn": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
         },
-        "StartingPosition": "LATEST"
+        "FilterPattern": "",
+        "LogGroupName": "my-log-group"
+      }
+    },
+    "MyLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "Principal": {
+          "Fn::Sub": "logs.${AWS::URLSuffix}"
+        },
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${Name}:*",
+            {
+              "Name": "my-log-group"
+            }
+          ]
+        }
       }
     }
   },

@@ -41,21 +41,11 @@
         }
       }
     },
-    "MyQueueTopic": {
-      "Type": "AWS::SNS::Topic",
-      "Properties": {
-        "TopicName": {
-          "Fn::Sub": "${AWS::StackName}-MyQueue"
-        }
-      }
-    },
     "MyQueueSubscription": {
       "Type": "AWS::SNS::Subscription",
       "Properties": {
         "Protocol": "sqs",
-        "TopicArn": {
-          "Ref": "MyQueueTopic"
-        },
+        "TopicArn": "arn:aws:sns:us-east-1:111122223333:MyTopic",
         "Endpoint": {
           "Fn::GetAtt": [
             "MyQueue",
@@ -91,9 +81,7 @@
               },
               "Condition": {
                 "ArnEquals": {
-                  "aws:SourceArn": {
-                    "Ref": "MyQueueTopic"
-                  }
+                  "aws:SourceArn": "arn:aws:sns:us-east-1:111122223333:MyTopic"
                 }
               }
             }

@@ -5,6 +5,9 @@
   "Mappings": {},
   "Conditions": {},
   "Resources": {
+    "TopicForOtherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
     "MyQueue": {
       "Type": "AWS::SQS::Queue",
       "Properties": {
@@ -41,20 +44,12 @@
         }
       }
     },
-    "MyQueueTopic": {
-      "Type": "AWS::SNS::Topic",
-      "Properties": {
-        "TopicName": {
-          "Fn::Sub": "${AWS::StackName}-MyQueue"
-        }
-      }
-    },
     "MyQueueSubscription": {
       "Type": "AWS::SNS::Subscription",
       "Properties": {
         "Protocol": "sqs",
         "TopicArn": {
-          "Ref": "MyQueueTopic"
+          "Ref": "TopicForOtherThing"
         },
         "Endpoint": {
           "Fn::GetAtt": [
@@ -92,7 +87,7 @@
               "Condition": {
                 "ArnEquals": {
                   "aws:SourceArn": {
-                    "Ref": "MyQueueTopic"
+                    "Ref": "TopicForOtherThing"
                   }
                 }
               }

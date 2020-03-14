@@ -1,3 +1,23 @@
+# v4.0.0
+
+- Upgrade cloudfriend and lambda shortcut to Node10 with support for Node12
+
+# v3.8.1
+
+- Fix bug in queue shortcut
+
+# v3.8.0
+
+- Adds `ExistingTopicArn` option to queue shortcut
+
+# v.3.7.0
+
+- Adds shortcut for log subscription lambda
+
+# v3.6.0
+
+- Adds support for the `MaximumBatchingWindowInSeconds` property of an event source mapping within the `StreamLambda` shortcut
+
 # v3.5.0
 
 - Adds shortcut for Kinesis Firehouse (with S3 destination)

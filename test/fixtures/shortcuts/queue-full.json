@@ -61,18 +61,22 @@
       "Condition": "Always",
       "Properties": {
         "TopicName": "my-topic",
-        "DisplayName": "topic-display-name",
-        "Subscription": [
-          {
-            "Endpoint": {
-              "Fn::GetAtt": [
-                "MyQueue",
-                "Arn"
-              ]
-            },
-            "Protocol": "sqs"
-          }
-        ]
+        "DisplayName": "topic-display-name"
+      }
+    },
+    "MyQueueSubscription": {
+      "Type": "AWS::SNS::Subscription",
+      "Properties": {
+        "Protocol": "sqs",
+        "TopicArn": {
+          "Ref": "MyQueueTopic"
+        },
+        "Endpoint": {
+          "Fn::GetAtt": [
+            "MyQueue",
+            "Arn"
+          ]
+        }
       }
     },
     "MyQueuePolicy": {

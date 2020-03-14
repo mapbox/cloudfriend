@@ -49,25 +49,6 @@
                       "Arn"
                     ]
                   }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "sqs:DeleteMessage",
-                    "sqs:ReceiveMessage",
-                    "sqs:GetQueueAttributes"
-                  ],
-                  "Resource": [
-                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
-                    {
-                      "Fn::Sub": [
-                        "${arn}/*",
-                        {
-                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
-                        }
-                      ]
-                    }
-                  ]
                 }
               ]
             }
@@ -90,7 +71,6 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "ReservedConcurrentExecutions": 10,
         "Role": {
           "Fn::GetAtt": [
             "MyLambdaRole",
@@ -137,14 +117,39 @@
         "MetricName": "Errors"
       }
     },
-    "MyLambdaEventSource": {
-      "Type": "AWS::Lambda::EventSourceMapping",
+    "MyLambdaSubscriptionFilter": {
+      "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "Enabled": true,
-        "BatchSize": 1,
-        "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+        "DestinationArn": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "FilterPattern": "{ $.errorCode = 400 }",
+        "LogGroupName": "my-log-group"
+      }
+    },
+    "MyLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
         "FunctionName": {
-          "Ref": "MyLambda"
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "Principal": {
+          "Fn::Sub": "logs.${AWS::URLSuffix}"
+        },
+        "SourceArn": {
+          "Fn::Sub": [
+            "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${Name}:*",
+            {
+              "Name": "my-log-group"
+            }
+          ]
         }
       }
     }
