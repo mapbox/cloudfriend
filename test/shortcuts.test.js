@@ -5,23 +5,26 @@ const fs = require('fs');
 const test = require('tape');
 const cf = require('..');
 const fixtures = require('./fixtures/shortcuts');
+const { default: Queue } = require('p-queue');
 
 const update = !!process.env.UPDATE;
 
 const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 
 test('[shortcuts] fixture validation', async (assert) => {
+  const queue = new Queue({ concurrency: 2 });
+
   const validations = fs
     .readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
     .filter((filename) => path.extname(filename) === '.json')
-    .map((filename) => {
+    .map((filename) => queue.add(() => {
       return cf
         .validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
         .catch((err) =>
           assert.fail(`${filename} fixture fails validation: ${err.message}`)
         )
         .then(() => assert.pass(`${filename} fixture passed validation`));
-    });
+    }));
 
   try {
     await Promise.all(validations);
