@@ -1,3 +1,7 @@
+# v4.1.0
+
+- Add shortcuts for Glue resources
+
 # v4.0.0
 
 - Upgrade cloudfriend and lambda shortcut to Node10 with support for Node12
