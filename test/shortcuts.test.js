@@ -5,31 +5,26 @@ const fs = require('fs');
 const test = require('tape');
 const cf = require('..');
 const fixtures = require('./fixtures/shortcuts');
-const { default: Queue } = require('p-queue');
+const util = require('util');
+const sleep = util.promisify(setTimeout);
 
 const update = !!process.env.UPDATE;
 
 const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 
 test('[shortcuts] fixture validation', async (assert) => {
-  const queue = new Queue({ concurrency: 1 });
-
-  const validations = fs
+  const toValidate = fs
     .readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
-    .filter((filename) => path.extname(filename) === '.json')
-    .map((filename) => queue.add(() => {
-      return cf
-        .validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
-        .catch((err) =>
-          assert.fail(`${filename} fixture fails validation: ${err.message}`)
-        )
-        .then(() => assert.pass(`${filename} fixture passed validation`));
-    }));
+    .filter((filename) => path.extname(filename) === '.json');
 
-  try {
-    await Promise.all(validations);
-  } catch (err) {
-    assert.ifError(err, 'test failure');
+  while (toValidate.length) {
+    const filename = toValidate.shift();
+    await Promise.all([
+      cf.validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
+        .then(() => assert.pass(`${filename} fixture passed validation`))
+        .catch((err) => assert.fail(`${filename} fixture fails validation: ${err.message}`)),
+      sleep(1000)
+    ]);
   }
 
   assert.end();
