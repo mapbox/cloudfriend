@@ -11,8 +11,10 @@ const update = !!process.env.UPDATE;
 
 const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 
+const schemaUrl = 'https://s3.amazonaws.com/cfn-resource-specifications-us-east-1-prod/schemas/2.15.0/all-spec.json';
+
 test('[shortcuts] fixture validation', async (assert) => {
-  const queue = new Queue({ concurrency: 2 });
+  const queue = new Queue({ concurrency: 1 });
 
   const validations = fs
     .readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
