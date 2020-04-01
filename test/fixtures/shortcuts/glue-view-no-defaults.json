@@ -57,6 +57,12 @@
             "BucketColumns": [
               "column"
             ],
+            "Columns": [
+              {
+                "Name": "column",
+                "Type": "string"
+              }
+            ],
             "Compressed": true,
             "InputFormat": "fake.input.format",
             "Location": "s3://fake/location",

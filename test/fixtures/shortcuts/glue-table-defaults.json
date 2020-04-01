@@ -19,6 +19,12 @@
           "Name": "my_table",
           "PartitionKeys": [],
           "StorageDescriptor": {
+            "Columns": [
+              {
+                "Name": "column",
+                "Type": "string"
+              }
+            ],
             "Compressed": false,
             "Location": "",
             "NumberOfBuckets": 0,
