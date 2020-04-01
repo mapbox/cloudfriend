@@ -1,3 +1,7 @@
+# v4.1.2
+
+- More Bugfixes for Glue shortcuts. Specifically, pass in the column descriptions!
+
 # v4.1.1
 
 - Bugfixes for Glue shortcuts
