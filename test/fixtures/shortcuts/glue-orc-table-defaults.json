@@ -20,6 +20,12 @@
           "PartitionKeys": [],
           "TableType": "EXTERNAL_TABLE",
           "StorageDescriptor": {
+            "Columns": [
+              {
+                "Name": "column",
+                "Type": "string"
+              }
+            ],
             "Compressed": false,
             "InputFormat": "org.apache.hadoop.hive.ql.io.orc.OrcInputFormat",
             "Location": "s3://fake/location",
