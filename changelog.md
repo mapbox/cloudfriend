@@ -1,3 +1,7 @@
+# v4.1.3
+
+- Update minimist to resolve security vulnerabilities
+
 # v4.1.2
 
 - More Bugfixes for Glue shortcuts. Specifically, pass in the column descriptions!
