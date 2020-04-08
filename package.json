@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.4.11",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.5",
     "redent": "^2.0.0"
   },
   "eslintConfig": {
