@@ -1047,12 +1047,12 @@ test('[shortcuts] glue orc table', (assert) => {
 
 test('[shortcuts] glue view', (assert) => {
   assert.throws(
-    () => new cf.shortcuts.GlueView(),
+    () => new cf.shortcuts.GlueAthenaView(),
     /You must provide a DatabaseName, Columns, and OriginalSql/,
     'throws without required parameters'
   );
 
-  let db = new cf.shortcuts.GlueView({
+  let db = new cf.shortcuts.GlueAthenaView({
     LogicalName: 'MyView',
     DatabaseName: 'my_database',
     Name: 'my_view',
@@ -1070,7 +1070,7 @@ test('[shortcuts] glue view', (assert) => {
     'expected resources generated with defaults'
   );
 
-  db = new cf.shortcuts.GlueView({
+  db = new cf.shortcuts.GlueAthenaView({
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_view',
