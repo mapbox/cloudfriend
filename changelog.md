@@ -1,3 +1,7 @@
+# v4.2.0
+
+- Seperate Glue View into Glue Presto View and Glue Spark View
+
 # v4.1.3
 
 - Update minimist to resolve security vulnerabilities
