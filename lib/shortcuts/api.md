@@ -55,10 +55,10 @@
 -   [GlueOrcTable][51]
     -   [Parameters][52]
     -   [Properties][53]
--   [GlueAthenaView][54]
+-   [GluePrestoView][54]
     -   [Parameters][55]
     -   [Properties][56]
--   [GlueSparkSQLView][57]
+-   [GlueSparkView][57]
     -   [Parameters][58]
     -   [Properties][59]
 -   [hookshot.Passthrough][60]
@@ -699,7 +699,7 @@ Create a Glue Table supported by line-delimited ORC files on S3.
 
 -   `Resources` **[Object][68]** the CloudFormation resources created by this shortcut.
 
-## GlueAthenaView
+## GluePrestoView
 
 **Extends GlueTable**
 
@@ -715,7 +715,7 @@ Create a Glue Athena View.
 
 -   `Resources` **[Object][68]** the CloudFormation resources created by this shortcut.
 
-## GlueSparkSQLView
+## GlueSparkView
 
 **Extends GlueTable**
 
