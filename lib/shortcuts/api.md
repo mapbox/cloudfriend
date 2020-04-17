@@ -1005,13 +1005,13 @@ module.exports = cf.merge(myTemplate, lambda);
 
 [53]: #properties-10
 
-[54]: #glueview
+[54]: #glueprestoview
 
 [55]: #parameters-15
 
 [56]: #properties-11
 
-[57]: #hookshotpassthrough
+[57]: #gluesparkview
 
 [58]: #parameters-16
 
