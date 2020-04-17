@@ -55,20 +55,23 @@
 -   [GlueOrcTable][51]
     -   [Parameters][52]
     -   [Properties][53]
--   [GlueView][54]
+-   [GluePrestoView][54]
     -   [Parameters][55]
     -   [Properties][56]
--   [hookshot.Passthrough][57]
+-   [GlueSparkView][57]
     -   [Parameters][58]
     -   [Properties][59]
-    -   [Examples][60]
--   [hookshot.Github][61]
-    -   [Parameters][62]
-    -   [Properties][63]
-    -   [Examples][64]
--   [LogSubscriptionLambda][65]
-    -   [Parameters][66]
+-   [hookshot.Passthrough][60]
+    -   [Parameters][61]
+    -   [Properties][62]
+    -   [Examples][63]
+-   [hookshot.Github][64]
+    -   [Parameters][65]
+    -   [Properties][66]
     -   [Examples][67]
+-   [LogSubscriptionLambda][68]
+    -   [Parameters][69]
+    -   [Examples][70]
 
 ## Lambda
 
@@ -696,11 +699,27 @@ Create a Glue Table supported by line-delimited ORC files on S3.
 
 -   `Resources` **[Object][68]** the CloudFormation resources created by this shortcut.
 
-## GlueView
+## GluePrestoView
 
 **Extends GlueTable**
 
-Create a Glue Presto View.
+Create a Glue Athena View.
+
+### Parameters
+
+-   `options` **[Object][68]** configuration options for the Glue Presto View. Accepts [the same `options` as the vanilla Glue Table][44], though the following additional properties are either required or hard-wired: (optional, default `{}`)
+    -   `options.OriginalSql` **[String][69]** the SQL query that defines the view.
+    -   `options.TableType` **[String][69]** hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
+
+### Properties
+
+-   `Resources` **[Object][68]** the CloudFormation resources created by this shortcut.
+
+## GlueSparkView
+
+**Extends GlueTable**
+
+Create a Glue SparkSQL View.
 
 ### Parameters
 
