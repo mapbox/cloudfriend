@@ -1,6 +1,6 @@
 # cloudfriend.shortcuts
 
-Shortcuts are JS classes that construct snippets of CloudFormation template that are required to build a piece of infrastructure. The intention is to reduce the amount of repetitious CloudFormation template code developers have to write in order to build systems that they use frequently, but without restricting the developer's need to adjust any aspect of the configuration that needs to be non-standard.
+Shortcuts are JS classes that construct snippets of CloudFormation template that are required to build a piece of infrastructure. The intention is to reduce the amount of repetitious CloudFormation template code developers have to write to build systems that they use frequently, but without restricting the developer's need to adjust any aspect of the configuration that needs to be non-standard.
 
 For example, to create a Lambda function, a CloudFormation template should always include:
 
@@ -18,24 +18,7 @@ All told, this can amount to hundreds of lines of CloudFormation template JSON. 
 
 ## Available shortcuts
 
-Links to documentation for each shortcut in [api.md](./api.md)
-
-- [Lambda](./api.md#lambda)
-- [ScheduledLambda](./api.md#scheduledlambda)
-- [StreamLambda](./api.md#streamlambda)
-- [QueueLambda](./api.md#queuelambda)
-- [SubscriptionFilterLambda](./api.md#subscriptionfilterlambda)
-- [ServiceRole](./api.md#servicerole)
-- [Queue](./api.md#queue)
-- [KinesisFirehose](./api.md#kinesisfirehose)
-- [GlueDatabase](./api.md#gluedatabase)
-- [GlueTable](./api.md#gluetable)
-- [GlueJsonTable](./api.md#gluejsontable)
-- [GlueOrcTable](./api.md#glueorctable)
-- [GluePrestoView](./api.md#glueprestoview)
-- [GlueSparkView](./api.md#gluesparkview)
-- [hookshot.Passthrough](./api.md#hookshotpassthrough)
-- [hookshot.Github](./api.md#hookshotgithub)
+See the table of contents in [api.md](./api.md).
 
 ## Using shortcuts in a template
 
@@ -61,13 +44,13 @@ const Resources = {
 };
 
 const lambda = new cf.shortcuts.Lambda({
-  LogicalName: 'Reader', 
+  LogicalName: 'Reader',
   Code: {
     S3Bucket: 'my-lambda-code-bucket',
     S3Key: 'key/for/my/lambda/code.zip'
-  }, 
+  },
   Description: cf.sub('Reads data from s3://${Bucket}'),
-  MemorySize: 512, 
+  MemorySize: 512,
   Statement: [
     {
       Effect: 'Allow',
