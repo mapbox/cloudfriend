@@ -6,7 +6,7 @@ Helper functions for assembling CloudFormation templates in JavaScript
 
 ## Shortcuts
 
-Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write in order to setup a common set of AWS Resources. See [the shortcuts readme for more information](./lib/shortcuts/readme.md), or [the shortcuts API documentation to look at shortcut-specific configuration](./lib/shortcuts/api.md).
+Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write to setup a common set of AWS Resources. See [the shortcuts readme for more information](./lib/shortcuts/readme.md), or [the shortcuts API documentation to look at shortcut-specific configuration](./lib/shortcuts/api.md).
 
 ## Intrinsic functions and conditions
 
