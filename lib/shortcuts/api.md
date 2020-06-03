@@ -66,7 +66,7 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the Lambda function
         within the CloudFormation template. This is used to construct the logical
         names of the other resources, as well as the Lambda function's name.
@@ -133,7 +133,7 @@ a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes: (optional, default `{}`)
+-   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes:
     -   `options.ScheduleExpression` **[String][58]** See [AWS documentation][90].
     -   `options.State` **[String][58]** See [AWS documentation][91]. (optional, default `'ENABLED'`)
 
@@ -167,7 +167,7 @@ a Lambda permission.
 ### Parameters
 
 -   `options` **[Object][57]** Extends the options for [`Lambda`][1]
-    with the following additional attributes: (optional, default `{}`)
+    with the following additional attributes:
     -   `options.EventPattern` **[String][58]** See [AWS documentation][92].
     -   `options.State` **[String][58]** See [AWS documentation][91]. (optional, default `'ENABLED'`)
 
@@ -206,7 +206,7 @@ mapping.
 
 ### Parameters
 
--   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes: (optional, default `{}`)
+-   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes:
     -   `options.EventSourceArn` **[String][58]** See [AWS documentation][93].
     -   `options.ReservedConcurrentExecutions` **[Number][68]** See [AWS documentation][70].
     -   `options.BatchSize` **[Number][68]** See [AWS documentation][94]. (optional, default `1`)
@@ -241,7 +241,7 @@ source mapping.
 
 ### Parameters
 
--   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes: (optional, default `{}`)
+-   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes:
     -   `options.EventSourceArn` **[String][58]** See [AWS documentation][93].
     -   `options.BatchSize` **[Number][68]** See [AWS documentation][94]. (optional, default `1`)
     -   `options.MaximumBatchingWindowInSeconds` **[Number][68]** See [AWS documentation][95]. (optional, default `undefined`)
@@ -273,7 +273,7 @@ Create an IAM role.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the IAM role
         within the CloudFormation template.
     -   `options.AssumeRolePrincipals` **[Array][66]&lt;[Object][57]>** An array of [principal objects][99]
@@ -326,7 +326,7 @@ Create an IAM role that will be assumed from another AWS Account.
 -   `options` **[Object][57]** Extends
     the options for [`Role`][16]. You do not need to provide
     an `AssumeRolePrincipals` attribute, but do need to include the following
-    additional attributes: (optional, default `{}`)
+    additional attributes:
     -   `options.Accounts` **[Array][66]&lt;([String][58] \| [Object][57])>** An array of accounts that can
         assume this IAM Role. These could be account IDs (`123456789012`),
         account ARNs (`arn:aws:iam::123456789012:root`), or CloudFormation intrinsic
@@ -365,7 +365,7 @@ Create an IAM role that will be assumed by an AWS service, e.g. Lambda or ECS.
 -   `options` **[Object][57]** Extends
     the options for [`Role`][16]. You do not need to provide
     an `AssumeRolePrincipals` attribute, but do need to include the following
-    additional attributes: (optional, default `{}`)
+    additional attributes:
     -   `options.Service` **[String][58]** The name of the AWS service that will assume this role, e.g. `lambda`.
 
 ### Examples
@@ -399,7 +399,7 @@ to an existing SNS topic provided with the `ExistingTopicArn` option.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the SQS queue
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
@@ -453,7 +453,7 @@ alarm is triggered.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the Kinesis Firehouse delivery stream
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
@@ -500,7 +500,7 @@ a policy allowing records to be delivered to the delivery stream.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the Kinesis Firehouse delivery stream
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
@@ -512,7 +512,7 @@ Create a Glue Database.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the Glue Database within the CloudFormation template.
     -   `options.Name` **[String][58]** The name of the database. See [AWS documentation][121].
     -   `options.CatalogId` **[String][58]** The AWS account ID for the account in which to create the database. See [AWS documentation][122]. (optional, default `AccountId`)
@@ -546,7 +546,7 @@ Create a Glue Table.
 
 ### Parameters
 
--   `options` **[Object][57]** Options. (optional, default `{}`)
+-   `options` **[Object][57]** Options.
     -   `options.LogicalName` **[String][58]** The logical name of the Glue Table within the CloudFormation template.
     -   `options.Name` **[String][58]** The name of the table. See [AWS documentation][126].
     -   `options.DatabaseName` **[String][58]** The name of the database the table
@@ -605,7 +605,7 @@ Create a Glue Table supported by line-delimited JSON files on S3.
 
 ### Parameters
 
--   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired: (optional, default `{}`)
+-   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
     -   `options.Location` **[String][58]** The physical location of the table. See [AWS documentation][141].
     -   `options.TableType` **[String][58]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
     -   `options.InputFormat` **[String][58]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.mapred.TextInputFormat'`)
@@ -621,7 +621,7 @@ Create a Glue Table supported by line-delimited ORC files on S3.
 
 ### Parameters
 
--   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired: (optional, default `{}`)
+-   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
     -   `options.Location` **[String][58]** The physical location of the table. See [AWS documentation][141].
     -   `options.TableType` **[String][58]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
     -   `options.InputFormat` **[String][58]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'`)
@@ -637,7 +637,7 @@ Create a Glue Presto View.
 
 ### Parameters
 
--   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired: (optional, default `{}`)
+-   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
     -   `options.OriginalSql` **[String][58]** The SQL query that defines the view.
     -   `options.TableType` **[String][58]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
 
@@ -649,7 +649,7 @@ Create a Glue Presto View.
 
 ### Parameters
 
--   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired: (optional, default `{}`)
+-   `options` **[Object][57]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
     -   `options.OriginalSql` **[String][58]** The SQL query that defines the view.
     -   `options.TableType` **[String][58]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
 
@@ -791,7 +791,7 @@ and a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes: (optional, default `{}`)
+-   `options` **[Object][57]** Extends the options for [`Lambda`][1] with the following additional attributes:
     -   `options.LogGroupName` **[String][58]** See [AWS documentation][152].
     -   `options.FilterPattern` **[String][58]** See [AWS documentation][153]. (optional, default `''`)
 
