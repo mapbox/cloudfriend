@@ -33,6 +33,11 @@ test('[shortcuts] fixture validation', async (assert) => {
 test('[shortcuts] lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.Lambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.Lambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without required parameters'
   );
@@ -147,6 +152,11 @@ test('[shortcuts] lambda', (assert) => {
 test('[shortcuts] queue-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.QueueLambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.QueueLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -188,6 +198,11 @@ test('[shortcuts] queue-lambda', (assert) => {
 test('[shortcuts] scheduled-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.ScheduledLambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.ScheduledLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -246,6 +261,11 @@ test('[shortcuts] scheduled-lambda', (assert) => {
 test('[shortcuts] event-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.EventLambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.EventLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -316,6 +336,11 @@ test('[shortcuts] event-lambda', (assert) => {
 test('[shortcuts] stream-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.StreamLambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -377,6 +402,11 @@ test('[shortcuts] stream-lambda', (assert) => {
 test('[shortcuts] log-subscription-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.LogSubscriptionLambda(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.LogSubscriptionLambda({}),
     /You must provide a LogicalName, and Code/,
     'throws without basic lambda required parameters'
   );
@@ -435,6 +465,11 @@ test('[shortcuts] log-subscription-lambda', (assert) => {
 test('[shortcuts] queue', (assert) => {
   assert.throws(
     () => new cf.shortcuts.Queue(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.Queue({}),
     /You must provide a LogicalName/,
     'throws without required parameters'
   );
@@ -516,6 +551,11 @@ test('[shortcuts] queue', (assert) => {
 test('[shortcuts] s3 kinesis firehose', (assert) => {
   assert.throws(
     () => new cf.shortcuts.S3KinesisFirehose(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.S3KinesisFirehose({}),
     /You must provide a LogicalName/,
     'throws without required LogicalName parameter'
   );
@@ -565,6 +605,11 @@ test('[shortcuts] s3 kinesis firehose', (assert) => {
 test('[shortcuts] role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.Role(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.Role({}),
     /You must provide a LogicalName and AssumeRolePrincipals/,
     'throws without required parameters'
   );
@@ -618,6 +663,11 @@ test('[shortcuts] role', (assert) => {
 test('[shortcuts] cross-account role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.CrossAccountRole(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.CrossAccountRole({}),
     /You must provide a LogicalName and Accounts/,
     'throws without required parameters'
   );
@@ -679,6 +729,11 @@ test('[shortcuts] cross-account role', (assert) => {
 test('[shortcuts] service role', (assert) => {
   assert.throws(
     () => new cf.shortcuts.ServiceRole(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.ServiceRole({}),
     /You must provide a LogicalName and Service/,
     'throws without required parameters'
   );
@@ -772,6 +827,11 @@ test('[shortcuts] service role', (assert) => {
 test('[shortcuts] glue database', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GlueDatabase(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GlueDatabase({}),
     /You must provide a LogicalName and Name/,
     'throws without required parameters'
   );
@@ -818,6 +878,11 @@ test('[shortcuts] glue database', (assert) => {
 test('[shortcuts] glue table', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GlueTable(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GlueTable({}),
     /You must provide a LogicalName, Name, DatabaseName, and Columns/,
     'throws without required parameters'
   );
@@ -894,6 +959,11 @@ test('[shortcuts] glue table', (assert) => {
 test('[shortcuts] glue json table', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GlueJsonTable(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GlueJsonTable({}),
     /You must provide a Location/,
     'throws without required parameters'
   );
@@ -971,6 +1041,11 @@ test('[shortcuts] glue json table', (assert) => {
 test('[shortcuts] glue orc table', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GlueOrcTable(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GlueOrcTable({}),
     /You must provide a Location/,
     'throws without required parameters'
   );
@@ -1048,6 +1123,11 @@ test('[shortcuts] glue orc table', (assert) => {
 test('[shortcuts] glue view', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GluePrestoView(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GluePrestoView({}),
     /You must provide a DatabaseName, Columns, and OriginalSql/,
     'throws without required parameters'
   );
@@ -1133,6 +1213,11 @@ const normalizeDeployment = (template) => {
 test('[shortcuts] hookshot passthrough', (assert) => {
   assert.throws(
     () => new cf.shortcuts.hookshot.Passthrough(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.hookshot.Passthrough({}),
     /You must provide a Prefix, and PassthroughTo/,
     'throws without required parameters'
   );
