@@ -544,6 +544,8 @@ module.exports = cf.merge(myTemplate, db);
 
 Create a Glue Table.
 
+Versions of this shortcut preconfigured for [line-delimited JSON][39] or [ORC][41] backed tables are available.
+
 ### Parameters
 
 -   `options` **[Object][57]** Options.
