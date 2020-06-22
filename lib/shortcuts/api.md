@@ -544,7 +544,10 @@ module.exports = cf.merge(myTemplate, db);
 
 Create a Glue Table.
 
-Versions of this shortcut preconfigured for [line-delimited JSON][39] or [ORC][41] backed tables are available.
+Pre-configured versions of this shortcut are available for tables stored as line-delimited JSON or ORC:
+
+-   [GlueJsonTable][39]
+-   [GlueOrcTable][41]
 
 ### Parameters
 
@@ -603,7 +606,7 @@ module.exports = cf.merge(myTemplate, table);
 
 **Extends GlueTable**
 
-Create a Glue Table supported by line-delimited JSON files on S3.
+Create a Glue Table backed by line-delimited JSON files on S3.
 
 ### Parameters
 
@@ -619,7 +622,7 @@ Create a Glue Table supported by line-delimited JSON files on S3.
 
 **Extends GlueTable**
 
-Create a Glue Table supported by line-delimited ORC files on S3.
+Create a Glue Table backed by ORC files on S3.
 
 ### Parameters
 
