@@ -21,5 +21,4 @@ ServiceRole
 SNS
 SQS
 StreamLambda
-preconfigured
 webhooks
