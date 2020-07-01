@@ -14,12 +14,12 @@ const shortcuts = require('./lib/shortcuts');
  * @example
  * var cloudfriend = require('cloudfriend');
  */
-const cloudfriend = module.exports = {
+const cloudfriend = (module.exports = {
   build,
   validate,
   merge,
-  shortcuts
-};
+  shortcuts,
+});
 
 Object.keys(intrinsic).forEach((key) => {
   cloudfriend[key] = intrinsic[key];
@@ -47,23 +47,25 @@ cloudfriend.permissions = {
                 {
                   Action: 'cloudformation:ValidateTemplate',
                   Effect: 'Allow',
-                  Resource: '*'
-                }
-              ]
-            }
-          }
-        ]
-      }
+                  Resource: '*',
+                },
+              ],
+            },
+          },
+        ],
+      },
     },
     AccessKey: {
       Type: 'AWS::IAM::AccessKey',
       Properties: {
-        UserName: cloudfriend.ref('User')
-      }
-    }
+        UserName: cloudfriend.ref('User'),
+      },
+    },
   },
   Outputs: {
     AccessKeyId: { Value: cloudfriend.ref('AccessKey') },
-    SecretAccessKey: { Value: cloudfriend.getAtt('AccessKey', 'SecretAccessKey') }
-  }
+    SecretAccessKey: {
+      Value: cloudfriend.getAtt('AccessKey', 'SecretAccessKey'),
+    },
+  },
 };

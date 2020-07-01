@@ -5,20 +5,20 @@ module.exports = (callback) => {
     AWSTemplateFormatVersion: '2010-09-09',
     Parameters: {
       OutputThis: {
-        Type: 'String'
-      }
+        Type: 'String',
+      },
     },
     Resources: {
       Topic: {
-        Type: 'AWS::SNS::Topic'
-      }
+        Type: 'AWS::SNS::Topic',
+      },
     },
     Outputs: {
       ProvidedValue: {
         Value: {
-          Ref: 'OutputThis'
-        }
-      }
-    }
+          Ref: 'OutputThis',
+        },
+      },
+    },
   });
 };

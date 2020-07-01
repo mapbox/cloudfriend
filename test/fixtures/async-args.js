@@ -1,5 +1,5 @@
 'use strict';
 
-module.exports = function(options, callback) {
+module.exports = function (options, callback) {
   setImmediate(callback, null, options);
 };
