@@ -7,7 +7,9 @@
     "node": ">=10"
   },
   "scripts": {
-    "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
+    "format": "prettier \"**/*.js\" --write",
+    "lint": "eslint .",
+    "pretest": "eslint \"**/*.js\" && npm run shortcuts-api-doc",
     "test": "nyc tape test/*.test.js",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
@@ -41,7 +43,11 @@
     "nyc": "^14.1.0",
     "opener": "^1.4.1",
     "p-queue": "^6.3.0",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "prettier": "^2.0.5",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11"
   },
   "dependencies": {
     "aws-sdk": "^2.4.11",
@@ -49,6 +55,25 @@
     "redent": "^2.0.0"
   },
   "eslintConfig": {
-    "extends": "@mapbox/eslint-config-mapbox"
+    "extends": [
+      "@mapbox/eslint-config-mapbox",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
