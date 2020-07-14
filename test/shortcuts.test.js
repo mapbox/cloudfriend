@@ -174,6 +174,38 @@ test('[shortcuts] queue-lambda', (assert) => {
     'throws without queue-lambda required parameters'
   );
 
+  assert.throws(
+    () =>
+      new cf.shortcuts.QueueLambda({
+        LogicalName: 'MyLambda',
+        Code: {
+          S3Bucket: 'my-code-bucket',
+          S3Key: 'path/to/code.zip'
+        },
+        EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
+        ReservedConcurrentExecutions: -1
+      }),
+    /ReservedConcurrentExecutions must be greater than or equal to 0/,
+    'throws when ReservedConcurrentExecutions is a negative number'
+  );
+
+  const zeroLambda = new cf.shortcuts.QueueLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
+    ReservedConcurrentExecutions: 0
+  });
+  const zeroTemplate = cf.merge(zeroLambda);
+  if (update) fixtures.update('queue-lambda-zero', zeroTemplate);
+  assert.deepEqual(
+    noUndefined(zeroTemplate),
+    fixtures.get('queue-lambda-zero'),
+    'expected resources generated'
+  );
+
   const lambda = new cf.shortcuts.QueueLambda({
     LogicalName: 'MyLambda',
     Code: {
