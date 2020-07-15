@@ -1,3 +1,7 @@
+# v4.2.1
+
+- Fix bug in QueueLambda where ReservedConcurrentExecution inncorrectly couldn't be set to zero
+
 # v4.2.0
 
 - Seperate Glue View into Glue Presto View and Glue Spark View
