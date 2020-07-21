@@ -9,6 +9,7 @@ const fixtures = path.resolve(__dirname, 'fixtures');
 
 test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.base64('secret'), { 'Fn::Base64': 'secret' }, 'base64');
+  assert.deepEqual(cloudfriend.cidr('ipBlock', 1, 2), { 'Fn::Cidr': ['ipBlock', 1, 2] }, 'cidr');
   assert.deepEqual(cloudfriend.findInMap('mapping', 'key', 'value'), { 'Fn::FindInMap': ['mapping', 'key', 'value'] }, 'lookup');
   assert.deepEqual(cloudfriend.getAtt('obj', 'key'), { 'Fn::GetAtt': ['obj', 'key'] }, 'attr');
   assert.deepEqual(cloudfriend.getAzs(), { 'Fn::GetAZs': '' }, 'azs (no value specified)');
@@ -26,6 +27,7 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.importValue(cloudfriend.ref('Id')), { 'Fn::ImportValue': cloudfriend.ref('Id') }, 'import value with string');
   assert.deepEqual(cloudfriend.arn('s3', 'my-bucket/*'), { 'Fn::Sub': ['arn:${AWS::Partition}:${service}:::${suffix}', { service: 's3', suffix: 'my-bucket/*' }] }, 's3 arn');
   assert.deepEqual(cloudfriend.arn('cloudformation', 'stack/my-stack/*'), { 'Fn::Sub': ['arn:${AWS::Partition}:${service}:${AWS::Region}:${AWS::AccountId}:${suffix}', { service: 'cloudformation', suffix: 'stack/my-stack/*' }] }, 'non-s3 arn');
+  assert.deepEqual(cloudfriend.transform('name', { 'a': 'b', 'c': 'd' }), { 'Fn::Transform': { Name: 'name', Parameters: { 'a': 'b', 'c': 'd' } } }, 'cidr');
   assert.end();
 });
 
