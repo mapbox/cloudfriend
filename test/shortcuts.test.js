@@ -601,6 +601,17 @@ test('[shortcuts] queue', (assert) => {
     'expected resources generated for FIFO queue with specified QueueName'
   );
 
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyFifoFalseQueue',
+    FifoQueue: false
+  });
+  template = cf.merge(queue);
+  assert.equal(
+    template.Resources.MyFifoFalseQueue.Properties.FifoQueue,
+    undefined,
+    'the FifoQueue value false is converted to undefined, to pass CFN validation'
+  );
+
   assert.end();
 });
 
