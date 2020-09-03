@@ -1,0 +1,51 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyFifoQueue": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "FifoQueue": true,
+        "MessageRetentionPeriod": 1209600,
+        "QueueName": {
+          "Fn::Sub": [
+            "${queue}.fifo",
+            {
+              "queue": "custom-and-fancy"
+            }
+          ]
+        },
+        "RedrivePolicy": {
+          "maxReceiveCount": 10,
+          "deadLetterTargetArn": {
+            "Fn::GetAtt": [
+              "MyFifoQueueDeadLetter",
+              "Arn"
+            ]
+          }
+        },
+        "VisibilityTimeout": 300
+      }
+    },
+    "MyFifoQueueDeadLetter": {
+      "Type": "AWS::SQS::Queue",
+      "Properties": {
+        "MessageRetentionPeriod": 1209600,
+        "VisibilityTimeout": 300,
+        "FifoQueue": true,
+        "QueueName": {
+          "Fn::Sub": [
+            "${queue}-dead-letter.fifo",
+            {
+              "queue": "custom-and-fancy"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

@@ -22,7 +22,6 @@
       "Properties": {
         "ContentBasedDeduplication": true,
         "DelaySeconds": 60,
-        "FifoQueue": true,
         "KmsMasterKeyId": "alias/my-key",
         "MaximumMessageSize": 1024,
         "MessageRetentionPeriod": 60,
