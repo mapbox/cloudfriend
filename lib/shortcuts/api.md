@@ -392,10 +392,13 @@ module.exports = cf.merge(myTemplate, role);
 
 ## Queue
 
-Creates an SQS queue that can receive messages through an SNS topic. Creates
-an SQS queue and a dead-letter queue for it. Either creates a new SNS
-topic that can be used for sending messages into the queue, or subscribes the queue
-to an existing SNS topic provided with the `ExistingTopicArn` option.
+Creates an SQS queue with an attached dead-letter queue.
+
+Standard (non-FIFO) queues can receive messages through an SNS topic. The
+shortcut either creates a new SNS topic that can be used for sending messages
+into the queue, or subscribes the queue to an existing SNS topic provided
+with the `ExistingTopicArn` option. For FIFO queues, no SNS topic is created
+and `ExistingTopicArn` is ignored.
 
 ### Parameters
 
@@ -412,7 +415,8 @@ to an existing SNS topic provided with the `ExistingTopicArn` option.
     -   `options.KmsDataKeyReusePeriodSeconds` **[Number][68]** See [AWS documentation][112]. (optional, default `undefined`)
     -   `options.MaximumMessageSize` **[Number][68]** See [AWS documentation][113]. (optional, default `undefined`)
     -   `options.MessageRetentionPeriod` **[Number][68]** See [AWS documentation][114]. (optional, default `1209600`)
-    -   `options.QueueName` **[String][58]** See [AWS documentation][115]. (optional, default `'${stack name}-${logical name}'`)
+    -   `options.QueueName` **[String][58]** See [AWS documentation][115].
+        If `FifoQueue` is `true`, the suffix `.fifo` will be added to the queue name. (optional, default `'${stack name}-${logical name}'`)
     -   `options.ReceiveMessageWaitTimeSeconds` **[Number][68]** See [AWS documentation][116]. (optional, default `undefined`)
     -   `options.Condition` **[String][58]** If there is a `Condition` defined
         in the template that should control whether to create this SQS queue,
@@ -421,7 +425,9 @@ to an existing SNS topic provided with the `ExistingTopicArn` option.
         to this SQS queue. See [AWS documentation][77]. (optional, default `undefined`)
     -   `options.ExistingTopicArn` **[String][58]?** Specify an SNS topic ARN to subscribe the queue to.
         If this option is provided, `TopicName` is irrelevant because no new topic is created.
-    -   `options.TopicName` **[String][58]** See [AWS documentation][117]. (optional, default `'${stack name}-${logical name}'`)
+        This option is ignored if `FifoQueue: true`, because FIFO queues cannot subscribe to SNS topics.
+    -   `options.TopicName` **[String][58]** See [AWS documentation][117].
+        This option is ignored if `FifoQueue: true`, because FIFO queues cannot subscribe to SNS topics. (optional, default `'${stack name}-${logical name}'`)
     -   `options.DisplayName` **[String][58]** See [AWS documentation][118]. (optional, default `undefined`)
     -   `options.DeadLetterVisibilityTimeout` **[Number][68]** [VisibilityTimeout][106] for the dead-letter queue. (optional, default `300`)
 

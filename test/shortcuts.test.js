@@ -524,7 +524,6 @@ test('[shortcuts] queue', (assert) => {
     maxReceiveCount: 100,
     ContentBasedDeduplication: true,
     DelaySeconds: 60,
-    FifoQueue: true,
     KmsMasterKeyId: 'alias/my-key',
     KmsDataKeyReusePeriondSeconds: 86400,
     MaximumMessageSize: 1024,
@@ -575,6 +574,31 @@ test('[shortcuts] queue', (assert) => {
     noUndefined(template),
     fixtures.get('queue-external-topic-ref'),
     'expected resources generated for external topic identified by ref'
+  );
+
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyFifoQueue',
+    FifoQueue: true
+  });
+  template = cf.merge(queue);
+  if (update) fixtures.update('queue-fifo', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('queue-fifo'),
+    'expected resources generated for FIFO queue'
+  );
+
+  queue = new cf.shortcuts.Queue({
+    LogicalName: 'MyFifoQueue',
+    QueueName: 'custom-and-fancy',
+    FifoQueue: true
+  });
+  template = cf.merge(queue);
+  if (update) fixtures.update('queue-fifo-queuename', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('queue-fifo-queuename'),
+    'expected resources generated for FIFO queue with specified QueueName'
   );
 
   assert.end();
