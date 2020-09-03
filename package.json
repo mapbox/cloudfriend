@@ -9,6 +9,7 @@
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
     "test": "nyc tape test/*.test.js",
+    "test:update": "UPDATE=1 tape test/*.test.js",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
     "copyeditor-shortcuts": "copyeditor -q lib/shortcuts/api.md",
