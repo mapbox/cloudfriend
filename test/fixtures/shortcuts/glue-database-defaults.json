@@ -14,7 +14,7 @@
         "DatabaseInput": {
           "Name": "my_database",
           "Description": {
-            "Fn::Sub": "Created by the ${AWS::StackName} CloudFormation stack"
+            "Fn::Sub": "Created by the {$AWS::StackName} CloudFormation stack"
           }
         }
       }
