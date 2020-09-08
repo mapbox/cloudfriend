@@ -1,3 +1,7 @@
+# v4.2.3
+
+- Fix typo in Glue database shortcut
+
 # v4.2.2
 
 - Fix bugs in Queue shortcut with the setting `FifoQueue: true`. This option did not work to create FIFO queues before: the resources it created were undeployable. Now it works.
