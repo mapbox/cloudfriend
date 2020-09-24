@@ -6,6 +6,7 @@ EventLambda
 GlueDatabase
 GlueJsonTable
 GlueOrcTable
+GlueParquetTable
 GluePrestoView
 GlueSparkView
 GlueTable
