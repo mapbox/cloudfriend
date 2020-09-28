@@ -1187,6 +1187,88 @@ test('[shortcuts] glue orc table', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] glue parquet table', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.GlueParquetTable(),
+    'Options required',
+    'throws without options'
+  );
+  assert.throws(
+    () => new cf.shortcuts.GlueParquetTable({}),
+    /You must provide a Location/,
+    'throws without required parameters'
+  );
+
+  let db = new cf.shortcuts.GlueParquetTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location'
+  });
+
+  let template = cf.merge(db);
+  if (update) fixtures.update('glue-parquet-table-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-parquet-table-defaults'),
+    'expected resources generated with defaults'
+  );
+
+  db = new cf.shortcuts.GlueParquetTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    CatalogId: '1234',
+    Owner: 'Team',
+    Parameters: { table: 'params' },
+    Description: 'my_table description',
+    Retention: 12,
+    TableType: 'TABLE_TYPE',
+    ViewExpandedText: '/* Presto View */',
+    ViewOriginalText: '/* Presto View: abc123= */',
+    BucketColumns: ['column'],
+    Compressed: true,
+    Location: 's3://fake/location',
+    InputFormat: 'fake.input.format',
+    OutputFormat: 'fake.output.format',
+    StorageParameters: { storage: 'parameters' },
+    SerdeInfo: {
+      SerializationLibrary: 'fake.serde'
+    },
+    SkewedColumns: {
+      SkewedColumnNames: ['column'],
+      SkewedColumnValueLocationMap: { fake: 'map' },
+      SkewedColumnValues: ['value']
+    },
+    SortColumns: [
+      { Column: 'column', SortOrder: 0 }
+    ],
+    StoredAsSubdirectory: true,
+    Condition: 'Always',
+    DependsOn: 'AnotherThing'
+  });
+
+  template = cf.merge(
+    { Conditions: { Always: cf.equals('1', '1') } },
+    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
+    db
+  );
+  if (update) fixtures.update('glue-parquet-table-no-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-parquet-table-no-defaults'),
+    'expected resources generated without defaults'
+  );
+
+  assert.end();
+});
+
 test('[shortcuts] glue view', (assert) => {
   assert.throws(
     () => new cf.shortcuts.GluePrestoView(),
