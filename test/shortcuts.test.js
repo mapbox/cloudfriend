@@ -708,6 +708,7 @@ test('[shortcuts] role', (assert) => {
     MaxSessionDuration: 60,
     Path: '/fake',
     RoleName: 'my-role',
+    Tags: [{ Key: 'pipeline-name', Value: 'test' }],
     Condition: 'Always',
     DependsOn: 'AnotherThing'
   });
