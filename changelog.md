@@ -1,3 +1,7 @@
+# v4.3.0
+
+- Adds Tags option to Role shortcuts
+
 # v4.2.3
 
 - Fix typo in Glue database shortcut
