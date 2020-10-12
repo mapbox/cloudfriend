@@ -55,6 +55,24 @@ test('[shortcuts] lambda', (assert) => {
     'throws for unsupported runtime'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.Lambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      RoleArn: 'custom',
+      Statement: [{
+        Effect: 'Allow',
+        Action: 's3:GetObject',
+        Resource: 'arn:aws:s3:::my-bucket/*'
+      }]
+    }),
+    /You cannot specify both Statements and a RoleArn/,
+    'throws for RoleArn and Statements both provided'
+  );
+
   let lambda = new cf.shortcuts.Lambda({
     LogicalName: 'MyLambda',
     Code: {
@@ -84,6 +102,30 @@ test('[shortcuts] lambda', (assert) => {
     noUndefined(template),
     fixtures.get('lambda-zipfile'),
     'expected resources generated using all default values and inline code'
+  );
+
+  lambda = new cf.shortcuts.Lambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    RoleArn: cf.getAtt('CustomLambdaRole', 'Arn')
+  });
+
+  template = cf.merge(lambda, {
+    Resources: {
+      'CustomLambdaRole': {
+        Type: 'AWS::IAM::Role',
+        Properties: {}
+      }
+    }
+  });
+  if (update) fixtures.update('lambda-provided-role', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('lambda-provided-role'),
+    'expected resources generated if RoleArn provided'
   );
 
   lambda = new cf.shortcuts.Lambda({
