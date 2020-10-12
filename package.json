@@ -8,7 +8,7 @@
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
-    "test": "nyc tape test/*.test.js",
+    "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
     "copyeditor-shortcuts": "copyeditor -q lib/shortcuts/api.md",
@@ -41,6 +41,7 @@
     "nyc": "^14.1.0",
     "opener": "^1.4.1",
     "p-queue": "^6.3.0",
+    "tap-spec": "^5.0.0",
     "tape": "^4.6.0"
   },
   "dependencies": {
