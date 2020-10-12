@@ -30,47 +30,6 @@
         "RetentionInDays": 14
       }
     },
-    "MyLambdaRole": {
-      "Type": "AWS::IAM::Role",
-      "Condition": "Always",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyLambdaLogs",
-                      "Arn"
-                    ]
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": "s3:GetObject",
-                  "Resource": "arn:aws:s3:::fake/data"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "MyLambda": {
       "Type": "AWS::Lambda::Function",
       "Condition": "Always",
@@ -154,6 +113,49 @@
           }
         ],
         "MetricName": "Errors"
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyLambdaLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": "s3:GetObject",
+                  "Resource": "arn:aws:s3:::fake/data"
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   },

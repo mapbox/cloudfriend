@@ -21,65 +21,6 @@
         "RetentionInDays": 14
       }
     },
-    "MyLambdaRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyLambdaLogs",
-                      "Arn"
-                    ]
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "dynamodb:GetRecords",
-                    "dynamodb:GetShardIterator",
-                    "dynamodb:DescribeStream",
-                    "dynamodb:ListStreams",
-                    "kinesis:GetRecords",
-                    "kinesis:GetShardIterator",
-                    "kinesis:DescribeStream",
-                    "kinesis:ListStreams"
-                  ],
-                  "Resource": [
-                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
-                    {
-                      "Fn::Sub": [
-                        "${arn}/*",
-                        {
-                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "MyLambda": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -139,6 +80,68 @@
           }
         ],
         "MetricName": "Errors"
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "logs:*",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyLambdaLogs",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:GetRecords",
+                    "dynamodb:GetShardIterator",
+                    "dynamodb:DescribeStream",
+                    "dynamodb:ListStreams",
+                    "kinesis:GetRecords",
+                    "kinesis:GetShardIterator",
+                    "kinesis:DescribeStream",
+                    "kinesis:ListStreams"
+                  ],
+                  "Resource": [
+                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+                    {
+                      "Fn::Sub": [
+                        "${arn}/*",
+                        {
+                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
       }
     },
     "MyLambdaEventSource": {

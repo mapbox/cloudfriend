@@ -17,10 +17,10 @@
             "Fn::Sub": "Created by the ${AWS::StackName} CloudFormation stack"
           },
           "Name": "my_table",
-          "PartitionKeys": [],
           "Parameters": {
             "EXTERNAL": "true"
           },
+          "PartitionKeys": [],
           "TableType": "EXTERNAL_TABLE",
           "StorageDescriptor": {
             "Columns": [
