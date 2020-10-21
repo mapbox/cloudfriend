@@ -92,8 +92,8 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
         the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
     -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this Lambda function. See [AWS documentation][79]. (optional, default `undefined`)
-    -   `options.Statement` **[Array][68]&lt;[Object][59]>** Policy statements that will be added to a generated IAM role defining the permissions your Lambda function needs to run. (optional, default `[]`)
-    -   `options.RoleARN` **[String][60]** If specified, the Lambda function will use this role instead of creating a new role. (optional, default `undefined`)
+    -   `options.Statement` **[Array][68]&lt;[Object][59]>** Policy statements that will be added to a generated IAM role defining the permissions your Lambda function needs to run. _Do not use this option when specifying your own role via RoleARN._ (optional, default `[]`)
+    -   `options.RoleARN` **[String][60]** If specified, the Lambda function will use this role instead of creating a new role. _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ (optional, default `undefined`)
     -   `options.AlarmName` **[String][60]** See [AWS documentation][80]. (optional, default `'${stack name}-${logical name}-Errors-${region}'`)
     -   `options.AlarmDescription` **[String][60]** See [AWS documentation][81]. (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
     -   `options.AlarmActions` **[Array][68]&lt;[String][60]>** See [AWS documentation][82]. (optional, default `[]`)
