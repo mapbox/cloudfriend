@@ -84,10 +84,13 @@
     },
     "MyLambdaLogPolicy": {
       "Type": "AWS::IAM::Policy",
+      "DependsOn": "MyLambdaRole",
       "Properties": {
         "PolicyName": "lambda-log-access",
         "Roles": [
-          "MyLambdaRole"
+          {
+            "Ref": "MyLambdaRole"
+          }
         ],
         "PolicyDocument": {
           "Version": "2012-10-17",

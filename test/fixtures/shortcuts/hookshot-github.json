@@ -23,7 +23,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment8c2ab881"
+          "Ref": "PassDeploymentb6246d63"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -42,7 +42,7 @@
         ]
       }
     },
-    "PassDeployment8c2ab881": {
+    "PassDeploymentb6246d63": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -230,10 +230,13 @@
     },
     "PassFunctionLogPolicy": {
       "Type": "AWS::IAM::Policy",
+      "DependsOn": "PassFunctionRole",
       "Properties": {
         "PolicyName": "lambda-log-access",
         "Roles": [
-          "PassFunctionRole"
+          {
+            "Ref": "PassFunctionRole"
+          }
         ],
         "PolicyDocument": {
           "Version": "2012-10-17",
@@ -368,10 +371,13 @@
     },
     "DestinationLogPolicy": {
       "Type": "AWS::IAM::Policy",
+      "DependsOn": "DestinationRole",
       "Properties": {
         "PolicyName": "lambda-log-access",
         "Roles": [
-          "DestinationRole"
+          {
+            "Ref": "DestinationRole"
+          }
         ],
         "PolicyDocument": {
           "Version": "2012-10-17",
