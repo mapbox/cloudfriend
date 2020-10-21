@@ -16,7 +16,7 @@ KinesisFirehoseBase
 LogGroup
 LogSubscriptionLambda
 QueueLambda
-RoleARN
+RoleArn
 S3KinesisFirehose
 ScheduledLambda
 ServiceRole

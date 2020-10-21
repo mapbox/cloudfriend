@@ -87,9 +87,9 @@
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-log-access",
-        "Roles": {
-          "Ref": "MyLambdaRole"
-        },
+        "Roles": [
+          "MyLambdaRole"
+        ],
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [

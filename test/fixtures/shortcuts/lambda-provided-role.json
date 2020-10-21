@@ -86,12 +86,24 @@
       "Type": "AWS::IAM::Policy",
       "Properties": {
         "PolicyName": "lambda-log-access",
-        "Roles": {
-          "Fn::GetAtt": [
-            "CustomLambdaRole",
-            "Arn"
-          ]
-        },
+        "Roles": [
+          {
+            "Fn::Select": [
+              1,
+              {
+                "Fn::Split": [
+                  "/",
+                  {
+                    "Fn::GetAtt": [
+                      "CustomLambdaRole",
+                      "Arn"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
