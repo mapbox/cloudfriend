@@ -36,14 +36,14 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
+        "Runtime": "nodejs10.x",
+        "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [
             "MyLambdaRole",
             "Arn"
           ]
-        },
-        "Runtime": "nodejs10.x",
-        "Timeout": 300
+        }
       }
     },
     "MyLambdaErrorAlarm": {
@@ -82,6 +82,30 @@
         "MetricName": "Errors"
       }
     },
+    "MyLambdaLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": {
+          "Ref": "MyLambdaRole"
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyLambdaLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
     "MyLambdaRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -97,27 +121,7 @@
               }
             }
           ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyLambdaLogs",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
+        }
       }
     }
   },

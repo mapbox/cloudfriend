@@ -56,12 +56,6 @@
         ],
         "MemorySize": 512,
         "ReservedConcurrentExecutions": 10,
-        "Role": {
-          "Fn::GetAtt": [
-            "MyLambdaRole",
-            "Arn"
-          ]
-        },
         "Runtime": "nodejs12.x",
         "Timeout": 30,
         "TracingConfig": {
@@ -80,7 +74,13 @@
             "Key": "a",
             "Value": "b"
           }
-        ]
+        ],
+        "Role": {
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
+        }
       }
     },
     "MyLambdaErrorAlarm": {
@@ -115,6 +115,31 @@
         "MetricName": "Errors"
       }
     },
+    "MyLambdaLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "Condition": "Always",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": {
+          "Ref": "MyLambdaRole"
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyLambdaLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
     "MyLambdaRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -137,16 +162,6 @@
             "PolicyDocument": {
               "Version": "2012-10-17",
               "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyLambdaLogs",
-                      "Arn"
-                    ]
-                  }
-                },
                 {
                   "Effect": "Allow",
                   "Action": "s3:GetObject",
