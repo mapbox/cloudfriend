@@ -1,3 +1,8 @@
+# unreleased
+
+- Sets the policy Version in all generated Roles to **2012-10-17**
+- Adds a `RoleArn` setting to Lambda shortcuts. If set, the created Lambda function will use this Role and will not create a new one.
+
 # v4.3.0
 
 - Adds Tags option to Role shortcuts

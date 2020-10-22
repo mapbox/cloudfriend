@@ -23,7 +23,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment244f3c80"
+          "Ref": "PassDeploymentb6246d63"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -42,7 +42,7 @@
         ]
       }
     },
-    "PassDeployment244f3c80": {
+    "PassDeploymentb6246d63": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -144,51 +144,6 @@
         "RetentionInDays": 14
       }
     },
-    "PassFunctionRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "PassFunctionLogs",
-                      "Arn"
-                    ]
-                  }
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": "lambda:InvokeFunction",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "Destination",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "PassFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -205,14 +160,14 @@
         },
         "Handler": "index.lambda",
         "MemorySize": 128,
+        "Runtime": "nodejs10.x",
+        "Timeout": 30,
         "Role": {
           "Fn::GetAtt": [
             "PassFunctionRole",
             "Arn"
           ]
-        },
-        "Runtime": "nodejs10.x",
-        "Timeout": 30
+        }
       }
     },
     "PassFunctionErrorAlarm": {
@@ -253,6 +208,71 @@
         "MetricName": "Errors"
       }
     },
+    "PassFunctionLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "DependsOn": "PassFunctionRole",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": [
+          {
+            "Ref": "PassFunctionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "PassFunctionLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "PassFunctionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "lambda:InvokeFunction",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Destination",
+                      "Arn"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
     "DestinationLogs": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -269,41 +289,6 @@
         "RetentionInDays": 14
       }
     },
-    "DestinationRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": "lambda.amazonaws.com"
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "logs:*",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "DestinationLogs",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    },
     "Destination": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -318,14 +303,14 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
+        "Runtime": "nodejs10.x",
+        "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [
             "DestinationRole",
             "Arn"
           ]
-        },
-        "Runtime": "nodejs10.x",
-        "Timeout": 300
+        }
       }
     },
     "DestinationErrorAlarm": {
@@ -362,6 +347,51 @@
           }
         ],
         "MetricName": "Errors"
+      }
+    },
+    "DestinationLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "DependsOn": "DestinationRole",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": [
+          {
+            "Ref": "DestinationRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "DestinationLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "DestinationRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        }
       }
     }
   },

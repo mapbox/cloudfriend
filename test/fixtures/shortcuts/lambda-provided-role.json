@@ -40,7 +40,7 @@
         "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [
-            "MyLambdaRole",
+            "CustomLambdaRole",
             "Arn"
           ]
         }
@@ -84,12 +84,24 @@
     },
     "MyLambdaLogPolicy": {
       "Type": "AWS::IAM::Policy",
-      "DependsOn": "MyLambdaRole",
       "Properties": {
         "PolicyName": "lambda-log-access",
         "Roles": [
           {
-            "Ref": "MyLambdaRole"
+            "Fn::Select": [
+              1,
+              {
+                "Fn::Split": [
+                  "/",
+                  {
+                    "Fn::GetAtt": [
+                      "CustomLambdaRole",
+                      "Arn"
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ],
         "PolicyDocument": {
@@ -109,23 +121,9 @@
         }
       }
     },
-    "MyLambdaRole": {
+    "CustomLambdaRole": {
       "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": {
-                  "Fn::Sub": "lambda.amazonaws.com"
-                }
-              }
-            }
-          ]
-        }
-      }
+      "Properties": {}
     }
   },
   "Outputs": {}
