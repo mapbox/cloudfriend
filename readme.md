@@ -1,6 +1,6 @@
 # cloudfriend
 
-[![Build Status](https://travis-ci.org/mapbox/cloudfriend.svg?branch=master)](https://travis-ci.org/mapbox/cloudfriend)
+[![Build Status](https://travis-ci.com/mapbox/cloudfriend.svg?branch=master)](https://travis-ci.com/mapbox/cloudfriend)
 
 Helper functions for assembling CloudFormation templates in JavaScript.
 
