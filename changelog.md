@@ -1,3 +1,7 @@
+# HEAD
+
+- Adds top-level `Transform` section support to `cf.merge`. `Transform` macros from all template arguments are merged into a single array, in order of their appearance in the template arguments, and an error is thrown if any macro is repeated.
+
 # v4.4.0
 
 - Sets the policy `Version` in all generated Roles to **2012-10-17**
