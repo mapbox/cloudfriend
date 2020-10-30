@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mapbox/cloudfriend.svg?branch=master)](https://travis-ci.org/mapbox/cloudfriend)
 
-Helper functions for assembling CloudFormation templates in JavaScript
+Helper functions for assembling CloudFormation templates in JavaScript.
 
 ## Shortcuts
 
