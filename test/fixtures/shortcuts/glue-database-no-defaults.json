@@ -32,5 +32,6 @@
       }
     }
   },
-  "Outputs": {}
+  "Outputs": {},
+  "Transform": []
 }

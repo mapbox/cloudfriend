@@ -47,5 +47,6 @@
       }
     }
   },
-  "Outputs": {}
+  "Outputs": {},
+  "Transform": []
 }

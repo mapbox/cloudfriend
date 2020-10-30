@@ -126,5 +126,6 @@
       "Properties": {}
     }
   },
-  "Outputs": {}
+  "Outputs": {},
+  "Transform": []
 }
