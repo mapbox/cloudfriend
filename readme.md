@@ -57,7 +57,7 @@ method | description
 --- | ---
 build(file, opts) | Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.
 validate(file) | Uses the `cloudformation:ValidateTemplate` API call to perform rudimentary template validation
-merge(...template) | Merges templates together. Throws errors if logical names are reused
+merge(...template) | Merges templates together. Throws errors if logical names are reused. `Transform` macros from all template arguments are merged into a single array, in order of their appearance in the template arguments, and an error is thrown if any macro is repeated.
 
 ## CLI tools
 

@@ -111,6 +111,7 @@ test('merge', (assert) => {
     Parameters: { InstanceCount: { Type: 'Number' } },
     Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' } } },
     Conditions: { WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999) },
+    Transform: ['TransformB'],
     Resources: { Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } } },
     Outputs: { Breakfast: { Condition: 'WouldYouLikeBaconWithThat', Value: cloudfriend.ref('Instance') } }
   };
@@ -120,6 +121,7 @@ test('merge', (assert) => {
     Parameters: { DatabasePrefix: { Type: 'String' } },
     Mappings: { Prefix: { eggs: { Name: 'bananas' } } },
     Conditions: { TooMuch: cloudfriend.equals(cloudfriend.ref('DatabasePrefix'), 'bacon') },
+    Transform: ['TransformA'],
     Resources: { Database: { Type: 'AWS::DynamoDB::Table', Properties: { Name: cloudfriend.findInMap('Prefix', cloudfriend.ref('DatabasePrefix'), 'Name') } } },
     Outputs: { GoSomewhereElse: { Condition: 'TooMuch', Value: cloudfriend.ref('Database') } }
   };
@@ -147,6 +149,7 @@ test('merge', (assert) => {
       WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999),
       TooMuch: cloudfriend.equals(cloudfriend.ref('DatabasePrefix'), 'bacon')
     },
+    Transform: ['TransformB', 'TransformA'],
     Resources: {
       Instance: { Type: 'AWS::EC2::Instance', Properties: { ImageId: cloudfriend.findInMap('Region', cloudfriend.region, 'AMI') } },
       Database: { Type: 'AWS::DynamoDB::Table', Properties: { Name: cloudfriend.findInMap('Prefix', cloudfriend.ref('DatabasePrefix'), 'Name') } }
@@ -156,6 +159,29 @@ test('merge', (assert) => {
       GoSomewhereElse: { Condition: 'TooMuch', Value: cloudfriend.ref('Database') }
     }
   }, 'merge without overlap');
+
+  assert.deepEqual(
+    cloudfriend.merge(
+      { Transform: 'foo' },
+      { Transform: ['baz', 'bar'] },
+      { Parameters: { InstanceCount: { Type: 'Number' } } }
+    ),
+    {
+      AWSTemplateFormatVersion: '2010-09-09',
+      Metadata: {},
+      Parameters: { InstanceCount: { Type: 'Number' } },
+      Mappings: {},
+      Conditions: {},
+      Transform: ['foo', 'baz', 'bar'],
+      Resources: {},
+      Outputs: {}
+    },
+    'merge with string, array, and empty Transforms, ignoring duplicates'
+  );
+
+  assert.throws(() => {
+    cloudfriend.merge({ Transform: ['foo', 'bar'] }, { Transform: ['baz', 'bar'] });
+  }, /Transform macro used more than once: bar/);
 
   assert.throws(() => {
     b = { Metadata: { Instances: { Description: 'Information about the instances different' } } };
