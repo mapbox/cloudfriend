@@ -1,3 +1,6 @@
+# 4.5.1
+- Fixes a bug present in v4.4.0 and v4.5.0 where Lambda shortcuts' Conditions were not passed to the generated IAM Roles.
+
 # v4.5.0
 
 - Adds top-level `Transform` section support to `cf.merge`. `Transform` macros from all template arguments are merged into a single array, in order of their appearance in the template arguments, and an error is thrown if any macro is repeated.
