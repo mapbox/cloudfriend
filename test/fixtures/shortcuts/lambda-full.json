@@ -145,6 +145,7 @@
     },
     "MyLambdaRole": {
       "Type": "AWS::IAM::Role",
+      "Condition": "Always",
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
