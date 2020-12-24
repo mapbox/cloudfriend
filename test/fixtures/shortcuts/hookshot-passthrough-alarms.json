@@ -2,6 +2,7 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Metadata": {},
   "Parameters": {},
+  "Rules": {},
   "Mappings": {},
   "Conditions": {},
   "Resources": {
@@ -23,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment636bae51"
+          "Ref": "PassDeployment15ce21d4"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -42,7 +43,7 @@
         ]
       }
     },
-    "PassDeployment636bae51": {
+    "PassDeployment15ce21d4": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
