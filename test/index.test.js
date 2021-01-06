@@ -41,6 +41,16 @@ test('conditions', (assert) => {
   assert.end();
 });
 
+test('rules', (assert) => {
+  assert.deepEqual(cloudfriend.contains(['a', 'b'], 'a'), { 'Fn::Contains': [['a', 'b'], 'a'] });
+  assert.deepEqual(cloudfriend.eachMemberEquals(['a', 'a'], 'a'), { 'Fn::EachMemberEquals': [['a', 'a'], 'a'] });
+  assert.deepEqual(cloudfriend.eachMemberIn(['a', 'b'], ['a', 'b', 'c']), { 'Fn::EachMemberIn': [['a', 'b'], ['a', 'b', 'c']] });
+  assert.deepEqual(cloudfriend.refAll('a'), { 'Fn::RefAll': 'a' });
+  assert.deepEqual(cloudfriend.valueOf('a', 'b'), { 'Fn::ValueOf': ['a', 'b'] });
+  assert.deepEqual(cloudfriend.valueOfAll('a', 'b'), { 'Fn::ValueOfAll': ['a', 'b'] });
+  assert.end();
+});
+
 test('pseudo', (assert) => {
   assert.deepEqual(cloudfriend.accountId, { Ref: 'AWS::AccountId' }, 'account');
   assert.deepEqual(cloudfriend.notificationArns, { Ref: 'AWS::NotificationARNs' }, 'notificationArns');
@@ -109,6 +119,7 @@ test('merge', (assert) => {
   const a = {
     Metadata: { Instances: { Description: 'Information about the instances' } },
     Parameters: { InstanceCount: { Type: 'Number' } },
+    Rules: { WeAreOutOfBacon: { Assertions: [{ Assert: cloudfriend.not('WouldYouLikeBaconWithThat') }] } },
     Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' } } },
     Conditions: { WouldYouLikeBaconWithThat: cloudfriend.equals(cloudfriend.ref('InstanceCount'), 999) },
     Transform: ['TransformB'],
@@ -119,6 +130,7 @@ test('merge', (assert) => {
   let b = {
     Metadata: { Databases: { Description: 'Information about the databases' } },
     Parameters: { DatabasePrefix: { Type: 'String' } },
+    Rules: { YouMustHaveBacon: { Assertions: [{ Assert: cloudfriend.and([cloudfriend.not('WouldYouLikeBaconWithThat'), 'TooMuch']) }] } },
     Mappings: { Prefix: { eggs: { Name: 'bananas' } } },
     Conditions: { TooMuch: cloudfriend.equals(cloudfriend.ref('DatabasePrefix'), 'bacon') },
     Transform: ['TransformA'],
@@ -140,6 +152,10 @@ test('merge', (assert) => {
       InstanceCount: { Type: 'Number' },
       DatabasePrefix: { Type: 'String' },
       NoConsequence: { Type: 'String' }
+    },
+    Rules: {
+      WeAreOutOfBacon: { Assertions: [{ Assert: cloudfriend.not('WouldYouLikeBaconWithThat') }] },
+      YouMustHaveBacon: { Assertions: [{ Assert: cloudfriend.and([cloudfriend.not('WouldYouLikeBaconWithThat'), 'TooMuch']) }] }
     },
     Mappings: {
       Region: { 'us-east-1': { AMI: 'ami-123456' } },
@@ -170,6 +186,7 @@ test('merge', (assert) => {
       AWSTemplateFormatVersion: '2010-09-09',
       Metadata: {},
       Parameters: { InstanceCount: { Type: 'Number' } },
+      Rules: {},
       Mappings: {},
       Conditions: {},
       Transform: ['foo', 'baz', 'bar'],
@@ -202,6 +219,16 @@ test('merge', (assert) => {
     b = { Parameters: { InstanceCount: { Type: 'Number' } } };
     cloudfriend.merge(a, b);
   }, 'allows identical .Parameters overlap');
+
+  assert.throws(() => {
+    b = { Rules: { WeAreOutOfBacon: { Assertions: [{ Assert: cloudfriend.not('WouldYouLikeBaconWithThat'), AssertDescription: 'Different' }] } } };
+    cloudfriend.merge(a, b);
+  }, /Rules name used more than once: WeAreOutOfBacon/, 'throws in .Rules overlap');
+
+  assert.doesNotThrow(() => {
+    b = { Rules: { WeAreOutOfBacon: { Assertions: [{ Assert: cloudfriend.not('WouldYouLikeBaconWithThat') }] } } };
+    cloudfriend.merge(a, b);
+  }, 'allows identical .Rules overlap');
 
   assert.throws(() => {
     b = { Mappings: { Region: { 'us-east-1': { AMI: 'ami-123456' }, 'us-east-4': { AMI: 'ami-123456' } } } };
