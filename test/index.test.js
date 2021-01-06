@@ -41,6 +41,16 @@ test('conditions', (assert) => {
   assert.end();
 });
 
+test('rules', (assert) => {
+  assert.deepEqual(cloudfriend.contains(['a', 'b'], 'a'), { 'Fn::Contains': [['a', 'b'], 'a'] });
+  assert.deepEqual(cloudfriend.eachMemberEquals(['a', 'a'], 'a'), { 'Fn::EachMemberEquals': [['a', 'a'], 'a'] });
+  assert.deepEqual(cloudfriend.eachMemberIn(['a', 'b'], ['a', 'b', 'c']), { 'Fn::EachMemberIn': [['a', 'b'], ['a', 'b', 'c']] });
+  assert.deepEqual(cloudfriend.refAll('a'), { 'Fn::RefAll': 'a' });
+  assert.deepEqual(cloudfriend.valueOf('a', 'b'), { 'Fn::ValueOf': ['a', 'b'] });
+  assert.deepEqual(cloudfriend.valueOfAll('a', 'b'), { 'Fn::ValueOfAll': ['a', 'b'] });
+  assert.end();
+});
+
 test('pseudo', (assert) => {
   assert.deepEqual(cloudfriend.accountId, { Ref: 'AWS::AccountId' }, 'account');
   assert.deepEqual(cloudfriend.notificationArns, { Ref: 'AWS::NotificationARNs' }, 'notificationArns');

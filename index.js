@@ -2,6 +2,7 @@
 
 const intrinsic = require('./lib/intrinsic');
 const conditions = require('./lib/conditions');
+const rules = require('./lib/rules');
 const pseudo = require('./lib/pseudo');
 const build = require('./lib/build');
 const validate = require('./lib/validate');
@@ -27,6 +28,10 @@ Object.keys(intrinsic).forEach((key) => {
 
 Object.keys(conditions).forEach((key) => {
   cloudfriend[key] = conditions[key];
+});
+
+Object.keys(rules).forEach((key) => {
+  cloudfriend[key] = rules[key];
 });
 
 Object.keys(pseudo).forEach((key) => {
