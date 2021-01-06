@@ -1,5 +1,9 @@
 # Changelog
 
+## v4.6.0
+- Adds top-level `Rules` section support to `cf.merge`. Each key in `Rules` must have a unique name.
+- Adds rule-specific intrinsic functions: `contains`, `eachMemberEquals`, `eachMemberIn`, `refAll`, `valueOf`, `valueOfAll`
+
 ## v4.5.1
 - Fixes a bug present in v4.4.0 and v4.5.0 where Lambda shortcuts' Conditions were not passed to the generated IAM Roles.
 
