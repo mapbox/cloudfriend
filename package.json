@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/cloudfriend",
-  "version": "4.5.1",
+  "version": "4.6.0",
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
