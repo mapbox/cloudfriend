@@ -49,19 +49,6 @@ test('[shortcuts] lambda', (assert) => {
         S3Bucket: 'my-code-bucket',
         S3Key: 'path/to/code.zip'
       },
-      Runtime: 'nodejs6.10'
-    }),
-    /Runtime nodejs6.10 is not one of the supported runtimes: nodejs10.x,nodejs12.x/,
-    'throws for unsupported runtime'
-  );
-
-  assert.throws(
-    () => new cf.shortcuts.Lambda({
-      LogicalName: 'MyLambda',
-      Code: {
-        S3Bucket: 'my-code-bucket',
-        S3Key: 'path/to/code.zip'
-      },
       RoleArn: 'custom',
       Statement: [{
         Effect: 'Allow',

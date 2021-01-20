@@ -82,7 +82,7 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
     -   `options.Layers` **[Array][68]&lt;[String][60]>** See [AWS documentation][69]. (optional, default `undefined`)
     -   `options.MemorySize` **[Number][70]** See [AWS documentation][71]. (optional, default `128`)
     -   `options.ReservedConcurrentExecutions` **[Number][70]** See [AWS documentation][72]. (optional, default `undefined`)
-    -   `options.Runtime` **[String][60]** See [AWS documentation][73]. (optional, default `'nodejs10.x'`)
+    -   `options.Runtime` **[String][60]** See [AWS documentation][73]. (optional, default `'nodejs12.x'`)
     -   `options.Tags` **[Array][68]&lt;[Object][59]>** See [AWS documentation][74]. (optional, default `undefined`)
     -   `options.Timeout` **[Number][70]** See [AWS documentation][75]. (optional, default `300`)
     -   `options.TracingConfig` **[Object][59]** See [AWS documentation][76]. (optional, default `undefined`)
