@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.0.0
+- The Lambda shortcuts now use `nodejs12.x` as the default runtime.
+- There is no longer any constraint on the useable Lambda runtimes.
+
 ## v4.6.0
 - Adds top-level `Rules` section support to `cf.merge`. Each key in `Rules` must have a unique name.
 - Adds rule-specific intrinsic functions: `contains`, `eachMemberEquals`, `eachMemberIn`, `refAll`, `valueOf`, `valueOfAll`
