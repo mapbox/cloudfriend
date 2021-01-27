@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.1
+- Improves data type mappings between Glue and Presto when using the `GluePrestoView` shortcut.
+
 ## v5.0.0
 - The Lambda shortcuts now use `nodejs12.x` as the default runtime.
 - There is no longer any constraint on the useable Lambda runtimes.
