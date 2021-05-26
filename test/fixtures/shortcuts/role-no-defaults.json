@@ -24,8 +24,8 @@
         "ManagedPolicyArns": [
           "arn:aws:iam::123456789012:policy/fake"
         ],
-        "MaxSessionDuration": 60,
-        "Path": "/fake",
+        "MaxSessionDuration": 3600,
+        "Path": "/fake/",
         "RoleName": "my-role",
         "Tags": [
           {

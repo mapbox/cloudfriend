@@ -1,5 +1,6 @@
 'use strict';
 
+const cp = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const test = require('tape');
@@ -13,6 +14,15 @@ const update = !!process.env.UPDATE;
 const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 
 test('[shortcuts] fixture validation', async (assert) => {
+  // Runs cfn-lint, ignoring "warnings". Install via pip or Homebrew to run these
+  // tests locally.
+  const cfnLint = (filepath) => new Promise((resolve, reject) => {
+    cp.exec(`cfn-lint ${filepath} --ignore-checks W`, (err, stdout) => {
+      if (err) return reject(new Error(stdout));
+      return resolve();
+    });
+  });
+
   const toValidate = fs
     .readdirSync(path.join(__dirname, 'fixtures', 'shortcuts'))
     .filter((filename) => path.extname(filename) === '.json');
@@ -20,9 +30,12 @@ test('[shortcuts] fixture validation', async (assert) => {
   while (toValidate.length) {
     const filename = toValidate.shift();
     await Promise.all([
-      cf.validate(path.join(__dirname, 'fixtures', 'shortcuts', filename))
+      cfnLint(path.join(__dirname, 'fixtures', 'shortcuts', filename))
         .then(() => assert.pass(`${filename} fixture passed validation`))
-        .catch((err) => assert.fail(`${filename} fixture fails validation: ${err.message}`)),
+        .catch((err) => {
+          assert.fail(`${filename} fixture fails validation`);
+          console.log(err.message);
+        }),
       sleep(1000)
     ]);
   }
@@ -104,7 +117,9 @@ test('[shortcuts] lambda', (assert) => {
     Resources: {
       'CustomLambdaRole': {
         Type: 'AWS::IAM::Role',
-        Properties: {}
+        Properties: {
+          AssumeRolePolicyDocument: {}
+        }
       }
     }
   });
@@ -425,7 +440,7 @@ test('[shortcuts] stream-lambda', (assert) => {
       S3Bucket: 'my-code-bucket',
       S3Key: 'path/to/code.zip'
     },
-    EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
+    EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake'
   });
 
   let template = cf.merge(lambda);
@@ -442,7 +457,7 @@ test('[shortcuts] stream-lambda', (assert) => {
       S3Bucket: 'my-code-bucket',
       S3Key: 'path/to/code.zip'
     },
-    EventSourceArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake',
+    EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
     BatchSize: 10000,
     MaximumBatchingWindowInSeconds: 300,
     Enabled: false,
@@ -734,8 +749,8 @@ test('[shortcuts] role', (assert) => {
       }
     ],
     ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
-    MaxSessionDuration: 60,
-    Path: '/fake',
+    MaxSessionDuration: 3600,
+    Path: '/fake/',
     RoleName: 'my-role',
     Tags: [{ Key: 'pipeline-name', Value: 'test' }],
     Condition: 'Always',
@@ -801,8 +816,8 @@ test('[shortcuts] cross-account role', (assert) => {
       }
     ],
     ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
-    MaxSessionDuration: 60,
-    Path: '/fake',
+    MaxSessionDuration: 3600,
+    Path: '/fake/',
     RoleName: 'my-role',
     Condition: 'Always',
     DependsOn: 'AnotherThing'
@@ -899,8 +914,8 @@ test('[shortcuts] service role', (assert) => {
       }
     ],
     ManagedPolicyArns: ['arn:aws:iam::123456789012:policy/fake'],
-    MaxSessionDuration: 60,
-    Path: '/fake',
+    MaxSessionDuration: 3600,
+    Path: '/fake/',
     RoleName: 'my-role',
     Condition: 'Always',
     DependsOn: 'AnotherThing'
@@ -1013,7 +1028,7 @@ test('[shortcuts] glue table', (assert) => {
     Parameters: { table: 'params' },
     Description: 'my_table description',
     Retention: 12,
-    TableType: 'TABLE_TYPE',
+    TableType: 'EXTERNAL_TABLE',
     ViewExpandedText: '/* Presto View */',
     ViewOriginalText: '/* Presto View: abc123= */',
     BucketColumns: ['column'],
@@ -1095,7 +1110,7 @@ test('[shortcuts] glue json table', (assert) => {
     Parameters: { table: 'params' },
     Description: 'my_table description',
     Retention: 12,
-    TableType: 'TABLE_TYPE',
+    TableType: 'EXTERNAL_TABLE',
     ViewExpandedText: '/* Presto View */',
     ViewOriginalText: '/* Presto View: abc123= */',
     BucketColumns: ['column'],
@@ -1177,7 +1192,7 @@ test('[shortcuts] glue orc table', (assert) => {
     Parameters: { table: 'params' },
     Description: 'my_table description',
     Retention: 12,
-    TableType: 'TABLE_TYPE',
+    TableType: 'EXTERNAL_TABLE',
     ViewExpandedText: '/* Presto View */',
     ViewOriginalText: '/* Presto View: abc123= */',
     BucketColumns: ['column'],
@@ -1259,7 +1274,7 @@ test('[shortcuts] glue parquet table', (assert) => {
     Parameters: { table: 'params' },
     Description: 'my_table description',
     Retention: 12,
-    TableType: 'TABLE_TYPE',
+    TableType: 'EXTERNAL_TABLE',
     ViewExpandedText: '/* Presto View */',
     ViewOriginalText: '/* Presto View: abc123= */',
     BucketColumns: ['column'],
@@ -1342,7 +1357,7 @@ test('[shortcuts] glue view', (assert) => {
     Parameters: { table: 'params' },
     Description: 'my_view description',
     Retention: 12,
-    TableType: 'TABLE_TYPE',
+    TableType: 'EXTERNAL_TABLE',
     BucketColumns: ['column'],
     Compressed: true,
     Location: 's3://fake/location',

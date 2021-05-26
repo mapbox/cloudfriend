@@ -145,12 +145,12 @@
                     "kinesis:ListStreams"
                   ],
                   "Resource": [
-                    "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+                    "arn:aws:kinesis:us-east-1:123456789012:stream/fake",
                     {
                       "Fn::Sub": [
                         "${arn}/*",
                         {
-                          "arn": "arn:aws:sqs:us-east-1:123456789012:queue/fake"
+                          "arn": "arn:aws:kinesis:us-east-1:123456789012:stream/fake"
                         }
                       ]
                     }
@@ -168,7 +168,7 @@
         "BatchSize": 10000,
         "MaximumBatchingWindowInSeconds": 300,
         "Enabled": false,
-        "EventSourceArn": "arn:aws:sqs:us-east-1:123456789012:queue/fake",
+        "EventSourceArn": "arn:aws:kinesis:us-east-1:123456789012:stream/fake",
         "FunctionName": {
           "Ref": "MyLambda"
         },
