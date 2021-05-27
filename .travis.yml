@@ -4,3 +4,4 @@ node_js:
 - 14
 before_install:
 - pip install cfn-lint
+- ls -al ~/.ssh
