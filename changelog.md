@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.0.2
+- Fixes handling custom access log formats in hookshot shortcuts.
+
 ## v5.0.1
 - Improves data type mappings between Glue and Presto when using the `GluePrestoView` shortcut.
 
