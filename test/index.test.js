@@ -102,19 +102,6 @@ test('build', (assert) => {
     });
 });
 
-test('validate', (assert) => {
-  assert.plan(2);
-
-  cloudfriend.validate(path.join(fixtures, 'static.json'))
-    .then(() => {
-      assert.ok(true, 'valid');
-      return cloudfriend.validate(path.join(fixtures, 'invalid.json'));
-    })
-    .catch((err) => {
-      assert.ok(/Template format error: Unrecognized resource type/.test(err.message), 'invalid');
-    });
-});
-
 test('merge', (assert) => {
   const a = {
     Metadata: { Instances: { Description: 'Information about the instances' } },

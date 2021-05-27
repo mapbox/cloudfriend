@@ -32,7 +32,7 @@
           },
           "PartitionKeys": [],
           "Retention": 12,
-          "TableType": "TABLE_TYPE",
+          "TableType": "EXTERNAL_TABLE",
           "ViewExpandedText": "/* Presto View */",
           "ViewOriginalText": "/* Presto View: abc123= */",
           "StorageDescriptor": {
