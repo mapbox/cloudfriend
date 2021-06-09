@@ -1,0 +1,131 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyLambdaLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "MyLambda": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "PackageType": "Image",
+        "Code": {
+          "ImageUri": "MyImage"
+        },
+        "Description": {
+          "Fn::Sub": "MyLambda in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda"
+        },
+        "MemorySize": 128,
+        "Timeout": 300,
+        "Role": {
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "MyLambdaErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda-Errors-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 5,
+        "DatapointsToAlarm": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "MyLambda"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    },
+    "MyLambdaLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "DependsOn": "MyLambdaRole",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": [
+          {
+            "Ref": "MyLambdaRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyLambdaLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}
