@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.1.0
+- Lambda shortcuts now support custom Docker images.
+
 ## v5.0.2
 - Fixes handling custom access log formats in hookshot shortcuts.
 
