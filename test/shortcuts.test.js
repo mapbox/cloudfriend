@@ -92,6 +92,21 @@ test('[shortcuts] lambda', (assert) => {
   lambda = new cf.shortcuts.Lambda({
     LogicalName: 'MyLambda',
     Code: {
+      ImageUri: 'MyImage'
+    }
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('lambda-docker', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('lambda-docker'),
+    'expected resources generated using all default values and a docker image'
+  );
+
+  lambda = new cf.shortcuts.Lambda({
+    LogicalName: 'MyLambda',
+    Code: {
       ZipFile: 'fake code'
     }
   });
