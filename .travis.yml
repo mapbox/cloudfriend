@@ -3,4 +3,4 @@ node_js:
 - 12
 - 14
 before_install:
-- pip install cfn-lint==0.54.3
+- pip install cfn-lint==0.51.0
