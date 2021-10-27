@@ -87,7 +87,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "None",
         "HttpMethod": "OPTIONS",
         "Integration": {
           "Type": "AWS_PROXY",
@@ -108,7 +108,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "NONE",
+        "AuthorizationType": "None",
         "HttpMethod": "POST",
         "Integration": {
           "Type": "AWS_PROXY",
