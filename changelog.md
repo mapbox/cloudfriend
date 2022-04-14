@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.1.1
+
+- Dependency updates to avoid security vulnerabilities (minimist).
+
 ## v5.1.0
 - Lambda shortcuts now support custom Docker images.
 
