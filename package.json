@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
-    "@mapbox/copyeditor": "^0.8.0",
+    "@mapbox/copyeditor": "^1.0.0-beta.5",
     "@mapbox/eslint-config-mapbox": "^1.2.1",
     "documentation": "^13.2.5",
     "eslint": "^8.22.0",
