@@ -35,7 +35,7 @@
   "devDependencies": {
     "@mapbox/copyeditor": "^1.0.0-beta.5",
     "@mapbox/eslint-config-mapbox": "^1.2.1",
-    "documentation": "^13.2.5",
+    "documentation": "^14.0.0-alpha.1",
     "eslint": "^8.22.0",
     "eslint-plugin-node": "^6.0.1",
     "nyc": "^15.1.0",
