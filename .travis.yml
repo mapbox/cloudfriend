@@ -2,9 +2,11 @@ language: node_js
 node_js:
 - 12
 - 14
+env:
+- MBX_CI_DOMAIN=o619qyc20d.execute-api.us-east-1.amazonaws.com
 before_install:
 - pip install cfn-lint==0.51.0
-install:
 - curl -Ls https://mapbox-release-engineering.s3.amazonaws.com/mbx-ci/latest/mbx-ci-linux-amd64 > mbx-ci && chmod 755 ./mbx-ci
 - ./mbx-ci npm token --write-filegit stat
+install:
 - npm ci
