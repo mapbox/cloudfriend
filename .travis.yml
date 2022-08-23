@@ -7,6 +7,6 @@ env:
 before_install:
 - pip install cfn-lint==0.51.0
 - curl -Ls https://mapbox-release-engineering.s3.amazonaws.com/mbx-ci/latest/mbx-ci-linux-amd64 > mbx-ci && chmod 755 ./mbx-ci
-- ./mbx-ci npm token --write-filegit stat
+- ./mbx-ci npm token --write-file
 install:
 - npm ci
