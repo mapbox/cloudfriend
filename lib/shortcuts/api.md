@@ -2,64 +2,64 @@
 
 ### Table of Contents
 
--   [Lambda][1]
-    -   [Parameters][2]
-    -   [Examples][3]
--   [ScheduledLambda][4]
-    -   [Parameters][5]
-    -   [Examples][6]
--   [EventLambda][7]
-    -   [Parameters][8]
-    -   [Examples][9]
--   [QueueLambda][10]
-    -   [Parameters][11]
-    -   [Examples][12]
--   [StreamLambda][13]
-    -   [Parameters][14]
-    -   [Examples][15]
--   [Role][16]
-    -   [Parameters][17]
-    -   [Examples][18]
--   [CrossAccountRole][19]
-    -   [Parameters][20]
-    -   [Examples][21]
--   [ServiceRole][22]
-    -   [Parameters][23]
-    -   [Examples][24]
--   [Queue][25]
-    -   [Parameters][26]
-    -   [Examples][27]
--   [S3KinesisFirehose][28]
-    -   [Parameters][29]
-    -   [Examples][30]
--   [KinesisFirehoseBase][31]
-    -   [Parameters][32]
--   [GlueDatabase][33]
-    -   [Parameters][34]
-    -   [Examples][35]
--   [GlueTable][36]
-    -   [Parameters][37]
-    -   [Examples][38]
--   [GlueJsonTable][39]
-    -   [Parameters][40]
--   [GlueOrcTable][41]
-    -   [Parameters][42]
--   [GlueParquetTable][43]
-    -   [Parameters][44]
--   [GluePrestoView][45]
-    -   [Parameters][46]
--   [GlueSparkView][47]
-    -   [Parameters][48]
--   [hookshot.Passthrough][49]
-    -   [Parameters][50]
-    -   [Examples][51]
--   [hookshot.Github][52]
-    -   [Parameters][53]
-    -   [Properties][54]
-    -   [Examples][55]
--   [LogSubscriptionLambda][56]
-    -   [Parameters][57]
-    -   [Examples][58]
+*   [Lambda][1]
+    *   [Parameters][2]
+    *   [Examples][3]
+*   [ScheduledLambda][4]
+    *   [Parameters][5]
+    *   [Examples][6]
+*   [EventLambda][7]
+    *   [Parameters][8]
+    *   [Examples][9]
+*   [QueueLambda][10]
+    *   [Parameters][11]
+    *   [Examples][12]
+*   [StreamLambda][13]
+    *   [Parameters][14]
+    *   [Examples][15]
+*   [Role][16]
+    *   [Parameters][17]
+    *   [Examples][18]
+*   [CrossAccountRole][19]
+    *   [Parameters][20]
+    *   [Examples][21]
+*   [ServiceRole][22]
+    *   [Parameters][23]
+    *   [Examples][24]
+*   [Queue][25]
+    *   [Parameters][26]
+    *   [Examples][27]
+*   [S3KinesisFirehose][28]
+    *   [Parameters][29]
+    *   [Examples][30]
+*   [KinesisFirehoseBase][31]
+    *   [Parameters][32]
+*   [GlueDatabase][33]
+    *   [Parameters][34]
+    *   [Examples][35]
+*   [GlueTable][36]
+    *   [Parameters][37]
+    *   [Examples][38]
+*   [GlueJsonTable][39]
+    *   [Parameters][40]
+*   [GlueOrcTable][41]
+    *   [Parameters][42]
+*   [GlueParquetTable][43]
+    *   [Parameters][44]
+*   [GluePrestoView][45]
+    *   [Parameters][46]
+*   [GlueSparkView][47]
+    *   [Parameters][48]
+*   [hookshot.Passthrough][49]
+    *   [Parameters][50]
+    *   [Examples][51]
+*   [hookshot.Github][52]
+    *   [Parameters][53]
+    *   [Properties][54]
+    *   [Examples][55]
+*   [LogSubscriptionLambda][56]
+    *   [Parameters][57]
+    *   [Examples][58]
 
 ## Lambda
 
@@ -68,45 +68,46 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the Lambda function
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the Lambda function
         within the CloudFormation template. This is used to construct the logical
         names of the other resources, as well as the Lambda function's name.
-    -   `options.Code` **[Object][59]** See [AWS documentation][61].
-    -   `options.DeadLetterConfig` **[Object][59]** See [AWS documentation][62]. (optional, default `undefined`)
-    -   `options.Description` **[String][60]** See [AWS documentation][63]. (optional, default `'${logical name} in the ${stack name} stack'`)
-    -   `options.Environment` **[Object][59]** See [AWS documentation][64]. (optional, default `undefined`)
-    -   `options.FunctionName` **[String][60]** See [AWS documentation][65]. (optional, default `'${stack name}-${logical name}'`)
-    -   `options.Handler` **[String][60]** See [AWS documentation][66]. (optional, default `'index.handler'`)
-    -   `options.KmsKeyArn` **[String][60]** See [AWS documentation][67]. (optional, default `undefined`)
-    -   `options.Layers` **[Array][68]&lt;[String][60]>** See [AWS documentation][69]. (optional, default `undefined`)
-    -   `options.MemorySize` **[Number][70]** See [AWS documentation][71]. (optional, default `128`)
-    -   `options.ReservedConcurrentExecutions` **[Number][70]** See [AWS documentation][72]. (optional, default `undefined`)
-    -   `options.Runtime` **[String][60]** See [AWS documentation][73]. (optional, default `'nodejs12.x'`)
-    -   `options.Tags` **[Array][68]&lt;[Object][59]>** See [AWS documentation][74]. (optional, default `undefined`)
-    -   `options.Timeout` **[Number][70]** See [AWS documentation][75]. (optional, default `300`)
-    -   `options.TracingConfig` **[Object][59]** See [AWS documentation][76]. (optional, default `undefined`)
-    -   `options.VpcConfig` **[Object][59]** See [AWS documentation][77]. (optional, default `undefined`)
-    -   `options.Condition` **[String][60]** If there is a `Condition` defined in the template
+    *   `options.Code` **[Object][59]** See [AWS documentation][61].
+    *   `options.DeadLetterConfig` **[Object][59]** See [AWS documentation][62]. (optional, default `undefined`)
+    *   `options.Description` **[String][60]** See [AWS documentation][63]. (optional, default `'${logical name} in the ${stack name} stack'`)
+    *   `options.Environment` **[Object][59]** See [AWS documentation][64]. (optional, default `undefined`)
+    *   `options.FunctionName` **[String][60]** See [AWS documentation][65]. (optional, default `'${stack name}-${logical name}'`)
+    *   `options.Handler` **[String][60]** See [AWS documentation][66]. (optional, default `'index.handler'`)
+    *   `options.KmsKeyArn` **[String][60]** See [AWS documentation][67]. (optional, default `undefined`)
+    *   `options.Layers` **[Array][68]<[String][60]>** See [AWS documentation][69]. (optional, default `undefined`)
+    *   `options.MemorySize` **[Number][70]** See [AWS documentation][71]. (optional, default `128`)
+    *   `options.ReservedConcurrentExecutions` **[Number][70]** See [AWS documentation][72]. (optional, default `undefined`)
+    *   `options.Runtime` **[String][60]** See [AWS documentation][73]. (optional, default `'nodejs16.x'`)
+    *   `options.Tags` **[Array][68]<[Object][59]>** See [AWS documentation][74]. (optional, default `undefined`)
+    *   `options.Timeout` **[Number][70]** See [AWS documentation][75]. (optional, default `300`)
+    *   `options.TracingConfig` **[Object][59]** See [AWS documentation][76]. (optional, default `undefined`)
+    *   `options.VpcConfig` **[Object][59]** See [AWS documentation][77]. (optional, default `undefined`)
+    *   `options.Condition` **[String][60]** If there is a `Condition` defined in the template
         that should control whether to create this Lambda function, specify
         the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
-    -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
+    *   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this Lambda function. See [AWS documentation][79]. (optional, default `undefined`)
-    -   `options.Statement` **[Array][68]&lt;[Object][59]>** Policy statements that will be added to a generated IAM role defining the permissions your Lambda function needs to run. _Do not use this option when specifying your own role via RoleArn._ (optional, default `[]`)
-    -   `options.RoleArn` **[String][60]** If specified, the Lambda function will use this role instead of creating a new role. _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ (optional, default `undefined`)
-    -   `options.AlarmName` **[String][60]** See [AWS documentation][80]. (optional, default `'${stack name}-${logical name}-Errors-${region}'`)
-    -   `options.AlarmDescription` **[String][60]** See [AWS documentation][81]. (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
-    -   `options.AlarmActions` **[Array][68]&lt;[String][60]>** See [AWS documentation][82]. (optional, default `[]`)
-    -   `options.Period` **[Number][70]** See [AWS documentation][83]. (optional, default `60`)
-    -   `options.EvaluationPeriods` **[Number][70]** See [AWS documentation][84]. (optional, default `1`)
-    -   `options.Statistic` **[String][60]** See [AWS documentation][85]. (optional, default `'Sum'`)
-    -   `options.DatapointsToAlarm` **[Number][70]** See [AWS documentation][86]. (optional, default `1`)
-    -   `options.Threshold` **[Number][70]** See [AWS documentation][87]. (optional, default `0`)
-    -   `options.ComparisonOperator` **[String][60]** See [AWS documentation][88]. (optional, default `'GreaterThanThreshold'`)
-    -   `options.TreatMissingData` **[String][60]** See [AWS documentation][89]. (optional, default `'notBreaching'`)
-    -   `options.EvaluateLowSampleCountPercentile` **[String][60]** See [AWS documentation][90]. (optional, default `undefined`)
-    -   `options.ExtendedStatistic` **[String][60]** See [AWS documentation][91]] (optional, default `undefined`)
-    -   `options.OKActions` **[Array][68]&lt;[String][60]>** See [AWS documentation][92]. (optional, default `undefined`)
+    *   `options.Statement` **[Array][68]<[Object][59]>** Policy statements that will be added to a generated IAM role defining the permissions your Lambda function needs to run. *Do not use this option when specifying your own role via RoleArn.* (optional, default `[]`)
+    *   `options.RoleArn` **[String][60]** If specified, the Lambda function will use this role instead of creating a new role. *If this option is specified, do not use the Statement option; add the permissions you need to your Role directly.* (optional, default `undefined`)
+    *   `options.AlarmName` **[String][60]** See [AWS documentation][80]. (optional, default `'${stack name}-${logical name}-Errors-${region}'`)
+    *   `options.AlarmDescription` **[String][60]** See [AWS documentation][81]. (optional, default `'Error alarm for ${stack name}-${logical name} lambda function in ${stack name} stack'`)
+    *   `options.AlarmActions` **[Array][68]<[String][60]>** See [AWS documentation][82]. (optional, default `[]`)
+    *   `options.Period` **[Number][70]** See [AWS documentation][83]. (optional, default `60`)
+    *   `options.EvaluationPeriods` **[Number][70]** See [AWS documentation][84]. (optional, default `1`)
+    *   `options.Statistic` **[String][60]** See [AWS documentation][85]. (optional, default `'Sum'`)
+    *   `options.DatapointsToAlarm` **[Number][70]** See [AWS documentation][86]. (optional, default `1`)
+    *   `options.Threshold` **[Number][70]** See [AWS documentation][87]. (optional, default `0`)
+    *   `options.ComparisonOperator` **[String][60]** See [AWS documentation][88]. (optional, default `'GreaterThanThreshold'`)
+    *   `options.TreatMissingData` **[String][60]** See [AWS documentation][89]. (optional, default `'notBreaching'`)
+    *   `options.EvaluateLowSampleCountPercentile` **[String][60]** See [AWS documentation][90]. (optional, default `undefined`)
+    *   `options.ExtendedStatistic` **[String][60]** See [AWS documentation][91]] (optional, default `undefined`)
+    *   `options.OKActions` **[Array][68]<[String][60]>** See [AWS documentation][92]. (optional, default `undefined`)
 
 ### Examples
 
@@ -136,9 +137,10 @@ a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
-    -   `options.ScheduleExpression` **[String][60]** See [AWS documentation][93].
-    -   `options.State` **[String][60]** See [AWS documentation][94]. (optional, default `'ENABLED'`)
+*   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
+
+    *   `options.ScheduleExpression` **[String][60]** See [AWS documentation][93].
+    *   `options.State` **[String][60]** See [AWS documentation][94]. (optional, default `'ENABLED'`)
 
 ### Examples
 
@@ -169,10 +171,11 @@ a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends the options for [`Lambda`][1]
+*   `options` **[Object][59]** Extends the options for [`Lambda`][1]
     with the following additional attributes:
-    -   `options.EventPattern` **[String][60]** See [AWS documentation][95].
-    -   `options.State` **[String][60]** See [AWS documentation][94]. (optional, default `'ENABLED'`)
+
+    *   `options.EventPattern` **[String][60]** See [AWS documentation][95].
+    *   `options.State` **[String][60]** See [AWS documentation][94]. (optional, default `'ENABLED'`)
 
 ### Examples
 
@@ -209,10 +212,11 @@ mapping.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
-    -   `options.EventSourceArn` **[String][60]** See [AWS documentation][96].
-    -   `options.ReservedConcurrentExecutions` **[Number][70]** See [AWS documentation][72].
-    -   `options.BatchSize` **[Number][70]** See [AWS documentation][97]. (optional, default `1`)
+*   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
+
+    *   `options.EventSourceArn` **[String][60]** See [AWS documentation][96].
+    *   `options.ReservedConcurrentExecutions` **[Number][70]** See [AWS documentation][72].
+    *   `options.BatchSize` **[Number][70]** See [AWS documentation][97]. (optional, default `1`)
 
 ### Examples
 
@@ -244,12 +248,13 @@ source mapping.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
-    -   `options.EventSourceArn` **[String][60]** See [AWS documentation][96].
-    -   `options.BatchSize` **[Number][70]** See [AWS documentation][97]. (optional, default `1`)
-    -   `options.MaximumBatchingWindowInSeconds` **[Number][70]** See [AWS documentation][98]. (optional, default `undefined`)
-    -   `options.Enabled` **[Boolean][99]** See [AWS documentation][100]. (optional, default `true`)
-    -   `options.StartingPosition` **[String][60]** See [AWS documentation][101]. (optional, default `'LATEST'`)
+*   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
+
+    *   `options.EventSourceArn` **[String][60]** See [AWS documentation][96].
+    *   `options.BatchSize` **[Number][70]** See [AWS documentation][97]. (optional, default `1`)
+    *   `options.MaximumBatchingWindowInSeconds` **[Number][70]** See [AWS documentation][98]. (optional, default `undefined`)
+    *   `options.Enabled` **[Boolean][99]** See [AWS documentation][100]. (optional, default `true`)
+    *   `options.StartingPosition` **[String][60]** See [AWS documentation][101]. (optional, default `'LATEST'`)
 
 ### Examples
 
@@ -276,23 +281,24 @@ Create an IAM role.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the IAM role
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the IAM role
         within the CloudFormation template.
-    -   `options.AssumeRolePrincipals` **[Array][68]&lt;[Object][59]>** An array of [principal objects][102]
+    *   `options.AssumeRolePrincipals` **[Array][68]<[Object][59]>** An array of [principal objects][102]
         defining entities able to assume this role. Will be included in the role's
         [`AssumeRolePolicyDocument`][103].
-    -   `options.Statement` **[Array][68]&lt;[Object][59]>** An array of permissions statements
+    *   `options.Statement` **[Array][68]<[Object][59]>** An array of permissions statements
         to be included in the [`PolicyDocument`][104]. (optional, default `[]`)
-    -   `options.ManagedPolicyArns` **[Array][68]&lt;[String][60]>** See [AWS documentation][105]. (optional, default `undefined`)
-    -   `options.MaxSessionDuration` **[Number][70]** See [AWS documentation][106]. (optional, default `undefined`)
-    -   `options.Path` **[String][60]** See [AWS documentation][107]. (optional, default `undefined`)
-    -   `options.RoleName` **[String][60]** See [AWS documentation][108]. (optional, default `undefined`)
-    -   `options.Tags` **[Array][68]&lt;[Object][59]>** See [AWS documentation][109]. (optional, default `undefined`)
-    -   `options.Condition` **[String][60]** \-If there is a `Condition` defined
+    *   `options.ManagedPolicyArns` **[Array][68]<[String][60]>** See [AWS documentation][105]. (optional, default `undefined`)
+    *   `options.MaxSessionDuration` **[Number][70]** See [AWS documentation][106]. (optional, default `undefined`)
+    *   `options.Path` **[String][60]** See [AWS documentation][107]. (optional, default `undefined`)
+    *   `options.RoleName` **[String][60]** See [AWS documentation][108]. (optional, default `undefined`)
+    *   `options.Tags` **[Array][68]<[Object][59]>** See [AWS documentation][109]. (optional, default `undefined`)
+    *   `options.Condition` **[String][60]** -If there is a `Condition` defined
         in the template that should control whether to create this IAM role,
         specify the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
-    -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
+    *   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this IAM role. See [AWS documentation][79]. (optional, default `undefined`)
 
 ### Examples
@@ -327,11 +333,12 @@ Create an IAM role that will be assumed from another AWS Account.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends
+*   `options` **[Object][59]** Extends
     the options for [`Role`][16]. You do not need to provide
     an `AssumeRolePrincipals` attribute, but do need to include the following
     additional attributes:
-    -   `options.Accounts` **[Array][68]&lt;([String][60] \| [Object][59])>** An array of accounts that can
+
+    *   `options.Accounts` **[Array][68]<([String][60] | [Object][59])>** An array of accounts that can
         assume this IAM Role. These could be account IDs (`123456789012`),
         account ARNs (`arn:aws:iam::123456789012:root`), or CloudFormation intrinsic
         function objects (`cf.sub('arn:aws:iam::${AccountIdParameter}:root')`).
@@ -366,11 +373,12 @@ Create an IAM role that will be assumed by an AWS service, e.g. Lambda or ECS.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends
+*   `options` **[Object][59]** Extends
     the options for [`Role`][16]. You do not need to provide
     an `AssumeRolePrincipals` attribute, but do need to include the following
     additional attributes:
-    -   `options.Service` **[String][60]** The name of the AWS service that will assume this role, e.g. `lambda`.
+
+    *   `options.Service` **[String][60]** The name of the AWS service that will assume this role, e.g. `lambda`.
 
 ### Examples
 
@@ -406,34 +414,35 @@ and `ExistingTopicArn` is ignored.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the SQS queue
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the SQS queue
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
-    -   `options.VisibilityTimeout` **[Number][70]** See [AWS documentation][110]. (optional, default `300`)
-    -   `options.maxReceiveCount` **[Number][70]** See [AWS documentation][111]. (optional, default `10`)
-    -   `options.ContentBasedDeduplication` **[Boolean][99]** See [AWS documentation][112]. (optional, default `undefined`)
-    -   `options.DelaySeconds` **[Number][70]** See [AWS documentation][113]. (optional, default `undefined`)
-    -   `options.FifoQueue` **[Boolean][99]** See [AWS documentation][114]. (optional, default `undefined`)
-    -   `options.KmsMasterKeyId` **[String][60]** See [AWS documentation][115]. (optional, default `undefined`)
-    -   `options.KmsDataKeyReusePeriodSeconds` **[Number][70]** See [AWS documentation][116]. (optional, default `undefined`)
-    -   `options.MaximumMessageSize` **[Number][70]** See [AWS documentation][117]. (optional, default `undefined`)
-    -   `options.MessageRetentionPeriod` **[Number][70]** See [AWS documentation][118]. (optional, default `1209600`)
-    -   `options.QueueName` **[String][60]** See [AWS documentation][119].
+    *   `options.VisibilityTimeout` **[Number][70]** See [AWS documentation][110]. (optional, default `300`)
+    *   `options.maxReceiveCount` **[Number][70]** See [AWS documentation][111]. (optional, default `10`)
+    *   `options.ContentBasedDeduplication` **[Boolean][99]** See [AWS documentation][112]. (optional, default `undefined`)
+    *   `options.DelaySeconds` **[Number][70]** See [AWS documentation][113]. (optional, default `undefined`)
+    *   `options.FifoQueue` **[Boolean][99]** See [AWS documentation][114]. (optional, default `undefined`)
+    *   `options.KmsMasterKeyId` **[String][60]** See [AWS documentation][115]. (optional, default `undefined`)
+    *   `options.KmsDataKeyReusePeriodSeconds` **[Number][70]** See [AWS documentation][116]. (optional, default `undefined`)
+    *   `options.MaximumMessageSize` **[Number][70]** See [AWS documentation][117]. (optional, default `undefined`)
+    *   `options.MessageRetentionPeriod` **[Number][70]** See [AWS documentation][118]. (optional, default `1209600`)
+    *   `options.QueueName` **[String][60]** See [AWS documentation][119].
         If `FifoQueue` is `true`, the suffix `.fifo` will be added to the queue name. (optional, default `'${stack name}-${logical name}'`)
-    -   `options.ReceiveMessageWaitTimeSeconds` **[Number][70]** See [AWS documentation][120]. (optional, default `undefined`)
-    -   `options.Condition` **[String][60]** If there is a `Condition` defined
+    *   `options.ReceiveMessageWaitTimeSeconds` **[Number][70]** See [AWS documentation][120]. (optional, default `undefined`)
+    *   `options.Condition` **[String][60]** If there is a `Condition` defined
         in the template that should control whether to create this SQS queue,
         specify the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
-    -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
+    *   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this SQS queue. See [AWS documentation][79]. (optional, default `undefined`)
-    -   `options.ExistingTopicArn` **[String][60]?** Specify an SNS topic ARN to subscribe the queue to.
+    *   `options.ExistingTopicArn` **[String][60]?** Specify an SNS topic ARN to subscribe the queue to.
         If this option is provided, `TopicName` is irrelevant because no new topic is created.
         This option is ignored if `FifoQueue: true`, because FIFO queues cannot subscribe to SNS topics.
-    -   `options.TopicName` **[String][60]** See [AWS documentation][121].
+    *   `options.TopicName` **[String][60]** See [AWS documentation][121].
         This option is ignored if `FifoQueue: true`, because FIFO queues cannot subscribe to SNS topics. (optional, default `'${stack name}-${logical name}'`)
-    -   `options.DisplayName` **[String][60]** See [AWS documentation][122]. (optional, default `undefined`)
-    -   `options.DeadLetterVisibilityTimeout` **[Number][70]** [VisibilityTimeout][110] for the dead-letter queue. (optional, default `300`)
+    *   `options.DisplayName` **[String][60]** See [AWS documentation][122]. (optional, default `undefined`)
+    *   `options.DeadLetterVisibilityTimeout` **[Number][70]** [VisibilityTimeout][110] for the dead-letter queue. (optional, default `300`)
 
 ### Examples
 
@@ -463,27 +472,28 @@ alarm is triggered.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the Kinesis Firehouse delivery stream
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the Kinesis Firehouse delivery stream
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
-    -   `options.DestinationBucket` **[String][60]** The name of the S3 bucket to write to.
-    -   `options.Prefix` **[String][60]** The prefix path (folder) within the DestinationBucket to write to. (optional, default `'raw/${logical name}/'`)
-    -   `options.KinesisStreamARN` **([String][60] \| [Object][59])** The ARN of a source Kinesis Stream. (optional, default `undefined`)
-    -   `options.BufferingIntervalInSeconds` **[Number][70]** See [AWS documentation][123]. (optional, default `900`)
-    -   `options.BufferingSizeInMBs` **[Number][70]** See [AWS documentation][124]. (optional, default `128`)
-    -   `options.AlarmName` **[String][60]** See [AWS documentation][80]. (optional, default `'${stack name}-${logical name}-Freshness-${region}'`)
-    -   `options.AlarmDescription` **[String][60]** See [AWS documentation][81]. (optional, default `'Freshness alarm for ${stack name}-${logical name} kinesis firehose in ${stack name} stack'`)
-    -   `options.AlarmActions` **[Array][68]&lt;[String][60]>** See [AWS documentation][82]. (optional, default `[]`)
-    -   `options.Period` **[Number][70]** See [AWS documentation][83]. (optional, default `60`)
-    -   `options.EvaluationPeriods` **[Number][70]** See [AWS documentation][84]. (optional, default `1`)
-    -   `options.Statistic` **[String][60]** See [AWS documentation][85]. (optional, default `'Maximum'`)
-    -   `options.Threshold` **[Number][70]** See [AWS documentation][87]. (optional, default `(BufferingIntervalInSeconds*2)`)
-    -   `options.ComparisonOperator` **[String][60]** See [AWS documentation][88]. (optional, default `'GreaterThanThreshold'`)
-    -   `options.TreatMissingData` **[String][60]** See [AWS documentation][89]. (optional, default `'notBreaching'`)
-    -   `options.EvaluateLowSampleCountPercentile` **[String][60]** See [AWS documentation][90]. (optional, default `undefined`)
-    -   `options.ExtendedStatistic` **[String][60]** See [AWS documentation][91]] (optional, default `undefined`)
-    -   `options.OKActions` **[Array][68]&lt;[String][60]>** See [AWS documentation][92]. (optional, default `undefined`)
+    *   `options.DestinationBucket` **[String][60]** The name of the S3 bucket to write to.
+    *   `options.Prefix` **[String][60]** The prefix path (folder) within the DestinationBucket to write to. (optional, default `'raw/${logical name}/'`)
+    *   `options.KinesisStreamARN` **([String][60] | [Object][59])** The ARN of a source Kinesis Stream. (optional, default `undefined`)
+    *   `options.BufferingIntervalInSeconds` **[Number][70]** See [AWS documentation][123]. (optional, default `900`)
+    *   `options.BufferingSizeInMBs` **[Number][70]** See [AWS documentation][124]. (optional, default `128`)
+    *   `options.AlarmName` **[String][60]** See [AWS documentation][80]. (optional, default `'${stack name}-${logical name}-Freshness-${region}'`)
+    *   `options.AlarmDescription` **[String][60]** See [AWS documentation][81]. (optional, default `'Freshness alarm for ${stack name}-${logical name} kinesis firehose in ${stack name} stack'`)
+    *   `options.AlarmActions` **[Array][68]<[String][60]>** See [AWS documentation][82]. (optional, default `[]`)
+    *   `options.Period` **[Number][70]** See [AWS documentation][83]. (optional, default `60`)
+    *   `options.EvaluationPeriods` **[Number][70]** See [AWS documentation][84]. (optional, default `1`)
+    *   `options.Statistic` **[String][60]** See [AWS documentation][85]. (optional, default `'Maximum'`)
+    *   `options.Threshold` **[Number][70]** See [AWS documentation][87]. (optional, default `(BufferingIntervalInSeconds*2)`)
+    *   `options.ComparisonOperator` **[String][60]** See [AWS documentation][88]. (optional, default `'GreaterThanThreshold'`)
+    *   `options.TreatMissingData` **[String][60]** See [AWS documentation][89]. (optional, default `'notBreaching'`)
+    *   `options.EvaluateLowSampleCountPercentile` **[String][60]** See [AWS documentation][90]. (optional, default `undefined`)
+    *   `options.ExtendedStatistic` **[String][60]** See [AWS documentation][91]] (optional, default `undefined`)
+    *   `options.OKActions` **[Array][68]<[String][60]>** See [AWS documentation][92]. (optional, default `undefined`)
 
 ### Examples
 
@@ -510,11 +520,12 @@ a policy allowing records to be delivered to the delivery stream.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the Kinesis Firehouse delivery stream
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the Kinesis Firehouse delivery stream
         within the CloudFormation template. This is also used to construct the logical
         names of the other resources.
-    -   `options.KinesisStreamARN` **([String][60] \| [Object][59])** The ARN of a source Kinesis Stream. (optional, default `undefined`)
+    *   `options.KinesisStreamARN` **([String][60] | [Object][59])** The ARN of a source Kinesis Stream. (optional, default `undefined`)
 
 ## GlueDatabase
 
@@ -522,17 +533,18 @@ Create a Glue Database.
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the Glue Database within the CloudFormation template.
-    -   `options.Name` **[String][60]** The name of the database. See [AWS documentation][125].
-    -   `options.CatalogId` **[String][60]** The AWS account ID for the account in which to create the database. See [AWS documentation][126]. (optional, default `AccountId`)
-    -   `options.Description` **[String][60]** The description of the database. See [AWS documentation][127]. (optional, default `'Created by the ${AWS::StackName} CloudFormation stack'`)
-    -   `options.LocationUri` **[String][60]** The location of the database. See [AWS documentation][128]. (optional, default `undefined`)
-    -   `options.Parameters` **[String][60]** Parameters of the database. See [AWS documentation][129]. (optional, default `undefined`)
-    -   `options.Condition` **[String][60]** If there is a `Condition` defined
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the Glue Database within the CloudFormation template.
+    *   `options.Name` **[String][60]** The name of the database. See [AWS documentation][125].
+    *   `options.CatalogId` **[String][60]** The AWS account ID for the account in which to create the database. See [AWS documentation][126]. (optional, default `AccountId`)
+    *   `options.Description` **[String][60]** The description of the database. See [AWS documentation][127]. (optional, default `'Created by the ${AWS::StackName} CloudFormation stack'`)
+    *   `options.LocationUri` **[String][60]** The location of the database. See [AWS documentation][128]. (optional, default `undefined`)
+    *   `options.Parameters` **[String][60]** Parameters of the database. See [AWS documentation][129]. (optional, default `undefined`)
+    *   `options.Condition` **[String][60]** If there is a `Condition` defined
         in the template that should control whether to create this database,
         specify the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
-    -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
+    *   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this database. See [AWS documentation][79]. (optional, default `undefined`)
 
 ### Examples
@@ -556,41 +568,42 @@ Create a Glue Table.
 
 Pre-configured versions of this shortcut are available for tables stored as line-delimited JSON or ORC:
 
--   [GlueJsonTable][39]
--   [GlueOrcTable][41]
+*   [GlueJsonTable][39]
+*   [GlueOrcTable][41]
 
 ### Parameters
 
--   `options` **[Object][59]** Options.
-    -   `options.LogicalName` **[String][60]** The logical name of the Glue Table within the CloudFormation template.
-    -   `options.Name` **[String][60]** The name of the table. See [AWS documentation][130].
-    -   `options.DatabaseName` **[String][60]** The name of the database the table
+*   `options` **[Object][59]** Options.
+
+    *   `options.LogicalName` **[String][60]** The logical name of the Glue Table within the CloudFormation template.
+    *   `options.Name` **[String][60]** The name of the table. See [AWS documentation][130].
+    *   `options.DatabaseName` **[String][60]** The name of the database the table
         resides in. See [AWS documentation][131].
-    -   `options.Columns` **[Array][68]&lt;[Object][59]>** List of the table's columns. See [AWS documentation][132].
-    -   `options.CatalogId` **[String][60]** The AWS account ID for the account in which to create the table. See [AWS documentation][133]. (optional, default `AccountId`)
-    -   `options.Owner` **[String][60]** The table owner. See [AWS documentation][134]. (optional, default `undefined`)
-    -   `options.Parameters` **[Object][59]** Table parameters. See [AWS documentation][135]. (optional, default `undefined`)
-    -   `options.PartitionKeys` **[Array][68]&lt;[String][60]>** List of partitioning columns. See [AWS documentation][136]. (optional, default `[]`)
-    -   `options.Description` **[String][60]** The description of the table. See [AWS documentation][137]. (optional, default `'Created by the ${AWS::StackName} CloudFormation stack'`)
-    -   `options.Retention` **[Number][70]** Retention time for the table. See [AWS documentation][138]. (optional, default `undefined`)
-    -   `options.TableType` **[String][60]** The type of this table. See [AWS documentation][139]. (optional, default `undefined`)
-    -   `options.ViewExpandedText` **[String][60]** The expanded text of the view. See [AWS documentation][140]. (optional, default `undefined`)
-    -   `options.ViewOriginalText` **[String][60]** The original text of the view. See [AWS documentation][141]. (optional, default `undefined`)
-    -   `options.BucketColumns` **[Array][68]&lt;[String][60]>** List of bucketing columns. See [AWS documentation][142]. (optional, default `undefined`)
-    -   `options.Compressed` **[Boolean][99]** Whether the data is compressed. See [AWS documentation][143]. (optional, default `false`)
-    -   `options.InputFormat` **[String][60]** The table's input format. See [AWS documentation][144]. (optional, default `undefined`)
-    -   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145]. (optional, default `''`)
-    -   `options.NumberOfBuckets` **[Number][70]** See [AWS documentation][146]. (optional, default `0`)
-    -   `options.OutputFormat` **[String][60]** The table's output format. See [AWS documentation][147]. (optional, default `undefined`)
-    -   `options.StorageParameters` **[Object][59]** Storage parameters. See [AWS documentation][148]. (optional, default `undefined`)
-    -   `options.SerdeInfo` **[Object][59]** The serialization/deserialization information. See [AWS documentation][149]. (optional, default `{}`)
-    -   `options.SkewedInfo` **[Object][59]** Frequent value information. See [AWS documentation][150]. (optional, default `undefined`)
-    -   `options.SortColumns` **[Array][68]&lt;[Object][59]>** List specifying the sort order. See [AWS documentation][151]. (optional, default `undefined`)
-    -   `options.StoredAsSubDirectories` **[Boolean][99]** See [AWS documentation][152]. (optional, default `true`)
-    -   `options.Condition` **[String][60]** If there is a `Condition` defined
+    *   `options.Columns` **[Array][68]<[Object][59]>** List of the table's columns. See [AWS documentation][132].
+    *   `options.CatalogId` **[String][60]** The AWS account ID for the account in which to create the table. See [AWS documentation][133]. (optional, default `AccountId`)
+    *   `options.Owner` **[String][60]** The table owner. See [AWS documentation][134]. (optional, default `undefined`)
+    *   `options.Parameters` **[Object][59]** Table parameters. See [AWS documentation][135]. (optional, default `undefined`)
+    *   `options.PartitionKeys` **[Array][68]<[String][60]>** List of partitioning columns. See [AWS documentation][136]. (optional, default `[]`)
+    *   `options.Description` **[String][60]** The description of the table. See [AWS documentation][137]. (optional, default `'Created by the ${AWS::StackName} CloudFormation stack'`)
+    *   `options.Retention` **[Number][70]** Retention time for the table. See [AWS documentation][138]. (optional, default `undefined`)
+    *   `options.TableType` **[String][60]** The type of this table. See [AWS documentation][139]. (optional, default `undefined`)
+    *   `options.ViewExpandedText` **[String][60]** The expanded text of the view. See [AWS documentation][140]. (optional, default `undefined`)
+    *   `options.ViewOriginalText` **[String][60]** The original text of the view. See [AWS documentation][141]. (optional, default `undefined`)
+    *   `options.BucketColumns` **[Array][68]<[String][60]>** List of bucketing columns. See [AWS documentation][142]. (optional, default `undefined`)
+    *   `options.Compressed` **[Boolean][99]** Whether the data is compressed. See [AWS documentation][143]. (optional, default `false`)
+    *   `options.InputFormat` **[String][60]** The table's input format. See [AWS documentation][144]. (optional, default `undefined`)
+    *   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145]. (optional, default `''`)
+    *   `options.NumberOfBuckets` **[Number][70]** See [AWS documentation][146]. (optional, default `0`)
+    *   `options.OutputFormat` **[String][60]** The table's output format. See [AWS documentation][147]. (optional, default `undefined`)
+    *   `options.StorageParameters` **[Object][59]** Storage parameters. See [AWS documentation][148]. (optional, default `undefined`)
+    *   `options.SerdeInfo` **[Object][59]** The serialization/deserialization information. See [AWS documentation][149]. (optional, default `{}`)
+    *   `options.SkewedInfo` **[Object][59]** Frequent value information. See [AWS documentation][150]. (optional, default `undefined`)
+    *   `options.SortColumns` **[Array][68]<[Object][59]>** List specifying the sort order. See [AWS documentation][151]. (optional, default `undefined`)
+    *   `options.StoredAsSubDirectories` **[Boolean][99]** See [AWS documentation][152]. (optional, default `true`)
+    *   `options.Condition` **[String][60]** If there is a `Condition` defined
         in the template that should control whether to create this database,
         specify the name of the condition here. See [AWS documentation][78]. (optional, default `undefined`)
-    -   `options.DependsOn` **[String][60]** Specify a stack resource dependency
+    *   `options.DependsOn` **[String][60]** Specify a stack resource dependency
         to this database. See [AWS documentation][79]. (optional, default `undefined`)
 
 ### Examples
@@ -620,13 +633,15 @@ Create a Glue Table backed by line-delimited JSON files on S3.
 
 ### Parameters
 
--   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
-    -   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145].
-    -   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
-    -   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.mapred.TextInputFormat'`)
-    -   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'`)
-    -   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
-        -   `options.SerdeInfo.SerializationLibrary` **[Object][59]** Hard-wired by this shortcut. (optional, default `'org.openx.data.jsonserde.JsonSerDe'`)
+*   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
+
+    *   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145].
+    *   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
+    *   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.mapred.TextInputFormat'`)
+    *   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'`)
+    *   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
+
+        *   `options.SerdeInfo.SerializationLibrary` **[Object][59]** Hard-wired by this shortcut. (optional, default `'org.openx.data.jsonserde.JsonSerDe'`)
 
 ## GlueOrcTable
 
@@ -636,13 +651,15 @@ Create a Glue Table backed by ORC files on S3.
 
 ### Parameters
 
--   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
-    -   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145].
-    -   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
-    -   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'`)
-    -   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'`)
-    -   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
-        -   `options.SerdeInfo.SerializationLibrary` **[Object][59]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcSerde'`)
+*   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
+
+    *   `options.Location` **[String][60]** The physical location of the table. See [AWS documentation][145].
+    *   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'EXTERNAL_TABLE'`)
+    *   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcInputFormat'`)
+    *   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat'`)
+    *   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
+
+        *   `options.SerdeInfo.SerializationLibrary` **[Object][59]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.orc.OrcSerde'`)
 
 ## GlueParquetTable
 
@@ -652,18 +669,20 @@ Create a Glue table backed by Parquet files on S3.
 
 ### Parameters
 
--   `options` **[Object][59]** Accepts the same options as cloudfriend's
+*   `options` **[Object][59]** Accepts the same options as cloudfriend's
     [`GlueTable`][153],
     though the following additional attributes are either required or hard-wired:
-    -   `options.Location` **[String][60]** The physical location of the table. See
+
+    *   `options.Location` **[String][60]** The physical location of the table. See
         [AWS
         documentation][145].
-    -   `options.TableType` **[String][60]** Hard-wired by this
+    *   `options.TableType` **[String][60]** Hard-wired by this
         shortcut. (optional, default `'EXTERNAL_TABLE'`)
-    -   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat'`)
-    -   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'`)
-    -   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
-        -   `options.SerdeInfo.SerializationLibrary` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'`)
+    *   `options.InputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat'`)
+    *   `options.OutputFormat` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat'`)
+    *   `options.SerdeInfo` **[Object][59]?** Hard-wired by this shortcut.
+
+        *   `options.SerdeInfo.SerializationLibrary` **[String][60]** Hard-wired by this shortcut. (optional, default `'org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe'`)
 
 ## GluePrestoView
 
@@ -673,9 +692,10 @@ Create a Glue Presto View.
 
 ### Parameters
 
--   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
-    -   `options.OriginalSql` **[String][60]** The SQL query that defines the view.
-    -   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
+*   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
+
+    *   `options.OriginalSql` **[String][60]** The SQL query that defines the view.
+    *   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
 
 ## GlueSparkView
 
@@ -685,9 +705,10 @@ Create a Glue Presto View.
 
 ### Parameters
 
--   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
-    -   `options.OriginalSql` **[String][60]** The SQL query that defines the view.
-    -   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
+*   `options` **[Object][59]** Accepts the same options as [`GlueTable`][36], though the following additional attributes are either required or hard-wired:
+
+    *   `options.OriginalSql` **[String][60]** The SQL query that defines the view.
+    *   `options.TableType` **[String][60]** Hard-wired by this shortcut. (optional, default `'VIRTUAL_VIEW'`)
 
 ## hookshot.Passthrough
 
@@ -719,20 +740,20 @@ and a random string that can be used as a shared secret.
 
 ### Parameters
 
--   `Prefix` **[String][60]** This will be used to prefix the set of CloudFormation
+*   `Prefix` **[String][60]** This will be used to prefix the set of CloudFormation
     resources created by this shortcut.
--   `PassthroughTo` **[String][60]** The logical name of the Lambda function that you
+*   `PassthroughTo` **[String][60]** The logical name of the Lambda function that you
     have written which will receive a request and generate a response to provide
     to the caller.
--   `LoggingLevel` **[String][60]** One of `OFF`, `INFO`, or `ERROR`. Logs are delivered
+*   `LoggingLevel` **[String][60]** One of `OFF`, `INFO`, or `ERROR`. Logs are delivered
     to a CloudWatch Log Group named `API-Gateway-Execution-Logs_{rest-api-id}/hookshot`. (optional, default `'OFF'`)
--   `DataTraceEnabled` **[Boolean][99]** Set to `true` to enable full request/response
+*   `DataTraceEnabled` **[Boolean][99]** Set to `true` to enable full request/response
     logging in the API's logs. (optional, default `false`)
--   `MetricsEnabled` **[Boolean][99]** Set to `true` to enable additional metrics in CloudWatch. (optional, default `false`)
--   `AccessLogFormat` **[String][60]?** A single line format of the access logs of
+*   `MetricsEnabled` **[Boolean][99]** Set to `true` to enable additional metrics in CloudWatch. (optional, default `false`)
+*   `AccessLogFormat` **[String][60]?** A single line format of the access logs of
     data, as specified by selected `$context` variables. The format must include at
     least `$context.requestId`. [See AWS documentation for details][156].
--   `WebhookSecret` **([String][60] \| [Object][59])?** A secret string to be used to verify
+*   `WebhookSecret` **([String][60] | [Object][59])?** A secret string to be used to verify
     payload signatures that are delivered to the endpoint. This is optional. If
     not specified, a string will be generated for you. Implementation of
     signature verification is up to the caller.
@@ -773,14 +794,14 @@ Lambda function.
 
 ### Parameters
 
--   `Prefix` **[String][60]** this will be used to prefix the set of CloudFormation
+*   `Prefix` **[String][60]** this will be used to prefix the set of CloudFormation
     resources created by this shortcut.
--   `PassthroughTo` **[String][60]** the logical name of the Lambda function that you
+*   `PassthroughTo` **[String][60]** the logical name of the Lambda function that you
     have written which will receive a request and generate a response to provide
     to the caller.
--   `LoggingLevel` **[String][60]** one of `OFF`, `INFO`, or `ERROR`. Logs are delivered
+*   `LoggingLevel` **[String][60]** one of `OFF`, `INFO`, or `ERROR`. Logs are delivered
     to a CloudWatch LogGroup named `API-Gateway-Execution-Logs_{rest-api-id}/hookshot`
--   `WebhookSecret` **([String][60] \| [Object][59])?** A secret string to be used to verify
+*   `WebhookSecret` **([String][60] | [Object][59])?** A secret string to be used to verify
     payload signatures that are delivered to the endpoint. This is optional. If
     not specified, a string will be generated for you. You should provide this
     value to GitHub, and signature verification will be performed before your
@@ -788,8 +809,8 @@ Lambda function.
 
 ### Properties
 
--   `Resources` **[Object][59]** the CloudFormation resources created by this shortcut.
--   `Outputs` **[Object][59]** the CloudFormation outputs created by this
+*   `Resources` **[Object][59]** the CloudFormation resources created by this shortcut.
+*   `Outputs` **[Object][59]** the CloudFormation outputs created by this
     shortcut. This includes the URL for the API Gateway endpoint, and a secret
     string. Use these two values to configure GitHub to send webhooks to your
     API Gateway endpoint.
@@ -827,9 +848,10 @@ and a Lambda permission.
 
 ### Parameters
 
--   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
-    -   `options.LogGroupName` **[String][60]** See [AWS documentation][157].
-    -   `options.FilterPattern` **[String][60]** See [AWS documentation][158]. (optional, default `''`)
+*   `options` **[Object][59]** Extends the options for [`Lambda`][1] with the following additional attributes:
+
+    *   `options.LogGroupName` **[String][60]** See [AWS documentation][157].
+    *   `options.FilterPattern` **[String][60]** See [AWS documentation][158]. (optional, default `''`)
 
 ### Examples
 

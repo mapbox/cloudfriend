@@ -25,7 +25,6 @@
     "MyLambda": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
-        "PackageType": "Image",
         "Code": {
           "ImageUri": "MyImage"
         },
@@ -42,7 +41,8 @@
             "MyLambdaRole",
             "Arn"
           ]
-        }
+        },
+        "PackageType": "Image"
       }
     },
     "MyLambdaErrorAlarm": {
