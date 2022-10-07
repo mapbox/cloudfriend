@@ -4,7 +4,7 @@
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
