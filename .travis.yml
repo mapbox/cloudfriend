@@ -3,12 +3,8 @@ node_js:
 - 12
 - 14
 - 16
-addons:
-  apt:
-    sources:
-      - deadsnakes # source required so it finds the package definition below
-    packages:
-      - python3.7
 before_install:
+- pyenv install 3.7.9
+- pyenv global 3.7.9
 - pip install aws-sam-cli
 - pip install cfn-lint==0.60.0
