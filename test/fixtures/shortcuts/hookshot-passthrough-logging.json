@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment19fa1882"
+          "Ref": "PassDeployment9d115723"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -43,7 +43,7 @@
         ]
       }
     },
-    "PassDeployment19fa1882": {
+    "PassDeployment9d115723": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -78,7 +78,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "None",
+        "AuthorizationType": "NONE",
         "HttpMethod": "OPTIONS",
         "Integration": {
           "Type": "AWS_PROXY",
@@ -99,7 +99,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "None",
+        "AuthorizationType": "NONE",
         "HttpMethod": "POST",
         "Integration": {
           "Type": "AWS_PROXY",
