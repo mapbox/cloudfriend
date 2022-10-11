@@ -4,15 +4,14 @@
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
     "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
-    "copyeditor-shortcuts": "copyeditor -q lib/shortcuts/api.md",
-    "shortcuts-api-doc": "documentation build lib/shortcuts/index.js -f md -o lib/shortcuts/api.md && npm run copyeditor-shortcuts"
+    "shortcuts-api-doc": "documentation build lib/shortcuts/index.js -f md -o lib/shortcuts/api.md"
   },
   "bin": {
     "build-template": "bin/build-template.js",
@@ -33,19 +32,17 @@
   },
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
-    "@mapbox/copyeditor": "^0.8.0",
     "@mapbox/eslint-config-mapbox": "^1.2.1",
-    "documentation": "^13.0.0",
+    "documentation": "^14.0.0",
     "eslint": "^4.18.2",
     "eslint-plugin-node": "^6.0.1",
     "nyc": "^14.1.0",
     "opener": "^1.4.1",
-    "p-queue": "^6.3.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.829.0",
+    "aws-sdk": "^2.1225.0",
     "minimist": "^1.2.6",
     "redent": "^2.0.0"
   },

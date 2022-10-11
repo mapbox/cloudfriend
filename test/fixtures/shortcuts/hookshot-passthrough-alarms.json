@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment0209686b"
+          "Ref": "PassDeploymentec912fae"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -43,7 +43,7 @@
         ]
       }
     },
-    "PassDeployment0209686b": {
+    "PassDeploymentec912fae": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -78,7 +78,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "None",
+        "AuthorizationType": "NONE",
         "HttpMethod": "OPTIONS",
         "Integration": {
           "Type": "AWS_PROXY",
@@ -99,7 +99,7 @@
           "Ref": "PassResource"
         },
         "ApiKeyRequired": false,
-        "AuthorizationType": "None",
+        "AuthorizationType": "NONE",
         "HttpMethod": "POST",
         "Integration": {
           "Type": "AWS_PROXY",
@@ -161,7 +161,7 @@
         },
         "Handler": "index.lambda",
         "MemorySize": 128,
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 30,
         "Role": {
           "Fn::GetAtt": [
@@ -304,7 +304,7 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "Runtime": "nodejs12.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [
