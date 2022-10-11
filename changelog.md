@@ -1,5 +1,10 @@
 # Changelog
 
+## v6.0.0
+
+- Updates default node runtime for lambda shortcuts to node16.x.
+- Updates default authorization type for hookshot shortcuts to "NONE" from "None".
+
 ## v5.1.1
 
 - Dependency updates to avoid security vulnerabilities (minimist).
