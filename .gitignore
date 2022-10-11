@@ -3,3 +3,4 @@ coverage/
 cloudformation/*.json
 node_modules
 .python-version
+.vscode
