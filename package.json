@@ -11,7 +11,7 @@
     "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
-    "shortcuts-api-doc": "documentation build lib/shortcuts/index.js -f md -o lib/shortcuts/api.md"
+    "shortcuts-api-doc": "jsdoc lib/shortcuts/*.js -R ./readme.md -r -d docs/shortcuts/api"
   },
   "bin": {
     "build-template": "bin/build-template.js",
@@ -33,9 +33,9 @@
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
-    "documentation": "^14.0.0",
     "eslint": "^4.18.2",
     "eslint-plugin-node": "^6.0.1",
+    "jsdoc": "^3.6.11",
     "nyc": "^14.1.0",
     "opener": "^1.4.1",
     "tap-spec": "^5.0.0",

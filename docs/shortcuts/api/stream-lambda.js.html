@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: stream-lambda.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: stream-lambda.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict';
+
+const Lambda = require('./lambda');
+
+/**
+ * A Lambda function that runs in response to events in a DynamoDB or Kinesis
+ * stream. Includes a Log Group, a Role, an Alarm on function errors, and an event
+ * source mapping.
+ *
+ * @param {Object} options - Extends the options for [`Lambda`](#lambda) with the following additional attributes:
+ * @param {String} options.EventSourceArn - See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-eventsourcearn).
+ * @param {Number} [options.BatchSize=1] - See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-batchsize).
+ * @param {Number} [options.MaximumBatchingWindowInSeconds=undefined] - See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-maximumbatchingwindowinseconds).
+ * @param {Boolean} [options.Enabled=true] - See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled).
+ * @param {String} [options.StartingPosition='LATEST'] - See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition).
+ *
+ * @example
+ * const cf = require('@mapbox/cloudfriend');
+ *
+ * const myTemplate = { ... };
+ *
+ * const lambda = new cf.shortcuts.StreamLambda({
+ *   LogicalName: 'MyLambda',
+ *   Code: {
+ *     S3Bucket: 'my-code-bucket',
+ *     S3Key: 'path/to/code.zip'
+ *   },
+ *   EventSourceArn: cf.getAtt('MyStream', 'Arn')
+ * });
+ *
+ * module.exports = cf.merge(myTemplate, lambda);
+ */
+class StreamLambda extends Lambda {
+  constructor(options) {
+    if (!options) throw new Error('Options required');
+    super(options);
+
+    const {
+      EventSourceArn,
+      BatchSize = 1,
+      MaximumBatchingWindowInSeconds,
+      Enabled = true,
+      StartingPosition = 'LATEST'
+    } = options;
+
+    const required = [EventSourceArn];
+    if (required.some((variable) => !variable))
+      throw new Error('You must provide an EventSourceArn');
+
+    this.Resources[`${this.LogicalName}EventSource`] = {
+      Type: 'AWS::Lambda::EventSourceMapping',
+      Condition: this.Condition,
+      Properties: {
+        BatchSize,
+        MaximumBatchingWindowInSeconds,
+        Enabled,
+        EventSourceArn,
+        FunctionName: { Ref: this.LogicalName },
+        StartingPosition
+      }
+    };
+
+    const generatedRoleRef = this.Resources[`${this.LogicalName}Role`];
+    const streamStatement = {
+      Effect: 'Allow',
+      Action: [
+        'dynamodb:GetRecords',
+        'dynamodb:GetShardIterator',
+        'dynamodb:DescribeStream',
+        'dynamodb:ListStreams',
+        'kinesis:GetRecords',
+        'kinesis:GetShardIterator',
+        'kinesis:DescribeStream',
+        'kinesis:ListStreams'
+      ],
+      Resource: [
+        EventSourceArn,
+        { 'Fn::Sub': ['${arn}/*', { arn: EventSourceArn }] }
+      ]
+    };
+
+    if (generatedRoleRef &amp;&amp; generatedRoleRef.Properties.Policies) {
+      generatedRoleRef.Properties.Policies[0].PolicyDocument.Statement.push(streamStatement);
+    } else if (generatedRoleRef) {
+      generatedRoleRef.Properties.Policies = [
+        {
+          PolicyName: 'StreamAccess',
+          PolicyDocument: {
+            Version: '2012-10-17',
+            Statement: [streamStatement]
+          }
+        }
+      ];
+    }
+  }
+}
+
+module.exports = StreamLambda;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CrossAccountRole.html">CrossAccountRole</a></li><li><a href="EventLambda.html">EventLambda</a></li><li><a href="GlueDatabase.html">GlueDatabase</a></li><li><a href="GlueJsonTable.html">GlueJsonTable</a></li><li><a href="GlueOrcTable.html">GlueOrcTable</a></li><li><a href="GlueParquetTable.html">GlueParquetTable</a></li><li><a href="GluePrestoView.html">GluePrestoView</a></li><li><a href="GlueSparkView.html">GlueSparkView</a></li><li><a href="GlueTable.html">GlueTable</a></li><li><a href="KinesisFirehoseBase.html">KinesisFirehoseBase</a></li><li><a href="Lambda.html">Lambda</a></li><li><a href="LogSubscriptionLambda.html">LogSubscriptionLambda</a></li><li><a href="Queue.html">Queue</a></li><li><a href="QueueLambda.html">QueueLambda</a></li><li><a href="Role.html">Role</a></li><li><a href="S3KinesisFirehose.html">S3KinesisFirehose</a></li><li><a href="ScheduledLambda.html">ScheduledLambda</a></li><li><a href="ServiceRole.html">ServiceRole</a></li><li><a href="StreamLambda.html">StreamLambda</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Oct 11 2022 12:18:46 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

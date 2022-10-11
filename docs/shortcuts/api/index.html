@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>cloudfriend</h1>
+<p><a href="https://travis-ci.com/mapbox/cloudfriend"><img src="https://travis-ci.com/mapbox/cloudfriend.svg?branch=master" alt="Build Status"></a></p>
+<p>Helper functions for assembling CloudFormation templates in JavaScript.</p>
+<h2>Shortcuts</h2>
+<p>Cloudfriend contains a library of JS classes that reduce the amount of &quot;boilerplate&quot; CloudFormation that you need to write to setup a common set of AWS Resources. See <a href="./lib/shortcuts/readme.md">the shortcuts readme for more information</a>, or <a href="./docs/shortcuts/api/index.html">the shortcuts API documentation to look at shortcut-specific configuration</a>.</p>
+<h2>Intrinsic functions and conditions</h2>
+<p>These are functions that you can use in place of various CloudFormation objects.</p>
+<table>
+<thead>
+<tr>
+<th>CloudFriend</th>
+<th>CloudFormation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base64(value)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-base64.html">Fn::Base64</a></td>
+</tr>
+<tr>
+<td>cidr(ipBlock, count, cidrBits)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-cidr.html">Fn::Cidr</a></td>
+</tr>
+<tr>
+<td>findInMap(mapping, key, attr)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-findinmap.html">Fn::FindInMap</a></td>
+</tr>
+<tr>
+<td>getAtt(obj, key)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getatt.html">Fn::GetAtt</a></td>
+</tr>
+<tr>
+<td>getAzs(region)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-getavailabilityzones.html">Fn::GetAZs</a></td>
+</tr>
+<tr>
+<td>join(delimiter, pieces)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-join.html">Fn::Join</a></td>
+</tr>
+<tr>
+<td>split(delimiter, string)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-split.html">Fn::Split</a></td>
+</tr>
+<tr>
+<td>select(index, list)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-select.html">Fn::Select</a></td>
+</tr>
+<tr>
+<td>ref(name)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html">Ref</a></td>
+</tr>
+<tr>
+<td>userData(list)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-base64.html">Fn::Base64</a> and <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-join.html">Fn::Join</a> with <code>\n</code> delimiter</td>
+</tr>
+<tr>
+<td>and(conditions)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e121706">Fn::And</a></td>
+</tr>
+<tr>
+<td>equals(a, b)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e121788">Fn::Equals</a></td>
+</tr>
+<tr>
+<td>if(condition, ifTrue, ifFalse)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e121863">Fn::If</a></td>
+</tr>
+<tr>
+<td>not(condition)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122042">Fn::Not</a></td>
+</tr>
+<tr>
+<td>or(conditions)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122130">Fn::Or</a></td>
+</tr>
+<tr>
+<td>notEquals(a, b)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e122042">Fn::Not</a> and <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#d0e121788">Fn::Equals</a></td>
+</tr>
+<tr>
+<td>sub(str, variables)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html">Fn::Sub</a></td>
+</tr>
+<tr>
+<td>importValue(sharedValue)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html">Fn::ImportValue</a>,</td>
+</tr>
+<tr>
+<td>arn(service, suffix)</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html">Fn::Sub</a> designed for an ARN</td>
+</tr>
+<tr>
+<td>transform(name, parameters)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-transform.html">Fn::Transform</a></td>
+</tr>
+<tr>
+<td>contains(strings, s)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-contains">Fn::Contains</a></td>
+</tr>
+<tr>
+<td>eachMemberEquals(strings, s)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-eachmemberequals">Fn::EachMemberEquals</a></td>
+</tr>
+<tr>
+<td>eachMemberIn(stringsToCheck, stringsToMatch)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-eachmemberin">Fn::EachMemberIn</a></td>
+</tr>
+<tr>
+<td>refAll(parameterType)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-refall">Fn::RefAll</a></td>
+</tr>
+<tr>
+<td>valueOf(parameterLogicalId, attribute)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-valueof">Fn::ValueOf</a></td>
+</tr>
+<tr>
+<td>valueOfAll(parameterType, attribute)</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-valueofall">Fn::ValueOfAll</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Pseudo parameters</h2>
+<p>These are static properties of <code>cloudfriend</code> that you can use to reference various CloudFormation objects.</p>
+<table>
+<thead>
+<tr>
+<th>CloudFriend</th>
+<th>CloudFormation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>accountId</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::AccountId</a></td>
+</tr>
+<tr>
+<td>notificationArns</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::NotificationARNs</a></td>
+</tr>
+<tr>
+<td>noValue</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::NoValue</a></td>
+</tr>
+<tr>
+<td>region</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::Region</a></td>
+</tr>
+<tr>
+<td>stackId</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::StackId</a></td>
+</tr>
+<tr>
+<td>stackName</td>
+<td><a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html">AWS::StackName</a></td>
+</tr>
+<tr>
+<td>partition</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-partition">AWS::Partition</a></td>
+</tr>
+<tr>
+<td>urlSuffix</td>
+<td><a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-urlsuffix">AWS::URLSuffix</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Other helpers</h2>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>build(file, opts)</td>
+<td>Builds a template defined by a static JavaScript export, a synchronous or an asynchronous function.</td>
+</tr>
+<tr>
+<td>validate(file)</td>
+<td>Uses the <code>cloudformation:ValidateTemplate</code> API call to perform rudimentary template validation</td>
+</tr>
+<tr>
+<td>merge(...template)</td>
+<td>Merges templates together. Throws errors if logical names are reused. <code>Transform</code> macros from all template arguments are merged into a single array, in order of their appearance in the template arguments, and an error is thrown if any macro is repeated.</td>
+</tr>
+</tbody>
+</table>
+<h2>CLI tools</h2>
+<p>By installing cloudfriend globally, it can provide you with simple CLI tools for building and validating CloudFormation templates.</p>
+<pre class="prettyprint source"><code># either...
+$ git clone https://github.com/mapbox/cloudfriend && cd cloudfriend && npm link
+# ... or ...
+$ npm install -g @mapbox/cloudfriend
+</code></pre>
+<p>Then, to build a template:</p>
+<pre class="prettyprint source"><code># Prints the template as JSON to stdout
+$ build-template path/to/template.js
+</code></pre>
+<p>Or, to validate a template:</p>
+<pre class="prettyprint source"><code># Make sure that your shell is configured to make AWS requests
+$ validate-template path/to/template.js
+</code></pre>
+<p>You may also specify a region for validation:</p>
+<pre class="prettyprint source"><code># Make sure that your shell is configured to make AWS requests
+$ validate-template path/to/template.js us-east-1
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CrossAccountRole.html">CrossAccountRole</a></li><li><a href="EventLambda.html">EventLambda</a></li><li><a href="GlueDatabase.html">GlueDatabase</a></li><li><a href="GlueJsonTable.html">GlueJsonTable</a></li><li><a href="GlueOrcTable.html">GlueOrcTable</a></li><li><a href="GlueParquetTable.html">GlueParquetTable</a></li><li><a href="GluePrestoView.html">GluePrestoView</a></li><li><a href="GlueSparkView.html">GlueSparkView</a></li><li><a href="GlueTable.html">GlueTable</a></li><li><a href="KinesisFirehoseBase.html">KinesisFirehoseBase</a></li><li><a href="Lambda.html">Lambda</a></li><li><a href="LogSubscriptionLambda.html">LogSubscriptionLambda</a></li><li><a href="Queue.html">Queue</a></li><li><a href="QueueLambda.html">QueueLambda</a></li><li><a href="Role.html">Role</a></li><li><a href="S3KinesisFirehose.html">S3KinesisFirehose</a></li><li><a href="ScheduledLambda.html">ScheduledLambda</a></li><li><a href="ServiceRole.html">ServiceRole</a></li><li><a href="StreamLambda.html">StreamLambda</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Oct 11 2022 12:18:46 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
