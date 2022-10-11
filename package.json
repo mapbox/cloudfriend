@@ -11,7 +11,7 @@
     "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
-    "shortcuts-api-doc": "jsdoc2md lib/shortcuts/*.js > docs/shortcuts/api.md"
+    "shortcuts-api-doc": "jsdoc2md lib/shortcuts/*.js > lib/shortcuts/api.md"
   },
   "bin": {
     "build-template": "bin/build-template.js",
