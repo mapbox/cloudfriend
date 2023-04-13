@@ -6,7 +6,9 @@ Helper functions for assembling CloudFormation templates in JavaScript.
 
 ## Shortcuts
 
-Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write to setup a common set of AWS Resources. See [the shortcuts readme for more information](./lib/shortcuts/readme.md), or [the shortcuts API documentation to look at shortcut-specific configuration](./lib/shortcuts/api.md).
+Cloudfriend contains a library of JS classes that reduce the amount of "boilerplate" CloudFormation that you need to write to
+setup a common set of AWS Resources. See [the shortcuts readme for more information](./lib/shortcuts/readme.md), or [the shortcuts
+API documentation to look at shortcut-specific configuration](./lib/shortcuts/api.md).
 
 ## Intrinsic functions and conditions
 
@@ -41,7 +43,6 @@ refAll(parameterType) | [Fn::RefAll](https://docs.aws.amazon.com/AWSCloudFormati
 valueOf(parameterLogicalId, attribute) | [Fn::ValueOf](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-valueof)
 valueOfAll(parameterType, attribute) | [Fn::ValueOfAll](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-rules.html#fn-valueofall)
 
-
 ## Pseudo parameters
 
 These are static properties of `cloudfriend` that you can use to reference various CloudFormation objects.
@@ -56,7 +57,6 @@ stackId | [AWS::StackId](http://docs.aws.amazon.com/AWSCloudFormation/latest/Use
 stackName | [AWS::StackName](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html)
 partition | [AWS::Partition](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-partition)
 urlSuffix | [AWS::URLSuffix](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html#cfn-pseudo-param-urlsuffix)
-
 
 ## Other helpers
 

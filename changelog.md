@@ -10,23 +10,29 @@
 - Dependency updates to avoid security vulnerabilities (minimist).
 
 ## v5.1.0
+
 - Lambda shortcuts now support custom Docker images.
 
 ## v5.0.2
+
 - Fixes handling custom access log formats in hookshot shortcuts.
 
 ## v5.0.1
+
 - Improves data type mappings between Glue and Presto when using the `GluePrestoView` shortcut.
 
 ## v5.0.0
+
 - The Lambda shortcuts now use `nodejs12.x` as the default runtime.
 - There is no longer any constraint on the useable Lambda runtimes.
 
 ## v4.6.0
+
 - Adds top-level `Rules` section support to `cf.merge`. Each key in `Rules` must have a unique name.
 - Adds rule-specific intrinsic functions: `contains`, `eachMemberEquals`, `eachMemberIn`, `refAll`, `valueOf`, `valueOfAll`
 
 ## v4.5.1
+
 - Fixes a bug present in v4.4.0 and v4.5.0 where Lambda shortcuts' Conditions were not passed to the generated IAM Roles.
 
 ## v4.5.0
@@ -175,7 +181,7 @@ signature-verification in the `.Github()` case.
 
 ## v2.0.1
 
-- various shortcut bugfixes. See https://github.com/mapbox/cloudfriend/pull/34
+- various shortcut bugfixes. See <https://github.com/mapbox/cloudfriend/pull/34>
 
 ## v2.0.0
 
