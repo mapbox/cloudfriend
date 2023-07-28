@@ -1,5 +1,11 @@
 # Changelog
 
+## v7.0.0
+
+- Updates default node runtime for lambda shortcuts to node18.x.
+- Suppress AWS SDK V2 maintinence message for `validate-template`.
+- Updates `aws-sdk` to version 2.1425.0.
+
 ## v6.0.0
 
 - Updates default node runtime for lambda shortcuts to node16.x.
