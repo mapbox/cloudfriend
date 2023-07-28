@@ -2,8 +2,9 @@ language: node_js
 node_js:
 - 14
 - 16
+- 18
 before_install:
 - pyenv install 3.7.9
 - pyenv global 3.7.9
-- pip install aws-sam-cli==1.59.0
-- pip install cfn-lint==0.60.0
+- pip install aws-sam-cli==1.94.0
+- pip install cfn-lint==0.79.4
