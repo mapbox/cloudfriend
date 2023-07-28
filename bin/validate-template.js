@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 'use strict';
+
 const cloudfriend = require('..');
 const argv = require('minimist')(process.argv.slice(2), {
   default: { region: 'us-east-1' },
