@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeploymentec912fae"
+          "Ref": "PassDeployment0e352c83"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -52,7 +52,7 @@
         }
       }
     },
-    "PassDeploymentec912fae": {
+    "PassDeployment0e352c83": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -179,7 +179,7 @@
         },
         "Handler": "index.lambda",
         "MemorySize": 128,
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 30,
         "Role": {
           "Fn::GetAtt": [
@@ -320,7 +320,7 @@
         },
         "Handler": "index.handler",
         "MemorySize": 128,
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [

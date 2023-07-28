@@ -162,7 +162,7 @@ test('[shortcuts] lambda', (assert) => {
     Layers: ['arn:aws:fake:layer/abc'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
-    Runtime: 'nodejs16.x',
+    Runtime: 'nodejs18.x',
     Tags: [{ Key: 'a', Value: 'b' }],
     Timeout: 30,
     TracingConfig: { Mode: 'Active' },
