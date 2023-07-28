@@ -11,6 +11,24 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.base64('secret'), { 'Fn::Base64': 'secret' }, 'base64');
   assert.deepEqual(cloudfriend.cidr('ipBlock', 1, 2), { 'Fn::Cidr': ['ipBlock', 1, 2] }, 'cidr');
   assert.deepEqual(cloudfriend.findInMap('mapping', 'key', 'value'), { 'Fn::FindInMap': ['mapping', 'key', 'value'] }, 'lookup');
+  assert.deepEqual(
+    cloudfriend.forEach('somethings', 'topic', ['abra', 'cadabra'], 'magic', {
+      Type: 'AWS::SNS::Topic',
+      Properties: { TopicName: cloudfriend.ref('topic') }
+    }),
+    {
+      'Fn::ForEach::somethings': [
+        'topic',
+        ['abra', 'cadabra'],
+        'magic${topic}',
+        {
+          Type: 'AWS::SNS::Topic',
+          Properties: { TopicName: { 'Ref': 'topic' } }
+        }
+      ]
+    },
+    'forEach'
+  );
   assert.deepEqual(cloudfriend.getAtt('obj', 'key'), { 'Fn::GetAtt': ['obj', 'key'] }, 'attr');
   assert.deepEqual(cloudfriend.getAzs(), { 'Fn::GetAZs': '' }, 'azs (no value specified)');
   assert.deepEqual(cloudfriend.getAzs('us-east-1'), { 'Fn::GetAZs': 'us-east-1' }, 'azs (value specified)');
