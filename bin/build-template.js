@@ -2,6 +2,7 @@
 
 'use strict';
 
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
 const cloudfriend = require('..');
 const argv = require('minimist')(process.argv.slice(2), {
   default: { region: 'us-east-1' },
