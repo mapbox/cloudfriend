@@ -1442,6 +1442,18 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'throws with invalid LoggingLevel'
   );
 
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'INFO',
+        Runtime: 'python3.7'
+      }),
+    /Only valid nodejs runtimes are supported, received: 'python3.7'/,
+    'throws with invalid lambda Runtime'
+  );
+
   const to = new cf.shortcuts.Lambda({
     LogicalName: 'Destination',
     Code: {
@@ -1540,6 +1552,21 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'expected resources generated with access logs'
   );
 
+  passthrough = new cf.shortcuts.hookshot.Passthrough({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    Runtime: 'nodejs16.x'
+  });
+
+  template = cf.merge(passthrough, to);
+  if (update)
+    fixtures.update('hookshot-passthrough-compatible-runtime-nodejs16.x', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-compatible-runtime-nodejs16.x')),
+    'expected inline code when lambda runtime is nodejs16.x'
+  );
+
   assert.end();
 });
 
@@ -1548,6 +1575,18 @@ test('[shortcuts] hookshot github', (assert) => {
     () => new cf.shortcuts.hookshot.Github(),
     /You must provide a Prefix, and PassthroughTo/,
     'throws without required parameters'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'INFO',
+        Runtime: 'python3.7'
+      }),
+    /Only valid nodejs runtimes are supported, received: 'python3.7'/,
+    'throws with invalid lambda Runtime'
   );
 
   const to = new cf.shortcuts.Lambda({
@@ -1596,6 +1635,20 @@ test('[shortcuts] hookshot github', (assert) => {
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-github-secret-ref')),
     'expected resources generated when secret passed as ref'
+  );
+
+  github = new cf.shortcuts.hookshot.Github({
+    Prefix: 'Pass',
+    PassthroughTo: 'Destination',
+    WebhookSecret: cf.ref('SomeParameter'),
+    Runtime: 'nodejs16.x'
+  });
+  template = cf.merge(github, to);
+  if (update) fixtures.update('hookshot-github-compatible-runtime-nodejs16.x', template);
+  assert.deepEqual(
+    normalizeDeployment(noUndefined(template)),
+    normalizeDeployment(fixtures.get('hookshot-github-compatible-runtime-nodejs16.x')),
+    'expected inline code when lambda runtime is nodejs16.x'
   );
 
   assert.end();
