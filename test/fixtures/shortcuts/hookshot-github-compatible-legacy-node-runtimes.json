@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeployment4d9930cb"
+          "Ref": "PassDeploymentdc0eb3f8"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -43,7 +43,7 @@
         ]
       }
     },
-    "PassDeployment4d9930cb": {
+    "PassDeploymentdc0eb3f8": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -162,9 +162,7 @@
             "Fn::Sub": [
               "'use strict';\n\nconst crypto = require('crypto');\nconst AWS = require('aws-sdk');\nconst client = new AWS.Lambda();\nconst secret = '${WebhookSecret}';\n\nmodule.exports.lambda = (event, context, callback) => {\n  const body = event.body;\n  const hash = 'sha1=' + crypto\n    .createHmac('sha1', secret)\n    .update(new Buffer(JSON.stringify(body)))\n    .digest('hex');\n\n  if (event.signature !== hash)\n    return callback('invalid: signature does not match');\n\n  if (body.zen) return callback(null, 'ignored ping request');\n\n  const lambdaParams = {\n    FunctionName: '${Destination}',\n    Payload: JSON.stringify(event.body),\n    InvocationType: 'Event'\n  };\n\n  client.invoke(lambdaParams).promise()\n    .then(() => callback(null, 'success'))\n    .catch((err) => callback(err));\n};",
               {
-                "WebhookSecret": {
-                  "Ref": "SomeParameter"
-                }
+                "WebhookSecret": "abc123"
               }
             ]
           }
@@ -419,9 +417,7 @@
     },
     "PassSecretOutput": {
       "Description": "A secret key to give Github to use when signing webhook requests",
-      "Value": {
-        "Ref": "SomeParameter"
-      }
+      "Value": "abc123"
     }
   }
 }

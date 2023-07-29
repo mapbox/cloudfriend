@@ -1560,10 +1560,10 @@ test('[shortcuts] hookshot passthrough', (assert) => {
 
   template = cf.merge(passthrough, to);
   if (update)
-    fixtures.update('hookshot-passthrough-compatible-runtime-nodejs16.x', template);
+    fixtures.update('hookshot-passthrough-compatible-legacy-node-runtimes', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
-    normalizeDeployment(fixtures.get('hookshot-passthrough-compatible-runtime-nodejs16.x')),
+    normalizeDeployment(fixtures.get('hookshot-passthrough-compatible-legacy-node-runtimes')),
     'expected inline code when lambda runtime is nodejs16.x'
   );
 
@@ -1640,14 +1640,14 @@ test('[shortcuts] hookshot github', (assert) => {
   github = new cf.shortcuts.hookshot.Github({
     Prefix: 'Pass',
     PassthroughTo: 'Destination',
-    WebhookSecret: cf.ref('SomeParameter'),
+    WebhookSecret: 'abc123',
     Runtime: 'nodejs16.x'
   });
   template = cf.merge(github, to);
-  if (update) fixtures.update('hookshot-github-compatible-runtime-nodejs16.x', template);
+  if (update) fixtures.update('hookshot-github-compatible-legacy-node-runtimes', template);
   assert.deepEqual(
     normalizeDeployment(noUndefined(template)),
-    normalizeDeployment(fixtures.get('hookshot-github-compatible-runtime-nodejs16.x')),
+    normalizeDeployment(fixtures.get('hookshot-github-compatible-legacy-node-runtimes')),
     'expected inline code when lambda runtime is nodejs16.x'
   );
 
