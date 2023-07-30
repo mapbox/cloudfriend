@@ -1450,8 +1450,20 @@ test('[shortcuts] hookshot passthrough', (assert) => {
         LoggingLevel: 'INFO',
         Runtime: 'python3.7'
       }),
-    /Only valid nodejs runtimes are supported, received: 'python3.7'/,
-    'throws with invalid lambda Runtime'
+    /Only valid nodejs runtimes are supported for hookshot lambdas, received: 'python3.7'/,
+    'throws with invalid lambda Runtime python3.7'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'INFO',
+        Runtime: 'nodejs16.x'
+      }),
+    /Only nodejs runtimes >= 18 are supported for hookshot lambdas, received: 'nodejs16.x'/,
+    'throws with invalid lambda Runtime nodejs16.x'
   );
 
   const to = new cf.shortcuts.Lambda({
@@ -1552,21 +1564,6 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'expected resources generated with access logs'
   );
 
-  passthrough = new cf.shortcuts.hookshot.Passthrough({
-    Prefix: 'Pass',
-    PassthroughTo: 'Destination',
-    Runtime: 'nodejs16.x'
-  });
-
-  template = cf.merge(passthrough, to);
-  if (update)
-    fixtures.update('hookshot-passthrough-compatible-legacy-node-runtimes', template);
-  assert.deepEqual(
-    normalizeDeployment(noUndefined(template)),
-    normalizeDeployment(fixtures.get('hookshot-passthrough-compatible-legacy-node-runtimes')),
-    'expected inline code when lambda runtime is nodejs16.x'
-  );
-
   assert.end();
 });
 
@@ -1579,14 +1576,24 @@ test('[shortcuts] hookshot github', (assert) => {
 
   assert.throws(
     () =>
-      new cf.shortcuts.hookshot.Passthrough({
+      new cf.shortcuts.hookshot.Github({
         Prefix: 'Pass',
         PassthroughTo: 'Destination',
-        LoggingLevel: 'INFO',
         Runtime: 'python3.7'
       }),
-    /Only valid nodejs runtimes are supported, received: 'python3.7'/,
-    'throws with invalid lambda Runtime'
+    /Only valid nodejs runtimes are supported for hookshot lambdas, received: 'python3.7'/,
+    'throws with invalid lambda Runtime python3.7'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Github({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        Runtime: 'nodejs16.x'
+      }),
+    /Only nodejs runtimes >= 18 are supported for hookshot lambdas, received: 'nodejs16.x'/,
+    'throws with invalid lambda Runtime nodejs16.x'
   );
 
   const to = new cf.shortcuts.Lambda({
@@ -1635,20 +1642,6 @@ test('[shortcuts] hookshot github', (assert) => {
     normalizeDeployment(noUndefined(template)),
     normalizeDeployment(fixtures.get('hookshot-github-secret-ref')),
     'expected resources generated when secret passed as ref'
-  );
-
-  github = new cf.shortcuts.hookshot.Github({
-    Prefix: 'Pass',
-    PassthroughTo: 'Destination',
-    WebhookSecret: 'abc123',
-    Runtime: 'nodejs16.x'
-  });
-  template = cf.merge(github, to);
-  if (update) fixtures.update('hookshot-github-compatible-legacy-node-runtimes', template);
-  assert.deepEqual(
-    normalizeDeployment(noUndefined(template)),
-    normalizeDeployment(fixtures.get('hookshot-github-compatible-legacy-node-runtimes')),
-    'expected inline code when lambda runtime is nodejs16.x'
   );
 
   assert.end();

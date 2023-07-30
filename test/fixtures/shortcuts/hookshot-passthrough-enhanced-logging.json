@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeploymentdc0eb3f8"
+          "Ref": "PassDeployment32141620"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -43,7 +43,7 @@
         ]
       }
     },
-    "PassDeploymentdc0eb3f8": {
+    "PassDeployment32141620": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -150,7 +150,7 @@
       "Properties": {
         "Code": {
           "ZipFile": {
-            "Fn::Sub": "const { InvokeCommand, LambdaClient } = require('@aws-sdk/client-lambda');\nconst client = new LambdaClient();\n  \nmodule.exports.lambda = (event, context, callback) => {\n  if (event.httpMethod === 'OPTIONS') {\n    const requestHeaders = event.headers['Access-Control-Request-Headers'] || event.headers['access-control-request-headers'];\n    const response = {\n      statusCode: 200,\n      body: '',\n      headers: {\n        'Access-Control-Allow-Headers': requestHeaders,\n        'Access-Control-Allow-Methods': 'POST, OPTIONS',\n        'Access-Control-Allow-Origin': '*'\n      }\n    };\n    return callback(null, response);\n  }\n  \n  const command = new InvokeCommand({\n    FunctionName: '${Destination}',\n    Payload: JSON.stringify(event)\n  });\n  \n  client.send(command)\n    .then((response) => {\n      if (!response || !response.Payload)\n        return callback(new Error('Your Lambda function Destination did not provide a payload'));\n\n      var payload = JSON.parse(response.Payload);\n      payload.headers = payload.headers || {};\n      payload.headers['Access-Control-Allow-Origin'] = '*';\n      callback(null, payload);\n    })\n  .catch((err) => callback(err));\n};"
+            "Fn::Sub": "const { InvokeCommand, LambdaClient } = require('@aws-sdk/client-lambda');\nconst client = new LambdaClient();\n\nmodule.exports.lambda = (event, context, callback) => {\n  if (event.httpMethod === 'OPTIONS') {\n    const requestHeaders = event.headers['Access-Control-Request-Headers'] || event.headers['access-control-request-headers'];\n    const response = {\n      statusCode: 200,\n      body: '',\n      headers: {\n        'Access-Control-Allow-Headers': requestHeaders,\n        'Access-Control-Allow-Methods': 'POST, OPTIONS',\n        'Access-Control-Allow-Origin': '*'\n      }\n    };\n    return callback(null, response);\n  }\n\n  const command = new InvokeCommand({\n    FunctionName: '${Destination}',\n    Payload: JSON.stringify(event)\n  };\n\n  client.send(command)\n    .then((response) => {\n      if (!response || !response.Payload)\n        return callback(new Error('Your Lambda function Destination did not provide a payload'));\n\n      var payload = JSON.parse(response.Payload);\n      payload.headers = payload.headers || {};\n      payload.headers['Access-Control-Allow-Origin'] = '*';\n      callback(null, payload);\n    })\n    .catch((err) => callback(err));\n};"
           }
         },
         "Description": {
