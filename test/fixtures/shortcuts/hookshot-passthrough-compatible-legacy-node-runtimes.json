@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeploymentdf0c9696"
+          "Ref": "PassDeployment5dcf4ca7"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -43,7 +43,7 @@
         ]
       }
     },
-    "PassDeploymentdf0c9696": {
+    "PassDeployment5dcf4ca7": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {
@@ -68,6 +68,27 @@
         "PathPart": "webhook"
       }
     },
+    "PassOptionsMethod": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "RestApiId": {
+          "Ref": "PassApi"
+        },
+        "ResourceId": {
+          "Ref": "PassResource"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "Integration": {
+          "Type": "AWS_PROXY",
+          "IntegrationHttpMethod": "POST",
+          "Uri": {
+            "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PassFunction.Arn}/invocations"
+          }
+        }
+      }
+    },
     "PassMethod": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -81,48 +102,12 @@
         "AuthorizationType": "NONE",
         "HttpMethod": "POST",
         "Integration": {
-          "Type": "AWS",
+          "Type": "AWS_PROXY",
           "IntegrationHttpMethod": "POST",
-          "IntegrationResponses": [
-            {
-              "StatusCode": "200"
-            },
-            {
-              "StatusCode": "500",
-              "SelectionPattern": "^error.*"
-            },
-            {
-              "StatusCode": "403",
-              "SelectionPattern": "^invalid.*"
-            }
-          ],
           "Uri": {
             "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${PassFunction.Arn}/invocations"
-          },
-          "RequestTemplates": {
-            "application/json": "{\"signature\":\"$input.params('X-Hub-Signature')\",\"body\":$input.json('$')}"
           }
-        },
-        "MethodResponses": [
-          {
-            "StatusCode": "200",
-            "ResponseModels": {
-              "application/json": "Empty"
-            }
-          },
-          {
-            "StatusCode": "500",
-            "ResponseModels": {
-              "application/json": "Empty"
-            }
-          },
-          {
-            "StatusCode": "403",
-            "ResponseModels": {
-              "application/json": "Empty"
-            }
-          }
-        ]
+        }
       }
     },
     "PassPermission": {
@@ -136,6 +121,12 @@
         "SourceArn": {
           "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PassApi}/*"
         }
+      }
+    },
+    "PassSecret": {
+      "Type": "AWS::ApiGateway::ApiKey",
+      "Properties": {
+        "Enabled": false
       }
     },
     "PassFunctionLogs": {
@@ -159,12 +150,7 @@
       "Properties": {
         "Code": {
           "ZipFile": {
-            "Fn::Sub": [
-              "'use strict';\n\nconst crypto = require('crypto');\nconst { InvokeCommand, LambdaClient } = require('@aws-sdk/client-lambda');\nconst client = new LambdaClient();\nconst secret = '${WebhookSecret}';\n\nmodule.exports.lambda = (event, context, callback) => {\n  const body = event.body;\n  const hash = 'sha1=' + crypto\n    .createHmac('sha1', secret)\n    .update(Buffer.from(JSON.stringify(body)))\n    .digest('hex');\n\n  if (event.signature !== hash)\n    return callback('invalid: signature does not match');\n\n  if (body.zen) return callback(null, 'ignored ping request');\n\n  const command = new InvokeCommand({\n    FunctionName: '${Destination}',\n    Payload: JSON.stringify(event.body),\n    InvocationType: 'Event'\n  });\n\n  client.send(command)\n    .then(() => callback(null, 'success'))\n    .catch((err) => callback(err));\n};",
-              {
-                "WebhookSecret": "abc123"
-              }
-            ]
+            "Fn::Sub": "const { InvokeCommand, LambdaClient } = require('@aws-sdk/client-lambda');\nconst client = new LambdaClient();\n\nmodule.exports.lambda = (event, context, callback) => {\n  if (event.httpMethod === 'OPTIONS') {\n    const requestHeaders = event.headers['Access-Control-Request-Headers'] || event.headers['access-control-request-headers'];\n    const response = {\n      statusCode: 200,\n      body: '',\n      headers: {\n        'Access-Control-Allow-Headers': requestHeaders,\n        'Access-Control-Allow-Methods': 'POST, OPTIONS',\n        'Access-Control-Allow-Origin': '*'\n      }\n    };\n    return callback(null, response);\n  }\n\n  const command = new InvokeCommand({\n    FunctionName: '${Destination}',\n    Payload: JSON.stringify(event)\n  };\n\n  lambda.invoke(lambdaParams).promise()\n    .then((response) => {\n      if (!response || !response.Payload)\n        return callback(new Error('Your Lambda function Destination did not provide a payload'));\n\n      var payload = JSON.parse(response.Payload);\n      payload.headers = payload.headers || {};\n      payload.headers['Access-Control-Allow-Origin'] = '*';\n      callback(null, payload);\n    })\n    .catch((err) => callback(err));\n};"
           }
         },
         "Description": {
@@ -175,7 +161,7 @@
         },
         "Handler": "index.lambda",
         "MemorySize": 128,
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs16.x",
         "Timeout": 30,
         "Role": {
           "Fn::GetAtt": [
@@ -417,7 +403,9 @@
     },
     "PassSecretOutput": {
       "Description": "A secret key to give Github to use when signing webhook requests",
-      "Value": "abc123"
+      "Value": {
+        "Ref": "PassSecret"
+      }
     }
   }
 }
