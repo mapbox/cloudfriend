@@ -38,7 +38,7 @@
         "Handler": "index.handler",
         "MemorySize": 128,
         "ReservedConcurrentExecutions": 0,
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 300,
         "Role": {
           "Fn::GetAtt": [

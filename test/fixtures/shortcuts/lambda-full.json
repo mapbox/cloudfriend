@@ -57,7 +57,7 @@
         ],
         "MemorySize": 512,
         "ReservedConcurrentExecutions": 10,
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs18.x",
         "Timeout": 30,
         "TracingConfig": {
           "Mode": "Active"

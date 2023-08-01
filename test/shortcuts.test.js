@@ -162,7 +162,7 @@ test('[shortcuts] lambda', (assert) => {
     Layers: ['arn:aws:fake:layer/abc'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
-    Runtime: 'nodejs16.x',
+    Runtime: 'nodejs18.x',
     Tags: [{ Key: 'a', Value: 'b' }],
     Timeout: 30,
     TracingConfig: { Mode: 'Active' },
@@ -1442,6 +1442,30 @@ test('[shortcuts] hookshot passthrough', (assert) => {
     'throws with invalid LoggingLevel'
   );
 
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'INFO',
+        Runtime: 'python3.7'
+      }),
+    /Only valid nodejs runtimes are supported for hookshot lambdas, received: 'python3.7'/,
+    'throws with invalid lambda Runtime python3.7'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Passthrough({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        LoggingLevel: 'INFO',
+        Runtime: 'nodejs16.x'
+      }),
+    /Only nodejs runtimes >= 18 are supported for hookshot lambdas, received: 'nodejs16.x'/,
+    'throws with invalid lambda Runtime nodejs16.x'
+  );
+
   const to = new cf.shortcuts.Lambda({
     LogicalName: 'Destination',
     Code: {
@@ -1548,6 +1572,28 @@ test('[shortcuts] hookshot github', (assert) => {
     () => new cf.shortcuts.hookshot.Github(),
     /You must provide a Prefix, and PassthroughTo/,
     'throws without required parameters'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Github({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        Runtime: 'python3.7'
+      }),
+    /Only valid nodejs runtimes are supported for hookshot lambdas, received: 'python3.7'/,
+    'throws with invalid lambda Runtime python3.7'
+  );
+
+  assert.throws(
+    () =>
+      new cf.shortcuts.hookshot.Github({
+        Prefix: 'Pass',
+        PassthroughTo: 'Destination',
+        Runtime: 'nodejs16.x'
+      }),
+    /Only nodejs runtimes >= 18 are supported for hookshot lambdas, received: 'nodejs16.x'/,
+    'throws with invalid lambda Runtime nodejs16.x'
   );
 
   const to = new cf.shortcuts.Lambda({
