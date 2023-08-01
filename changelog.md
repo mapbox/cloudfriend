@@ -1,5 +1,10 @@
 # Changelog
 
+## v7.0.1
+
+- Fixes `hookshot.Passthrough` and `hookshot.Github` shortcuts where inline code lambdas were using AWS SDK v2 while the lambda default runtime is `nodejs18.x`, by switching to AWS SDK v3.
+- Updates `hookshot.Passthrough` and `hookshot.Github` shortcuts to only use nodejs versions 18 or higher. 
+
 ## v7.0.0
 
 - Updates default node runtime for lambda shortcuts to node18.x.
