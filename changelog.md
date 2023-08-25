@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.0
+
+- Add support for `Fn::ForEach`. With `Fn::ForEach`, you can replicate parts of your templates with minimal lines of code, as per the [official AWS announcement](https://aws.amazon.com/about-aws/whats-new/2023/07/accelerate-cloudformation-authoring-experience-looping-function/) and [the documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-foreach.html).
+  
 ## v7.0.1
 
 - Fixes `hookshot.Passthrough` and `hookshot.Github` shortcuts where inline code lambdas were using AWS SDK v2 while the lambda default runtime is `nodejs18.x`, by switching to AWS SDK v3.
