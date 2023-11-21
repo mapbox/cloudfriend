@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.1.1
+
+- Add support for supplying default values to `Fn::FindInMap`. As per the [official documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-findinmap-enhancements.html#intrinsic-function-reference-findinmap-enhancements-supported-functions), you can now provide either a string or an intrinsic function as the default value for `Fn::FindInMap`.
+
 ## 7.1.0
 
 - Add support for `Fn::ForEach`. With `Fn::ForEach`, you can replicate parts of your templates with minimal lines of code, as per the [official AWS announcement](https://aws.amazon.com/about-aws/whats-new/2023/07/accelerate-cloudformation-authoring-experience-looping-function/) and [the documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-foreach.html).
