@@ -162,7 +162,8 @@
               "Arn"
             ]
           }
-        }
+        },
+        "GroupName": "my-cool-stack"
       }
     },
     "MyLambdaEventBridgeScheduleRole": {

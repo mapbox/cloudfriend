@@ -1,5 +1,20 @@
 # Changelog
 
+## x.x.x
+
+- Updates `shortcuts.ScheduleLambda` to use EventBridge Scheduler instead of EventBridge Rules to scheduler lambda invocations. When updating your template with this version your template will experience the following changes per scheduled lambda, 
+
+```
+Add     AWS::IAM::Role
+Add     AWS::Scheduler::Schedule
+Remove  AWS::Lambda::Permission
+Remove  AWS::Events::Rule
+```
+
+Note a service role will automatically be created for the `AWS::Scheduler::Schedule` resource, if you do not specify a ScheduleRoleArn. 
+
+[Read more about the EventBridge Scheduler](https://docs.aws.amazon.com/scheduler/latest/UserGuide/managing-schedule-group.html)
+
 ## 7.1.0
 
 - Add support for `Fn::ForEach`. With `Fn::ForEach`, you can replicate parts of your templates with minimal lines of code, as per the [official AWS announcement](https://aws.amazon.com/about-aws/whats-new/2023/07/accelerate-cloudformation-authoring-experience-looping-function/) and [the documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-foreach.html).
