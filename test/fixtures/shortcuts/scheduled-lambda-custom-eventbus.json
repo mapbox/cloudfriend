@@ -1,0 +1,188 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyLambdaLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": [
+            "/aws/lambda/${name}",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "RetentionInDays": 14
+      }
+    },
+    "MyLambda": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": "my-code-bucket",
+          "S3Key": "path/to/code.zip"
+        },
+        "Description": {
+          "Fn::Sub": "MyLambda in the ${AWS::StackName} stack"
+        },
+        "FunctionName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda"
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Runtime": "nodejs18.x",
+        "Timeout": 300,
+        "Role": {
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
+        }
+      }
+    },
+    "MyLambdaErrorAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda-Errors-${AWS::Region}"
+        },
+        "AlarmDescription": {
+          "Fn::Sub": [
+            "Error alarm for ${name} lambda function in ${AWS::StackName} stack",
+            {
+              "name": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "AlarmActions": [],
+        "Period": 60,
+        "EvaluationPeriods": 5,
+        "DatapointsToAlarm": 1,
+        "Statistic": "Sum",
+        "Threshold": 0,
+        "ComparisonOperator": "GreaterThanThreshold",
+        "TreatMissingData": "notBreaching",
+        "Namespace": "AWS/Lambda",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "MyLambda"
+            }
+          }
+        ],
+        "MetricName": "Errors"
+      }
+    },
+    "MyLambdaLogPolicy": {
+      "Type": "AWS::IAM::Policy",
+      "DependsOn": "MyLambdaRole",
+      "Properties": {
+        "PolicyName": "lambda-log-access",
+        "Roles": [
+          {
+            "Ref": "MyLambdaRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "logs:*",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MyLambdaLogs",
+                  "Arn"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "MyLambdaRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "lambda.amazonaws.com"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "MyLambdaSchedule": {
+      "Type": "AWS::Events::Rule",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda"
+        },
+        "Description": {
+          "Fn::Sub": [
+            "Schedule for ${function} in ${AWS::StackName} stack",
+            {
+              "function": {
+                "Fn::Sub": "${AWS::StackName}-MyLambda"
+              }
+            }
+          ]
+        },
+        "State": "DISABLED",
+        "ScheduleExpression": "rate(1 hour)",
+        "Targets": [
+          {
+            "Id": {
+              "Fn::Sub": "${AWS::StackName}-MyLambda"
+            },
+            "Arn": {
+              "Fn::GetAtt": [
+                "MyLambda",
+                "Arn"
+              ]
+            }
+          }
+        ],
+        "EventBusName": "my-cool-eventbus"
+      }
+    },
+    "MyLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "Principal": {
+          "Fn::Sub": "events.${AWS::URLSuffix}"
+        },
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "MyLambdaSchedule",
+            "Arn"
+          ]
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

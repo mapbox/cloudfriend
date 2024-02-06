@@ -346,6 +346,23 @@ test('[shortcuts] scheduled-lambda', (assert) => {
     'expected resources generated without defaults'
   );
 
+  lambda = new cf.shortcuts.ScheduledLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventBusName: 'my-cool-eventbus',
+    ScheduleExpression: 'rate(1 hour)',
+    State: 'DISABLED'
+  });
+  template = cf.merge(lambda);
+  if (update) fixtures.update('scheduled-lambda-custom-eventbus', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('scheduled-lambda-custom-eventbus'),
+    'expected resources generated without defaults and a custom eventbus'
+  );
   assert.end();
 });
 
@@ -419,6 +436,31 @@ test('[shortcuts] event-lambda', (assert) => {
     noUndefined(template),
     fixtures.get('event-lambda-full'),
     'expected resources generated without defaults'
+  );
+
+  lambda = new cf.shortcuts.EventLambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    EventBusName: 'my-cool-eventbus',
+    EventPattern: {
+      source: ['aws.ec2'],
+      'detail-type': ['EC2 Instance State-change Notification'],
+      detail: {
+        state: ['running']
+      }
+    },
+    State: 'DISABLED'
+  });
+
+  template = cf.merge(lambda);
+  if (update) fixtures.update('event-lambda-custom-eventbus', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('event-lambda-custom-eventbus'),
+    'expected resources generated without defaults and a custom eventbus'
   );
 
   assert.end();

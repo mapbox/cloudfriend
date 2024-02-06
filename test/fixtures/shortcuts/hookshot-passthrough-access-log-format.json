@@ -24,7 +24,7 @@
       "Type": "AWS::ApiGateway::Stage",
       "Properties": {
         "DeploymentId": {
-          "Ref": "PassDeploymentdf0c9696"
+          "Ref": "PassDeployment41d722f6"
         },
         "StageName": "hookshot",
         "RestApiId": {
@@ -52,7 +52,7 @@
         }
       }
     },
-    "PassDeploymentdf0c9696": {
+    "PassDeployment41d722f6": {
       "Type": "AWS::ApiGateway::Deployment",
       "DependsOn": "PassMethod",
       "Properties": {

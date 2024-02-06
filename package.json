@@ -8,6 +8,8 @@
   },
   "scripts": {
     "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
+    "lint": "eslint index.js test lib bin cloudformation",
+    "lint:fix": "npm run lint -- --fix",
     "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
