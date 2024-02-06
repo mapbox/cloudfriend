@@ -129,7 +129,7 @@
       }
     },
     "MyLambdaSchedule": {
-      "Type": "AWS::Events::Rule",
+      "Type": "AWS::Scheduler::Schedule",
       "Properties": {
         "Name": {
           "Fn::Sub": "${AWS::StackName}-MyLambda"
@@ -146,6 +146,9 @@
         },
         "State": "DISABLED",
         "ScheduleExpression": "rate(1 hour)",
+        "FlexibleTimeWindow": {
+          "Mode": "OFF"
+        },
         "Targets": [
           {
             "Id": {
