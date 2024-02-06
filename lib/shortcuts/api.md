@@ -707,7 +707,6 @@ a Lambda permission.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
 | options.ScheduleExpression | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
-| [options.EventBusName] | <code>String</code> | <code>&#x27;default&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-eventbusname). |
 | [options.State] | <code>String</code> | <code>&#x27;ENABLED&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state). |
 
 **Example**  
@@ -722,32 +721,6 @@ const lambda = new cf.shortcuts.ScheduledLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  ScheduleExpression: 'cron(45 * * * ? *)',
-});
-
-module.exports = cf.merge(myTemplate, lambda);
-```
-**Example**  
-```js
-const cf = require('@mapbox/cloudfriend');
-
-const myTemplate = {
-  ...
-  Resources: {
-    MyEventBus: {
-      Type: 'AWS::Events::EventBus',
-      Properties: { ... }
-    }
-  }
-};
-
-const lambda = new cf.shortcuts.ScheduledLambda({
-  LogicalName: 'MyLambda',
-  Code: {
-    S3Bucket: 'my-code-bucket',
-    S3Key: 'path/to/code.zip'
-  },
-  EventBusName: cf.ref('MyEventBus'),
   ScheduleExpression: 'cron(45 * * * ? *)',
 });
 

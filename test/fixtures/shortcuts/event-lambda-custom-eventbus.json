@@ -145,6 +145,7 @@
           ]
         },
         "State": "DISABLED",
+        "EventBusName": "my-cool-eventbus",
         "EventPattern": {
           "source": [
             "aws.ec2"
@@ -170,8 +171,7 @@
               ]
             }
           }
-        ],
-        "EventBusName": "my-cool-eventbus"
+        ]
       }
     },
     "MyLambdaPermission": {
