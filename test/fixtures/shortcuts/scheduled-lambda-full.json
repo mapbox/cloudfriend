@@ -128,7 +128,7 @@
         }
       }
     },
-    "MyLambdaSchedule": {
+    "MyLambdaEventBridgeSchedule": {
       "Type": "AWS::Scheduler::Schedule",
       "Properties": {
         "Name": {
@@ -149,40 +149,58 @@
         "FlexibleTimeWindow": {
           "Mode": "OFF"
         },
-        "Target": [
+        "Target": {
+          "Arn": {
+            "Fn::GetAtt": [
+              "MyLambda",
+              "Arn"
+            ]
+          },
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "MyLambdaEventBridgeScheduleRole",
+              "Arn"
+            ]
+          }
+        }
+      }
+    },
+    "MyLambdaEventBridgeScheduleRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Principal": {
+                "Service": {
+                  "Fn::Sub": "scheduler.${AWS::URLSuffix}"
+                }
+              }
+            }
+          ]
+        },
+        "Policies": [
           {
-            "Id": {
-              "Fn::Sub": "${AWS::StackName}-MyLambda"
-            },
-            "Arn": {
-              "Fn::GetAtt": [
-                "MyLambda",
-                "Arn"
+            "PolicyName": "main",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "lambda:InvokeLambda",
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "MyLambdaLogs",
+                      "Arn"
+                    ]
+                  }
+                }
               ]
             }
           }
         ]
-      }
-    },
-    "MyLambdaPermission": {
-      "Type": "AWS::Lambda::Permission",
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "MyLambda",
-            "Arn"
-          ]
-        },
-        "Principal": {
-          "Fn::Sub": "events.${AWS::URLSuffix}"
-        },
-        "SourceArn": {
-          "Fn::GetAtt": [
-            "MyLambdaSchedule",
-            "Arn"
-          ]
-        }
       }
     }
   },
