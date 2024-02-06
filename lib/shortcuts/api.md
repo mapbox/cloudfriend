@@ -142,7 +142,6 @@ a Lambda permission.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
 | options.EventPattern | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-eventpattern). |
-| [options.EventBusName] | <code>String</code> | <code>&#x27;default&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-eventbusname). |
 | [options.State] | <code>String</code> | <code>&#x27;ENABLED&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state). |
 
 **Example**  
@@ -157,38 +156,6 @@ const lambda = new cf.shortcuts.EventLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  EventPattern: {
-    'detail-type': ['AWS Console Sign In via CloudTrail'],
-    detail: {
-      eventSource: ['signin.amazonaws.com'],
-      eventName: ['ConsoleLogin']
-    }
-  }
-});
-
-module.exports = cf.merge(myTemplate, lambda);
-```
-**Example**  
-```js
-const cf = require('@mapbox/cloudfriend');
-
-const myTemplate = {
-  ...
-  Resources: {
-    MyEventBus: {
-      Type: 'AWS::Events::EventBus',
-      Properties: { ... }
-    }
-  }
-};
-
-const lambda = new cf.shortcuts.EventLambda({
-  LogicalName: 'MyLambda',
-  Code: {
-    S3Bucket: 'my-code-bucket',
-    S3Key: 'path/to/code.zip'
-  },
-  EventBusName: cf.ref('MyEventBus'),
   EventPattern: {
     'detail-type': ['AWS Console Sign In via CloudTrail'],
     detail: {

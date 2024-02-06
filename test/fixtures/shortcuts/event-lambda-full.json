@@ -145,7 +145,6 @@
           ]
         },
         "State": "DISABLED",
-        "EventBusName": "default",
         "EventPattern": {
           "source": [
             "aws.ec2"

@@ -149,7 +149,7 @@
         "FlexibleTimeWindow": {
           "Mode": "OFF"
         },
-        "Targets": [
+        "Target": [
           {
             "Id": {
               "Fn::Sub": "${AWS::StackName}-MyLambda"

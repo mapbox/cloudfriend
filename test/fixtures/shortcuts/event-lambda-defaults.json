@@ -145,7 +145,6 @@
           ]
         },
         "State": "ENABLED",
-        "EventBusName": "default",
         "EventPattern": {
           "source": [
             "aws.ec2"
