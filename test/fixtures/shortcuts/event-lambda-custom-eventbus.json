@@ -128,15 +128,15 @@
         }
       }
     },
-    "MyLambdaScheduler": {
-      "Type": "AWS::Scheduler::Schedule",
+    "MyLambdaTrigger": {
+      "Type": "AWS::Events::Rule",
       "Properties": {
         "Name": {
           "Fn::Sub": "${AWS::StackName}-MyLambda"
         },
         "Description": {
           "Fn::Sub": [
-            "Schedule for ${function} in ${AWS::StackName} stack",
+            "Event trigger for ${function} in ${AWS::StackName} stack",
             {
               "function": {
                 "Fn::Sub": "${AWS::StackName}-MyLambda"
@@ -145,20 +145,54 @@
           ]
         },
         "State": "DISABLED",
-        "ScheduleExpression": "rate(1 hour)",
-        "FlexibleTimeWindow": {
-          "Mode": "OFF"
-        },
-        "Target": {
-          "Arn": {
-            "Fn::GetAtt": [
-              "MyLambda",
-              "Arn"
+        "EventBusName": "my-cool-eventbus",
+        "EventPattern": {
+          "source": [
+            "aws.ec2"
+          ],
+          "detail-type": [
+            "EC2 Instance State-change Notification"
+          ],
+          "detail": {
+            "state": [
+              "running"
             ]
-          },
-          "RoleArn": "arn:aws:iam::012345678901:role/MyCoolRole"
+          }
         },
-        "GroupName": "my-cool-stack"
+        "Targets": [
+          {
+            "Id": {
+              "Fn::Sub": "${AWS::StackName}-MyLambda"
+            },
+            "Arn": {
+              "Fn::GetAtt": [
+                "MyLambda",
+                "Arn"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "MyLambdaPermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "MyLambda",
+            "Arn"
+          ]
+        },
+        "Principal": {
+          "Fn::Sub": "events.${AWS::URLSuffix}"
+        },
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "MyLambdaTrigger",
+            "Arn"
+          ]
+        }
       }
     }
   },

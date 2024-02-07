@@ -674,6 +674,8 @@ a Lambda permission.
 | --- | --- | --- | --- |
 | options | <code>Object</code> |  | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
 | options.ScheduleExpression | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
+| [options.ScheduleRoleArn] | <code>String</code> |  | If specified, the eventbridge scheduler schedule will use this role to invoke your lambda . If not specified a service role with the correct scoped permissions is created for you. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
+| [options.ScheduleGroupName] | <code>String</code> |  | If specified, the eventbridge scheduler schedule is associated with this preexisting schedule group. If not specified the schedule is associated with the default schedule group. Note you cannot change a schedule's schedule group once it has been already associated with a schedule group. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-scheduler-schedule.html#cfn-scheduler-schedule-groupname). |
 | [options.State] | <code>String</code> | <code>&#x27;ENABLED&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state). |
 
 **Example**  
@@ -692,6 +694,36 @@ const lambda = new cf.shortcuts.ScheduledLambda({
 });
 
 module.exports = cf.merge(myTemplate, lambda);
+```
+**Example**  
+```js
+const cf = require('@mapbox/cloudfriend');
+
+const myTemplate = { ... };
+
+const role = new cf.shortcuts.ServiceRole({
+  LogicalName: 'MyRole',
+  Service: 'scheduler.amazonaws.com',
+  Statement: [
+    {
+      Effect: 'Allow',
+      Action: 'lambda:InvokeFunction',
+      Resource: cf.sub('arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:my-role-*')
+    }
+  ]
+});
+
+const lambda = new cf.shortcuts.ScheduledLambda({
+  LogicalName: 'MyLambda',
+  Code: {
+    S3Bucket: 'my-code-bucket',
+    S3Key: 'path/to/code.zip'
+  },
+  ScheduleRoleArn: cf.getAtt('MyRole', 'Arn'),
+  ScheduleExpression: 'rate(1 hour)',
+});
+
+module.exports = cf.merge(myTemplate, role, lambda);
 ```
 <a name="ServiceRole"></a>
 

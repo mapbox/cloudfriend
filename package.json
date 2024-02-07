@@ -1,13 +1,15 @@
 {
   "name": "@mapbox/cloudfriend",
-  "version": "7.1.0",
+  "version": "8.0.0-1",
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
     "node": ">=14"
   },
   "scripts": {
-    "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
+    "pretest": "npm run lint && npm run shortcuts-api-doc",
+    "lint": "eslint index.js test lib bin cloudformation",
+    "lint:fix": "npm run lint -- --fix",
     "test": "nyc tape test/*.test.js | tap-spec",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
