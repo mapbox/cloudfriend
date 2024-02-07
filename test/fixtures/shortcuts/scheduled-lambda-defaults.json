@@ -128,7 +128,7 @@
         }
       }
     },
-    "MyLambdaEventBridgeSchedule": {
+    "MyLambdaScheduler": {
       "Type": "AWS::Scheduler::Schedule",
       "Properties": {
         "Name": {
@@ -165,7 +165,7 @@
         }
       }
     },
-    "MyLambdaEventBridgeScheduleRole": {
+    "MyLambdaSchedulerRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {

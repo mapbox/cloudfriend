@@ -128,7 +128,7 @@
         }
       }
     },
-    "MyLambdaEventBridgeSchedule": {
+    "MyLambdaScheduler": {
       "Type": "AWS::Scheduler::Schedule",
       "Properties": {
         "Name": {
@@ -166,7 +166,7 @@
         "GroupName": "my-cool-stack"
       }
     },
-    "MyLambdaEventBridgeScheduleRole": {
+    "MyLambdaSchedulerRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
