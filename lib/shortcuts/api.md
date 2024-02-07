@@ -694,6 +694,36 @@ const lambda = new cf.shortcuts.ScheduledLambda({
 
 module.exports = cf.merge(myTemplate, lambda);
 ```
+**Example**  
+```js
+const cf = require('@mapbox/cloudfriend');
+
+const myTemplate = { ... };
+
+const role = new cf.shortcuts.ServiceRole({
+  LogicalName: 'MyRole',
+  Service: 'scheduler.amazonaws.com',
+  Statement: [
+    {
+      Effect: 'Allow',
+      Action: 'lambda:InvokeFunction',
+      Resource: 'arn:aws:lambda:us-east-1:012345678901:function:my-role-*'
+    }
+  ]
+});
+
+const lambda = new cf.shortcuts.ScheduledLambda({
+  LogicalName: 'MyLambda',
+  Code: {
+    S3Bucket: 'my-code-bucket',
+    S3Key: 'path/to/code.zip'
+  },
+  ScheduleRoleArn: cf.ref('MyRole'),
+  ScheduleExpression: 'rate(1 hour)',
+});
+
+module.exports = cf.merge(myTemplate, role, lambda);
+```
 <a name="ServiceRole"></a>
 
 ## ServiceRole
