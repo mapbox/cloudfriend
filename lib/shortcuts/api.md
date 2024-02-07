@@ -684,6 +684,7 @@ const cf = require('@mapbox/cloudfriend');
 
 const myTemplate = { ... };
 
+// A scheduler service role is already created for you internally with the correct permissions
 const lambda = new cf.shortcuts.ScheduledLambda({
   LogicalName: 'MyLambda',
   Code: {
@@ -701,6 +702,7 @@ const cf = require('@mapbox/cloudfriend');
 
 const myTemplate = { ... };
 
+// If you are creating your own scheduler service role, be sure your permissions are correct!
 const role = new cf.shortcuts.ServiceRole({
   LogicalName: 'MyRole',
   Service: 'scheduler.amazonaws.com',
@@ -708,7 +710,7 @@ const role = new cf.shortcuts.ServiceRole({
     {
       Effect: 'Allow',
       Action: 'lambda:InvokeFunction',
-      Resource: cf.sub('arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:my-role-*')
+      Resource: cf.sub('arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${AWS::StackName}-*')
     }
   ]
 });
