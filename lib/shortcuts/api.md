@@ -670,12 +670,13 @@ a Lambda permission.
 
 ### new ScheduledLambda(options)
 
-| Param | Type | Description |
-| --- | --- | --- |
-| options | <code>Object</code> | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
-| options.ScheduleExpression | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
-| [options.ScheduleRoleArn] | <code>String</code> | If specified, the eventbride scheduler will use this role to invoke your lambda . If not specified a service role with the correct scoped permissions is created for you. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
-| [options.ScheduleGroupName] | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-scheduler-schedule.html#cfn-scheduler-schedule-groupname). |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
+| options.ScheduleExpression | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
+| [options.ScheduleRoleArn] | <code>String</code> |  | If specified, the eventbridge scheduler schedule will use this role to invoke your lambda . If not specified a service role with the correct scoped permissions is created for you. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
+| [options.ScheduleGroupName] | <code>String</code> |  | If specified, the eventbridge scheduler schedule is associated with this preexisting schedule group. If not specified the schedule is associated with the default schedule group. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-scheduler-schedule.html#cfn-scheduler-schedule-groupname). |
+| [options.State] | <code>String</code> | <code>&#x27;ENABLED&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-state). |
 
 **Example**  
 ```js
