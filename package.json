@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "scripts": {
-    "pretest": "eslint index.js test lib bin cloudformation && npm run shortcuts-api-doc",
+    "pretest": "npm run lint && npm run shortcuts-api-doc",
     "lint": "eslint index.js test lib bin cloudformation",
     "lint:fix": "npm run lint -- --fix",
     "test": "nyc tape test/*.test.js | tap-spec",
