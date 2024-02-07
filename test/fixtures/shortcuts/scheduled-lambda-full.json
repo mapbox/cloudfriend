@@ -156,52 +156,9 @@
               "Arn"
             ]
           },
-          "RoleArn": {
-            "Fn::GetAtt": [
-              "MyLambdaEventBridgeScheduleRole",
-              "Arn"
-            ]
-          }
+          "RoleArn": "arn:aws:iam::012345678901:role/MyCoolRole"
         },
         "GroupName": "my-cool-stack"
-      }
-    },
-    "MyLambdaSchedulerRole": {
-      "Type": "AWS::IAM::Role",
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                "Service": {
-                  "Fn::Sub": "scheduler.${AWS::URLSuffix}"
-                }
-              }
-            }
-          ]
-        },
-        "Policies": [
-          {
-            "PolicyName": "main",
-            "PolicyDocument": {
-              "Version": "2012-10-17",
-              "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": "lambda:InvokeFunction",
-                  "Resource": {
-                    "Fn::GetAtt": [
-                      "MyLambda",
-                      "Arn"
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
       }
     }
   },

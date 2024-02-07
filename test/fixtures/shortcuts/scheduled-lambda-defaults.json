@@ -158,7 +158,7 @@
           },
           "RoleArn": {
             "Fn::GetAtt": [
-              "MyLambdaEventBridgeScheduleRole",
+              "MyLambdaSchedulerRole",
               "Arn"
             ]
           }

@@ -334,7 +334,7 @@ test('[shortcuts] scheduled-lambda', (assert) => {
       S3Bucket: 'my-code-bucket',
       S3Key: 'path/to/code.zip'
     },
-    ScheduledRoleArn: 'arn:aws:iam::012345678901:role/MyCoolRole',
+    ScheduleRoleArn: 'arn:aws:iam::012345678901:role/MyCoolRole',
     ScheduleGroupName: 'my-cool-stack',
     ScheduleExpression: 'rate(1 hour)',
     State: 'DISABLED'
