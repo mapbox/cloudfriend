@@ -190,10 +190,10 @@
               "Statement": [
                 {
                   "Effect": "Allow",
-                  "Action": "lambda:InvokeLambda",
+                  "Action": "lambda:InvokeFunction",
                   "Resource": {
                     "Fn::GetAtt": [
-                      "MyLambdaLogs",
+                      "MyLambda",
                       "Arn"
                     ]
                   }

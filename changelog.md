@@ -2,7 +2,7 @@
 
 ## x.x.x
 
-- Updates `shortcuts.ScheduleLambda` to use EventBridge Scheduler instead of EventBridge Rules to scheduler lambda invocations. When updating your template with this version your template will experience the following changes per scheduled lambda, 
+- Updates `shortcuts.ScheduleLambda` to use EventBridge Scheduler instead of EventBridge Rules to schedule lambda invocations. When using this version your template will have the following changes per scheduled lambda instance, 
 
 ```
 Add     AWS::IAM::Role

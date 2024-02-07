@@ -674,8 +674,7 @@ a Lambda permission.
 | --- | --- | --- |
 | options | <code>Object</code> | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
 | options.ScheduleExpression | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
-| [options.RoleArn] | <code>String</code> | If specified, the eventbride schedule will use this role to invoke your lambda . _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
-| [options.RoleArn] | <code>String</code> | If specified, the eventbride schedule will use this role to invoke your lambda . _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ |
+| [options.ScheduleRoleArn] | <code>String</code> | If specified, the eventbride scheduler will use this role to invoke your lambda . _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
 | [options.ScheduleGroupName] | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-scheduler-schedule.html#cfn-scheduler-schedule-groupname). |
 
 **Example**  
