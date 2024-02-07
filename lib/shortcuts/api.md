@@ -674,7 +674,7 @@ a Lambda permission.
 | --- | --- | --- |
 | options | <code>Object</code> | Extends the options for [`Lambda`](#lambda) with the following additional attributes: |
 | options.ScheduleExpression | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-events-rule.html#cfn-events-rule-scheduleexpression). |
-| [options.ScheduleRoleArn] | <code>String</code> | If specified, the eventbride scheduler will use this role to invoke your lambda . _If this option is specified, do not use the Statement option; add the permissions you need to your Role directly._ See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
+| [options.ScheduleRoleArn] | <code>String</code> | If specified, the eventbride scheduler will use this role to invoke your lambda . If not specified a service role with the correct scoped permissions is created for you. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-scheduler-schedule-target.html#cfn-scheduler-schedule-target-rolearn) |
 | [options.ScheduleGroupName] | <code>String</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-scheduler-schedule.html#cfn-scheduler-schedule-groupname). |
 
 **Example**  
@@ -707,7 +707,7 @@ const role = new cf.shortcuts.ServiceRole({
     {
       Effect: 'Allow',
       Action: 'lambda:InvokeFunction',
-      Resource: 'arn:aws:lambda:us-east-1:012345678901:function:my-role-*'
+      Resource: cf.sub('arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:my-role-*')
     }
   ]
 });
@@ -718,7 +718,7 @@ const lambda = new cf.shortcuts.ScheduledLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  ScheduleRoleArn: cf.ref('MyRole'),
+  ScheduleRoleArn: cf.getAtt('MyRole', 'Arn'),
   ScheduleExpression: 'rate(1 hour)',
 });
 

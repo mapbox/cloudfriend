@@ -2,7 +2,7 @@
 
 ## x.x.x
 
-- Updates `shortcuts.ScheduleLambda` to use EventBridge Scheduler instead of EventBridge Rules to schedule lambda invocations. When using this version your template will have the following changes per scheduled lambda instance, 
+- Updates `cf.shortcuts.ScheduledLambda` to use EventBridge Scheduler instead of EventBridge Rules to schedule lambda invocations. When using this version your template will have the following changes per scheduled lambda instance,
 
 ```
 Add     AWS::IAM::Role
@@ -11,8 +11,9 @@ Remove  AWS::Lambda::Permission
 Remove  AWS::Events::Rule
 ```
 
-Note a service role will automatically be created for the `AWS::Scheduler::Schedule` resource, if you do not specify a ScheduleRoleArn. 
+Note the service role (`AWS::IAM::Role`) will automatically be created for the `AWS::Scheduler::Schedule` resource, if you do not specify a ScheduleRoleArn.
 
+[Read more in API reference doc](./lib/shortcuts/api.md#ScheduledLambda)
 [Read more about the EventBridge Scheduler](https://docs.aws.amazon.com/scheduler/latest/UserGuide/managing-schedule-group.html)
 
 ## 7.1.0
