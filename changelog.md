@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.1.0
+
+- Allow `FilterCriteria` property to be defined for Lambda shortcuts
+
 ## 8.0.0
 
 - Updates `cf.shortcuts.ScheduledLambda` to use EventBridge Scheduler instead of EventBridge Rules to schedule lambda invocations. When using this version your template will have the following changes per scheduled lambda instance,
