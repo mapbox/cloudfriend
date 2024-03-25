@@ -475,6 +475,13 @@ test('[shortcuts] stream-lambda', (assert) => {
       S3Key: 'path/to/code.zip'
     },
     EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+    FilterCriteria: {
+      Filters: [
+        {
+          Pattern: JSON.stringify({ eventName: ['INSERT', 'MODIFY'] })
+        }
+      ]
+    },
     BatchSize: 10000,
     MaximumBatchingWindowInSeconds: 300,
     Enabled: false,
