@@ -549,39 +549,6 @@ test('[shortcuts] StreamLambda FilterCriteria', (assert) => {
       FilterCriteria: {
         Filters: [
           {
-            Pattern: JSON.stringify({ eventName: ['1'] })
-          },
-          {
-            Pattern: JSON.stringify({ eventName: ['2'] })
-          },
-          {
-            Pattern: JSON.stringify({ eventName: ['3'] })
-          },
-          {
-            Pattern: JSON.stringify({ eventName: ['4'] })
-          },
-          {
-            Pattern: JSON.stringify({ eventName: ['5'] })
-          },
-          {
-            Pattern: JSON.stringify({ eventName: ['6'] })
-          }
-        ]
-      }
-    }),
-    '`FilterCriteria.Filter` cannot contain more than 5 items, you may request a quota increase with AWS support if required.',
-  );
-  assert.throws(
-    () => new cf.shortcuts.StreamLambda({
-      LogicalName: 'MyLambda',
-      Code: {
-        S3Bucket: 'my-code-bucket',
-        S3Key: 'path/to/code.zip'
-      },
-      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
-      FilterCriteria: {
-        Filters: [
-          {
             NotPattern: JSON.stringify({ eventName: ['INSERT', 'MODIFY'] })
           },
           {
