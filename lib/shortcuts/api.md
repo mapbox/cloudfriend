@@ -796,8 +796,25 @@ const lambda = new cf.shortcuts.StreamLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  EventSourceArn: cf.getAtt('MyStream', 'Arn')
+  EventSourceArn: cf.getAtt('MyStream', 'Arn'),
 });
 
-module.exports = cf.merge(myTemplate, lambda);
+// This lambda only gets invoked for 'INSERT' events for the DynamoDb event source
+const lambdaWithFilterCriteria = new cf.shortcuts.StreamLambda({
+ LogicalName: 'MyLambdaWithFilterCriteria',
+ Code: {
+   S3Bucket: 'my-code-bucket',
+   S3Key: 'path/to/code.zip'
+ },
+ EventSourceArn: cf.getAtt('MyDynamoDbStream', 'Arn'),
+ FilterCriteria: {
+   Filters: [
+     {
+       Pattern: JSON.stringify({ eventName: ['INSERT'] }),
+     }
+   ]
+ }
+});
+
+module.exports = cf.merge(myTemplate, lambda, lambdaWithFilterCriteria);
 ```
