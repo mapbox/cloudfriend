@@ -613,6 +613,7 @@ test('[shortcuts] StreamLambda FilterCriteria', (assert) => {
     }),
     'An object in `FilterCriteria.Filter` contains a `Pattern` property that is not a JSON parseable string',
   );
+  assert.end();
 });
 
 test('[shortcuts] log-subscription-lambda', (assert) => {
