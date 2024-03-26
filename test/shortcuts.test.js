@@ -499,6 +499,122 @@ test('[shortcuts] stream-lambda', (assert) => {
   assert.end();
 });
 
+test('[shortcuts] StreamLambda FilterCriteria', (assert) => {
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: ['test']
+    }),
+    '`FilterCriteria` must be a JSON-like object',
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: {}
+    }),
+    '`FilterCriteria` must contain property `Filter` of type array',
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: {
+        Filter: 613
+      }
+    }),
+    '`FilterCriteria` must contain property `Filter` of type array',
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: {
+        Filters: [
+          {
+            Pattern: JSON.stringify({ eventName: ['1'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['2'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['3'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['4'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['5'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['6'] })
+          }
+        ]
+      }
+    }),
+    '`FilterCriteria.Filter` cannot contain more than 5 items, you may request a quota increase with AWS support if required.',
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: {
+        Filters: [
+          {
+            NotPattern: JSON.stringify({ eventName: ['INSERT', 'MODIFY'] })
+          },
+          {
+            Pattern: JSON.stringify({ eventName: ['INSERT', 'MODIFY'] })
+          }
+        ]
+      }
+    }),
+    'An object in `FilterCriteria.Filter` was missing the required property `Pattern`',
+  );
+  assert.throws(
+    () => new cf.shortcuts.StreamLambda({
+      LogicalName: 'MyLambda',
+      Code: {
+        S3Bucket: 'my-code-bucket',
+        S3Key: 'path/to/code.zip'
+      },
+      EventSourceArn: 'arn:aws:kinesis:us-east-1:123456789012:stream/fake',
+      FilterCriteria: {
+        Filters: [
+          {
+            Pattern: '{"eventName":["INSERT","MODIFY"]}'
+          },
+          {
+            Pattern: { eventName: ['INSERT', 'MODIFY'] }
+          }
+        ]
+      }
+    }),
+    'An object in `FilterCriteria.Filter` contains a `Pattern` property that is not a JSON parseable string',
+  );
+});
+
 test('[shortcuts] log-subscription-lambda', (assert) => {
   assert.throws(
     () => new cf.shortcuts.LogSubscriptionLambda(),

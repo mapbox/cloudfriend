@@ -394,7 +394,6 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 | [options.DeadLetterConfig] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig). |
 | [options.Description] | <code>String</code> | <code>&#x27;${logical name} in the ${stack name} stack&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-description). |
 | [options.Environment] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-environment). |
-| [options.FilterCriteria] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html) |
 | [options.FunctionName] | <code>String</code> | <code>&#x27;${stack name}-${logical name}&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-functionname). |
 | [options.Handler] | <code>String</code> | <code>&#x27;index.handler&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-handler). |
 | [options.KmsKeyArn] | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-kmskeyarn). |
@@ -783,6 +782,7 @@ source mapping.
 | [options.MaximumBatchingWindowInSeconds] | <code>Number</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-maximumbatchingwindowinseconds). |
 | [options.Enabled] | <code>Boolean</code> | <code>true</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled). |
 | [options.StartingPosition] | <code>String</code> | <code>&#x27;LATEST&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition). |
+| [options.FilterCriteria] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html). |
 
 **Example**  
 ```js
