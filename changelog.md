@@ -2,7 +2,7 @@
 
 ## 8.1.0
 
-- Allow `FilterCriteria` property to be defined for Lambda shortcuts
+- Allow `FilterCriteria` property to be defined for Stream Lambda shortcuts
 
 ## 8.0.0
 
