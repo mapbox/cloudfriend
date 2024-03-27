@@ -782,6 +782,7 @@ source mapping.
 | [options.MaximumBatchingWindowInSeconds] | <code>Number</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-maximumbatchingwindowinseconds). |
 | [options.Enabled] | <code>Boolean</code> | <code>true</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-enabled). |
 | [options.StartingPosition] | <code>String</code> | <code>&#x27;LATEST&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-eventsourcemapping.html#cfn-lambda-eventsourcemapping-startingposition). |
+| [options.FilterCriteria] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html). |
 
 **Example**  
 ```js
@@ -795,8 +796,25 @@ const lambda = new cf.shortcuts.StreamLambda({
     S3Bucket: 'my-code-bucket',
     S3Key: 'path/to/code.zip'
   },
-  EventSourceArn: cf.getAtt('MyStream', 'Arn')
+  EventSourceArn: cf.getAtt('MyStream', 'Arn'),
 });
 
-module.exports = cf.merge(myTemplate, lambda);
+// This lambda only gets invoked for 'INSERT' events for the DynamoDb event source
+const lambdaWithFilterCriteria = new cf.shortcuts.StreamLambda({
+ LogicalName: 'MyLambdaWithFilterCriteria',
+ Code: {
+   S3Bucket: 'my-code-bucket',
+   S3Key: 'path/to/code.zip'
+ },
+ EventSourceArn: cf.getAtt('MyDynamoDbStream', 'Arn'),
+ FilterCriteria: {
+   Filters: [
+     {
+       Pattern: JSON.stringify({ eventName: ['INSERT'] }),
+     }
+   ]
+ }
+});
+
+module.exports = cf.merge(myTemplate, lambda, lambdaWithFilterCriteria);
 ```

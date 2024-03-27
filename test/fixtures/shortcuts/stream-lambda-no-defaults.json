@@ -167,6 +167,13 @@
       "Properties": {
         "BatchSize": 10000,
         "MaximumBatchingWindowInSeconds": 300,
+        "FilterCriteria": {
+          "Filters": [
+            {
+              "Pattern": "{\"eventName\":[\"INSERT\",\"MODIFY\"]}"
+            }
+          ]
+        },
         "Enabled": false,
         "EventSourceArn": "arn:aws:kinesis:us-east-1:123456789012:stream/fake",
         "FunctionName": {
