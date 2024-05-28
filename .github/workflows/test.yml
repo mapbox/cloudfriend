@@ -1,11 +1,11 @@
-name: mapbox/spark-cloudfront-costs
+name: mapbox/cloudfriend
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   test:
