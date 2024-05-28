@@ -1,0 +1,30 @@
+name: mapbox/spark-cloudfront-costs
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        node-version: [14, 16, 18]
+    runs-on: ubuntu-22.04
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.7.9'
+      - name: pip install
+        run: |
+          pip install -r requirements.dev.txt
+      - id: action-node-setup
+        uses: mapbox/gha@action-node-setup-v1
+        with:
+          node-version: ${{ matrix.node-version }}
