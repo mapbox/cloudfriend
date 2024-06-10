@@ -1,0 +1,51 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.txt'
+      - '**/LICENSE.txt'
+      - '**/CODEOWNERS'
+      - 'readme.*'
+      - '.gitignore'
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.txt'
+      - '**/LICENSE.txt'
+      - '**/CODEOWNERS'
+      - 'readme.*'
+      - '.gitignore'
+
+jobs:
+  codeql:
+    name: Analyze
+    runs-on: ubuntu-22.04
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    env:
+      language: javascript
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ env.language }}
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{env.language}}'
