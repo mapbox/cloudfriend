@@ -422,6 +422,7 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 | [options.EvaluateLowSampleCountPercentile] | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-evaluatelowsamplecountpercentile). |
 | [options.ExtendedStatistic] | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-extendedstatistic)] |
 | [options.OKActions] | <code>Array.&lt;String&gt;</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-okactions). |
+| [options.LogRetentionInDays] | <code>Number</code> | <code>14</code> | How long to retain CloudWatch logs for this Lambda function. See [AWS Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html) for allowed values. |
 
 **Example**  
 ```js

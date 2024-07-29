@@ -190,7 +190,8 @@ test('[shortcuts] lambda', (assert) => {
     TreatMissingData: 'breaching',
     EvaluateLowSampleCountPercentile: 'ignore',
     ExtendedStatistics: 'p100',
-    OKActions: ['devnull@mapbox.com']
+    OKActions: ['devnull@mapbox.com'],
+    LogRetentionInDays: 30
   });
 
   template = cf.merge(
