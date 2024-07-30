@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.2.0
+
+- Add `LogRetentionInDays` option to Lambda shortcuts
+
 ## 8.1.0
 
 - Allow `FilterCriteria` property to be defined for Stream Lambda shortcuts
@@ -25,7 +29,7 @@ When you make this update, you will no longer see a trigger on your scheduled la
 ## 7.1.0
 
 - Add support for `Fn::ForEach`. With `Fn::ForEach`, you can replicate parts of your templates with minimal lines of code, as per the [official AWS announcement](https://aws.amazon.com/about-aws/whats-new/2023/07/accelerate-cloudformation-authoring-experience-looping-function/) and [the documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-foreach.html).
-  
+
 ## v7.0.1
 
 - Fixes `hookshot.Passthrough` and `hookshot.Github` shortcuts where inline code lambdas were using AWS SDK v2 while the lambda default runtime is `nodejs18.x`, by switching to AWS SDK v3.
@@ -47,23 +51,29 @@ When you make this update, you will no longer see a trigger on your scheduled la
 - Dependency updates to avoid security vulnerabilities (minimist).
 
 ## v5.1.0
+
 - Lambda shortcuts now support custom Docker images.
 
 ## v5.0.2
+
 - Fixes handling custom access log formats in hookshot shortcuts.
 
 ## v5.0.1
+
 - Improves data type mappings between Glue and Presto when using the `GluePrestoView` shortcut.
 
 ## v5.0.0
+
 - The Lambda shortcuts now use `nodejs12.x` as the default runtime.
 - There is no longer any constraint on the useable Lambda runtimes.
 
 ## v4.6.0
+
 - Adds top-level `Rules` section support to `cf.merge`. Each key in `Rules` must have a unique name.
 - Adds rule-specific intrinsic functions: `contains`, `eachMemberEquals`, `eachMemberIn`, `refAll`, `valueOf`, `valueOfAll`
 
 ## v4.5.1
+
 - Fixes a bug present in v4.4.0 and v4.5.0 where Lambda shortcuts' Conditions were not passed to the generated IAM Roles.
 
 ## v4.5.0
@@ -174,7 +184,7 @@ When you make this update, you will no longer see a trigger on your scheduled la
 ## v2.8.0
 
 - Allows Hookshot callers to bring their own webhook secret. This is used for
-signature-verification in the `.Github()` case.
+  signature-verification in the `.Github()` case.
 
 ## v2.7.0
 
