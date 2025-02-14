@@ -41,7 +41,8 @@
     "nyc": "^14.1.0",
     "opener": "^1.4.1",
     "tap-spec": "^5.0.0",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "@mapbox/mapbox-cdk-common":  "file://../mapbox-cdk-common"
   },
   "dependencies": {
     "aws-sdk": "^2.1425.0",
