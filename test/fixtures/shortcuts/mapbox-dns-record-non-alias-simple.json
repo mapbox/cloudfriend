@@ -1,0 +1,31 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {},
+  "Outputs": {
+    "MapboxDnsRecord-My-Record": {
+      "Alias": false,
+      "Name": "record-1",
+      "Type": "CNAME",
+      "Environment": "staging",
+      "Routing": "Simple",
+      "Target": "hello.com",
+      "HealthChecks": [
+        {
+          "FQDN": "hello.com",
+          "Path": "/lite"
+        }
+      ],
+      "TTL": 10,
+      "HostedZoneName": "mapbox.com",
+      "HostedZoneId": "Z2NOS9G3P4PDGR",
+      "RecordRegion": {
+        "Ref": "AWS::Region"
+      }
+    }
+  }
+}

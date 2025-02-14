@@ -64,7 +64,7 @@ test('[shortcuts] mapbox-dns-record-non-alias-simple', (assert) => {
     HostedZone: 'mapbox.com',
     Routing: 'Simple',
     Target: 'hello.com',
-    HealthChecks: [{ Path: '/lite' }],
+    HealthChecks: [{ FQDN: 'hello.com', Path: '/lite' }],
     TTL: 10
   });
   template = cf.merge(template, dnsRecord);

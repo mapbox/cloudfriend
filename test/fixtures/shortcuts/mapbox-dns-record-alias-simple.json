@@ -39,9 +39,9 @@
           "Additional": false
         }
       ],
+      "Name": "record-1",
       "Environment": "staging",
       "Routing": "Simple",
-      "Name": "record-1.mapbox.com.",
       "HostedZoneName": "mapbox.com",
       "HostedZoneId": "Z2NOS9G3P4PDGR",
       "RecordRegion": {
