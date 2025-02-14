@@ -1,0 +1,52 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyLoadBalancer": {
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+      "Properties": {
+        "Name": "hello-lb"
+      }
+    }
+  },
+  "Outputs": {
+    "MapboxDnsRecord-My-Record": {
+      "Alias": true,
+      "Target": {
+        "HostedZoneId": {
+          "Fn::GetAtt": [
+            "MyLoadBalancer",
+            "CanonicalHostedZoneID"
+          ]
+        },
+        "DNSName": "dualstack.[object Object]",
+        "EvaluateTargetHealth": true
+      },
+      "Type": "A",
+      "HealthChecks": [
+        {
+          "FQDN": {
+            "Fn::GetAtt": [
+              "MyLoadBalancer",
+              "DNSName"
+            ]
+          },
+          "Path": "/lite",
+          "Additional": false
+        }
+      ],
+      "Environment": "staging",
+      "Routing": "Simple",
+      "Name": "record-1.mapbox.com.",
+      "HostedZoneName": "mapbox.com",
+      "HostedZoneId": "Z2NOS9G3P4PDGR",
+      "RecordRegion": {
+        "Ref": "AWS::Region"
+      }
+    }
+  }
+}

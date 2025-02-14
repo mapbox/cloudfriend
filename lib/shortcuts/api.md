@@ -51,6 +51,9 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.<
 Includes a Log Group, a Role, an Alarm on function errors, a CloudWatch Subscription Filter,
 and a Lambda permission.</p>
 </dd>
+<dt><a href="#MapboxDnsRecordAlias">MapboxDnsRecordAlias</a></dt>
+<dd><p>Create an ALIAS DNS record in mapbox.com/tilestream.net/mbxinternal.com</p>
+</dd>
 <dt><a href="#QueueLambda">QueueLambda</a></dt>
 <dd><p>A Lambda function that runs in response to messages in an SQS queue.
 Includes a Log Group, a Role, an Alarm on function errors, and an event source
@@ -475,6 +478,21 @@ const lambda = new cf.shortcuts.LogSubscriptionLambda({
 
 module.exports = cf.merge(myTemplate, lambda);
 ```
+<a name="MapboxDnsRecordAlias"></a>
+
+## MapboxDnsRecordAlias
+Create an ALIAS DNS record in mapbox.com/tilestream.net/mbxinternal.com
+
+**Kind**: global class  
+<a name="new_MapboxDnsRecordAlias_new"></a>
+
+### new MapboxDnsRecordAlias(options)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | Options. |
+| options.LogicalName | <code>String</code> | The logical name of the IAM role within the CloudFormation template. const cf = require('@mapbox/cloudfriend'); const myTemplate = { ... }; const record = new cf.shortcuts.MapboxDnsRecordAlias({   Id: 'My-Record', // This becomes part of the logical id of the output   Name: 'record-1', // Becomes 'record-1.mapbox.com'   Environment: 'staging',   HostedZone: 'mapbox.com', // Or 'tilestream.net' or 'mbxinternal.com',   Routing: 'Simple', // Or 'Weighted', 'Latency', 'Geo'   Target: LoadBalancerLogicalId,   HealthChecks: [{ Path: '/lite' }], }); module.exports = cf.merge(myTemplate, record); |
+
 <a name="QueueLambda"></a>
 
 ## QueueLambda
