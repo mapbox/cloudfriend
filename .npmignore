@@ -1,1 +1,4 @@
-venv
+*
+!index.js
+!lib/**
+!bin/**
