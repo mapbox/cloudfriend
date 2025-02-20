@@ -1,0 +1,41 @@
+# Basic set up for three package managers
+version: 2
+updates:
+
+  # Maintain dependencies for npm
+  - package-ecosystem: "npm"
+    # https://github.com/dependabot/dependabot-core/issues/1778
+    target-branch: main
+    groups:
+      npm:
+        patterns:
+          - '*'
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    registries:
+      - npm-npmjs
+    ignore:
+      # Covered below
+      - dependency-name: '@mapbox/mapbox-cdk-common'
+
+  # Make sure the mapbox-cdk-common package stands out
+  - package-ecosystem: "npm"
+    allow:
+      - dependency-name: '@mapbox/mapbox-cdk-common'
+    groups:
+      mapbox-cdk-common:
+        patterns:
+          - '*'
+    directory: "/"
+    schedule:
+      interval: "daily"
+    registries:
+      - npm-npmjs
+
+registries:
+  npm-npmjs:
+    type: npm-registry
+    url: https://registry.npmjs.org
+    token: ${{ secrets.NPM_TOKEN_READONLY }}
+    replaces-base: true
