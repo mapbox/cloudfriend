@@ -35,7 +35,7 @@
   "homepage": "https://github.com/mapbox/cloudfriend#readme",
   "devDependencies": {
     "@mapbox/eslint-config-mapbox": "^1.2.1",
-    "@mapbox/mapbox-cdk-common": "file://../mapbox-cdk-common",
+    "@mapbox/mapbox-cdk-common": "^8.14.0",
     "eslint": "^4.18.2",
     "eslint-plugin-node": "^6.0.1",
     "jsdoc-to-markdown": "^7.1.1",
