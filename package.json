@@ -11,6 +11,7 @@
     "lint": "eslint index.js test lib bin cloudformation",
     "lint:fix": "npm run lint -- --fix",
     "test": "nyc tape test/*.test.js | tap-spec",
+    "test:update": "UPDATE=1 npm run test",
     "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
     "shortcuts-api-doc": "jsdoc2md lib/shortcuts/*.js > lib/shortcuts/api.md"

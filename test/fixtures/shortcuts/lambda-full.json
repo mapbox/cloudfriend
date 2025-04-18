@@ -6,7 +6,10 @@
   "Mappings": {},
   "Conditions": {
     "Always": {
-      "Fn::Equals": ["1", "1"]
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
     }
   },
   "Resources": {
@@ -49,7 +52,9 @@
         "FunctionName": "my-function",
         "Handler": "index.something",
         "KmsKeyArn": "arn:aws:kms:us-east-1:123456789012:key/fake",
-        "Layers": ["arn:aws:fake:layer/abc"],
+        "Layers": [
+          "arn:aws:fake:layer/abc"
+        ],
         "MemorySize": 512,
         "ReservedConcurrentExecutions": 10,
         "Runtime": "nodejs18.x",
@@ -58,8 +63,12 @@
           "Mode": "Active"
         },
         "VpcConfig": {
-          "SecurityGroupIds": ["sg-12345"],
-          "SubnetIds": ["fake"]
+          "SecurityGroupIds": [
+            "sg-12345"
+          ],
+          "SubnetIds": [
+            "fake"
+          ]
         },
         "Tags": [
           {
@@ -68,7 +77,10 @@
           }
         ],
         "Role": {
-          "Fn::GetAtt": ["MyLambdaRole", "Arn"]
+          "Fn::GetAtt": [
+            "MyLambdaRole",
+            "Arn"
+          ]
         }
       }
     },
@@ -78,7 +90,9 @@
       "Properties": {
         "AlarmName": "my-alarm",
         "AlarmDescription": "some alarm",
-        "AlarmActions": ["devnull@mapbox.com"],
+        "AlarmActions": [
+          "devnull@mapbox.com"
+        ],
         "Period": 120,
         "EvaluationPeriods": 2,
         "DatapointsToAlarm": 1,
@@ -87,7 +101,9 @@
         "ComparisonOperator": "LessThanThreshold",
         "TreatMissingData": "breaching",
         "EvaluateLowSampleCountPercentile": "ignore",
-        "OKActions": ["devnull@mapbox.com"],
+        "OKActions": [
+          "devnull@mapbox.com"
+        ],
         "Namespace": "AWS/Lambda",
         "Dimensions": [
           {
@@ -118,7 +134,10 @@
               "Effect": "Allow",
               "Action": "logs:*",
               "Resource": {
-                "Fn::GetAtt": ["MyLambdaLogs", "Arn"]
+                "Fn::GetAtt": [
+                  "MyLambdaLogs",
+                  "Arn"
+                ]
               }
             }
           ]
