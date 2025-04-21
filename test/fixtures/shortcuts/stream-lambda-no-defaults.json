@@ -167,19 +167,19 @@
       "Properties": {
         "BatchSize": 10000,
         "MaximumBatchingWindowInSeconds": 300,
+        "Enabled": false,
+        "EventSourceArn": "arn:aws:kinesis:us-east-1:123456789012:stream/fake",
+        "FunctionName": {
+          "Ref": "MyLambda"
+        },
+        "StartingPosition": "TRIM_HORIZON",
         "FilterCriteria": {
           "Filters": [
             {
               "Pattern": "{\"eventName\":[\"INSERT\",\"MODIFY\"]}"
             }
           ]
-        },
-        "Enabled": false,
-        "EventSourceArn": "arn:aws:kinesis:us-east-1:123456789012:stream/fake",
-        "FunctionName": {
-          "Ref": "MyLambda"
-        },
-        "StartingPosition": "TRIM_HORIZON"
+        }
       }
     }
   },

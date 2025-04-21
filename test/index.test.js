@@ -11,6 +11,7 @@ test('intrinsic functions', (assert) => {
   assert.deepEqual(cloudfriend.base64('secret'), { 'Fn::Base64': 'secret' }, 'base64');
   assert.deepEqual(cloudfriend.cidr('ipBlock', 1, 2), { 'Fn::Cidr': ['ipBlock', 1, 2] }, 'cidr');
   assert.deepEqual(cloudfriend.findInMap('mapping', 'key', 'value'), { 'Fn::FindInMap': ['mapping', 'key', 'value'] }, 'lookup');
+  assert.deepEqual(cloudfriend.findInMap('mapping', 'key', 'value', 'hello-world'), { 'Fn::FindInMap': ['mapping', 'key', 'value', { DefaultValue: 'hello-world' }] }, 'lookup with default value');
   assert.deepEqual(
     cloudfriend.forEach('somethings', 'topic', ['abra', 'cadabra'], 'magic', {
       Type: 'AWS::SNS::Topic',

@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.3.0
+
+- Support a default value for cf.findInMap (Fn::FindInMap).
+
 ## 8.2.0
 
 - Add `LogRetentionInDays` option to Lambda shortcuts
