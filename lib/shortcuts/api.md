@@ -391,6 +391,7 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 | options | <code>Object</code> |  | Options. |
 | options.LogicalName | <code>String</code> |  | The logical name of the Lambda function within the CloudFormation template. This is used to construct the logical names of the other resources, as well as the Lambda function's name. |
 | options.Code | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html). |
+| [options.ImageConfig] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-imageconfig). |
 | [options.DeadLetterConfig] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-deadletterconfig). |
 | [options.Description] | <code>String</code> | <code>&#x27;${logical name} in the ${stack name} stack&#x27;</code> | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-description). |
 | [options.Environment] | <code>Object</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-function.html#cfn-lambda-function-environment). |
