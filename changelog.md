@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.4.0
+
+- Support `ImageConfig` property for Lambda
+
 ## 8.3.0
 
 - Support a default value for cf.findInMap (Fn::FindInMap).
