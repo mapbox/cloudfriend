@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.0.0
+
+- Removes: aws-sdk as a runtime dependency
+- Adds: `@aws-sdk/client-cloudformation` as a runtime dependency
+- Updates: bin/validate-template to use `@aws-sdk/client-cloudformation`.
+
 ## 8.4.0
 
 - Support `ImageConfig` property for Lambda

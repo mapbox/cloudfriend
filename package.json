@@ -45,7 +45,7 @@
     "tape": "^4.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.1425.0",
+    "@aws-sdk/client-cloudformation": "^3.848.0",
     "minimist": "^1.2.6",
     "redent": "^2.0.0"
   },
