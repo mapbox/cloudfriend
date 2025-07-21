@@ -4,7 +4,7 @@
 
 - Removes: 
    - aws-sdk as a runtime dependency.
-   - Node 14 support.
+   - All node support prior to version 20.
 - Adds: 
   - `@aws-sdk/client-cloudformation` as a runtime dependency.
 - Updates: 

@@ -4,7 +4,7 @@
   "description": "Helper functions for assembling CloudFormation templates in JavaScript",
   "main": "index.js",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "pretest": "npm run lint && npm run shortcuts-api-doc",
