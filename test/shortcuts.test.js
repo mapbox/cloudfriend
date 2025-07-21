@@ -155,11 +155,11 @@ test('[shortcuts] lambda', (assert) => {
       TargetArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
     },
     Description: 'my description',
-    Environment: { Variables: { A: 'a' } },
+    Environment: { Variables: { MyCoolEnv: 'a' } },
     FunctionName: 'my-function',
     Handler: 'index.something',
     KmsKeyArn: 'arn:aws:kms:us-east-1:123456789012:key/fake',
-    Layers: ['arn:aws:fake:layer/abc'],
+    Layers: ['arn:aws:lambda:us-east-2:590474943231:layer:AWS-Parameters-and-Secrets-Lambda-Extension:4'],
     MemorySize: 512,
     ReservedConcurrentExecutions: 10,
     Runtime: 'nodejs22.x',
@@ -167,7 +167,7 @@ test('[shortcuts] lambda', (assert) => {
     Timeout: 30,
     TracingConfig: { Mode: 'Active' },
     VpcConfig: {
-      SecurityGroupIds: ['sg-12345'],
+      SecurityGroupIds: ['sg-12345678'],
       SubnetIds: ['fake']
     },
     Condition: 'Always',
@@ -675,7 +675,6 @@ test('[shortcuts] queue', (assert) => {
     LogicalName: 'MyQueue',
     VisibilityTimeout: 60,
     maxReceiveCount: 100,
-    ContentBasedDeduplication: true,
     DelaySeconds: 60,
     KmsMasterKeyId: 'alias/my-key',
     KmsDataKeyReusePeriondSeconds: 86400,
