@@ -46,25 +46,25 @@
         "Description": "my description",
         "Environment": {
           "Variables": {
-            "A": "a"
+            "MyCoolEnv": "a"
           }
         },
         "FunctionName": "my-function",
         "Handler": "index.something",
         "KmsKeyArn": "arn:aws:kms:us-east-1:123456789012:key/fake",
         "Layers": [
-          "arn:aws:fake:layer/abc"
+          "arn:aws:lambda:us-east-2:590474943231:layer:AWS-Parameters-and-Secrets-Lambda-Extension:4"
         ],
         "MemorySize": 512,
         "ReservedConcurrentExecutions": 10,
-        "Runtime": "nodejs18.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 30,
         "TracingConfig": {
           "Mode": "Active"
         },
         "VpcConfig": {
           "SecurityGroupIds": [
-            "sg-12345"
+            "sg-12345678"
           ],
           "SubnetIds": [
             "fake"
