@@ -229,7 +229,7 @@
       "Type": "AWS::IAM::Policy",
       "DependsOn": "PassFunctionRole",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": "PassFunction-lambda-log-access",
         "Roles": [
           {
             "Ref": "PassFunctionRole"
@@ -370,7 +370,7 @@
       "Type": "AWS::IAM::Policy",
       "DependsOn": "DestinationRole",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": "Destination-lambda-log-access",
         "Roles": [
           {
             "Ref": "DestinationRole"
