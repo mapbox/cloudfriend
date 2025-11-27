@@ -1,13 +1,17 @@
 # Changelog
 
+## 9.1.0
+
+- Change the policy name for the Lambda shortcuts to include the stack's LogicalName
+
 ## 9.0.0
 
-- Removes: 
+- Removes:
    - aws-sdk as a runtime dependency.
    - All node support prior to version 20.
-- Adds: 
+- Adds:
   - `@aws-sdk/client-cloudformation` as a runtime dependency.
-- Updates: 
+- Updates:
     - bin/validate-template to use `@aws-sdk/client-cloudformation`.
     - Lambda shortcut lambda runtime default to use `node22.x`
 

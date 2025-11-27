@@ -121,7 +121,7 @@
       "Condition": "Always",
       "DependsOn": "MyLambdaRole",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": "MyLambda-lambda-log-access",
         "Roles": [
           {
             "Ref": "MyLambdaRole"

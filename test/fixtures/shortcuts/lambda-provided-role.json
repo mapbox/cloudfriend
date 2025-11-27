@@ -86,7 +86,7 @@
     "MyLambdaLogPolicy": {
       "Type": "AWS::IAM::Policy",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": "MyLambda-lambda-log-access",
         "Roles": [
           {
             "Fn::Select": [
