@@ -222,10 +222,15 @@ Create a Glue table backed by Apache Iceberg format on S3.
 | [options.TableType] | <code>String</code> | <code>&#x27;EXTERNAL_TABLE&#x27;</code> | Hard-wired by this shortcut. |
 | [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-iceberginput.html). |
 | [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer for this Iceberg table. |
-| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the table optimizer to use. Required if EnableOptimizer is true. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
+| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the retention optimizer to use. Required if EnableOptimizer is true. Can be the same role as CompactionRoleArn if both optimizers are enabled. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
 | [options.SnapshotRetentionPeriodInDays] | <code>Number</code> | <code>5</code> | The number of days to retain snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
 | [options.NumberOfSnapshotsToRetain] | <code>Number</code> | <code>1</code> | The minimum number of snapshots to retain. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
 | [options.CleanExpiredFiles] | <code>Boolean</code> | <code>true</code> | Whether to delete expired data files after expiring snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
+| [options.EnableCompaction] | <code>Boolean</code> | <code>false</code> | Whether to enable the compaction optimizer for this Iceberg table. |
+| [options.CompactionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the compaction optimizer to use. Required if EnableCompaction is true. Can be the same role as OptimizerRoleArn if both optimizers are enabled. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
+| [options.CompactionStrategy] | <code>String</code> | <code>&#x27;binpack&#x27;</code> | The compaction strategy: binpack, sort, or z-order. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/enable-compaction.html). |
+| [options.MinInputFiles] | <code>Number</code> | <code>100</code> | Minimum number of data files before compaction triggers. |
+| [options.DeleteFileThreshold] | <code>Number</code> | <code>1</code> | Minimum deletes in a file to make it eligible for compaction. |
 
 <a name="GlueJsonTable"></a>
 

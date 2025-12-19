@@ -59,7 +59,7 @@
         }
       }
     },
-    "MyTableOptimizer": {
+    "MyTableRetentionOptimizer": {
       "Type": "AWS::Glue::TableOptimizer",
       "DependsOn": "MyTable",
       "Properties": {

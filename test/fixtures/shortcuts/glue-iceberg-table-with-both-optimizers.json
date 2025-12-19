@@ -56,13 +56,36 @@
         "TableName": "my_table",
         "Type": "retention",
         "TableOptimizerConfiguration": {
-          "RoleArn": "arn:aws:iam::123456789012:role/OptimizerRole",
+          "RoleArn": "arn:aws:iam::123456789012:role/RetentionRole",
           "Enabled": true,
           "RetentionConfiguration": {
             "IcebergConfiguration": {
               "SnapshotRetentionPeriodInDays": 5,
               "NumberOfSnapshotsToRetain": 1,
               "CleanExpiredFiles": true
+            }
+          }
+        }
+      }
+    },
+    "MyTableCompactionOptimizer": {
+      "Type": "AWS::Glue::TableOptimizer",
+      "DependsOn": "MyTable",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableName": "my_table",
+        "Type": "compaction",
+        "TableOptimizerConfiguration": {
+          "RoleArn": "arn:aws:iam::123456789012:role/CompactionRole",
+          "Enabled": true,
+          "CompactionConfiguration": {
+            "IcebergConfiguration": {
+              "Strategy": "sort",
+              "MinInputFiles": 100,
+              "DeleteFileThreshold": 1
             }
           }
         }
