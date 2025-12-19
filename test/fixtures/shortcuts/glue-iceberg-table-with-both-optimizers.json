@@ -80,14 +80,7 @@
         "Type": "compaction",
         "TableOptimizerConfiguration": {
           "RoleArn": "arn:aws:iam::123456789012:role/CompactionRole",
-          "Enabled": true,
-          "CompactionConfiguration": {
-            "IcebergConfiguration": {
-              "Strategy": "sort",
-              "MinInputFiles": 100,
-              "DeleteFileThreshold": 1
-            }
-          }
+          "Enabled": true
         }
       }
     }

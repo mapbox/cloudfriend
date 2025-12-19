@@ -1572,23 +1572,6 @@ test('[shortcuts] glue iceberg table', (assert) => {
     'throws when EnableCompaction is true but CompactionRoleArn is missing'
   );
 
-  assert.throws(
-    () => new cf.shortcuts.GlueIcebergTable({
-      LogicalName: 'MyTable',
-      DatabaseName: 'my_database',
-      Name: 'my_table',
-      Columns: [
-        { Name: 'column', Type: 'string' }
-      ],
-      Location: 's3://fake/location',
-      EnableCompaction: true,
-      CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole',
-      CompactionStrategy: 'invalid'
-    }),
-    /CompactionStrategy must be one of: binpack, sort, z-order/,
-    'throws when CompactionStrategy is invalid'
-  );
-
   db = new cf.shortcuts.GlueIcebergTable({
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
@@ -1618,10 +1601,7 @@ test('[shortcuts] glue iceberg table', (assert) => {
     ],
     Location: 's3://fake/location',
     EnableCompaction: true,
-    CompactionRoleArn: cf.getAtt('CompactionRole', 'Arn'),
-    CompactionStrategy: 'z-order',
-    MinInputFiles: 50,
-    DeleteFileThreshold: 10
+    CompactionRoleArn: cf.getAtt('CompactionRole', 'Arn')
   });
 
   template = cf.merge(
@@ -1646,8 +1626,7 @@ test('[shortcuts] glue iceberg table', (assert) => {
     EnableOptimizer: true,
     OptimizerRoleArn: 'arn:aws:iam::123456789012:role/RetentionRole',
     EnableCompaction: true,
-    CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole',
-    CompactionStrategy: 'sort'
+    CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole'
   });
 
   template = cf.merge(db);
