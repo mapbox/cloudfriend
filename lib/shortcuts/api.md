@@ -12,6 +12,9 @@ a Lambda permission.</p>
 <dt><a href="#GlueDatabase">GlueDatabase</a></dt>
 <dd><p>Create a Glue Database.</p>
 </dd>
+<dt><a href="#GlueIcebergTable">GlueIcebergTable</a></dt>
+<dd><p>Create a Glue table backed by Apache Iceberg format on S3.</p>
+</dd>
 <dt><a href="#GlueJsonTable">GlueJsonTable</a></dt>
 <dd><p>Create a Glue Table backed by line-delimited JSON files on S3.</p>
 </dd>
@@ -202,6 +205,28 @@ const db = new cf.shortcuts.GlueDatabase({
 
 module.exports = cf.merge(myTemplate, db);
 ```
+<a name="GlueIcebergTable"></a>
+
+## GlueIcebergTable
+Create a Glue table backed by Apache Iceberg format on S3.
+
+**Kind**: global class  
+<a name="new_GlueIcebergTable_new"></a>
+
+### new GlueIcebergTable(options)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | Accepts the same options as cloudfriend's [`GlueTable`](https://github.com/mapbox/cloudfriend/blob/master/lib/shortcuts/glue-table.js), though the following additional attributes are either required or hard-wired: |
+| options.Location | <code>String</code> |  | The physical location of the table. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html#cfn-glue-table-storagedescriptor-location). |
+| [options.TableType] | <code>String</code> | <code>&#x27;EXTERNAL_TABLE&#x27;</code> | Hard-wired by this shortcut. |
+| [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-iceberginput.html). |
+| [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer for this Iceberg table. |
+| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the table optimizer to use. Required if EnableOptimizer is true. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
+| [options.SnapshotRetentionPeriodInDays] | <code>Number</code> | <code>5</code> | The number of days to retain snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
+| [options.NumberOfSnapshotsToRetain] | <code>Number</code> | <code>1</code> | The minimum number of snapshots to retain. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
+| [options.CleanExpiredFiles] | <code>Boolean</code> | <code>true</code> | Whether to delete expired data files after expiring snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
+
 <a name="GlueJsonTable"></a>
 
 ## GlueJsonTable

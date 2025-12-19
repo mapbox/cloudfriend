@@ -1,0 +1,60 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {
+    "Always": {
+      "Fn::Equals": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "Resources": {
+    "AnotherThing": {
+      "Type": "AWS::SNS::Topic"
+    },
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Condition": "Always",
+      "DependsOn": "AnotherThing",
+      "Properties": {
+        "CatalogId": "1234",
+        "DatabaseName": "my_database",
+        "TableInput": {
+          "Description": "my_table description",
+          "Name": "my_table",
+          "Owner": "Team",
+          "Parameters": {
+            "table": "params"
+          },
+          "PartitionKeys": [],
+          "Retention": 12,
+          "TableType": "EXTERNAL_TABLE",
+          "StorageDescriptor": {
+            "Columns": [
+              {
+                "Name": "column",
+                "Type": "string"
+              }
+            ],
+            "Compressed": false,
+            "Location": "s3://fake/location",
+            "NumberOfBuckets": 0,
+            "SerdeInfo": {},
+            "StoredAsSubDirectories": true
+          }
+        },
+        "OpenTableFormatInput": {
+          "IcebergInput": {
+            "MetadataOperation": "CREATE",
+            "Version": "2"
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}
