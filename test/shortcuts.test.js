@@ -1557,6 +1557,107 @@ test('[shortcuts] glue iceberg table', (assert) => {
     'expected resources generated with optimizer using custom retention settings'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Columns: [
+        { Name: 'column', Type: 'string' }
+      ],
+      Location: 's3://fake/location',
+      EnableCompaction: true
+    }),
+    /You must provide a CompactionRoleArn when EnableCompaction is true/,
+    'throws when EnableCompaction is true but CompactionRoleArn is missing'
+  );
+
+  assert.throws(
+    () => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Columns: [
+        { Name: 'column', Type: 'string' }
+      ],
+      Location: 's3://fake/location',
+      EnableCompaction: true,
+      CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole',
+      CompactionStrategy: 'invalid'
+    }),
+    /CompactionStrategy must be one of: binpack, sort, z-order/,
+    'throws when CompactionStrategy is invalid'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableCompaction: true,
+    CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole'
+  });
+
+  template = cf.merge(db);
+  if (update) fixtures.update('glue-iceberg-table-with-compaction-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-compaction-defaults'),
+    'expected resources generated with compaction using default settings'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableCompaction: true,
+    CompactionRoleArn: cf.getAtt('CompactionRole', 'Arn'),
+    CompactionStrategy: 'z-order',
+    MinInputFiles: 50,
+    DeleteFileThreshold: 10
+  });
+
+  template = cf.merge(
+    { Resources: { CompactionRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
+    db
+  );
+  if (update) fixtures.update('glue-iceberg-table-with-compaction-custom', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-compaction-custom'),
+    'expected resources generated with compaction using custom settings'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableOptimizer: true,
+    OptimizerRoleArn: 'arn:aws:iam::123456789012:role/RetentionRole',
+    EnableCompaction: true,
+    CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole',
+    CompactionStrategy: 'sort'
+  });
+
+  template = cf.merge(db);
+  if (update) fixtures.update('glue-iceberg-table-with-both-optimizers', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-both-optimizers'),
+    'expected resources generated with both retention and compaction optimizers'
+  );
+
   assert.end();
 });
 

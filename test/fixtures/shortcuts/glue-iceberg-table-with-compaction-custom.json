@@ -6,6 +6,12 @@
   "Mappings": {},
   "Conditions": {},
   "Resources": {
+    "CompactionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {}
+      }
+    },
     "MyTable": {
       "Type": "AWS::Glue::Table",
       "Properties": {
@@ -45,7 +51,7 @@
         }
       }
     },
-    "MyTableRetentionOptimizer": {
+    "MyTableCompactionOptimizer": {
       "Type": "AWS::Glue::TableOptimizer",
       "DependsOn": "MyTable",
       "Properties": {
@@ -54,15 +60,20 @@
         },
         "DatabaseName": "my_database",
         "TableName": "my_table",
-        "Type": "retention",
+        "Type": "compaction",
         "TableOptimizerConfiguration": {
-          "RoleArn": "arn:aws:iam::123456789012:role/OptimizerRole",
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "CompactionRole",
+              "Arn"
+            ]
+          },
           "Enabled": true,
-          "RetentionConfiguration": {
+          "CompactionConfiguration": {
             "IcebergConfiguration": {
-              "SnapshotRetentionPeriodInDays": 5,
-              "NumberOfSnapshotsToRetain": 1,
-              "CleanExpiredFiles": true
+              "Strategy": "z-order",
+              "MinInputFiles": 50,
+              "DeleteFileThreshold": 10
             }
           }
         }
