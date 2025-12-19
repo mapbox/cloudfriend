@@ -68,14 +68,7 @@
               "Arn"
             ]
           },
-          "Enabled": true,
-          "CompactionConfiguration": {
-            "IcebergConfiguration": {
-              "Strategy": "z-order",
-              "MinInputFiles": 50,
-              "DeleteFileThreshold": 10
-            }
-          }
+          "Enabled": true
         }
       }
     }
