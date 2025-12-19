@@ -1658,6 +1658,90 @@ test('[shortcuts] glue iceberg table', (assert) => {
     'expected resources generated with both retention and compaction optimizers'
   );
 
+  assert.throws(
+    () => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Columns: [
+        { Name: 'column', Type: 'string' }
+      ],
+      Location: 's3://fake/location',
+      EnableOrphanFileDeletion: true
+    }),
+    /You must provide an OrphanFileDeletionRoleArn when EnableOrphanFileDeletion is true/,
+    'throws when EnableOrphanFileDeletion is true but OrphanFileDeletionRoleArn is missing'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableOrphanFileDeletion: true,
+    OrphanFileDeletionRoleArn: 'arn:aws:iam::123456789012:role/OrphanFileDeletionRole'
+  });
+
+  template = cf.merge(db);
+  if (update) fixtures.update('glue-iceberg-table-with-orphan-deletion-defaults', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-orphan-deletion-defaults'),
+    'expected resources generated with orphan file deletion using default settings'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableOrphanFileDeletion: true,
+    OrphanFileDeletionRoleArn: cf.getAtt('OrphanFileDeletionRole', 'Arn'),
+    OrphanFileRetentionPeriodInDays: 7,
+    OrphanFileDeletionLocation: 's3://fake/location/subdir'
+  });
+
+  template = cf.merge(
+    { Resources: { OrphanFileDeletionRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
+    db
+  );
+  if (update) fixtures.update('glue-iceberg-table-with-orphan-deletion-custom', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-orphan-deletion-custom'),
+    'expected resources generated with orphan file deletion using custom settings'
+  );
+
+  db = new cf.shortcuts.GlueIcebergTable({
+    LogicalName: 'MyTable',
+    DatabaseName: 'my_database',
+    Name: 'my_table',
+    Columns: [
+      { Name: 'column', Type: 'string' }
+    ],
+    Location: 's3://fake/location',
+    EnableOptimizer: true,
+    OptimizerRoleArn: 'arn:aws:iam::123456789012:role/SharedRole',
+    EnableCompaction: true,
+    CompactionRoleArn: 'arn:aws:iam::123456789012:role/SharedRole',
+    EnableOrphanFileDeletion: true,
+    OrphanFileDeletionRoleArn: 'arn:aws:iam::123456789012:role/SharedRole'
+  });
+
+  template = cf.merge(db);
+  if (update) fixtures.update('glue-iceberg-table-with-all-optimizers', template);
+  assert.deepEqual(
+    noUndefined(template),
+    fixtures.get('glue-iceberg-table-with-all-optimizers'),
+    'expected resources generated with all three optimizers using same role'
+  );
+
   assert.end();
 });
 
