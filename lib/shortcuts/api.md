@@ -217,21 +217,30 @@ Create a Glue table backed by Apache Iceberg format on S3.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | <code>Object</code> |  | Accepts the same options as cloudfriend's [`GlueTable`](https://github.com/mapbox/cloudfriend/blob/master/lib/shortcuts/glue-table.js), though the following additional attributes are either required or hard-wired: |
-| options.Location | <code>String</code> |  | The physical location of the table. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-storagedescriptor.html#cfn-glue-table-storagedescriptor-location). |
-| [options.TableType] | <code>String</code> | <code>&#x27;EXTERNAL_TABLE&#x27;</code> | Hard-wired by this shortcut. |
-| [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-iceberginput.html). |
-| [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer for this Iceberg table. |
-| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the retention optimizer to use. Required if EnableOptimizer is true. Can be the same role as CompactionRoleArn or OrphanFileDeletionRoleArn if multiple optimizers are enabled. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
-| [options.SnapshotRetentionPeriodInDays] | <code>Number</code> | <code>5</code> | The number of days to retain snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
-| [options.NumberOfSnapshotsToRetain] | <code>Number</code> | <code>1</code> | The minimum number of snapshots to retain. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
-| [options.CleanExpiredFiles] | <code>Boolean</code> | <code>true</code> | Whether to delete expired data files after expiring snapshots. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-glue-tableoptimizer-icebergretentionconfiguration.html). |
-| [options.EnableCompaction] | <code>Boolean</code> | <code>false</code> | Whether to enable the compaction optimizer for this Iceberg table. Note: CloudFormation does not support configuring compaction strategy or thresholds; the optimizer will use AWS defaults (binpack strategy). Configuration must be done via AWS CLI/API. See [GitHub issue](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/2257). |
-| [options.CompactionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the compaction optimizer to use. Required if EnableCompaction is true. Can be the same role as OptimizerRoleArn or OrphanFileDeletionRoleArn if multiple optimizers are enabled. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
-| [options.EnableOrphanFileDeletion] | <code>Boolean</code> | <code>false</code> | Whether to enable the orphan file deletion optimizer for this Iceberg table. |
-| [options.OrphanFileDeletionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the orphan file deletion optimizer to use. Required if EnableOrphanFileDeletion is true. Can be the same role as OptimizerRoleArn or CompactionRoleArn if multiple optimizers are enabled. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-tableoptimizer-tableoptimizerconfiguration.html). |
-| [options.OrphanFileRetentionPeriodInDays] | <code>Number</code> | <code>3</code> | The number of days to retain orphan files before deleting them. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/enable-orphan-file-deletion.html). |
-| [options.OrphanFileDeletionLocation] | <code>String</code> |  | The S3 location to scan for orphan files. Defaults to the table location if not specified. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/enable-orphan-file-deletion.html). |
+| options | <code>Object</code> |  | Options for creating an Iceberg table. |
+| options.LogicalName | <code>String</code> |  | The logical name of the Glue Table within the CloudFormation template. |
+| options.Name | <code>String</code> |  | The name of the table. |
+| options.DatabaseName | <code>String</code> |  | The name of the database the table resides in. |
+| options.Location | <code>String</code> |  | The physical location of the table (S3 URI). Required. |
+| [options.Columns] | <code>Array.&lt;Object&gt;</code> |  | Simple column definitions as array of {Name, Type, Required}. If provided, will be auto-converted to Iceberg Schema format. Use options.Schema for full control. |
+| [options.Schema] | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Either Columns or Schema must be provided. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-icebergtableinput.html). |
+| [options.PartitionSpec] | <code>Object</code> |  | Iceberg partition specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-partitionspec.html). |
+| [options.WriteOrder] | <code>Object</code> |  | Iceberg write order specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-writeorder.html). |
+| [options.CatalogId] | <code>String</code> | <code>AccountId</code> | The AWS account ID for the account in which to create the table. |
+| [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. |
+| [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer. |
+| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the retention optimizer. Required if EnableOptimizer is true. |
+| [options.SnapshotRetentionPeriodInDays] | <code>Number</code> | <code>5</code> | The number of days to retain snapshots. |
+| [options.NumberOfSnapshotsToRetain] | <code>Number</code> | <code>1</code> | The minimum number of snapshots to retain. |
+| [options.CleanExpiredFiles] | <code>Boolean</code> | <code>true</code> | Whether to delete expired data files after expiring snapshots. |
+| [options.EnableCompaction] | <code>Boolean</code> | <code>false</code> | Whether to enable the compaction optimizer. |
+| [options.CompactionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the compaction optimizer. Required if EnableCompaction is true. |
+| [options.EnableOrphanFileDeletion] | <code>Boolean</code> | <code>false</code> | Whether to enable the orphan file deletion optimizer. |
+| [options.OrphanFileDeletionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the orphan file deletion optimizer. Required if EnableOrphanFileDeletion is true. |
+| [options.OrphanFileRetentionPeriodInDays] | <code>Number</code> | <code>3</code> | The number of days to retain orphan files before deleting them. |
+| [options.OrphanFileDeletionLocation] | <code>String</code> |  | The S3 location to scan for orphan files. |
+| [options.Condition] | <code>String</code> |  | CloudFormation condition name. |
+| [options.DependsOn] | <code>String</code> |  | CloudFormation resource dependency. |
 
 <a name="GlueJsonTable"></a>
 

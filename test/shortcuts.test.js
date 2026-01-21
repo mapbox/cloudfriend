@@ -16,8 +16,13 @@ const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 test('[shortcuts] fixture validation', async (assert) => {
   // Runs cfn-lint, ignoring "warnings". Install via pip or Homebrew to run these
   // tests locally.
-  const cfnLint = (filepath) => new Promise((resolve, reject) => {
-    cp.exec(`cfn-lint ${filepath} --ignore-checks W`, (err, stdout) => {
+  const cfnLint = (filepath, filename) => new Promise((resolve, reject) => {
+    // Ignore E3003 (missing TableInput) and E3002 (unexpected properties) for Iceberg tables only
+    // cfn-lint doesn't yet support OpenTableFormatInput (Iceberg table format)
+    const isIcebergTable = filename.includes('glue-iceberg-table');
+    const ignoreChecks = isIcebergTable ? 'W,E3003,E3002' : 'W';
+
+    cp.exec(`cfn-lint ${filepath} --ignore-checks ${ignoreChecks}`, (err, stdout) => {
       if (err) return reject(new Error(stdout));
       return resolve();
     });
@@ -30,7 +35,7 @@ test('[shortcuts] fixture validation', async (assert) => {
   while (toValidate.length) {
     const filename = toValidate.shift();
     await Promise.all([
-      cfnLint(path.join(__dirname, 'fixtures', 'shortcuts', filename))
+      cfnLint(path.join(__dirname, 'fixtures', 'shortcuts', filename), filename)
         .then(() => assert.pass(`${filename} fixture passed validation`))
         .catch((err) => {
           assert.fail(`${filename} fixture fails validation`);
@@ -1442,7 +1447,7 @@ test('[shortcuts] glue iceberg table', (assert) => {
   );
   assert.throws(
     () => new cf.shortcuts.GlueIcebergTable({}),
-    /You must provide a Location/,
+    /You must provide a LogicalName, Name, DatabaseName, and Location/,
     'throws without required parameters'
   );
 

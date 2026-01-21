@@ -23,34 +23,25 @@
       "Properties": {
         "CatalogId": "1234",
         "DatabaseName": "my_database",
-        "TableInput": {
-          "Description": "my_table description",
-          "Name": "my_table",
-          "Owner": "Team",
-          "Parameters": {
-            "table": "params"
-          },
-          "PartitionKeys": [],
-          "Retention": 12,
-          "TableType": "EXTERNAL_TABLE",
-          "StorageDescriptor": {
-            "Columns": [
-              {
-                "Name": "column",
-                "Type": "string"
-              }
-            ],
-            "Compressed": false,
-            "Location": "s3://fake/location",
-            "NumberOfBuckets": 0,
-            "SerdeInfo": {},
-            "StoredAsSubDirectories": true
-          }
-        },
+        "Name": "my_table",
         "OpenTableFormatInput": {
           "IcebergInput": {
             "MetadataOperation": "CREATE",
-            "Version": "2"
+            "Version": "2",
+            "IcebergTableInput": {
+              "Location": "s3://fake/location",
+              "Schema": {
+                "Type": "struct",
+                "Fields": [
+                  {
+                    "Name": "column",
+                    "Type": "string",
+                    "Id": 1,
+                    "Required": true
+                  }
+                ]
+              }
+            }
           }
         }
       }
