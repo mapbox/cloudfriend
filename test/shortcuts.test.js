@@ -89,6 +89,18 @@ test('[shortcuts] lambda', (assert) => {
     'expected resources generated using all default values'
   );
 
+  const lambdaWithRetain = new cf.shortcuts.Lambda({
+    LogicalName: 'MyLambda',
+    Code: { S3Bucket: 'my-code-bucket', S3Key: 'path/to/code.zip' },
+    LogPolicyDeletionPolicy: 'Retain'
+  });
+  const templateWithRetain = cf.merge(lambdaWithRetain);
+  assert.equal(
+    templateWithRetain.Resources.MyLambdaLogPolicy.DeletionPolicy,
+    'Retain',
+    'LogPolicyDeletionPolicy=Retain sets DeletionPolicy on IAM Policy resource'
+  );
+
   lambda = new cf.shortcuts.Lambda({
     LogicalName: 'MyLambda',
     Code: {
