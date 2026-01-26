@@ -424,6 +424,7 @@ Log Group, a Role, an Alarm on function errors, and the Lambda Function itself.
 | [options.ExtendedStatistic] | <code>String</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-extendedstatistic)] |
 | [options.OKActions] | <code>Array.&lt;String&gt;</code> |  | See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cw-alarm.html#cfn-cloudwatch-alarms-okactions). |
 | [options.LogRetentionInDays] | <code>Number</code> | <code>14</code> | How long to retain CloudWatch logs for this Lambda function. See [AWS Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html) for allowed values. |
+| [options.LogPolicyDeletionPolicy] | <code>String</code> | <code>&#x27;Delete&#x27;</code> | DeletionPolicy on the IAM Policy resource used to access Logs. See [AWS Documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-attribute-deletionpolicy.html) for allowed values. |
 
 **Example**  
 ```js

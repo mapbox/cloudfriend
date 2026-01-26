@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.1.1
+
+- Add DeletionPolicy for the IAM Policy in Lamdba shortcuts.
+
 ## 9.1.0
 
 - Change the policy name for the Lambda shortcuts to include the stack's LogicalName
