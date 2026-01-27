@@ -1447,7 +1447,7 @@ test('[shortcuts] glue iceberg table', (assert) => {
   );
   assert.throws(
     () => new cf.shortcuts.GlueIcebergTable({}),
-    /You must provide a LogicalName, Name, DatabaseName, and Location/,
+    /You must provide a LogicalName, Name, DatabaseName, Location, and Schema/,
     'throws without required parameters'
   );
 
@@ -1455,9 +1455,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location'
   });
 
@@ -1473,25 +1476,22 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     CatalogId: '1234',
     Owner: 'Team',
     Parameters: { table: 'params' },
     Description: 'my_table description',
     Retention: 12,
     Location: 's3://fake/location',
-    IcebergVersion: '2',
-    Condition: 'Always',
-    DependsOn: 'AnotherThing'
+    IcebergVersion: '2'
   });
 
-  template = cf.merge(
-    { Conditions: { Always: cf.equals('1', '1') } },
-    { Resources: { AnotherThing: { Type: 'AWS::SNS::Topic' } } },
-    db
-  );
+  template = cf.merge(db);
   if (update) fixtures.update('glue-iceberg-table-no-defaults', template);
   assert.deepEqual(
     noUndefined(template),
@@ -1504,9 +1504,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
       LogicalName: 'MyTable',
       DatabaseName: 'my_database',
       Name: 'my_table',
-      Columns: [
-        { Name: 'column', Type: 'string' }
-      ],
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
       Location: 's3://fake/location',
       EnableOptimizer: true
     }),
@@ -1518,9 +1521,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOptimizer: true,
     OptimizerRoleArn: 'arn:aws:iam::123456789012:role/OptimizerRole'
@@ -1538,20 +1544,21 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOptimizer: true,
     OptimizerRoleArn: cf.getAtt('OptimizerRole', 'Arn'),
     SnapshotRetentionPeriodInDays: 7,
     NumberOfSnapshotsToRetain: 3,
-    CleanExpiredFiles: false,
-    Condition: 'Always'
+    CleanExpiredFiles: false
   });
 
   template = cf.merge(
-    { Conditions: { Always: cf.equals('1', '1') } },
     { Resources: { OptimizerRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
     db
   );
@@ -1567,9 +1574,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
       LogicalName: 'MyTable',
       DatabaseName: 'my_database',
       Name: 'my_table',
-      Columns: [
-        { Name: 'column', Type: 'string' }
-      ],
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
       Location: 's3://fake/location',
       EnableCompaction: true
     }),
@@ -1581,9 +1591,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableCompaction: true,
     CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole'
@@ -1601,9 +1614,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableCompaction: true,
     CompactionRoleArn: cf.getAtt('CompactionRole', 'Arn')
@@ -1624,9 +1640,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOptimizer: true,
     OptimizerRoleArn: 'arn:aws:iam::123456789012:role/RetentionRole',
@@ -1647,9 +1666,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
       LogicalName: 'MyTable',
       DatabaseName: 'my_database',
       Name: 'my_table',
-      Columns: [
-        { Name: 'column', Type: 'string' }
-      ],
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
       Location: 's3://fake/location',
       EnableOrphanFileDeletion: true
     }),
@@ -1661,9 +1683,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOrphanFileDeletion: true,
     OrphanFileDeletionRoleArn: 'arn:aws:iam::123456789012:role/OrphanFileDeletionRole'
@@ -1681,9 +1706,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOrphanFileDeletion: true,
     OrphanFileDeletionRoleArn: cf.getAtt('OrphanFileDeletionRole', 'Arn'),
@@ -1706,9 +1734,12 @@ test('[shortcuts] glue iceberg table', (assert) => {
     LogicalName: 'MyTable',
     DatabaseName: 'my_database',
     Name: 'my_table',
-    Columns: [
-      { Name: 'column', Type: 'string' }
-    ],
+    Schema: {
+      Type: 'struct',
+      Fields: [
+        { Name: 'column', Type: 'string', Id: 1, Required: true }
+      ]
+    },
     Location: 's3://fake/location',
     EnableOptimizer: true,
     OptimizerRoleArn: 'arn:aws:iam::123456789012:role/SharedRole',

@@ -222,8 +222,7 @@ Create a Glue table backed by Apache Iceberg format on S3.
 | options.Name | <code>String</code> |  | The name of the table. |
 | options.DatabaseName | <code>String</code> |  | The name of the database the table resides in. |
 | options.Location | <code>String</code> |  | The physical location of the table (S3 URI). Required. |
-| [options.Columns] | <code>Array.&lt;Object&gt;</code> |  | Simple column definitions as array of {Name, Type, Required}. If provided, will be auto-converted to Iceberg Schema format. Use options.Schema for full control. |
-| [options.Schema] | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Either Columns or Schema must be provided. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-icebergtableinput.html). |
+| options.Schema | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Each field must have Id (integer), Name (string), Type (string or object for complex types), and Required (boolean). See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-icebergtableinput.html). |
 | [options.PartitionSpec] | <code>Object</code> |  | Iceberg partition specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-partitionspec.html). |
 | [options.WriteOrder] | <code>Object</code> |  | Iceberg write order specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-writeorder.html). |
 | [options.CatalogId] | <code>String</code> | <code>AccountId</code> | The AWS account ID for the account in which to create the table. |
