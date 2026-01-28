@@ -238,8 +238,6 @@ Create a Glue table backed by Apache Iceberg format on S3.
 | [options.OrphanFileDeletionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the orphan file deletion optimizer. Required if EnableOrphanFileDeletion is true. |
 | [options.OrphanFileRetentionPeriodInDays] | <code>Number</code> | <code>3</code> | The number of days to retain orphan files before deleting them. |
 | [options.OrphanFileDeletionLocation] | <code>String</code> |  | The S3 location to scan for orphan files. |
-| [options.Condition] | <code>String</code> |  | CloudFormation condition name. |
-| [options.DependsOn] | <code>String</code> |  | CloudFormation resource dependency. |
 
 <a name="GlueJsonTable"></a>
 

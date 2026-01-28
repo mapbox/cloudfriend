@@ -4,14 +4,7 @@
   "Parameters": {},
   "Rules": {},
   "Mappings": {},
-  "Conditions": {
-    "Always": {
-      "Fn::Equals": [
-        "1",
-        "1"
-      ]
-    }
-  },
+  "Conditions": {},
   "Resources": {
     "OptimizerRole": {
       "Type": "AWS::IAM::Role",
@@ -21,7 +14,6 @@
     },
     "MyTable": {
       "Type": "AWS::Glue::Table",
-      "Condition": "Always",
       "Properties": {
         "CatalogId": {
           "Ref": "AWS::AccountId"
@@ -76,8 +68,7 @@
             }
           }
         }
-      },
-      "Condition": "Always"
+      }
     }
   },
   "Outputs": {}
