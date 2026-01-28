@@ -222,9 +222,9 @@ Create a Glue table backed by Apache Iceberg format on S3.
 | options.Name | <code>String</code> |  | The name of the table. |
 | options.DatabaseName | <code>String</code> |  | The name of the database the table resides in. |
 | options.Location | <code>String</code> |  | The physical location of the table (S3 URI). Required. |
-| options.Schema | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Each field must have Id (integer), Name (string), Type (string or object for complex types), and Required (boolean). See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-icebergtableinput.html). |
-| [options.PartitionSpec] | <code>Object</code> |  | Iceberg partition specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-partitionspec.html). |
-| [options.WriteOrder] | <code>Object</code> |  | Iceberg write order specification. See [AWS documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-glue-table-writeorder.html). |
+| options.Schema | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Each field must have Id (integer), Name (string), Type (string or object for complex types), and Required (boolean). See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergSchema.html). |
+| [options.PartitionSpec] | <code>Object</code> |  | Iceberg partition specification. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergPartitionSpec.html). |
+| [options.WriteOrder] | <code>Object</code> |  | Iceberg write order specification. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergSortOrder.html). |
 | [options.CatalogId] | <code>String</code> | <code>AccountId</code> | The AWS account ID for the account in which to create the table. |
 | [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. |
 | [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer. |
