@@ -22,7 +22,7 @@ test('[shortcuts] fixture validation', async (assert) => {
     const isIcebergTable = filename.includes('glue-iceberg-table');
     const ignoreChecks = isIcebergTable ? 'W,E3003,E3002' : 'W';
 
-    cp.exec(`cfn-lint ${filepath} --ignore-checks ${ignoreChecks}`, (err, stdout) => {
+    cp.execFile('cfn-lint', [filepath, '--ignore-checks', ignoreChecks], (err, stdout) => {
       if (err) return reject(new Error(stdout));
       return resolve();
     });
