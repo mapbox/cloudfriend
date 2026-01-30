@@ -230,7 +230,7 @@
       "DependsOn": "PassFunctionRole",
       "DeletionPolicy": "Delete",
       "Properties": {
-        "PolicyName": "PassFunction-lambda-log-access",
+        "PolicyName": { "Fn::Sub": "${AWS::StackName}-PassFunction-lambda-log-access" },
         "Roles": [
           {
             "Ref": "PassFunctionRole"
@@ -372,7 +372,7 @@
       "DependsOn": "DestinationRole",
       "DeletionPolicy": "Delete",
       "Properties": {
-        "PolicyName": "Destination-lambda-log-access",
+        "PolicyName": { "Fn::Sub": "${AWS::StackName}-Destination-lambda-log-access" },
         "Roles": [
           {
             "Ref": "DestinationRole"
