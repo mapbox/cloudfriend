@@ -218,6 +218,22 @@ test('[shortcuts] lambda', (assert) => {
     'expected resources generated using no default values'
   );
 
+  lambda = new cf.shortcuts.Lambda({
+    LogicalName: 'MyLambda',
+    Code: {
+      S3Bucket: 'my-code-bucket',
+      S3Key: 'path/to/code.zip'
+    },
+    LogPolicyName: 'CustomLogPolicyName'
+  });
+
+  template = cf.merge(lambda);
+  assert.equal(
+    template.Resources.MyLambdaLogPolicy.Properties.PolicyName,
+    'CustomLogPolicyName',
+    'LogPolicyName parameter correctly overrides the default policy name'
+  );
+
   assert.end();
 });
 
