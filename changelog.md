@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.2.0
+
+- Inline policy for Lambda Shortcut name will change from `${LogicalName}-lambda-log-access` to `${AWS::StackName}-${LogicalName}-lambda-log-access`. This is the new default value. You can override default value using property `LogPolicyName`.
+
 ## 9.1.1
 
 - Add DeletionPolicy for the IAM Policy in Lamdba shortcuts.
