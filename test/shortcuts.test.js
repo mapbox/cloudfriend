@@ -1483,10 +1483,6 @@ test('[shortcuts] glue iceberg table', (assert) => {
       ]
     },
     CatalogId: '1234',
-    Owner: 'Team',
-    Parameters: { table: 'params' },
-    Description: 'my_table description',
-    Retention: 12,
     Location: 's3://fake/location',
     IcebergVersion: '2'
   });
