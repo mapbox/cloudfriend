@@ -10,9 +10,8 @@
     "pretest": "npm run lint && npm run shortcuts-api-doc",
     "lint": "eslint index.js test lib bin cloudformation",
     "lint:fix": "npm run lint -- --fix",
-    "test": "nyc tape test/*.test.js | tap-spec",
-    "test:update": "UPDATE=1 npm run test",
-    "coverage": "nyc --reporter html tape test/*.test.js && opener coverage/index.html",
+    "test": "jest --coverage",
+    "test:update": "jest --updateSnapshot",
     "build-ci-template": "bin/build-template.js cloudformation/ci.template.js > cloudformation/ci.template.json",
     "shortcuts-api-doc": "jsdoc2md lib/shortcuts/*.js > lib/shortcuts/api.md"
   },
@@ -38,11 +37,8 @@
     "@mapbox/eslint-config-mapbox": "^1.2.1",
     "eslint": "^4.18.2",
     "eslint-plugin-node": "^6.0.1",
-    "jsdoc-to-markdown": "^7.1.1",
-    "nyc": "^14.1.0",
-    "opener": "^1.4.1",
-    "tap-spec": "^5.0.0",
-    "tape": "^4.6.0"
+    "jest": "^29.7.0",
+    "jsdoc-to-markdown": "^7.1.1"
   },
   "dependencies": {
     "@aws-sdk/client-cloudformation": "^3.848.0",
@@ -50,6 +46,9 @@
     "redent": "^2.0.0"
   },
   "eslintConfig": {
-    "extends": "@mapbox/eslint-config-mapbox"
+    "extends": "@mapbox/eslint-config-mapbox",
+    "env": {
+      "jest": true
+    }
   }
 }
