@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.2.1
+
+- Refactor tests to use `jest` instead of `tape` & update linting dependencies to fix security vulnerabilities. 
+
 ## 9.2.0
 
 - Inline policy for Lambda Shortcut name will change from `${LogicalName}-lambda-log-access` to `${AWS::StackName}-${LogicalName}-lambda-log-access`. This is the new default value. You can override default value using property `LogPolicyName`.
