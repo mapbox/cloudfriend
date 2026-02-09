@@ -12,6 +12,9 @@ a Lambda permission.</p>
 <dt><a href="#GlueDatabase">GlueDatabase</a></dt>
 <dd><p>Create a Glue Database.</p>
 </dd>
+<dt><a href="#GlueIcebergTable">GlueIcebergTable</a></dt>
+<dd><p>Create a Glue table backed by Apache Iceberg format on S3.</p>
+</dd>
 <dt><a href="#GlueJsonTable">GlueJsonTable</a></dt>
 <dd><p>Create a Glue Table backed by line-delimited JSON files on S3.</p>
 </dd>
@@ -202,6 +205,40 @@ const db = new cf.shortcuts.GlueDatabase({
 
 module.exports = cf.merge(myTemplate, db);
 ```
+<a name="GlueIcebergTable"></a>
+
+## GlueIcebergTable
+Create a Glue table backed by Apache Iceberg format on S3.
+
+**Kind**: global class  
+<a name="new_GlueIcebergTable_new"></a>
+
+### new GlueIcebergTable(options)
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | <code>Object</code> |  | Options for creating an Iceberg table. |
+| options.LogicalName | <code>String</code> |  | The logical name of the Glue Table within the CloudFormation template. |
+| options.Name | <code>String</code> |  | The name of the table. |
+| options.DatabaseName | <code>String</code> |  | The name of the database the table resides in. |
+| options.Location | <code>String</code> |  | The physical location of the table (S3 URI). Required. |
+| options.Schema | <code>Object</code> |  | Full Iceberg schema definition with Type: "struct" and Fields array. Each field must have Id (integer), Name (string), Type (string or object for complex types), and Required (boolean). See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergSchema.html). |
+| [options.PartitionSpec] | <code>Object</code> |  | Iceberg partition specification. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergPartitionSpec.html). |
+| [options.WriteOrder] | <code>Object</code> |  | Iceberg write order specification. See [AWS documentation](https://docs.aws.amazon.com/glue/latest/webapi/API_IcebergSortOrder.html). |
+| [options.CatalogId] | <code>String</code> | <code>AccountId</code> | The AWS account ID for the account in which to create the table. |
+| [options.IcebergVersion] | <code>String</code> | <code>&#x27;2&#x27;</code> | The table version for the Iceberg table. |
+| [options.EnableOptimizer] | <code>Boolean</code> | <code>false</code> | Whether to enable the snapshot retention optimizer. |
+| [options.OptimizerRoleArn] | <code>String</code> |  | The ARN of the IAM role for the retention optimizer. Required if EnableOptimizer is true. |
+| [options.SnapshotRetentionPeriodInDays] | <code>Number</code> | <code>5</code> | The number of days to retain snapshots. |
+| [options.NumberOfSnapshotsToRetain] | <code>Number</code> | <code>1</code> | The minimum number of snapshots to retain. |
+| [options.CleanExpiredFiles] | <code>Boolean</code> | <code>true</code> | Whether to delete expired data files after expiring snapshots. |
+| [options.EnableCompaction] | <code>Boolean</code> | <code>false</code> | Whether to enable the compaction optimizer. |
+| [options.CompactionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the compaction optimizer. Required if EnableCompaction is true. |
+| [options.EnableOrphanFileDeletion] | <code>Boolean</code> | <code>false</code> | Whether to enable the orphan file deletion optimizer. |
+| [options.OrphanFileDeletionRoleArn] | <code>String</code> |  | The ARN of the IAM role for the orphan file deletion optimizer. Required if EnableOrphanFileDeletion is true. |
+| [options.OrphanFileRetentionPeriodInDays] | <code>Number</code> | <code>3</code> | The number of days to retain orphan files before deleting them. |
+| [options.OrphanFileDeletionLocation] | <code>String</code> |  | The S3 location to scan for orphan files. |
+
 <a name="GlueJsonTable"></a>
 
 ## GlueJsonTable

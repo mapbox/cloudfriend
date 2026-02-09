@@ -1,0 +1,80 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "Name": "my_table",
+        "OpenTableFormatInput": {
+          "IcebergInput": {
+            "MetadataOperation": "CREATE",
+            "Version": "2",
+            "IcebergTableInput": {
+              "Location": "s3://fake/location",
+              "Schema": {
+                "Type": "struct",
+                "Fields": [
+                  {
+                    "Name": "column",
+                    "Type": "string",
+                    "Id": 1,
+                    "Required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "MyTableRetentionOptimizer": {
+      "Type": "AWS::Glue::TableOptimizer",
+      "DependsOn": "MyTable",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableName": "my_table",
+        "Type": "retention",
+        "TableOptimizerConfiguration": {
+          "RoleArn": "arn:aws:iam::123456789012:role/RetentionRole",
+          "Enabled": true,
+          "RetentionConfiguration": {
+            "IcebergConfiguration": {
+              "SnapshotRetentionPeriodInDays": 5,
+              "NumberOfSnapshotsToRetain": 1,
+              "CleanExpiredFiles": true
+            }
+          }
+        }
+      }
+    },
+    "MyTableCompactionOptimizer": {
+      "Type": "AWS::Glue::TableOptimizer",
+      "DependsOn": "MyTable",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableName": "my_table",
+        "Type": "compaction",
+        "TableOptimizerConfiguration": {
+          "RoleArn": "arn:aws:iam::123456789012:role/CompactionRole",
+          "Enabled": true
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

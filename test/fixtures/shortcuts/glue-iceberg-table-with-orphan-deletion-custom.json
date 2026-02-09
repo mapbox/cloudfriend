@@ -1,0 +1,74 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "OrphanFileDeletionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {}
+      }
+    },
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "Name": "my_table",
+        "OpenTableFormatInput": {
+          "IcebergInput": {
+            "MetadataOperation": "CREATE",
+            "Version": "2",
+            "IcebergTableInput": {
+              "Location": "s3://fake/location",
+              "Schema": {
+                "Type": "struct",
+                "Fields": [
+                  {
+                    "Name": "column",
+                    "Type": "string",
+                    "Id": 1,
+                    "Required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "MyTableOrphanFileDeletionOptimizer": {
+      "Type": "AWS::Glue::TableOptimizer",
+      "DependsOn": "MyTable",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableName": "my_table",
+        "Type": "orphan_file_deletion",
+        "TableOptimizerConfiguration": {
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "OrphanFileDeletionRole",
+              "Arn"
+            ]
+          },
+          "Enabled": true,
+          "OrphanFileDeletionConfiguration": {
+            "IcebergConfiguration": {
+              "OrphanFileRetentionPeriodInDays": 7,
+              "Location": "s3://fake/location/subdir"
+            }
+          }
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

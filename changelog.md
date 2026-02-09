@@ -1,5 +1,9 @@
 # Changelog
 
+## 9.3.1
+
+- Add `GlueIcebergTable` shortcut for creating AWS Glue tables backed by Apache Iceberg format with support for table optimizers.
+
 ## 9.2.1
 
 - Refactor tests to use `jest` instead of `tape` & update linting dependencies to fix security vulnerabilities. 

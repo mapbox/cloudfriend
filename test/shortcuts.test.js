@@ -15,8 +15,13 @@ const noUndefined = (template) => JSON.parse(JSON.stringify(template));
 describe('[shortcuts] fixture validation', () => {
   // Runs cfn-lint, ignoring "warnings". Install via pip or Homebrew to run these
   // tests locally.
-  const cfnLint = (filepath) => new Promise((resolve, reject) => {
-    cp.exec(`cfn-lint ${filepath} --ignore-checks W`, (err, stdout) => {
+  const cfnLint = (filepath, filename) => new Promise((resolve, reject) => {
+    // Ignore E3003 (missing TableInput) and E3002 (unexpected properties) for Iceberg tables only
+    // cfn-lint doesn't yet support OpenTableFormatInput (Iceberg table format)
+    const isIcebergTable = filename.includes('glue-iceberg-table');
+    const ignoreChecks = isIcebergTable ? 'W,E3003,E3002' : 'W';
+
+    cp.execFile('cfn-lint', [filepath, '--ignore-checks', ignoreChecks], (err, stdout) => {
       if (err) return reject(new Error(stdout));
       return resolve();
     });
@@ -28,7 +33,7 @@ describe('[shortcuts] fixture validation', () => {
 
   test.each(toValidate)('%s fixture passes validation', async (filename) => {
     await Promise.all([
-      cfnLint(path.join(__dirname, 'fixtures', 'shortcuts', filename)),
+      cfnLint(path.join(__dirname, 'fixtures', 'shortcuts', filename), filename),
       sleep(1000)
     ]);
   });
@@ -1243,6 +1248,292 @@ describe('[shortcuts] glue parquet table', () => {
     );
     if (update) fixtures.update('glue-parquet-table-no-defaults', template);
     expect(noUndefined(template)).toEqual(fixtures.get('glue-parquet-table-no-defaults'));
+  });
+});
+
+describe('[shortcuts] glue iceberg table', () => {
+  test('throws without options', () => {
+    expect(() => new cf.shortcuts.GlueIcebergTable()).toThrow('Options required');
+  });
+
+  test('throws without required parameters', () => {
+    expect(() => new cf.shortcuts.GlueIcebergTable({})).toThrow(/You must provide a LogicalName, Name, DatabaseName, Location, and Schema/);
+  });
+
+  test('expected resources generated with defaults', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-defaults', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-defaults'));
+  });
+
+  test('expected resources generated without defaults', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      CatalogId: '1234',
+      Location: 's3://fake/location',
+      IcebergVersion: '2'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-no-defaults', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-no-defaults'));
+  });
+
+  test('throws when EnableOptimizer is true but OptimizerRoleArn is missing', () => {
+    expect(() => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOptimizer: true
+    })).toThrow(/You must provide an OptimizerRoleArn when EnableOptimizer is true/);
+  });
+
+  test('expected resources generated with optimizer using default retention settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOptimizer: true,
+      OptimizerRoleArn: 'arn:aws:iam::123456789012:role/OptimizerRole'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-with-optimizer-defaults', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-optimizer-defaults'));
+  });
+
+  test('expected resources generated with optimizer using custom retention settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOptimizer: true,
+      OptimizerRoleArn: cf.getAtt('OptimizerRole', 'Arn'),
+      SnapshotRetentionPeriodInDays: 7,
+      NumberOfSnapshotsToRetain: 3,
+      CleanExpiredFiles: false
+    });
+
+    const template = cf.merge(
+      { Resources: { OptimizerRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
+      db
+    );
+    if (update) fixtures.update('glue-iceberg-table-with-optimizer-custom', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-optimizer-custom'));
+  });
+
+  test('throws when EnableCompaction is true but CompactionRoleArn is missing', () => {
+    expect(() => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableCompaction: true
+    })).toThrow(/You must provide a CompactionRoleArn when EnableCompaction is true/);
+  });
+
+  test('expected resources generated with compaction using default settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableCompaction: true,
+      CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-with-compaction-defaults', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-compaction-defaults'));
+  });
+
+  test('expected resources generated with compaction using custom settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableCompaction: true,
+      CompactionRoleArn: cf.getAtt('CompactionRole', 'Arn')
+    });
+
+    const template = cf.merge(
+      { Resources: { CompactionRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
+      db
+    );
+    if (update) fixtures.update('glue-iceberg-table-with-compaction-custom', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-compaction-custom'));
+  });
+
+  test('expected resources generated with both retention and compaction optimizers', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOptimizer: true,
+      OptimizerRoleArn: 'arn:aws:iam::123456789012:role/RetentionRole',
+      EnableCompaction: true,
+      CompactionRoleArn: 'arn:aws:iam::123456789012:role/CompactionRole'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-with-both-optimizers', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-both-optimizers'));
+  });
+
+  test('throws when EnableOrphanFileDeletion is true but OrphanFileDeletionRoleArn is missing', () => {
+    expect(() => new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOrphanFileDeletion: true
+    })).toThrow(/You must provide an OrphanFileDeletionRoleArn when EnableOrphanFileDeletion is true/);
+  });
+
+  test('expected resources generated with orphan file deletion using default settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOrphanFileDeletion: true,
+      OrphanFileDeletionRoleArn: 'arn:aws:iam::123456789012:role/OrphanFileDeletionRole'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-with-orphan-deletion-defaults', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-orphan-deletion-defaults'));
+  });
+
+  test('expected resources generated with orphan file deletion using custom settings', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOrphanFileDeletion: true,
+      OrphanFileDeletionRoleArn: cf.getAtt('OrphanFileDeletionRole', 'Arn'),
+      OrphanFileRetentionPeriodInDays: 7,
+      OrphanFileDeletionLocation: 's3://fake/location/subdir'
+    });
+
+    const template = cf.merge(
+      { Resources: { OrphanFileDeletionRole: { Type: 'AWS::IAM::Role', Properties: { AssumeRolePolicyDocument: {} } } } },
+      db
+    );
+    if (update) fixtures.update('glue-iceberg-table-with-orphan-deletion-custom', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-orphan-deletion-custom'));
+  });
+
+  test('expected resources generated with all three optimizers using same role', () => {
+    const db = new cf.shortcuts.GlueIcebergTable({
+      LogicalName: 'MyTable',
+      DatabaseName: 'my_database',
+      Name: 'my_table',
+      Schema: {
+        Type: 'struct',
+        Fields: [
+          { Name: 'column', Type: 'string', Id: 1, Required: true }
+        ]
+      },
+      Location: 's3://fake/location',
+      EnableOptimizer: true,
+      OptimizerRoleArn: 'arn:aws:iam::123456789012:role/SharedRole',
+      EnableCompaction: true,
+      CompactionRoleArn: 'arn:aws:iam::123456789012:role/SharedRole',
+      EnableOrphanFileDeletion: true,
+      OrphanFileDeletionRoleArn: 'arn:aws:iam::123456789012:role/SharedRole'
+    });
+
+    const template = cf.merge(db);
+    if (update) fixtures.update('glue-iceberg-table-with-all-optimizers', template);
+    expect(noUndefined(template)).toEqual(fixtures.get('glue-iceberg-table-with-all-optimizers'));
   });
 });
 
