@@ -145,6 +145,7 @@ describe('[shortcuts] lambda', () => {
         S3Bucket: 'my-code-bucket',
         S3Key: 'path/to/code.zip'
       },
+      Architectures: ['arm64'],
       DeadLetterConfig: {
         TargetArn: 'arn:aws:sqs:us-east-1:123456789012:queue/fake'
       },

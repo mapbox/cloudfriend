@@ -1,5 +1,13 @@
 # Changelog
 
+## 9.4.0
+
+- Add support for `Architectures` property to Lambda shortcuts.
+
+## 9.3.2
+
+- Dependency update to avoid security vulnerabilities (@aws-sdk/client-cloudformation).
+
 ## 9.3.1
 
 - Add `GlueIcebergTable` shortcut for creating AWS Glue tables backed by Apache Iceberg format with support for table optimizers.
