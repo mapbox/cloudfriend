@@ -1,0 +1,68 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Metadata": {},
+  "Parameters": {},
+  "Rules": {},
+  "Mappings": {},
+  "Conditions": {},
+  "Resources": {
+    "CompactionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {}
+      }
+    },
+    "MyTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "Name": "my_table",
+        "OpenTableFormatInput": {
+          "IcebergInput": {
+            "MetadataOperation": "CREATE",
+            "Version": "2",
+            "IcebergTableInput": {
+              "Location": "s3://fake/location",
+              "Schema": {
+                "Type": "struct",
+                "Fields": [
+                  {
+                    "Name": "column",
+                    "Type": "string",
+                    "Id": 1,
+                    "Required": true
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "MyTableCompactionOptimizer": {
+      "Type": "AWS::Glue::TableOptimizer",
+      "DependsOn": "MyTable",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": "my_database",
+        "TableName": "my_table",
+        "Type": "compaction",
+        "TableOptimizerConfiguration": {
+          "RoleArn": {
+            "Fn::GetAtt": [
+              "CompactionRole",
+              "Arn"
+            ]
+          },
+          "Enabled": true
+        }
+      }
+    }
+  },
+  "Outputs": {}
+}

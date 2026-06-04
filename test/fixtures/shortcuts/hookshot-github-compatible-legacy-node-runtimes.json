@@ -175,7 +175,7 @@
         },
         "Handler": "index.lambda",
         "MemorySize": 128,
-        "Runtime": "nodejs16.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 30,
         "Role": {
           "Fn::GetAtt": [
@@ -224,8 +224,9 @@
     "PassFunctionLogPolicy": {
       "Type": "AWS::IAM::Policy",
       "DependsOn": "PassFunctionRole",
+      "DeletionPolicy": "Delete",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": { "Fn::Sub": "${AWS::StackName}-PassFunction-lambda-log-access" },
         "Roles": [
           {
             "Ref": "PassFunctionRole"
@@ -365,8 +366,9 @@
     "DestinationLogPolicy": {
       "Type": "AWS::IAM::Policy",
       "DependsOn": "DestinationRole",
+      "DeletionPolicy": "Delete",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": { "Fn::Sub": "${AWS::StackName}-Destination-lambda-log-access" },
         "Roles": [
           {
             "Ref": "DestinationRole"

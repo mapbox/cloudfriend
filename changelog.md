@@ -1,13 +1,41 @@
 # Changelog
 
+## 9.4.0
+
+- Add support for `Architectures` property to Lambda shortcuts.
+
+## 9.3.2
+
+- Dependency update to avoid security vulnerabilities (@aws-sdk/client-cloudformation).
+
+## 9.3.1
+
+- Add `GlueIcebergTable` shortcut for creating AWS Glue tables backed by Apache Iceberg format with support for table optimizers.
+
+## 9.2.1
+
+- Refactor tests to use `jest` instead of `tape` & update linting dependencies to fix security vulnerabilities. 
+
+## 9.2.0
+
+- Inline policy for Lambda Shortcut name will change from `${LogicalName}-lambda-log-access` to `${AWS::StackName}-${LogicalName}-lambda-log-access`. This is the new default value. You can override default value using property `LogPolicyName`.
+
+## 9.1.1
+
+- Add DeletionPolicy for the IAM Policy in Lamdba shortcuts.
+
+## 9.1.0
+
+- Change the policy name for the Lambda shortcuts to include the stack's LogicalName
+
 ## 9.0.0
 
-- Removes: 
+- Removes:
    - aws-sdk as a runtime dependency.
    - All node support prior to version 20.
-- Adds: 
+- Adds:
   - `@aws-sdk/client-cloudformation` as a runtime dependency.
-- Updates: 
+- Updates:
     - bin/validate-template to use `@aws-sdk/client-cloudformation`.
     - Lambda shortcut lambda runtime default to use `node22.x`
 

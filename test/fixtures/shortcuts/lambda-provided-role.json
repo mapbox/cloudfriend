@@ -85,8 +85,11 @@
     },
     "MyLambdaLogPolicy": {
       "Type": "AWS::IAM::Policy",
+      "DeletionPolicy": "Delete",
       "Properties": {
-        "PolicyName": "lambda-log-access",
+        "PolicyName": {
+          "Fn::Sub": "${AWS::StackName}-MyLambda-lambda-log-access"
+        },
         "Roles": [
           {
             "Fn::Select": [
