@@ -1,0 +1,22 @@
+name: NPM release
+
+on:
+  pull_request:
+    branches: [master]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      # Triggers the workflow when labels change in the PR
+      - labeled
+      - unlabeled
+  push:
+    branches:
+      - master
+
+jobs:
+  npm-release:
+    uses: mapbox/gha/.github/workflows/workflow-release-npm-package.yml@CLOUDPLAT-3155/adding-public-deploy-for-npm
+    secrets: inherit
+    with:
+      is-public: true  # Enable OIDC authentication for public packages
