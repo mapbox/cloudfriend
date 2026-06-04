@@ -16,7 +16,7 @@ on:
 
 jobs:
   npm-release:
-    uses: mapbox/gha/.github/workflows/workflow-release-npm-package.yml@CLOUDPLAT-3155/adding-public-deploy-for-npm
+    uses: mapbox/gha/.github/workflows/workflow-release-npm-package.yml@workflow-release-npm-package-v1
     secrets: inherit
     with:
       is-public: true  # Enable OIDC authentication for public packages
