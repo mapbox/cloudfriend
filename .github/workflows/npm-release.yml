@@ -1,0 +1,10 @@
+name: NPM release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  npm-release:
+    uses: mapbox/gha-public/.github/workflows/workflow-npm-oidc-publish.yml@main
+    with:
+      create-github-release: true

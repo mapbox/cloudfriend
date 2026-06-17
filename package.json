@@ -29,6 +29,9 @@
   ],
   "author": "Mapbox",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "bugs": {
     "url": "https://github.com/mapbox/cloudfriend/issues"
   },
