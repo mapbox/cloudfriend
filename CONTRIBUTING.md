@@ -20,3 +20,5 @@ Releases are published to npm via GitHub Actions
    - Select **NPM release** → **Run workflow** → run from `master`
 
 The workflow will publish to npm, and create a GitHub release with auto-generated notes.
+
+> **Note:** Only Mapbox maintainers with write access to this repository can trigger the release workflow. External contributors can open and contribute to PRs, but releases are always cut by the owning team.
