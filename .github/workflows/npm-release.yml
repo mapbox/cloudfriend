@@ -11,3 +11,4 @@ jobs:
       contents: write
     with:
       create-github-release: true
+      run-tests: false
